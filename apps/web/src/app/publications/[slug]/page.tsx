@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Icon } from "@/components/ui/Icon";
 import { CoverArt } from "@/components/ui/CoverArt";
 import { PublicationCard } from "@/components/ui/PublicationCard";
-import { reports, getReport, relatedReports, readMinutes } from "@/lib/reports";
+import { reports, getReport, relatedReports, readMinutes, illustrativeStats } from "@/lib/reports";
 
 export function generateStaticParams() {
   return reports.map((r) => ({ slug: r.slug }));
@@ -21,6 +21,7 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
   const r = getReport(slug);
   if (!r) notFound();
   const related = relatedReports(r);
+  const stats = illustrativeStats(r);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -59,8 +60,7 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
               <p>{r.abstract}</p>
               <p className="text-muted t-small">
                 The full text lives in the PDF. An accessible in-page viewer, full-text-in-PDF
-                search, view/download counters and author profile links arrive with the search
-                service and CMS.
+                search, and author profile links arrive with the search service and CMS.
               </p>
             </div>
 
@@ -95,8 +95,17 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
                     <dt>Language</dt>
                     <dd>English</dd>
                   </div>
+                  <div className="meta-row">
+                    <dt>Views</dt>
+                    <dd>{stats.views.toLocaleString("en-IN")}</dd>
+                  </div>
+                  <div className="meta-row">
+                    <dt>Downloads</dt>
+                    <dd>{stats.downloads.toLocaleString("en-IN")}</dd>
+                  </div>
                 </dl>
               </div>
+              <p className="t-micro text-muted">Illustrative — real analytics need server-side, bot-filtered tracking.</p>
               <div>
                 <p className="t-overline" style={{ marginBottom: "0.5rem" }}>
                   Cite as

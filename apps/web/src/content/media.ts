@@ -28,9 +28,11 @@ export const articles: Article[] = [
   },
 ];
 
+// kind is one of the four official Notices categories (Scope of Work §3.6).
+export type NoticeKind = "Tender" | "Vacancy Circular" | "Work at EAC-PM" | "Other";
 export type Notice = {
   title: string;
-  kind: string;
+  kind: NoticeKind;
   status: "open" | "soon" | "closed";
   date: string; // illustrative for MVP
   href: string;
@@ -38,17 +40,24 @@ export type Notice = {
 export const notices: Notice[] = [
   {
     title: "Vacancy Circular — Consultants & Young Professionals",
-    kind: "Vacancy",
+    kind: "Vacancy Circular",
     status: "open",
     date: "Closes soon",
     href: "https://eacpm.gov.in/wp-content/uploads/2025/08/Vacancy-Circular.pdf",
   },
   {
     title: "Guidelines for Engagement of Consultancy Services",
-    kind: "Notice",
+    kind: "Other",
     status: "open",
     date: "Active",
     href: "https://eacpm.gov.in/wp-content/uploads/2025/08/New-Consultancy-Guidelines.pdf",
+  },
+  {
+    title: "Call for Young Professionals & Interns (illustrative)",
+    kind: "Work at EAC-PM",
+    status: "open",
+    date: "Rolling basis",
+    href: "/notices",
   },
   {
     title: "Empanelment of research agencies (illustrative)",

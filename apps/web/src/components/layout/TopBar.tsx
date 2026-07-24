@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
+import { FlagIndia } from "@/components/ui/FlagIndia";
 import s from "./header.module.css";
 
 const MIN = 0.9;
@@ -51,12 +52,8 @@ export function TopBar() {
     <div className={s.topbar}>
       <div className={`container ${s.topbarInner}`}>
         <div className={s.gov}>
-          <span className={s.govEmblem} aria-hidden>
-            GoI
-          </span>
-          <span className={s.hideSm}>Government of India</span>
-          <span aria-hidden>·</span>
-          <span>An advisory council under NITI Aayog</span>
+          <FlagIndia width={26} />
+          <span>Government of India</span>
         </div>
 
         <div className={s.controls}>

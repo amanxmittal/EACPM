@@ -33,14 +33,17 @@
   backdrop-filter: saturate(180%) blur(10px);
   border-bottom: 1px solid var(--app-border);
 }
-.mainInner { display: flex; align-items: center; gap: 1.25rem; min-height: 66px; }
+/* Tier 1 — brand + utility icons */
+.topRow { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; min-height: 62px; }
 .brand { display: flex; align-items: center; gap: 0.7rem; flex: none; }
-.brandMark { height: 40px; width: auto; }
+.brandMark { height: 38px; width: auto; }
 .brandText { display: flex; flex-direction: column; line-height: 1.05; }
-.brandTitle { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; letter-spacing: -0.01em; }
-.brandSub { font-size: 0.66rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--app-text-muted); }
+.brandTitle { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; letter-spacing: -0.01em; }
+.brandSub { font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--app-text-muted); }
 
-.nav { display: flex; align-items: center; gap: 0.15rem; margin-left: auto; }
+/* Tier 2 — primary nav row */
+.navRow { border-top: 1px solid var(--app-border); }
+.nav { display: flex; align-items: center; gap: 0.15rem; min-height: 50px; }
 .navItem { position: relative; }
 .navLink {
   display: inline-flex; align-items: center; gap: 0.3rem;
@@ -86,7 +89,7 @@
 .drawer { display: none; }
 
 @media (max-width: 940px) {
-  .nav { display: none; }
+  .navRow { display: none; }
   .menuBtn { display: inline-grid; }
   .brandSub { display: none; }
   .drawer {

@@ -1,22 +1,30 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal, RevealStagger } from "@/components/motion/Reveal";
+import { CountUp } from "@/components/art/CountUp";
 import { PublicationCard } from "@/components/ui/PublicationCard";
 import { Sparkline } from "@/components/charts/Sparkline";
 import { LineChart } from "@/components/charts/LineChart";
-import { SparklineField } from "@/components/art/SparklineField";
-import { CountUp } from "@/components/art/CountUp";
 import { reports } from "@/lib/reports";
 import { indicators } from "@/content/indicators";
-import { chapters } from "@/content/story";
-import { audienceLanes } from "@/content/nav";
 import { articles, notices } from "@/content/media";
-
-const audienceIcons = ["chart", "book", "users", "globe"];
-const audienceHrefs = ["/data", "/publications", "/india-story", "/media"];
 
 const upiLabels = ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
 const upiPoints = [0.8, 1.3, 2.3, 4.5, 8.7, 12.5, 15.8, 18.4];
+
+const heroQuickLinks = [
+  { label: "Publications", href: "/publications" },
+  { label: "Data & Dashboards", href: "/data" },
+  { label: "Media and Events", href: "/media" },
+  { label: "Notices", href: "/notices" },
+];
+
+const socialPlatforms = [
+  { name: "X (Twitter)", icon: "spark" },
+  { name: "LinkedIn", icon: "users" },
+  { name: "Facebook", icon: "globe" },
+];
 
 export default function Home() {
   const latest = reports.slice(0, 3);
@@ -25,55 +33,69 @@ export default function Home() {
     <>
       {/* ---------------- Hero ---------------- */}
       <section className="hero-stage grain section">
-        <div className="hero-field" aria-hidden>
-          <SparklineField />
-        </div>
         <div className="container hero-content">
-          <span className="kicker">The Indian Economy · A standing assessment</span>
-          <h1 className="t-display balance" style={{ maxWidth: "20ch", marginTop: "0.9rem" }}>
-            The world&apos;s most-watched growth story, told with evidence.
-          </h1>
-          <hr className="gold-rule" style={{ margin: "1.3rem 0" }} />
-          <p className="t-lead measure">
-            The Economic Advisory Council to the Prime Minister publishes the data, working
-            papers and analysis behind India&apos;s economic trajectory — from the mathematics
-            of zero to population-scale digital public infrastructure.
-          </p>
-          <div className="hero-cta">
-            <Link href="/data" className="btn btn-primary btn-lg">
-              <Icon name="chart" size={18} /> Explore the data
-            </Link>
-            <Link href="/publications" className="btn btn-outline btn-lg">
-              <Icon name="book" size={18} /> Read the papers
-            </Link>
-          </div>
+          <div className="hero-grid">
+            <div>
+              <span className="kicker">The Indian Economy · A standing assessment</span>
+              <h1 className="t-display balance" style={{ maxWidth: "16ch", marginTop: "0.9rem" }}>
+                The world&apos;s most-watched growth story, told with <span className="text-accent">evidence</span>.
+              </h1>
+              <p className="t-lead" style={{ marginTop: "1.1rem", maxWidth: "42ch" }}>
+                Search the Council&apos;s publications, data and analysis — or jump straight to
+                what most people come here for.
+              </p>
 
-          <div className="stat-ribbon">
-            {indicators.map((ind) => {
-              const num = parseFloat(ind.value);
-              const dec = (ind.value.split(".")[1] || "").length;
-              return (
-                <div className="stat-cell" key={ind.key}>
-                  <div className="lbl">
-                    {ind.label}
-                    <span className={`stat-spark trend-${ind.direction}`}>
-                      <Sparkline data={ind.spark} width={56} height={20} />
-                    </span>
-                  </div>
-                  <div className="num">
-                    <CountUp value={num} decimals={dec} />
-                    {ind.unit && <span className="u">{ind.unit}</span>}
-                  </div>
-                  <div className="src">
-                    {ind.period} · {ind.source}
-                  </div>
+              <form action="/publications" role="search" aria-label="Search publications and data" className="hero-search" style={{ marginTop: "1.7rem" }}>
+                <Icon name="search" size={19} className="text-muted" />
+                <input type="search" name="q" placeholder="Search papers, notices, data…" />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+
+              <div className="hero-chips" role="group" aria-label="Quick links">
+                {heroQuickLinks.map((q) => (
+                  <Link key={q.href} href={q.href} className="chip">
+                    {q.label}
+                  </Link>
+                ))}
+              </div>
+
+              <Link href="/about" className="hero-start">
+                <u>New here? Start with About EAC-PM</u> <Icon name="arrowRight" size={15} />
+              </Link>
+            </div>
+
+            <Reveal className="spotlight-wrap">
+              <div className="spotlight-shadow" aria-hidden />
+              <div className="spotlight-card">
+                <span className="spotlight-badge">
+                  <span className="spotlight-dot" aria-hidden /> Illustrative — pending verification
+                </span>
+                <span className="spotlight-kicker">Featured indicator</span>
+                <div className="spotlight-figure">
+                  <span className="spotlight-value">
+                    <CountUp value={parseFloat(indicators[0].value)} decimals={(indicators[0].value.split(".")[1] || "").length} />
+                  </span>
+                  <span className="spotlight-unit">{indicators[0].unit}</span>
                 </div>
-              );
-            })}
+                <div className="spotlight-row">
+                  <span className="spotlight-label">{indicators[0].label}</span>
+                  <span className={`trend-${indicators[0].direction}`}>
+                    <Sparkline data={indicators[0].spark} width={72} height={26} />
+                  </span>
+                </div>
+                <div className="spotlight-foot">
+                  <span className="t-micro text-muted">
+                    {indicators[0].source} · {indicators[0].period}
+                  </span>
+                  <Link href="/data" className="link-arrow t-small">
+                    Dashboard <Icon name="arrowRight" size={14} />
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
           </div>
-          <p style={{ marginTop: "1.1rem" }}>
-            <span className="flag">Illustrative data — pending verification</span>
-          </p>
         </div>
       </section>
 
@@ -83,53 +105,11 @@ export default function Home() {
           <SectionHeader eyebrow="Latest thinking" title="Newest working papers & reports" href="/publications">
             Fresh analysis from the Council and its partners — {reports.length} publications and counting.
           </SectionHeader>
-          <div className="grid grid-3">
+          <RevealStagger className="grid grid-3">
             {latest.map((r) => (
               <PublicationCard key={r.slug} report={r} />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- India Story teaser ---------------- */}
-      <section className="section tint">
-        <div className="container">
-          <SectionHeader eyebrow="The India Story" title="From the Arthashastra to LLMs" href="/india-story" linkLabel="Enter the story">
-            Three thousand years of economic thought and practice, in one scrollable arc —
-            Sanskrit → zero → digital rails → LLMs.
-          </SectionHeader>
-          <div className="story-rail">
-            {chapters.map((c) => (
-              <Link key={c.id} href={`/india-story#${c.id}`} className="card card-hover story-chip">
-                <span className="story-era">{c.era}</span>
-                <h3>{c.title}</h3>
-                <p>{c.dek}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- Audience router ---------------- */}
-      <section className="section">
-        <div className="container">
-          <SectionHeader eyebrow="For you" title="Whoever you are, your evidence is one click away">
-            Investors, economists, researchers, educators, students, the press — each has a lane.
-          </SectionHeader>
-          <div className="grid grid-4">
-            {audienceLanes.map((a, i) => (
-              <Link key={a.href} href={audienceHrefs[i]} className="card card-hover audience-card">
-                <span className="audience-ico">
-                  <Icon name={audienceIcons[i]} size={22} />
-                </span>
-                <h3>{a.label}</h3>
-                <p>{a.desc}</p>
-                <span className="link-arrow t-small">
-                  Enter <Icon name="arrowRight" size={16} />
-                </span>
-              </Link>
-            ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
@@ -166,7 +146,7 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-2" style={{ alignItems: "start" }}>
             <div>
-              <SectionHeader eyebrow="Media & events" title="Articles by members" href="/media" linkLabel="All media" />
+              <SectionHeader eyebrow="Media and events" title="Articles by members" href="/media" linkLabel="All media" />
               <div className="card">
                 {articles.map((a) => (
                   <a key={a.href} href={a.href} target="_blank" rel="noopener noreferrer" className="row-item">
@@ -201,6 +181,30 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ---------------- Social feeds ---------------- */}
+      <section className="section tint">
+        <div className="container">
+          <SectionHeader eyebrow="Stay connected" title="Follow the Council" />
+          <div className="grid grid-3">
+            {socialPlatforms.map((p) => (
+              <div key={p.name} className="card" style={{ display: "flex", alignItems: "center", gap: "0.9rem" }}>
+                <span className="audience-ico">
+                  <Icon name={p.icon} size={20} />
+                </span>
+                <div>
+                  <div style={{ fontWeight: 600 }}>{p.name}</div>
+                  <div className="t-micro text-muted">Feed connects once the official handle is confirmed</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="t-micro text-muted" style={{ marginTop: "0.8rem" }}>
+            Privacy-safe, click-to-load embeds only — no third-party script runs until you open a
+            feed.
+          </p>
         </div>
       </section>
     </>

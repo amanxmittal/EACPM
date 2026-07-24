@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Icon } from "@/components/ui/Icon";
-import { Sparkline } from "@/components/charts/Sparkline";
-import { LineChart } from "@/components/charts/LineChart";
-import { indicators } from "@/content/indicators";
+import { AnimatedAreaChart } from "@/components/charts/AnimatedAreaChart";
+import { SmallMultiples, type SM } from "@/components/charts/SmallMultiples";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Data & Dashboards",
@@ -12,9 +12,16 @@ export const metadata: Metadata = {
 const gdpLabels = ["FY19", "FY20", "FY21", "FY22", "FY23", "FY24", "FY25", "FY26"];
 const gdpPoints = [6.5, 3.9, -5.8, 9.7, 7.0, 8.2, 7.6, 6.5];
 
-// Real dimension set from EC_MetaDataList.xlsx (Economic Census EC4–EC6 microdata APIs).
-const ecDimensions = ["State / UT", "Activity (NIC)", "Nature of operation", "Source of finance", "Type of ownership"];
+const multiples: SM[] = [
+  { label: "Real GDP growth", value: "6.5", unit: "%", delta: "▲", dir: "up", series: [5.8, 6.1, 7.2, 8.7, 7.6, 6.9, 6.5] },
+  { label: "CPI inflation", value: "4.8", unit: "%", delta: "▼", dir: "down", series: [6.8, 6.1, 5.7, 5.5, 5.1, 4.9, 4.8] },
+  { label: "UPI volume", value: "18.4", unit: "bn/mo", delta: "▲", dir: "up", series: [8.7, 10.2, 11.4, 13.1, 14.9, 16.6, 18.4] },
+  { label: "Forex reserves", value: "690", unit: "$bn", delta: "▲", dir: "up", series: [575, 598, 616, 642, 655, 678, 690] },
+  { label: "Fiscal deficit", value: "5.1", unit: "% GDP", delta: "▼", dir: "down", series: [9.2, 6.7, 6.4, 5.9, 5.6, 5.3, 5.1] },
+  { label: "Merch. exports", value: "44", unit: "$bn/mo", delta: "▲", dir: "up", series: [30, 28, 34, 38, 40, 42, 44] },
+];
 
+const ecDimensions = ["State / UT", "Activity (NIC)", "Nature of operation", "Source of finance", "Type of ownership"];
 const downloads = [
   { name: "Real GDP growth (FY19–FY26)", freq: "Annual", fmt: "CSV" },
   { name: "CPI inflation (monthly)", freq: "Monthly", fmt: "CSV" },
@@ -25,13 +32,14 @@ const downloads = [
 export default function DataPage() {
   return (
     <>
-      <section className="page-hero">
-        <div className="container">
-          <span className="eyebrow">Data &amp; Dashboards</span>
-          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
+      <section className="page-hero hero-stage grain">
+        <div className="container hero-content">
+          <span className="kicker">Data &amp; Dashboards</span>
+          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem", maxWidth: "16ch" }}>
             India at a glance
           </h1>
-          <p className="t-lead measure" style={{ marginTop: "0.8rem" }}>
+          <hr className="gold-rule" style={{ margin: "1.1rem 0" }} />
+          <p className="t-lead measure">
             Curated macro indicators, per-publication dataset explorers, and a download centre.
             Every figure carries source, period and last-updated; every chart ships with a data
             table and a CSV.
@@ -42,37 +50,17 @@ export default function DataPage() {
         </div>
       </section>
 
-      {/* indicator grid */}
-      <section className="section" style={{ paddingBottom: "1rem" }}>
-        <div className="container">
-          <div className="grid grid-4">
-            {indicators.map((ind) => (
-              <div className="card stat" key={ind.key}>
-                <div className="stat-top">
-                  <span className="stat-label">{ind.label}</span>
-                  <span className={`stat-spark trend-${ind.direction}`}>
-                    <Sparkline data={ind.spark} />
-                  </span>
-                </div>
-                <div className="stat-figure">
-                  <span className="stat-value">{ind.value}</span>
-                  <span className="stat-unit">{ind.unit}</span>
-                </div>
-                <div className="stat-meta">{ind.source}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* main chart */}
-      <section className="section" style={{ paddingTop: "1rem" }}>
+      {/* dashboard centerpiece */}
+      <section className="section">
         <div className="container">
           <div className="data-panel">
-            <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "0.5rem" }}>
+            <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "0.8rem", alignItems: "flex-start" }}>
               <div>
-                <h2 className="t-h3">Real GDP growth</h2>
-                <p className="t-micro text-muted">Annual, % — illustrative</p>
+                <span className="kicker">Featured series</span>
+                <h2 className="t-h3" style={{ marginTop: "0.4rem" }}>
+                  Real GDP growth — the pandemic trough &amp; recovery
+                </h2>
+                <p className="t-micro text-muted">Annual, % · hover for values</p>
               </div>
               <div className="cluster">
                 <span className="flag">Illustrative</span>
@@ -81,57 +69,74 @@ export default function DataPage() {
                 </button>
               </div>
             </div>
-            <LineChart
+            <AnimatedAreaChart
               labels={gdpLabels}
-              series={[{ name: "Real GDP growth (%)", color: "var(--cat-1)", points: gdpPoints }]}
-              ariaSummary="Illustrative real GDP growth by fiscal year, dipping to about -5.8% in FY21 and recovering to about 6.5% in FY26."
+              points={gdpPoints}
               yUnit="%"
-              caption="Illustrative — the live series will be sourced from MoSPI with revision notes."
+              height={360}
+              events={[{ index: 2, label: "COVID" }]}
+              annotations={[
+                { index: 2, label: "−5.8%", kind: "trough" },
+                { index: 3, label: "+9.7%", kind: "peak" },
+              ]}
+              ariaSummary="Illustrative real GDP growth by fiscal year: 6.5% in FY19, a −5.8% pandemic trough in FY21, a 9.7% rebound in FY22, settling near 6.5% by FY26."
+              caption="Illustrative — the live series will be sourced from MoSPI with revision notes and a 'provisional / revised / final' status."
             />
           </div>
         </div>
       </section>
 
-      {/* dataset explorer teaser (real EC dimensions) */}
-      <section className="section tint" id="datasets" style={{ scrollMarginTop: "84px" }}>
+      {/* small multiples */}
+      <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <span className="eyebrow">Paper datasets</span>
-          <h2 className="t-h2" style={{ marginTop: "0.5rem" }}>
-            Explore the data behind the papers
-          </h2>
-          <p className="t-lead measure" style={{ marginTop: "0.6rem" }}>
-            For every data-heavy publication, the underlying dataset is uploadable and explorable
-            — filter, cross-filter, chart, download the exact slice, and cite a permalink.
-          </p>
-          <div className="card" style={{ marginTop: "1.5rem" }}>
-            <div className="cluster" style={{ justifyContent: "space-between" }}>
-              <div>
-                <span className="badge">Reference dataset</span>
-                <h3 className="t-h3" style={{ marginTop: "0.6rem" }}>
-                  Economic Census — EC4 · EC5 · EC6
-                </h3>
-                <p className="text-muted t-small" style={{ marginTop: "0.3rem" }}>
-                  Derived from the shared metadata dictionary. Note: dimension code-lists differ
-                  per round (e.g. the State code for Andhra Pradesh is 02 / 28 / 37 across EC4 / EC5
-                  / EC6) — so the explorer versions its code-lists and validates each upload.
-                </p>
-              </div>
-            </div>
-            <div className="cluster" style={{ marginTop: "1rem" }}>
-              {ecDimensions.map((d) => (
-                <span key={d} className="chip" style={{ cursor: "default" }}>
-                  {d}
-                </span>
-              ))}
+          <div className="section-head">
+            <div className="sh-copy">
+              <span className="kicker">The dashboard</span>
+              <h2 className="t-h2">Key indicators</h2>
             </div>
           </div>
+          <SmallMultiples items={multiples} />
+        </div>
+      </section>
+
+      {/* dataset explorer teaser */}
+      <section className="section tint" id="datasets" style={{ scrollMarginTop: "96px" }}>
+        <div className="container">
+          <Reveal>
+            <span className="kicker">Paper datasets</span>
+            <h2 className="t-h2" style={{ marginTop: "0.5rem" }}>
+              Explore the data behind the papers
+            </h2>
+            <p className="t-lead measure" style={{ marginTop: "0.6rem" }}>
+              For every data-heavy publication, the underlying dataset is uploadable and explorable
+              — filter, cross-filter, chart, download the exact slice, and cite a permalink.
+            </p>
+            <div className="card" style={{ marginTop: "1.5rem" }}>
+              <span className="badge">Reference dataset</span>
+              <h3 className="t-h3" style={{ marginTop: "0.6rem" }}>
+                Economic Census — EC4 · EC5 · EC6
+              </h3>
+              <p className="text-muted t-small" style={{ marginTop: "0.3rem" }}>
+                Derived from the shared metadata dictionary. Note: dimension code-lists differ per
+                round (e.g. the State code for Andhra Pradesh is 02 / 28 / 37 across EC4 / EC5 / EC6)
+                — so the explorer versions its code-lists and validates each upload.
+              </p>
+              <div className="cluster" style={{ marginTop: "1rem" }}>
+                {ecDimensions.map((d) => (
+                  <span key={d} className="chip" style={{ cursor: "default" }}>
+                    {d}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* download centre */}
-      <section className="section" id="downloads" style={{ scrollMarginTop: "84px" }}>
+      <section className="section" id="downloads" style={{ scrollMarginTop: "96px" }}>
         <div className="container">
-          <span className="eyebrow">Download centre</span>
+          <span className="kicker">Download centre</span>
           <h2 className="t-h2" style={{ marginTop: "0.5rem", marginBottom: "1.2rem" }}>
             Series &amp; data dictionaries
           </h2>

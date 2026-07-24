@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-// Counts from 0 → value when scrolled into view. SSR renders the final value
-// (no-JS + hydration safe); animation only runs with JS and motion allowed.
+// Counts from 0 → value once scrolled into view. SSR renders the final value directly
+// (no hydration mismatch, no-JS safe); the animation is a post-mount enhancement only,
+// and is skipped entirely under prefers-reduced-motion.
 export function CountUp({ value, decimals = 1, duration = 1300 }: { value: number; decimals?: number; duration?: number }) {
   const [display, setDisplay] = useState(value);
   const ref = useRef<HTMLSpanElement>(null);

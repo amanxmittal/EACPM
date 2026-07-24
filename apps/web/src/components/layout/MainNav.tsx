@@ -18,36 +18,16 @@ export function MainNav() {
 
   return (
     <div className={s.mainbar}>
-      <div className={`container ${s.mainInner}`}>
+      {/* Tier 1 — brand + utility icons */}
+      <div className={`container ${s.topRow}`}>
         <Link href="/" className={s.brand} aria-label="EAC-PM home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo.png" alt="" className={s.brandMark} width={24} height={40} />
+          <img src="/brand/logo.png" alt="" className={`${s.brandMark} emblem-adapt`} width={24} height={40} />
           <span className={s.brandText}>
             <span className={s.brandTitle}>EAC&#8288;-&#8288;PM</span>
             <span className={s.brandSub}>Economic Advisory Council to the PM</span>
           </span>
         </Link>
-
-        <nav className={s.nav} aria-label="Primary">
-          {primaryNav.map((item) => (
-            <div key={item.label} className={s.navItem}>
-              <Link href={item.href} className={s.navLink}>
-                {item.label}
-                {item.children && <Icon name="chevronDown" size={15} />}
-              </Link>
-              {item.children && (
-                <div className={s.dropdown} role="menu">
-                  {item.children.map((c) => (
-                    <Link key={c.label} href={c.href} className={s.ddLink} role="menuitem">
-                      <span className={s.ddTitle}>{c.label}</span>
-                      {c.desc && <span className={s.ddDesc}>{c.desc}</span>}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
 
         <div className={s.actions}>
           <button
@@ -69,6 +49,32 @@ export function MainNav() {
         </div>
       </div>
 
+      {/* Tier 2 — primary nav */}
+      <div className={s.navRow}>
+        <div className="container">
+          <nav className={s.nav} aria-label="Primary">
+            {primaryNav.map((item) => (
+              <div key={item.label} className={s.navItem}>
+                <Link href={item.href} className={s.navLink}>
+                  {item.label}
+                  {item.children && <Icon name="chevronDown" size={15} />}
+                </Link>
+                {item.children && (
+                  <div className={s.dropdown} role="menu">
+                    {item.children.map((c) => (
+                      <Link key={c.label} href={c.href} className={s.ddLink} role="menuitem">
+                        <span className={s.ddTitle}>{c.label}</span>
+                        {c.desc && <span className={s.ddDesc}>{c.desc}</span>}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
+      </div>
+
       {searchOpen && (
         <div className={s.searchWrap}>
           <form className={`container ${s.searchInner}`} action="/publications">
@@ -78,7 +84,7 @@ export function MainNav() {
               name="q"
               type="search"
               autoFocus
-              placeholder="Search 71 papers, data & the India story…"
+              placeholder="Search papers, notices, data…"
               aria-label="Search the site"
             />
             <button className="btn btn-primary" type="submit">

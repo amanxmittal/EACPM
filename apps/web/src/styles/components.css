@@ -50,18 +50,8 @@
 .cover-title { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; line-height: 1.22; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .cover-mark { position: absolute; top: 0.9rem; right: 1rem; font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 700; opacity: 0.7; }
 
-/* ---- audience card ---- */
-.audience-card { display: flex; flex-direction: column; gap: 0.7rem; height: 100%; }
-.audience-ico { width: 42px; height: 42px; border-radius: var(--app-radius); background: var(--app-accent-soft); color: var(--app-accent-strong); display: grid; place-items: center; }
-.audience-card h3 { font-size: 1.08rem; }
-.audience-card p { color: var(--app-text-muted); font-size: 0.9rem; flex: 1; }
-
-/* ---- story rail ---- */
-.story-rail { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.75rem; scroll-snap-type: x mandatory; }
-.story-chip { min-width: 250px; max-width: 250px; scroll-snap-align: start; }
-.story-era { font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--app-accent); }
-.story-chip h3 { font-size: 1.02rem; margin-top: 0.4rem; }
-.story-chip p { font-size: 0.86rem; color: var(--app-text-muted); margin-top: 0.35rem; }
+/* ---- small icon tile (reused wherever a labelled tile needs a leading glyph) ---- */
+.audience-ico { width: 42px; height: 42px; border-radius: var(--app-radius); background: var(--app-accent-soft); color: var(--app-accent-strong); display: grid; place-items: center; flex: none; }
 
 /* ---- data panel ---- */
 .data-panel { border: 1px solid var(--app-border); border-radius: var(--app-radius-xl); padding: clamp(1.1rem, 2.5vw, 1.8rem); background: var(--app-surface); }
@@ -115,12 +105,6 @@
 
 /* ---- page hero (inner pages) ---- */
 .page-hero { padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem); border-bottom: 1px solid var(--app-border); }
-
-/* ---- story longform ---- */
-.chapter { display: grid; grid-template-columns: 90px 1fr; gap: 1.5rem; padding-block: clamp(1.8rem, 4vw, 3rem); border-top: 1px solid var(--app-border); }
-@media (max-width: 640px) { .chapter { grid-template-columns: 1fr; gap: 0.6rem; } }
-.chapter-era { font-family: var(--font-display); font-weight: 700; color: var(--app-accent); font-size: 0.95rem; position: sticky; top: 84px; align-self: start; }
-.evidence { margin-top: 1rem; border-left: 3px solid var(--app-accent); background: var(--app-accent-soft); padding: 0.7rem 1rem; border-radius: 0 var(--app-radius) var(--app-radius) 0; font-size: 0.85rem; }
 
 /* ---- team ---- */
 .member { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.7rem; }

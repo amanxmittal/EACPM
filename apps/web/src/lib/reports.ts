@@ -29,3 +29,14 @@ export function relatedReports(r: Report, n = 3): Report[] {
 export function readMinutes(r: Report): number {
   return Math.max(4, Math.round(r.abstract.split(/\s+/).length / 40) + 8);
 }
+
+// Illustrative view/download counts (Scope of Work §3.4) — deterministic from the slug so
+// they're stable across renders, clearly flagged as placeholders. Real counts require
+// server-side, bot-filtered tracking (PROMPT.md §5.3), not yet built.
+export function illustrativeStats(r: Report): { views: number; downloads: number } {
+  let hash = 0;
+  for (let i = 0; i < r.slug.length; i++) hash = (hash * 31 + r.slug.charCodeAt(i)) >>> 0;
+  const views = 400 + (hash % 3600);
+  const downloads = 60 + ((hash >> 3) % 900);
+  return { views, downloads };
+}

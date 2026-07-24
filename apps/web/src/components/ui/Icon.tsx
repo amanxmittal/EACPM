@@ -27,6 +27,11 @@ const paths: Record<string, string> = {
   quote: "M7 7H4v6h3l-2 4h3l2-4V7z M17 7h-3v6h3l-2 4h3l2-4V7z",
   check: "M4 12l5 5L20 6",
   spark: "M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z",
+  landmark: "M3 21h18 M5 21V11 M9 21V11 M15 21V11 M19 21V11 M12 3l8 5H4z",
+  store: "M4 9l1.2-4.5h13.6L20 9 M5 9v11h14V9 M5 9h14 M9 20v-6h6v6",
+  wallet: "M3 7a2 2 0 0 1 2-2h13v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M6 5V4a1 1 0 0 1 1-1h10 M16 12h3",
+  cpu: "M7 7h10v10H7z M9 3v2 M15 3v2 M9 19v2 M15 19v2 M3 9h2 M3 15h2 M19 9h2 M19 15h2",
+  play: "M7 4v16l13-8z",
 };
 
 type IconProps = SVGProps<SVGSVGElement> & { name: keyof typeof paths | string; size?: number; title?: string };

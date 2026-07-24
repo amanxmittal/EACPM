@@ -6,13 +6,12 @@ import s from "./footer.module.css";
 const explore = [
   { label: "Publications", href: "/publications" },
   { label: "Data & Dashboards", href: "/data" },
-  { label: "The India Story", href: "/india-story" },
-  { label: "Media & Events", href: "/media" },
+  { label: "Media and Events", href: "/media" },
+  { label: "What's New", href: "/whats-new" },
 ];
 const quick = [
   { label: "About EAC-PM", href: "/about" },
-  { label: "Notices & Tenders", href: "/notices" },
-  { label: "What's New", href: "/notices#whats-new" },
+  { label: "Notices", href: "/notices" },
   { label: "Contact Us", href: "/contact" },
 ];
 const partners = [
@@ -30,7 +29,7 @@ export function SiteFooter() {
         <div className={s.top}>
           <div>
             <div className={s.brandRow}>
-              <img src="/brand/logo.png" alt="" width={27} height={46} />
+              <img src="/brand/logo.png" alt="" width={27} height={46} className="emblem-adapt" />
               <span className={s.brandName}>
                 Economic Advisory Council
                 <br />

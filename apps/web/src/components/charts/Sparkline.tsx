@@ -21,11 +21,12 @@ export function Sparkline({
   });
   const line = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ");
   const area = `${line} L${pts[pts.length - 1][0].toFixed(1)} ${height} L${pts[0][0].toFixed(1)} ${height} Z`;
+  const [lastX, lastY] = pts[pts.length - 1];
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} fill="none" aria-hidden>
-      <path d={area} fill="currentColor" opacity="0.12" />
-      <path d={line} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx={pts[pts.length - 1][0]} cy={pts[pts.length - 1][1]} r="2.6" fill="currentColor" />
+      <path className="spark-area" d={area} fill="currentColor" opacity="0.12" />
+      <path className="spark-line" d={line} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" pathLength={100} />
+      <circle className="spark-dot" cx={lastX} cy={lastY} r="2.6" fill="currentColor" />
     </svg>
   );
 }
