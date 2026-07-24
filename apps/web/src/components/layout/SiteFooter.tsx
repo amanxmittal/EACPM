@@ -38,7 +38,7 @@ export function SiteFooter() {
             </div>
             <p className={s.about}>
               An independent body constituted to advise the Prime Minister on economic
-              matters. Evidence, data and analysis — in the public interest.
+              matters. Evidence, data and analysis, in the public interest.
             </p>
             <p className={s.owned}>Content owned &amp; maintained by EAC-PM.</p>
           </div>

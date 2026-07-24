@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans, Noto_Sans_Display } from "next/font/google";
+import { Noto_Sans, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -11,10 +11,12 @@ const notoSans = Noto_Sans({
   display: "swap",
 });
 
-const notoSansDisplay = Noto_Sans_Display({
+// Geometric grotesk for display type — self-hosted at build by next/font (no runtime
+// CDN request), satisfying the "self-host fonts" policy. Drives the large hero headings.
+const schibstedGrotesk = Schibsted_Grotesk({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-noto-display",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-display-face",
   display: "swap",
 });
 
@@ -37,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${notoSans.variable} ${notoSansDisplay.variable}`}
+      className={`${notoSans.variable} ${schibstedGrotesk.variable}`}
       suppressHydrationWarning
     >
       <head>

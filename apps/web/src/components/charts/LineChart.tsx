@@ -76,7 +76,8 @@ export function LineChart({
         </figcaption>
       )}
 
-      <table className="sr-only">
+      <div className="sr-only">
+      <table>
         <caption>{ariaSummary}</caption>
         <thead>
           <tr>
@@ -100,6 +101,7 @@ export function LineChart({
           ))}
         </tbody>
       </table>
+      </div>
     </figure>
   );
 }

@@ -174,7 +174,8 @@ export function AnimatedAreaChart({
         </figcaption>
       )}
 
-      <table className="sr-only">
+      <div className="sr-only">
+      <table>
         <caption>{ariaSummary}</caption>
         <thead>
           <tr>
@@ -191,6 +192,7 @@ export function AnimatedAreaChart({
           ))}
         </tbody>
       </table>
+      </div>
     </figure>
   );
 }
