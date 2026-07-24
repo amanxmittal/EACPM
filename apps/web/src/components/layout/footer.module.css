@@ -1,0 +1,26 @@
+.footer { background: var(--app-bg-subtle); border-top: 1px solid var(--app-border); margin-top: clamp(3rem, 6vw, 5rem); }
+.top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr; gap: 2rem; padding-block: clamp(2.5rem, 5vw, 4rem); }
+@media (max-width: 900px) { .top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .top { grid-template-columns: 1fr; } }
+
+.brandRow { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem; }
+.brandRow img { height: 46px; width: auto; }
+.brandName { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+.about { color: var(--app-text-muted); font-size: 0.9rem; max-width: 34ch; }
+.owned { margin-top: 1rem; font-size: 0.82rem; color: var(--app-text-subtle); }
+
+.colTitle { font-size: var(--ux4g-fs-12, 0.75rem); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--app-text-muted); margin-bottom: 0.9rem; }
+.linkList { display: flex; flex-direction: column; gap: 0.55rem; }
+.linkList a { color: var(--app-text-muted); font-size: 0.9rem; }
+.linkList a:hover { color: var(--app-accent); }
+
+.partners { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; padding-block: 1.4rem; border-top: 1px solid var(--app-border); }
+.partnersLabel { font-size: var(--ux4g-fs-12, 0.75rem); color: var(--app-text-subtle); margin-right: 0.4rem; }
+.partnerChip { background: #fff; border: 1px solid var(--app-border); border-radius: var(--app-radius); padding: 0.35rem 0.65rem; display: grid; place-items: center; }
+.partnerChip img { height: 26px; width: auto; }
+
+.bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 1.5rem; padding-block: 1.2rem; border-top: 1px solid var(--app-border); font-size: 0.82rem; color: var(--app-text-muted); }
+.credit strong { color: var(--app-text); font-weight: 600; }
+.meta { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
+.counter { display: inline-flex; align-items: center; gap: 0.4rem; }
+.counterNum { font-weight: 700; color: var(--app-text); font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }

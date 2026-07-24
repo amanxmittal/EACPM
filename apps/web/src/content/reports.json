@@ -1,0 +1,641 @@
+[
+ {
+  "title": "Constituency Size, Composition and the Case for Delimitation in India’s Lok Sabha (2009–2024)",
+  "abstract": "India’s parliamentary constituencies are very large by global standards: the median Lok Sabha Parliamentray Constituency (PC) electorate reached 1.82 million registered electors in 2024. The conventional reading of Indian turnout has been that very large PCs suppress voting; we show this “size penalty” is now a compositional artefact. Across 2,171 PC-elections in 2009, 2014, 2019 and 2024, the unconditional small-vs-large decile turnout gap halved from +22.86 to +12.03 percentage points (pp), yet the conditional 1 M-vs-2 M turnout gap crossed from +1.42 pp (95% CI: −2.85, +5.69) in 2009 to −6.16 pp (95% CI: −10.30, −2.02) in 2024 once urban, SC, ST shares, Esteban–Ray linguistic polarisation, Shannon linguistic diversity (122-language grain) and polling-station density are controlled. Urban share is the largest single compositional channel associated with female turnout at 52.4 % (95% CI: 44.6, 60.2), followed by linguistic diversity at 28.2 % (95% CI: 21.4, 35.1) and linguistic polarisation at 20.6 % (95% CI: 14.3, 27.0); linguistic diversity also displays an opposite-sign gender split (men: −8.2 %). A turnout-maximising delimitation counterfactual that splits 543 PCs into 824 (59 two-way, 111 three-way) holding parent-PC compositional covariates fixed is predicted to raise national turnout by +2.32 pp (95% CI: +1.43, +3.21) under our preferred specification, with substantial sensitivity to alternative specifications: re-running the same exercise under three alternative specifications returns +1.42 pp, +1.17 pp and +0.30 pp respectively, giving a defensible range of +0.3 to +2.3 pp. The plan delivers a small female-favourable tilt of +0.21 pp (95% CI: −0.14, +0.56).",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/06/Delimitation-Working-Paper-2026.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/06/delimination.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "constituency-size-composition-and-the-case-for-delimitation-in-india-s"
+ },
+ {
+  "title": "ESTIMATING REDUCTION IN POLLING PERSONNEL DEPLOYMENT UNDER SIMULTANEOUS ELECTIONS",
+  "abstract": "The conduct of elections in India demands substantial manpower, particularly polling personnel (PP), to carry out the poll at polling stations (PSs). This paper estimates the potential reduction in PP deployment under a simultaneous election framework. There are other potential benefits of simultaneous elections, but they are outside the scope of this paper. The Election Commission of India (ECI) has benchmarks for the deployment of PP per PS for different kinds of elections. According to these, the composition of a polling party for a PS is a Presiding Officer (PRO) plus 3 Polling Officers (POs) for a State Assembly election, a PRO plus 4 POs for a Lok Sabha election, and a PRO plus 5 POs for a simultaneous election. These benchmarks are tested against actual PP deployment numbers for certain election cycles and found to provide a good fit. Thus, using ECI benchmarks, we get a gross baseline reduction of 33 percent in PP deployment under the simultaneous election framework. This is because while 9 PP are required per PS to conduct a poll separately for State Assembly (PRO plus 3 POs) and Lok Sabha (PRO plus 4 POs), only 6 PP are required per PS to conduct a simultaneous poll (PRO plus 5 POs).",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/ESTIMATING-REDUCTION-IN-POLLING-PERSONNEL-DEPLOYMENT-UNDER-SIMULTANEOUS-ELECTIONS.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/Screenshot-2026-03-18-141251.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "estimating-reduction-in-polling-personnel-deployment-under-simultaneou"
+ },
+ {
+  "title": "Economic impact analysis of Priority Sector Lending",
+  "abstract": "The policy on priority sector lending has been in place in India for almost five decades and banks are required to direct at least 40% of their overall credit towards the priority sector. The priority sector encompasses a broad range of economic activities such as the provision of credit to small and marginal farmers, micro enterprises and weaker sections aiming to address systemic equity gaps. Growth considerations are also addressed through this policy as the priority sector includes activities that serve as economic multipliers like exports, medium enterprises and corporate farmers.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/05/Priority-Sector-Lending-impact-analysis-final-revised.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/05/economy-impact.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "economic-impact-analysis-of-priority-sector-lending"
+ },
+ {
+  "title": "Financial Inclusion as a Path to Equality: Lessons from India",
+  "abstract": "Financial inclusion represents a fundamental human rights imperative, linking economic access to dignity and opportunity. India’s decade-long journey toward universal financial inclusion offers crucial insights into how digital public infrastructure can overcome traditional barriers to financial access. Through the strategic deployment of the India Stack, comprising digital identity (Aadhaar), universal banking (Jan Dhan Yojana), and interoperable payments (UPI), India has demonstrated that financial inclusion at scale is achievable when governments create foundational infrastructure that reduces transaction costs and enables market innovation. This article examines how complementary interventions in savings, insurance, and credit create synergies exceeding their individual impacts, while acknowledging critical concerns about credit quality, sustainability, and the risk of overindebtedness. The evidence suggests that while India has made remarkable progress in expanding financial access, questions remain about whether this credit expansion leads to productive investment or consumption, and whether current lending practices are creating sustainable pathways out of poverty or new forms of debt dependency.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/Financial-Inclusion-as-a-Path-to-Equality-Lessons-from-India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/Screenshot-2026-03-05-121602.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "financial-inclusion-as-a-path-to-equality-lessons-from-india"
+ },
+ {
+  "title": "Formalization of Labour Market in India: Evidence from PLFS and ASUSE 2025 Unit-Level Data",
+  "abstract": "India’s labour market and its large informal enterprise sector present two interlinked development challenges. On the labour side, the persistence of informal employment, low female labour force participation, minimum wage non-compliance, and an expanding youth workforce have been central concerns in India’s employment discourse (World Bank, 2016; La Porta and Shleifer, 2014). On the enterprise side, the unincorporated sector comprising household-owned and individually operated firms outside the Companies Act continues to account for a substantial share of employment and output, yet remains constrained by low productivity, limited access to institutional credit, and weak integration into formal regulatory and financial systems (NCEUS, 2009). Recent policy interest has converged on two levers for addressing these challenges simultaneously: ICT adoption/digitalisation2 and enterprise formalization. ICT adoption has been identified as a potential productivity-enhancing mechanism for micro and small enterprises, while government-sponsored registration programmes such as Udyam and Udyam Assist have been introduced with the explicit aim of extending formal credit access to previously excluded firms. Understanding whether and to what degree these two pathways deliver on their intended objectives requires rigorous empirical analysis using representative data.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/06/ASUSE-PLFS-Working-Paper-June-2026.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/06/Labour-market.jpg",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "formalization-of-labour-market-in-india-evidence-from-plfs-and-asuse-2"
+ },
+ {
+  "title": "Golden Decade of Infrastructure Development in India with Special Reference to Metro Rail Network",
+  "abstract": "India has witnessed unprecedented infrastructure development over the past decade. A cornerstone of this transformation is the PM GatiShakti National Master Plan (PMGS-NMP)1, launched in October 2021, which adopts an integrated, multimodal approach to infrastructure planning aimed at generating strong growth multipliers. Within this framework, high-quality mass transit systems—particularly metro rail corridors—have emerged as a critical pillar. With rapid expansion across cities, India now boasts the world’s third-largest metro network. Moving beyond the conventional focus on output and employment multipliers, this paper is among the first to examine how large-scale urban transport infrastructure affects household financial behaviour in India. Using granular home-loan–level data, we assess the impact of metro connectivity on borrower delinquency and prepayment behaviour across urban neighbourhoods. The underlying mechanism is straightforward: improved access to efficient public transport reduces households’ dependence on private vehicles, thereby lowering recurring transportation expenses. This, in turn, eases the burden of servicing EMIs—among the most significant fixed financial commitments for urban households. Our findings reveal economically meaningful improvements in household financial discipline in metro-served areas. In Hyderabad, households located in metro-connected PIN codes exhibit a 1.7% decline in delinquency incidence and a 1.8% increase in prepayment activity. The effects are even stronger in Bengaluru, where delinquency falls by 2.4% and prepayment rises by 3.5%. Evidence from Delhi points to an even larger 4.42% reduction in mortgage delinquency alongside a 1.38% increase in prepayments. Complementary vehicle registration data indicate that these gains are driven by reduced reliance on private automobiles. Beyond improved repayment behaviour, the results also suggest a broad-based reduction in household indebtedness and a decline in average debt burdens. Overall, investments in urban mobility infrastructure over the last decade —particularly metro rail expansion—have translated into stronger household liquidity management and more disciplined borrowing. These behavioural improvements form a critical foundation for household financial resilience and contribute meaningfully to broader financial stability.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/01/Golden-Decade-of-Infrastructure-Development-in-India-final-rev.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/01/Screenshot-2026-01-15-120225.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "golden-decade-of-infrastructure-development-in-india-with-special-refe"
+ },
+ {
+  "title": "How to do Process Reforms: Case study of IEPFA",
+  "abstract": "Economic reform debates usually tend to gravitate towards the big reforms. Reforms such as tax system overhauls, introduction of Insolvency and Bankruptcy Code (IBC), inflation targeting usually dominate headlines. These are structural reforms, which make changes to the underlying framework of an economy. While such reforms are important, they overlook a quieter but equally powerful source of improvement, which we term as ‘process reforms’.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/05/Case-study-on-IEPFA.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/05/case-study.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "how-to-do-process-reforms-case-study-of-iepfa"
+ },
+ {
+  "title": "India’s Hidden Urbanisation & Its Policy Implications",
+  "abstract": "We are living in the epoch of urbanisation. Cities have been engines of economic growth for several centuries but their centrality in global production and consumption has accelerated in the last five decades at an unparalleled rate. A McKinsey report as far back as 2012 noted that just 440 cities in developing countries would be responsible for over half the global GDP growth in the subsequent decade1. As an aggregate, the GDP of cities in Asia is slated to exceed the European and North American cities combined, by 2027, as per a 2018 report by the research institute Oxford Economics2.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/EAC-PM-Working-Paper-Indias-Hidden-Urbanisation-Its-Policy-Implications-120326.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/Screenshot-2026-03-12-181741.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "india-s-hidden-urbanisation-its-policy-implications"
+ },
+ {
+  "title": "Reimagining the Care Economy: From Private Burden to Social and Economic Infrastructure",
+  "abstract": "India’s demographic profile is shifting – a growing share of elders and declining fertility, compounded by rapid urbanisation that is eroding the traditional family structures that have historically provided care. Indian states are at varying stages of this demographic transition– from high child dependency to accelerating elderly dependency. The pressures of declining fertility and ageing have increasingly prompted some state governments to respond through measures aimed at reversing demographic trends or easing the financial cost of raising children.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/05/Care-Paper_draft-V5_April-28.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/05/care.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "reimagining-the-care-economy-from-private-burden-to-social-and-economi"
+ },
+ {
+  "title": "Rise in Tobacco Consumption and Policy Implications",
+  "abstract": "The Household Consumption Expenditure Survey (HCES) 2023-24 delivers an uncomfortable truth India can no longer afford to ignore: tobacco consumption is rising fast, spreading wider, and embedding itself deeper into the lives of poorer households – just as the state expands publicly funded healthcare. This collision of trends is not accidental, and it carries serious implications for health outcomes, fiscal sustainability, and social policy. Adjusted for inflation, per capita spending on tobacco rose sharply between 2011-12 and 2023-24 – by 58 % in rural India and an even steeper 77 % in urban areas. Tobacco now accounts for around 1.5 % of monthly per capita consumption expenditure (MPCE) in rural areas and 1 % in urban areas. On the surface, these shares may appear modest. But the real alarm lies elsewhere: in the explosion of the number of households consuming tobacco. In rural India, tobacco-consuming households increased from 9.9 crore (59.3 % of all households) to 13.3 crore (68.6 %) – a rise of 33 % in just over a decade. Urban India tells an even more dramatic story. The number of tobacco-consuming households jumped by 59 %, from 2.8 crore (34.9 %) to 4.7 crore (45.6 %). Tobacco use is no longer confined to traditional pockets or demographics; it is becoming mainstream across rural and urban India alike.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/02/Rising-Tobacco-Consumption-Working-Paper-1.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/02/Screenshot-2026-02-26-120632.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "rise-in-tobacco-consumption-and-policy-implications"
+ },
+ {
+  "title": "The Duck and The Camel: Tracing the Net Load on the Indian Power Grid",
+  "abstract": "A power grid has to perform a continuous balancing act. At every moment, the total electricity being produced (the ‘generation’) must match the total being consumed (the ‘load’). For most of its history, the central worry about the grid was whether there was enough generation capacity. Over the last decade, India has answered that question emphatically. It added generating capacity at remarkable speed, and built a large fleet of solar power, rising to over 157 GW by May 20261.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/07/2026.07.03_Working_Paper_Current.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/07/duck-camel.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "the-duck-and-the-camel-tracing-the-net-load-on-the-indian-power-grid"
+ },
+ {
+  "title": "The World in Purchasing Power Parity (Trends since 1992)",
+  "abstract": "Most papers regarding relative economic performance of countries deal with either nominal or real GDP. This paper focuses on four indicators of relative long-term economic performance in Purchasing Power Parity (PPP) terms: (i) share in world GDP, (ii) relative per-capita income, (iii) share in world savings and (iv) share in world investment. This provides a useful long-term perspective unclouded by exchange rates and relative prices.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/07/The-World-in-PPP.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/07/wpp.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "the-world-in-purchasing-power-parity-trends-since-1992"
+ },
+ {
+  "title": "Unconditional Women Cash Transfer Programmes in India: Evidence from Maharashtra and Odisha",
+  "abstract": "Cash transfer programmes targeted at women have become one of the fastest-growing categories of state-level welfare spending in India. By FY26, more than fifteen states had introduced some form of unconditional monthly or annual transfer paid directly into women’s bank accounts, at an estimated aggregate cost of roughly Rs 1.7 lakh crore and reaching close to 12 crore women. The number of states running such schemes increased more than five-fold between FY23 and FY26 reflect a convergence of evidence from development economics and political economy; direct income support placed in women’s hands is a powerful and cost effective instrument for improving household welfare, advancing financial inclusion and reducing gender-based economic exclusion.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/07/CBT-Working-Paper.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/07/uwct.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "unconditional-women-cash-transfer-programmes-in-india-evidence-from-ma"
+ },
+ {
+  "title": "Unlocking Rural Property Rights: Social Inclusion and Credit Expansion through SVAMITVA",
+  "abstract": "The Government of India’s introduction of the SVAMITVA scheme marks a landmark policy effort in rural property-rights reform. By seeking to provide formal recognition to residential abadi holdings that have long remained outside clear legal and financial records, the scheme lays foundation for stronger tenure security, better local governance and wider participation in formal credit markets. This paper evaluates how SVAMITVA by formalizing rural property rights has significantly enabled women and those at the bottom the pyramid to leverage such residential property rights as a collateral to gain access to formal credit. Using granular level data and high-dimensional fixed-effects difference-in-differences and triple-difference specifications, the baseline estimates show that sanctioned loan amounts increased by 23% in districts where SVAMITVA were implemented after rollout. The gains are distributionally progressive: borrowers from backward classes experience an additional 21% increase , while borrowers in Aspirational Districts record an additional 23% increase, both over common treatment effect of 23%. Among women, the strongest gains are concentrated at the bottom of the pyramid: the bottom 20% of women borrowers see a 24% increase in sanctioned loan amounts. In particular, across all such women, Muslim women exhibit an incremental 5.8% increase over the common treatment effect of 23%. This increase is significant as Muslim Women (Protection of Rights on Marriage) Act that was passed in 2019 rendered the practice of triple talaq void and aimed to strengthen Muslim women’s legal protection. Thus, it is the possible that 2021 SVAMTIVA act coupled with 2019 Muslim Women Act has created a favorable institutional impact. Overall, the findings suggest that SVAMITVA relaxed collateral constraints, deepened formal credit access, and did so in a socially and spatially inclusive manner. We recommend that a SVAMITVA-like scheme be launched in urban India as well to integrate scattered land records across states and the ongoing NAKSHA scheme be extended to all Urban Local Bodies.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/04/Unlocking-property-rights-through-SVAMITVA-Fin-rev.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/04/Screenshot-2026-04-13-113939.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "unlocking-rural-property-rights-social-inclusion-and-credit-expansion-"
+ },
+ {
+  "title": "What the Data Cannot Say: Small-Sample Inference and India’s National Accounts",
+  "abstract": "The recent paper by Anand, Felman and Subramanian (2026) argues that India’s January 2015 national accounts methodology revision caused GDP growth to be overstated by approximately 1.5-2 percentage points per year between FY2011-12 and FY2024-25. The paper presents evidence for this view using informal-sector survey data, cross-country regressions, and correlation analysis that is the focus of this note. It has gathered some attention in media, and in political discussions, recently.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/04/Policy_note_FINAL.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/04/Screenshot-2026-04-13-114131.png",
+  "year": 2026,
+  "type": "Working Paper",
+  "slug": "what-the-data-cannot-say-small-sample-inference-and-india-s-national-a"
+ },
+ {
+  "title": "Changes in Durable Goods Ownership in India",
+  "abstract": "Expenditure on durable goods (such as transport equipment and household appliances) is a useful indicator of economic well-being and living standards of households. Consumption of durable goods is also reflective of the future utility to households (and improved productivity) from the use of such goods. This study compares the Household Consumption Expenditure Survey 2023–24 with 2011–12 and finds significant advancements in spending on durables goods and ownership of key durable assets. These changes represent shifting priorities and aspirations for consumption among Indian households and improvements in quality of life. Additionally, our analysis focuses on the Bottom 40 (B40) percent of the households by consumption, which have been extensively targeted through programs of the Government of India and state governments. Studying the consumption and ownership trends of these households is an important measure of the effectiveness of welfare policies.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2025/11/Final_Durables-Consumption-Paper.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2025/11/Screenshot-2025-11-26-164339.png",
+  "year": 2025,
+  "type": "Working Paper",
+  "slug": "changes-in-durable-goods-ownership-in-india"
+ },
+ {
+  "title": "HOW TO DO PROCESS REFORMS?: CASE STUDY OF VOLUNTARY LIQUIDATION IN INDIA",
+  "abstract": "Large number of process reforms have been done in recent years- including simplification of administrative processes, changes in regulations and legislations, removing obsolete laws, closure of outdated government entities and so on. Even if these changes appear small in many cases, they have led to significant efficiency gains in the overall system. In this paper, we illustrate the impact of process reforms in the area of voluntary liquidation of companies. The purpose of this paper is to provide a case study of how a problem is identified, solved and the outcome measured. The hope is that such a systematic study will lead to institutionalization of such reforms. The bulk of companies that shut down worldwide every year are voluntary, rather than due to involuntary causes such as insolvency or bankruptcy. In India, there are two main routes for voluntary liquidation. One is under Section 248 of the Companies Act, 2013 and the second is Section 59 of the Insolvency and Bankruptcy Code. For both, the process was very complicated and time-consuming until very recently as was pointed out in the Government of India’s Economic Survey 2020-21 and 2021-22. The process reforms carried out since then have completely changed the outcome.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2025/04/Case-study-on-Voluntary-Liquidation-11th-April.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2025/04/Screenshot-2025-04-11-155738.png",
+  "year": 2025,
+  "type": "Working Paper",
+  "slug": "how-to-do-process-reforms-case-study-of-voluntary-liquidation-in-india"
+ },
+ {
+  "title": "The Great Convergence: A Case Study of Uttarakhand and Himachal Pradesh (2000 to 2020)",
+  "abstract": "We compare the growth and transformation of Uttarakhand (UK) economy to that of Himachal Pradesh (HP) over a period of two decades [2000-2020]. In particular, we examine the changes in the industrial sector output, particularly in view of the Concessional Industrial Package (CIP) for the Hill States announced by the central government in January 2003. What emerged subsequent to the central government’s announcement is akin to a ‘natural experiment’ given the close similarities of the two neighboring states. We study the approaches of the two states in response to the CIP which resulted in differing long-term trajectories of growth for the two neighbors. The only fundamental difference between the industrial policies of the two states was in their land policies, while all others were identical. We find that UK was able to rapidly catchup and subsequently exceed the per capita income of HP within a relatively short period of time. The state was able to better leverage the benefits of the CIP owing to a proactive and dedicated approach to town planning and land use policy which has emerged as one of the most critical impediments to industrialization and urban growth across India. We further investigate the impact of subsequent industrialization on tax revenues and spending patterns of the two states over two decades.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2025/02/The-Great-Convergence-final-draft_28022025-1.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2025/02/Screenshot-2025-03-01-104023.png",
+  "year": 2025,
+  "type": "Working Paper",
+  "slug": "the-great-convergence-a-case-study-of-uttarakhand-and-himachal-pradesh"
+ },
+ {
+  "title": "Time Spent on Employment-Related Activities in India: A Note",
+  "abstract": "Recent remarks by leaders of corporate India have sparked an interesting public debate. Their general point is that if India wants to become a developed nation, people will have to work 70 hours a week or more. Assuming a six-day work week, this translates to 700 minutes per day on employment-related activities. So far, the public discussion has mostly focused on efficiency versus quantity of work. Though this is an important aspect, it is imperative to first understand how things stand on the ground by studying the available data. That is, how much time is spent on employment-related activities across states, different economic sectors, types of enterprises, rural versus urban differences, and differences across genders and social groups within the country. In addition, this note also provides evidence of the association between time spent on employment-related activities and the per capita Net State Domestic Product (NSDP) at constant prices.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2025/01/Working-Hours_SRavi2025.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2025/01/Screenshot-2.png",
+  "year": 2025,
+  "type": "Working Paper",
+  "slug": "time-spent-on-employment-related-activities-in-india-a-note"
+ },
+ {
+  "title": "A Complex Adaptive System Framework to Regulate Artificial Intelligence",
+  "abstract": "The field of Artificial Intelligence (AI) has been making significant strides, with advancements in computer vision, language processing, robotics, and many other emergent areas. This rapid development, however, has raised substantial concerns about the risks associated with uncontrolled AI propagation.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/01/EACPM_AI_WP-1.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/01/EACPM_AI_WP_page-0001-scaled.jpg",
+  "year": 2024,
+  "type": "Working Paper",
+  "slug": "a-complex-adaptive-system-framework-to-regulate-artificial-intelligenc"
+ },
+ {
+  "title": "AGROFORESTRY: MISSING TREES FOR THE FOREST",
+  "abstract": "Despite being a tropical country, India has not been able to unlock the full potential of agroforestry. India’s agroforestry sector remains under-utilised and stifled by regulation. According to a study published in the journal of “Environment, Development and Sustainability”, as of 2021, the area under agroforestry (defined as tree cover per cent greater than 10 per cent on agricultural land) is estimated to be around 28 million hectares, which is a mere 17 per cent of total agricultural land and is far less when compared to the global average of 43 per cent. Agroforestry is India’s primary source of timber. As per the Indian Council on Forest Research and Education (ICFRE), over 93 per cent of India’s domestic timber was produced by “trees outside forests”, a majority of which are agroforestry plots. However, a stringent, complex and cumbersome regulatory policy combined with a conservation-led approach to forestry has stifled the growth of agroforestry in India. Consequently, India has become a net importer of timber. In 2023, India imported over USD 2.7 billion worth of timber1 (ITTO 2023), which equals almost 12 per cent of all agrobased imports for the same year (Damodaran 2024)",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/09/Working-Papr-on-Agroforestry.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/09/Working-Paper-1.png",
+  "year": 2024,
+  "type": "Working Paper",
+  "slug": "agroforestry-missing-trees-for-the-forest"
+ },
+ {
+  "title": "Addressing Groundwater Depletion Crisis in India: Institutionalizing Rights and Technological Innovations",
+  "abstract": "Groundwater, a vital resource essential for sustaining agriculture, rural water supply, and urban consumption, is rapidly depleting in India. With overreliance on groundwater, constituting 62% of irrigation and 85% of rural water supply, India faces an imminent threat exacerbated by population growth, industrial demands, and urbanisation. A University of Michigan study projects a tripling of groundwater depletion rates by 2080, primarily driven by climate-induced intensified withdrawal for irrigation. It highlights the oversight in earlier projections and calls for urgent policy interventions to mitigate this crisis. Proposed measures include rationing power supply, metering electricity usage, regional water resource development, and incentivising farmers for groundwater recharge. The study places India within the global context of groundwater depletion, identifying it as one of the six environmental tipping points. Issues such as declining water quality, aquifer depletion, and land subsidence underscore governance challenges in India, necessitating sustainable management practices. This paper unfolds in three chapters, exploring the problem’s causes and impacts, policy measures from various states and globally, and solutions grounded in community rights and artificial recharge. It emphasises the imperative role of institutionalisation, drawing insights from global examples, particularly Latin America, South Africa, Germany, and Australia. The synthesis of global and Indian experiences highlights the need for a holistic approach, starting with institutionalising community rights and complementing it with technological interventions for sustainable groundwater management.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Addressing_Groundwater_Depletion_in_India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Addressing_Groundwater_Depletion_in_India_page.jpg",
+  "year": 2024,
+  "type": "Partner Report",
+  "slug": "addressing-groundwater-depletion-crisis-in-india-institutionalizing-ri"
+ },
+ {
+  "title": "Challenges of Solid Waste Management in Urban India",
+  "abstract": "Waste generation increases as a result of rapid urbanisation and economic growth, placing tremendous pressure on the current management systems. Effective waste management has remained difficult despite the rapid economic expansion, indicating a gap in development strategies. The paper presents an in-depth study and analysis of solid waste management, highlighting the dual nature of solid waste as a challenge and an opportunity for Indian cities. It further emphasises that immediate sustainable waste management solutions are needed to solve environmental issues and achieve economic potential. Constructive approaches that involve public engagement and take geographical differences into account are essential. Through the implementation of sustainable practices such as waste disposal, reduction, reuse, and waste recovery, communities can turn waste from an issue into an asset that benefits the environment, the economy, and public health in urban areas. Although various regulations and laws have been introduced to improve waste management, such as the shift from centralised (2000) to decentralised (2016) approaches, challenges persist during the implementation process of these regulations. A shift towards responsible practices, along with investment in infrastructure, finance, technology, and awareness, are necessary to alleviate the challenges and achieve effective waste management.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Solid_Waste_management_Updated.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Solid_Waste_management_Updated_page-scaled.jpg",
+  "year": 2024,
+  "type": "Partner Report",
+  "slug": "challenges-of-solid-waste-management-in-urban-india"
+ },
+ {
+  "title": "Changes in India’s Food Consumption and Policy Implications",
+  "abstract": "Significant changes are unfolding in India’s food consumption pattern, with serious implications for our national agriculture, health, nutrition, and overall welfare policies that target poorer sections of society. The changing consumption basket of Indians will also impact the calculation of the Consumer Price Index in the future. A comprehensive analysis of the Household Consumption Expenditure Survey 2022–23 and comparisons with 2011–12 reveal striking changes in food consumption patterns over the last ten years, with potential implications for health outcomes. This comprehensive study is presented in four chapters.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/09/Comprehensive-Nutrition-Report-Final-1.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/09/FireShot-Capture-050-.png",
+  "year": 2024,
+  "type": "Working Paper",
+  "slug": "changes-in-india-s-food-consumption-and-policy-implications"
+ },
+ {
+  "title": "Economic Performance of Parliamentary Constituencies UPA (2) versus NDA (Modi Years)",
+  "abstract": "In a vibrant democracy, assessing the economic performance under different political regimes is crucial. Typically, the debate is limited to comparing growth rates or poverty reduction at the macro level. However, for a more meaningful analysis of politics in action,",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/02/Politics-in-Action-EAC-PM-Working-Paper.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/02/Politics-in-Action-EAC-PM-Working-Paper.jpg",
+  "year": 2024,
+  "type": "Working Paper",
+  "slug": "economic-performance-of-parliamentary-constituencies-upa-2-versus-nda-"
+ },
+ {
+  "title": "Examining trends in growth of cities in India using novel high frequency data View Examining volume and directions of domestic migration in India using novel high frequency data View Female Labour Force Participation Rate",
+  "abstract": "The female labour force participation rate (LFPR) is a crucial indicator of women’s economic empowerment and overall economic inclusiveness. This research paper presents econometric analysis highlighting a significant resurgence in female LFPR across Indian states, especially in rural areas, since 2017-18. There are three broad themes for the empirical analysis: (1) Recent trends in female LFPR, (2) The effects of marital status and parenthood on LFPR, and (3) LFPR variations with age and gender across all regions and states of India.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/12/FINAL-Urbanization-Tales-of-a-few-cities-Publication-Version.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/12/eacpm.png",
+  "year": 2024,
+  "type": "Working Paper",
+  "slug": "examining-trends-in-growth-of-cities-in-india-using-novel-high-frequen"
+ },
+ {
+  "title": "Igniting the Bright Spark Through the Looking Glass on Electric Mobility in India",
+  "abstract": "Compulsions of climate change commitments, caprices in oil prices coupled with a rapid acceleration of battery technologies have together led to a sharp increase in electric mobility worldwide. In the Indian context, a slew of measures – on the demand side as well as on the supply side have been announced from time to time. However, the results have been mixed.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/03/Adoption-of-EVs-Project-EAC-PM-Publication-Version-1.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/03/Adoption-of-EVs-Project-EAC-PM-Publication-Version_page-0001.jpg",
+  "year": 2024,
+  "type": "Working Paper",
+  "slug": "igniting-the-bright-spark-through-the-looking-glass-on-electric-mobili"
+ },
+ {
+  "title": "India and Global IPR Treaties",
+  "abstract": "To become an international player in the knowledge economy, India needs to take global IPR treaties more seriously as these agreements create the framework for the country’s R&D ecosystem to align with global best practices and accurately benchmark our performance with international peers. In this EAC-PM Working Paper, we explore 4 such international agreements and look at the pros and cons of each of them. These are the Strasbourg Agreement Concerning the International Patent Classification 1971, Geneva Act of the Hague Agreement on Industrial Designs 1999, Geneva Act of the Lisbon Agreement on Geographical Indications 2015 and the Design Law Treaty 2024.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/11/EAC-PM-Working-Paper-India-and-Global-IPR-Treaties-1.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/11/FireShot-Capture-097-1-1.png",
+  "year": 2024,
+  "type": "Working Paper",
+  "slug": "india-and-global-ipr-treaties"
+ },
+ {
+  "title": "Infrastructure Deficit in Land Transport Infrastructure in India",
+  "abstract": "Over the past 75 years since Independence, India has made consistent strides in infrastructure development across various sectors such as transportation, housing, commercial development, telecom, and sanitation. Recognising infrastructure as a key driver of socioeconomic progress, the government has invested significantly in what is termed as ‘social overhead capital’, aiming to extend development to even the remotest corners of the nation. This strategic approach has involved dedicated budget allocations, cross-subsidisation of revenue-generating infrastructure, and focused program delivery, resulting in expanded physical transportation networks, enhanced connectivity, localised service provision, and increased digital penetration.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Infrastructure_Deficit_In_Land_Transport.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Infrastructure_Deficit_In_Land_Transport_page.jpg",
+  "year": 2024,
+  "type": "Partner Report",
+  "slug": "infrastructure-deficit-in-land-transport-infrastructure-in-india"
+ },
+ {
+  "title": "Need for Franchising Laws in India",
+  "abstract": "The term ‘Franchise’ is not explicitly defined within the Indian Legal framework. However, its interpretation can be deduced from the Finance Act of 1999, which stipulates that a ‘Franchise’ refers to an agreement granting the authorized entity the right to sell, manufacture goods, provide services, or engage in business activities associated with the Franchisor (Shrivastava & Jacob, 2023). India’s growing middle class and rising entrepreneurial culture make the nation fertile ground for emergent franchising opportunities. However, certain lacunas need to be addressed before realizing this ambition, notably the lack of franchise-specific laws. In contrast to many other countries – the United States, where the Federal Trade Commission (FTC) oversees franchising through the Franchise Rule, the European Union, where member states regulate franchising in their national laws, Australia, which has specific disclosure laws pertaining to franchises and the Australian Competition and Consumer Commission (ACCC) that regulates the code – India does not possess a centralized regulatory body or comprehensive franchise law at the national level. The landscape of franchisor-franchisee relationships is marked by diverse arrangements and contracts, giving rise to various forms of exploitation and disputes, particularly impacting smaller local vendors serving as franchisees due to the inherent information asymmetry. The franchisor, as the source of the business opportunity, has access to enhanced knowledge about the business as well as typically exercises greater control over the terms of the franchise contract, elucidating skewed power dynamics within the industry structure.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Need-for-Franchising-Laws-in-India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Need-for-Franchising-Laws-in-India_page.jpg",
+  "year": 2024,
+  "type": "Partner Report",
+  "slug": "need-for-franchising-laws-in-india"
+ },
+ {
+  "title": "Relative Economic Performance of Indian States",
+  "abstract": "Most papers regarding economic performance of states deal with the real and nominal growth rates of states over time. In this paper, we have focused exclusively on the relative performance of states, measured using two indicators- (1) Share in India’s GDP and (2) Relative per capita income.The state’s share in India’s GDP is calculated by dividing the Gross State Domestic Product (GSDP) of the state by the sum of GSDP of all states. Relative per capita income is calculated as the ratio of the per capita Net State Domestic Product (NSDP) of the state as a percentage of the all-India per capita Net National Product (or Net National Income in some years). An important point to remember here is that per capita NSDP means that it does not include remittances which may be important for states like Kerala, Bihar and Uttar Pradesh. We have made adjustments where possible for state bifurcations and other factors to ensure comparability. All data used are in current prices. The analysis spans a long period, from 1960-61 to 2023 24, providing insights into how individual states have performed in response to changes in national and state-specific policies.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/09/State-GDP-Working-Paper_Final.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/09/State-GDP-Working-Paper_Final_240916_190207_page-0001.jpg",
+  "year": 2024,
+  "type": "Working Paper",
+  "slug": "relative-economic-performance-of-indian-states"
+ },
+ {
+  "title": "Revisiting complex conundrums of slum definition in urban policy: A case of India",
+  "abstract": "Slums, often termed informal settlements, become the primary housing solution for low-income urban dwellers due to fierce competition for land and profits, leaving them with limited choices owing to their meagre incomes and lack of alternative housing opportunities. The paper delves into the global prevalence of slums, emphasising the significance of accommodating the urban poor, particularly in India. It explores the challenges faced by marginalised populations in planned cities and the critical need for precisely defining slums. The origin of the term ‘slum’ is traced, highlighting its evolving interpretation. The impact of rapid urbanisation on slum growth is analysed, emphasising the complex interplay of economic, social, and policy factors. The definition of slums is critically examined, along with the disparities and limitations in current categorisations. The paper highlights the evolution of slum policies in India, focusing on the role of definitions in shaping these policies, spanning from initial eradication strategies to current in-situ redevelopment initiatives, while examining the impact of evolving theories, the engagement of NGOs, and the persistent challenges in implementation. It scrutinises recent policies like the Pradhan Mantri Awas Yojana, featuring issues hindering effective slum improvement. Overall, the paper stresses the crucial link between clear slum definitions and successful urban poverty alleviation strategies.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Revisiting-complex-conundrums-of-slum-definition-in-urban-policy.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Revisiting-complex-conundrums-of-slum-definition-in-urban-policy_page.jpg",
+  "year": 2024,
+  "type": "Partner Report",
+  "slug": "revisiting-complex-conundrums-of-slum-definition-in-urban-policy-a-cas"
+ },
+ {
+  "title": "Share of Religious Minorities A Cross-Country Analysis",
+  "abstract": "The global economy is in a phase of churn and being closely watched and analyzed by economists and policymakers everywhere. There are, however, major demographic transitions that are also underway across countries – but mostly going unnoticed by analysts ranging from economy watchers to democracy-watchers. These silent transformations have the power to reshape societies and states. Ironically, of the four megatrends whose cascading effects are bringing about these transformations -demography, technology, economy and climate change3- the forecasts for demography are the most predictable. Shifting demographic trends are aggravating economic disparity within and between countries, straining governance and fuelling friction between states and people.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Share-of-Religious-Minorities-EAC-PM-Working-Paper-1-1.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Share-of-Religious-Minorities-EAC-PM-Working-Paper_page-0001-1.jpg",
+  "year": 2024,
+  "type": "Report",
+  "slug": "share-of-religious-minorities-a-cross-country-analysis"
+ },
+ {
+  "title": "A Secular Democracy in Practice: Objective Assessment of Amenities Programs in India",
+  "abstract": "Our results indicate that the government is responsive to the needs of the marginalized section of society irrespective of religion, caste, or place of residence, which is an alternative and more robust indicator of strengthening democracy in India.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/18-Democracy-in-Practice.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/04/Secular-Democracy-in-Practice-A.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "a-secular-democracy-in-practice-objective-assessment-of-amenities-prog"
+ },
+ {
+  "title": "Abrasions in the Federal System",
+  "abstract": "Sustaining a harmonious federal relationship can prove to be the route towards accelerated economic growth only if it opens up avenues for win-win situations for both the Centre and the states.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/4-Federal-System.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/11/Abrasions-in-Federal-System.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "abrasions-in-the-federal-system"
+ },
+ {
+  "title": "Assessing the National Surveys for its Representativeness",
+  "abstract": "This paper is a quantitative analysis of the data quality of the National Sample Survey (NSS) in terms of three estimates.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/Quantifying-Data-Quality-of-India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/State-Budgets-in-India-Report-New.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "assessing-the-national-surveys-for-its-representativeness"
+ },
+ {
+  "title": "Delivering on the Sustainable Development Goals 2016-2030",
+  "abstract": "The world and even India will not achieve the SDG promises on time, it is useful to consider which of the promises should be prioritised, to speed overall progress. Cost-benefit analysis can identify which policies generate the most socio-economic good for each extra rupee spent. Analysing more than one hundred relevant Indian policies, we identify 12 highly effective policies",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/2-Delivering-on-the-SDGs-2016-30.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/10/EAC-PM-Working-Paper-New.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "delivering-on-the-sustainable-development-goals-2016-2030"
+ },
+ {
+  "title": "Enumeration of Legislative Powers in India",
+  "abstract": "Enumeration of legislative powers in the seventh schedule of the Indian Constitution has been an important topic in the study of federalism in India. The success of a federation depends on several factors but the accuracy of power distribution is an important one.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/13-Enumeration-of-Legislative-Powers-in-India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/03/Enumeration-of-Legislative-A.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "enumeration-of-legislative-powers-in-india"
+ },
+ {
+  "title": "Exploring the Possibility of Organic and Climate Resilient Agriculture Revolution in the North East",
+  "abstract": "The vision of the Hon’ble Prime Minister for the North Eastern Region of Bharat can be developed as the Organic agriculture hub of not only India but of the world, which would double up as the reservoir of knowledge and practice of ancient, climate resilient crops and seeds.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/09/WP22-Seed-Revolution-in-North-East-Region.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/09/Seed-Revolution.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "exploring-the-possibility-of-organic-and-climate-resilient-agriculture"
+ },
+ {
+  "title": "Fair Compensation and Accountability",
+  "abstract": "A codified law of torts would eliminate the need to keep developing new legislation each time a new form of injury or violation occurs.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/11-Fair-Compensation-Accountability.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/03/Fair-Compensation-Account.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "fair-compensation-and-accountability"
+ },
+ {
+  "title": "Financial Inclusion in India",
+  "abstract": "Financial inclusion in India has seen a paradigm shift since 2014 with the introduction of JAM Trinity encompassing Jan Dhan Yojana (PMJDY) for universal banking access for all, Aadhaar for unique biometric identification, and mobile services for direct transfers.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/3-Financial-Inclusion-Srishti-Chauhan.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/11/Financial-Inclusion.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "financial-inclusion-in-india"
+ },
+ {
+  "title": "Fixing the GST Process: Five Years of Iterative Problem Solving",
+  "abstract": "The paper, examines the topic from the perspective of process efficiency and the ability of the system to correct by responding to feedback loops. It delves into areas such as customer complaint rates, responsiveness of the Goods and Services Tax Network (GSTN), time taken for redressal, and the technological tools being used to improve interactions with taxpayers.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/16-Fixing-the-GST-Process_Five-Years-of-Iterative-Problem-Solving.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/04/Fixing-GST-Process.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "fixing-the-gst-process-five-years-of-iterative-problem-solving"
+ },
+ {
+  "title": "Foundational Literacy And Numeracy Report",
+  "abstract": "Language plays a crucial role in shaping the identity of individuals as it determines how individuals interact with each other in the global world. At the same time, numerous issues related to acquiring literacy skills have become a significant concern.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/02/FLN-report-For-Web.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/02/FLN-Report-2022-A.jpg",
+  "year": 2023,
+  "type": "Partner Report",
+  "slug": "foundational-literacy-and-numeracy-report"
+ },
+ {
+  "title": "How the Pennies Drop",
+  "abstract": "This paper delves into the trends of GST collections to evaluate the efficacy of the reform to generate revenue. Subsequently, an attempt is made to answer the questions – what drives revenue growth and whether the collections; collection efficiencies and buoyancy of collections are better under GST as compared to the pre-GST period. This is done by examining the GST collections while controlling for extraneous factors such as inflation.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/10/GST-Enforcement-Rates-Project.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/10/How-the-Pennies-Drop-2.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "how-the-pennies-drop"
+ },
+ {
+  "title": "India on the move",
+  "abstract": "An examination of volume and direction of internal trade in India. While there is an almost unanimous view of the benefits of trade – fueling economic growth, supporting a greater number of and better paying employment, raising living standards and enhancing the consumer surplus with affordable goods and services, contemporary research has primarily looked at external trade i.e. trade across national borders. This has led to an under-appreciation of the quantum and the effects of internal trade i.e. trade within national borders. This is of particular significance for larger economies such as India.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/10-India-on-the-Move.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/02/India-on-the-move-A.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "india-on-the-move"
+ },
+ {
+  "title": "India’s G20 Presidency – Emerging Issues",
+  "abstract": "With India’s G20 presidency, it is an opportunie moment to delve into economic, political and technological aspects that will define the future of G20 and India’s potential to influence the global agenda.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/05/Indias-G20-Presidency.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/05/G20-Presidency-A.jpg",
+  "year": 2023,
+  "type": "Occasional Paper",
+  "slug": "india-s-g20-presidency-emerging-issues"
+ },
+ {
+  "title": "India’s Tryst with a Circular Economy",
+  "abstract": "The concept of a circular economy has gained immense popularity in recent times, as it provides a sustainable solution to the current linear economic model. In a circular economy, resources are kept in use for as long as possible, waste is minimized, and products are designed to be reused or recycled at the end of their life.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/17-Indias-Tryst-with-a-Circular-Economy.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/04/India-Circular-Economy-A.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "india-s-tryst-with-a-circular-economy"
+ },
+ {
+  "title": "Making India Self-Reliant",
+  "abstract": "India needs an alternative and a self-reliant development model “with Indian characteristics.” The Indian model of growth and development should encourage trade liberalization, but safety nets should be in place to address displacement issues.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/19-Atmanirbhar-India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/06/Making-India-Self-Reliant.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "making-india-self-reliant"
+ },
+ {
+  "title": "Monuments of National lmportance",
+  "abstract": "There has been almost no discussion about the existing list of monuments of national importance and how a monument or a site is so declared. Scores of minor and insignificant monuments have been declared as MNI. Therefore, the current list requires immediate attention for drastic rationalisation.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/01/Monuments-of-National-Importance.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/01/Monuments-of-National-Importance.jpg",
+  "year": 2023,
+  "type": "Report",
+  "slug": "monuments-of-national-lmportance"
+ },
+ {
+  "title": "National Bank For Financing Infrastructure and Development",
+  "abstract": "The Government of India has set up the National Bank for Financing Infrastructure and Development (NaBFID) as the central Development Finance Institution (DFI) for infrastructure financing. The idea is to establish NaBFID as the key DFI which provides financing to infrastructure projects under the broad developmental goals of the country.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/8-National-Bank-for-Financing-Infrastructure-and-Development.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/12/NBFID-A.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "national-bank-for-financing-infrastructure-and-development"
+ },
+ {
+  "title": "Non-Tariff Barriers faced by Indian Exporters from their top Partner Members",
+  "abstract": "The intersection of barriers and measures are need to be examined more carefully by the WTO and should frame additional provisions to prevent the use of such barriers.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/5-Non-Tariff-Barriers-faced-by-Indian-Exporters.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/11/Non-Tariff-Barriers-A.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "non-tariff-barriers-faced-by-indian-exporters-from-their-top-partner-m"
+ },
+ {
+  "title": "Reforming the Legal Metrology Regime",
+  "abstract": "The Legal Metrology Act, 2009 (“2009 Act”) which establishes and enforces the standard of weights, measures and labels used in the commercial sector, has long been subjected to criticism for harsh punitive measures and complexity of its labeling regulations.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/09/EAC-PM-Working-Paper-Reforming-the-Legal-Metrology-Regime.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/09/Reforming-Legal-Metrology-C.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "reforming-the-legal-metrology-regime"
+ },
+ {
+  "title": "Reversing the Gaze",
+  "abstract": "India’s poor performance on certain development indicators has been a matter of hot debate in recent years. These debates often arise because some socio-economic indicators, as estimated by international agencies, seem to stagnate or even deteriorate despite a rise in per capita income in India. In this paper, we examine whether or not these estimates stand up to scrutiny.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/14-Reversing-the-Gaze.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/03/Reversing-the-Gaze.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "reversing-the-gaze"
+ },
+ {
+  "title": "Smuggling and Counterfeiting",
+  "abstract": "As the world, grapples with a host of problems, ranging from inflation and recessions to war and violence, the menace of smuggling and counterfeiting lurks in the underbelly of the economy.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/7-Smuggling-and-Counterfeiting.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/11/Smuggling-Report-A1.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "smuggling-and-counterfeiting"
+ },
+ {
+  "title": "State Budgets in India: Observational Time Trend Analysis",
+  "abstract": "State budgets reflect the state government’s social and economic priorities beyond the political rhetoric in the media. Analyzing time trends and the composition of the revenue, expenditure, and capital outlay can provide valuable insights into how these priorities have evolved for different states in the last thirty years.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/20-State-Budgets-Observational-Time-Trends-from-1990-to-2020.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/06/State-Budgets-in-India.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "state-budgets-in-india-observational-time-trend-analysis"
+ },
+ {
+  "title": "The 2023 India Cluster Panorama",
+  "abstract": "This research paper delves into the concept of competitiveness and clusters, drawing inspiration from the seminal work of Michael Porter and guided by the empirical research conducted by Dr. Christian Ketels across various countries.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/08/Report_India_Cluster_Panorama_2023.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/08/India-Cluster-Panorama-Repo.png",
+  "year": 2023,
+  "type": "Partner Report",
+  "slug": "the-2023-india-cluster-panorama"
+ },
+ {
+  "title": "The Need for Amending Indian Evidence Act, 1872",
+  "abstract": "The Indian Evidence Act continues to serve as a stable foundation for resolving disputes and protecting rights, but it is also crucial to consider the need for modernization and the evolution of the legal system better to serve the needs of a rapidly changing society.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/12-Evidence-Act.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/03/Amending-Evidence-Act-1.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "the-need-for-amending-indian-evidence-act-1872"
+ },
+ {
+  "title": "Traditional Water Conservation",
+  "abstract": "A working paper on reasons for decline and need for revival of water conservation by Sankar Prasad Sarma and Himani Aggarwal.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/9-Traditional-Water-Conservation.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/02/Traditional-Water-Conservat-A.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "traditional-water-conservation"
+ },
+ {
+  "title": "What is “Urban/Rural” India?",
+  "abstract": "The issue of labeling settlements as “urban” and “rural” has important policy implications in India since the label determines the local governance structure (panchayat or urban local body) and the allocation of resources under government schemes. Policymakers often work on the faulty assumption that “rural” is a proxy for “poor” and accordingly spend greater resources on provisioning of public goods in areas defined as “rural”. However, the current classification uses a combination of administrative definition and census criteria which are often inadequate in capturing speed and scale of urbanization in India.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/15-What-is-Urban-Rural-India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/03/What-is-Urban-Rural-India-N.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "what-is-urban-rural-india"
+ },
+ {
+  "title": "Why Commercial Mediation Should be Voluntary",
+  "abstract": "For the mediation system to be effective, it must earn its place in the dispute-resolution ecosystem by its performance and not by a mandate. Hence, Section 12A of the Commercial Courts Act, 2015, must be amended to make pre-litigation mediation for commercial cases voluntary.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/10/EACPM-WP25-Why-Commercial-Mediation-Should-be-Voluntary.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/10/Commercial-Mediation-Voluntary-2.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "why-commercial-mediation-should-be-voluntary"
+ },
+ {
+  "title": "Why India Does Poorly On Global Perception Indices",
+  "abstract": "In this paper we look at 3 indices which are used by WGI, which are Freedom in the World Index, Economist Intelligence Unit (EIU) Democracy Index and V-DEM indices. All three indices are almost entirely perception-based.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/6-Global-Perception-Indices.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/11/Global-Perception-Indices-A.jpg",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "why-india-does-poorly-on-global-perception-indices"
+ },
+ {
+  "title": "Why India Needs To Urgently Invest In Its Patent Ecosystem?",
+  "abstract": "An evolved Intellectual Property Rights regime is the basic requirement for a knowledge-based economy. Technological innovation and scientific research require a robust patenting system. India is seeing a surge in start-ups and unicorns, and an efficient IPR system is an essential prerequisite for a healthy startup ecosystem. In this paper, we focus on analyzing India’s performance in terms of patents and trademarks.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/07/1-Patenting-Ecosystem.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/08/Patent-Ecosystem.png",
+  "year": 2023,
+  "type": "Working Paper",
+  "slug": "why-india-needs-to-urgently-invest-in-its-patent-ecosystem"
+ },
+ {
+  "title": "Competitiveness Roadmap For India@100",
+  "abstract": "India Competitiveness Initiative is a multiyear effort towards enhancing prosperity and ease of living for its citizens. The initiative is a collaborative effort between EAC-PM, The Institute for Competitiveness headed by Dr. Amit Kapoor, Prof. Michael Porter and Dr. Christian Ketels from Harvard Business School.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/09/Competitiveness_Roadmap_for_India_at_100.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/09/Competitivness-Roadmap-A.jpg",
+  "year": 2022,
+  "type": "Partner Report",
+  "slug": "competitiveness-roadmap-for-india-100"
+ },
+ {
+  "title": "Cultural Heritage: An Urgent Need To Popularize And Protect",
+  "abstract": "The report makes an attempt to address various issues associated with India’s diverse and ancient composite heritage.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/09/Cultural-Heritage-06092022-1.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/09/Cultural-Heritage-Cover-A.jpg",
+  "year": 2022,
+  "type": "Report",
+  "slug": "cultural-heritage-an-urgent-need-to-popularize-and-protect"
+ },
+ {
+  "title": "Documenting Traditional Knowledge",
+  "abstract": "Ideas and inventions have been passed down from generation to generation within many communities since time immemorial. Today’s practice can be defined as a collective understanding of all inventions and developments that occurred over time and were then passed down as Traditional Knowledge (TK).",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/12/Documenting-Traditional-Knowledge-2.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/12/Documenting-Traditional-2.jpg",
+  "year": 2022,
+  "type": "Report",
+  "slug": "documenting-traditional-knowledge"
+ },
+ {
+  "title": "Index on Quality of Life for elderly",
+  "abstract": "The Index on Quality of Life for Elderly 2021 represents a beginning in taking the first step in establishing a complete understanding of the elderly population around India’s States and Union territories.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/Report_Quality_of_Life_for_Elderly_Final-compressed.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/Ease-of-Elderly-Report-New-A.jpg",
+  "year": 2022,
+  "type": "Partner Report",
+  "slug": "index-on-quality-of-life-for-elderly"
+ },
+ {
+  "title": "Report of the Beekeeping Development Committee (Part-II)",
+  "abstract": "This report contains all the Annexures for Report of the Beekeeping Development Committee",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/Report-of-the-Beekeeping-Development-Committee_Inner_Part-II.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/Beekeeping-2-A.jpg",
+  "year": 2022,
+  "type": "Report",
+  "slug": "report-of-the-beekeeping-development-committee-part-ii"
+ },
+ {
+  "title": "Social Progress Index: States and Districts of India",
+  "abstract": "In collaboration with Social Progress Initiative, The Institute for Competitiveness is pleased to release the Social Progress Index: States and Districts in India report, mandated by the Economic Advisory Council, to the Prime Minister of India.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/12/Social_Progress_Index_States_and_Districts_of_India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/12/Social-Progress-Index-Launc.png",
+  "year": 2022,
+  "type": "Partner Report",
+  "slug": "social-progress-index-states-and-districts-of-india"
+ },
+ {
+  "title": "Status of Foundational Literacy & Numeracy in India",
+  "abstract": "The report on the State of Foundational Literacy and Numeracy in India highlights the importance of early education years in the overall development of a child. It further highlights the role of well-planned early interventions like the National Education Policy (2020) and the NIPUN Bharat guidelines, leading to long-term improved learning outcomes.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/Report_on_state_of_foundational_learning_and_numeracy_web_version.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/FLN-Cover-New-A.jpg",
+  "year": 2022,
+  "type": "Partner Report",
+  "slug": "status-of-foundational-literacy-numeracy-in-india"
+ },
+ {
+  "title": "Status of Women in India",
+  "abstract": "Gender inclusivity has emerged as an important leitmotif in global policy dialogues. India’s gender divide has been a matter of extensive debates and discussions.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/11/Status-of-Women-in-India.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/11/Status-of-Women-in-India-Co.jpg",
+  "year": 2022,
+  "type": "Report",
+  "slug": "status-of-women-in-india"
+ },
+ {
+  "title": "Beekeeping Development Committee Report",
+  "abstract": "Beekeeping is an important activity that supplements and compliments agriculture and provides nutritional and economic security to rural communities worldwide.",
+  "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2019/06/Report-of-the-Beekeeping-Development-Committee_Inner_Part-I.pdf",
+  "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/Beekeeping-Cover-EAC.jpg",
+  "year": 2019,
+  "type": "Report",
+  "slug": "beekeeping-development-committee-report"
+ }
+]
