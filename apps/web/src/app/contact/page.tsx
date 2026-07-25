@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Icon } from "@/components/ui/Icon";
+import { MapIllustration } from "@/components/ui/MapIllustration";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -55,16 +56,11 @@ export default function ContactPage() {
                   </p>
                 </div>
               </div>
-              <div
-                className="card"
-                style={{ aspectRatio: "16 / 7", display: "grid", placeItems: "center", background: "var(--app-bg-subtle)", textAlign: "center" }}
-              >
-                <div>
-                  <Icon name="mapPin" size={24} style={{ margin: "0 auto 0.5rem" }} />
-                  <p className="text-muted t-small">
-                    Accessible map loads on click — no auto-loading third-party embed.
-                  </p>
-                </div>
+              <div className="card map-card" style={{ aspectRatio: "16 / 7" }}>
+                <MapIllustration />
+                <p className="map-card-note t-small text-muted">
+                  <Icon name="mapPin" size={14} /> Accessible map loads on click
+                </p>
               </div>
             </div>
 

@@ -3,6 +3,7 @@ import { Noto_Sans, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { AccessibilityWidgetScript } from "@/components/layout/AccessibilityWidgetScript";
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
@@ -44,6 +45,12 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        {/* UX4G accessibility widget — knowing policy exception to CLAUDE.md §2.7/§8
+            (external CDN, no SRI). Its JS also beacons page URL/UA/session id to
+            https://audit360.ux4g.gov.in on load, on every toggle, and on unload —
+            undisclosed in the vendor snippet; kept anyway per explicit instruction.
+            Duplicates TopBar's self-hosted a11y controls (text size/contrast/theme/lang). */}
+        <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.26/accessibility-widget.css" />
       </head>
       <body>
         <a href="#main-content" className="skip-link">
@@ -52,6 +59,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <AccessibilityWidgetScript />
       </body>
     </html>
   );

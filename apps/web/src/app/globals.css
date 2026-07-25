@@ -16,11 +16,12 @@
   --ux4g-font-family-base: var(--font-sans);
   --ux4g-font-family-display: var(--font-display);
 
-  /* surfaces & ink (light) — clean lavender-white. Backgrounds carry a faint cool
-     primary tint (not warm amber) so the whole site reads modern-institutional,
-     matching the UX4G design-system reference. */
-  --app-bg: color-mix(in srgb, var(--ux4g-color-neutral-0, #fff) 97%, var(--ux4g-color-primary-500, #6a4eff));
-  --app-bg-subtle: color-mix(in srgb, var(--ux4g-color-neutral-0, #fff) 93%, var(--ux4g-color-primary-500, #6a4eff));
+  /* surfaces & ink (light) — clean lavender-white. Backgrounds carry a cool primary
+     tint (not warm amber) so the whole site reads modern-institutional, matching the
+     UX4G design-system reference. The bg/surface gap is deliberately wide enough that
+     white cards visibly lift off the page — a 1-2% tint reads as flat, not clean. */
+  --app-bg: color-mix(in srgb, var(--ux4g-color-neutral-0, #fff) 94%, var(--ux4g-color-primary-500, #6a4eff));
+  --app-bg-subtle: color-mix(in srgb, var(--ux4g-color-neutral-0, #fff) 89%, var(--ux4g-color-primary-500, #6a4eff));
   --app-surface: var(--ux4g-color-neutral-0, #fff);
   --app-border: color-mix(in srgb, var(--ux4g-color-neutral-200, #e5e5e5) 84%, var(--ux4g-color-primary-500, #6a4eff));
   --app-border-strong: color-mix(in srgb, var(--ux4g-color-neutral-300, #d9d9d9) 80%, var(--ux4g-color-primary-500, #6a4eff));
@@ -61,6 +62,13 @@
   --app-shadow-2: var(--ux4g-shadow-l2);
   --app-shadow-3: var(--ux4g-shadow-l3);
   --app-shadow-float: 0 24px 60px -22px color-mix(in srgb, var(--ux4g-color-primary-700, #3d239f) 40%, transparent);
+  /* the UX4G elevation tokens are near-invisible black alpha on a near-white page;
+     a faint purple tint reads as real depth instead of vanishing. Used on the sticky nav. */
+  --app-shadow-nav: 0 10px 28px -16px color-mix(in srgb, var(--ux4g-color-primary-700, #3d239f) 28%, transparent), 0 1px 0 var(--app-border);
+
+  /* a constant institutional band (GoI utility strip) — deliberately does NOT flip
+     with the reading theme, same purpose as a masthead. */
+  --app-topbar-bg: var(--ux4g-color-primary-900, #24145c);
 
   --app-font-scale: 1;
   --app-maxw: 1200px;
@@ -92,6 +100,7 @@
   --app-gold-soft: color-mix(in srgb, var(--ux4g-color-secondary-500, #c47d00) 20%, transparent);
   --app-gold-ink: var(--ux4g-color-secondary-950, #110700);
   --app-shadow-float: 0 24px 60px -22px rgba(0,0,0,0.6);
+  --app-shadow-nav: 0 10px 28px -16px rgba(0,0,0,0.45), 0 1px 0 var(--app-border);
   color-scheme: dark;
 }
 
@@ -121,6 +130,8 @@ html {
 body {
   font-family: var(--font-sans);
   background: var(--app-bg);
+  background-image: radial-gradient(var(--app-border) 1px, transparent 1.2px);
+  background-size: 26px 26px;
   color: var(--app-text);
   line-height: 1.6;
   min-height: 100dvh;
@@ -128,6 +139,8 @@ body {
   text-rendering: optimizeLegibility;
   font-synthesis: none;
 }
+/* High-contrast mode prioritises maximum clarity over ambient texture. */
+:root.contrast-more body { background-image: none; }
 img, svg, video { max-width: 100%; height: auto; }
 /* Clip stray horizontal overflow (e.g. offscreen a11y data tables) without creating a
    scroll container, so position:sticky and nested horizontal scrollers keep working. */

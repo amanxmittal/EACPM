@@ -49,6 +49,11 @@
 .cover-type { font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.82; }
 .cover-title { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; line-height: 1.22; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .cover-mark { position: absolute; top: 0.9rem; right: 1rem; font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 700; opacity: 0.7; }
+.cover-glyph {
+  position: absolute; right: -8%; bottom: -12%; z-index: -1;
+  width: 62%; height: auto; aspect-ratio: 1; opacity: 0.16; stroke-width: 1;
+  pointer-events: none;
+}
 
 /* ---- small icon tile (reused wherever a labelled tile needs a leading glyph) ---- */
 .audience-ico { width: 42px; height: 42px; border-radius: var(--app-radius); background: var(--app-accent-soft); color: var(--app-accent-strong); display: grid; place-items: center; flex: none; }
@@ -90,6 +95,24 @@
 .search-box input { border: 0; background: transparent; flex: 1; outline: none; color: var(--app-text); }
 .results-count { color: var(--app-text-muted); font-size: 0.9rem; }
 .empty { text-align: center; padding: 3rem 1rem; color: var(--app-text-muted); }
+
+/* ---- map illustration (contact page, stands in for the click-to-load embed) ---- */
+.map-card { padding: 0; position: relative; overflow: hidden; }
+.map-illo { width: 100%; height: 100%; display: block; }
+.map-illo-bg { fill: var(--app-bg-subtle); }
+.map-illo-blocks rect { fill: var(--app-border); opacity: 0.55; }
+.map-illo-roads path { stroke: var(--app-border); stroke-width: 3; fill: none; }
+.map-illo-avenue { stroke: var(--app-border-strong); stroke-width: 4; fill: none; stroke-linecap: round; }
+.map-illo-pin-halo { fill: var(--app-accent); opacity: 0.16; }
+.map-illo-pin { fill: var(--app-accent); }
+.map-illo-pin-dot { fill: var(--app-surface); }
+.map-card-note {
+  position: absolute; left: 50%; bottom: 0.9rem; transform: translateX(-50%);
+  display: inline-flex; align-items: center; gap: 0.4rem; text-align: center;
+  padding: 0.4rem 0.8rem; border-radius: var(--ux4g-radius-full, 999px);
+  background: var(--app-surface); border: 1px solid var(--app-border);
+  box-shadow: var(--app-shadow-1); max-width: calc(100% - 1.6rem);
+}
 
 /* ---- detail layout ---- */
 .detail-grid { display: grid; grid-template-columns: 1fr 300px; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
