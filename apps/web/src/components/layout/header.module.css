@@ -1,14 +1,15 @@
-/* Top identity + accessibility utility bar */
+/* Top identity + accessibility utility bar — a constant institutional band (like a
+   masthead) that does NOT reskin with the reading theme, so it's never the flat,
+   washed-out near-white-on-near-white strip light mode fell into. */
 .topbar {
-  background: var(--app-bg-subtle);
-  border-bottom: 1px solid var(--app-border);
+  background: var(--app-topbar-bg);
   font-size: var(--ux4g-fs-12, 0.75rem);
 }
 .topbarInner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 38px; }
-.gov { display: flex; align-items: center; gap: 0.55rem; color: var(--app-text-muted); font-weight: 500; }
+.gov { display: flex; align-items: center; gap: 0.55rem; color: rgba(255,255,255,0.8); font-weight: 500; }
 .govEmblem {
   width: 22px; height: 22px; border-radius: 999px; flex: none;
-  display: grid; place-items: center; background: var(--app-accent); color: #fff;
+  display: grid; place-items: center; background: var(--ux4g-color-primary-400, #8670ff); color: #fff;
   font-weight: 700; font-size: 11px; font-family: var(--font-display);
 }
 .controls { display: flex; align-items: center; gap: 0.35rem; }
@@ -16,23 +17,56 @@
   display: inline-flex; align-items: center; gap: 0.3rem;
   padding: 0.25rem 0.5rem; border-radius: var(--app-radius);
   border: 1px solid transparent; background: transparent; cursor: pointer;
-  color: var(--app-text-muted); font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 600;
+  color: rgba(255,255,255,0.72); font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 600;
 }
-.ctrl:hover { border-color: var(--app-border-strong); color: var(--app-text); }
-.ctrl[aria-pressed="true"] { background: var(--app-accent-soft); color: var(--app-accent-strong); border-color: transparent; }
-.ctrlGroup { display: inline-flex; align-items: center; border: 1px solid var(--app-border); border-radius: var(--app-radius); overflow: hidden; }
+.ctrl:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+.ctrl[aria-pressed="true"] { background: rgba(255,255,255,0.18); color: #fff; border-color: transparent; }
+.ctrl:disabled { opacity: 0.4; cursor: default; }
+.ctrlGroup { display: inline-flex; align-items: center; border: 1px solid rgba(255,255,255,0.28); border-radius: var(--app-radius); overflow: hidden; }
 .ctrlGroup .ctrl { border-radius: 0; border: 0; }
-.sep { width: 1px; height: 18px; background: var(--app-border); margin-inline: 0.25rem; }
-@media (max-width: 720px) { .hideSm { display: none; } }
-
-/* Main navigation bar */
-.header { position: relative; z-index: 100; }
-.mainbar {
-  position: sticky; top: 0; z-index: 100;
-  background: color-mix(in srgb, var(--app-bg) 88%, transparent);
-  backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid var(--app-border);
+.sep { width: 1px; height: 18px; background: rgba(255,255,255,0.24); margin-inline: 0.25rem; }
+@media (max-width: 720px) {
+  .hideSm { display: none; }
+  /* Mobile topbar keeps only identity, theme and language — text size and
+     contrast move into the full accessibility widget instead of duplicating it here. */
+  .a11yFull { display: none; }
 }
+
+/* Main navigation bar — a floating pill detached from the flush topbar above it and
+   from the viewport edges, while the hero/content below stays full-bleed. A light
+   touch of the "floating card" language, not a wholesale switch away from full-bleed. */
+/* The whole header sticks, offset up by the topbar's height so the GoI utility strip
+   scrolls away and the nav pins to the top. Sticking .mainbar alone does NOT work:
+   a sticky element is constrained to its PARENT's box, and <header> is only as tall
+   as its own content, so the nav would scroll off with it. */
+.header {
+  position: sticky; top: calc(-1 * var(--topbar-h)); z-index: 100;
+  --topbar-h: 38px;
+}
+/* At rest the nav is flush and full-bleed. Once the page scrolls it detaches into a
+   floating pill. The border is always present but transparent, and the vertical gap
+   comes from transform, so neither state change alters the box size or reflows the
+   page below — only the horizontal inset resolves within this sticky subtree. */
+.mainbar {
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--app-bg) 94%, transparent);
+  backdrop-filter: saturate(180%) blur(10px);
+  box-shadow: var(--app-shadow-nav);
+  transition:
+    margin-inline .34s cubic-bezier(.2,.7,.2,1),
+    border-radius .34s cubic-bezier(.2,.7,.2,1),
+    border-color .34s ease,
+    transform .34s cubic-bezier(.2,.7,.2,1);
+}
+.mainbar[data-floating="true"] {
+  margin-inline: clamp(12px, 3vw, 32px);
+  border-radius: var(--app-radius-xl);
+  border-color: var(--app-border);
+  transform: translateY(10px);
+}
+@media (prefers-reduced-motion: reduce) { .mainbar { transition: none; } }
 /* Tier 1 — brand + utility icons */
 .topRow { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; min-height: 62px; }
 .brand { display: flex; align-items: center; gap: 0.7rem; flex: none; }
@@ -46,13 +80,18 @@
 .nav { display: flex; align-items: center; gap: 0.15rem; min-height: 50px; }
 .navItem { position: relative; }
 .navLink {
-  display: inline-flex; align-items: center; gap: 0.3rem;
+  position: relative; display: inline-flex; align-items: center; gap: 0.3rem;
   padding: 0.55rem 0.7rem; border-radius: var(--app-radius);
   font-weight: 600; font-size: 0.93rem; color: var(--app-text); cursor: pointer;
 }
 .navLink:hover { color: var(--app-accent); background: var(--app-accent-soft); }
 .navLink svg { transition: transform .18s ease; opacity: 0.6; }
 .navItem:hover .navLink svg, .navItem:focus-within .navLink svg { transform: rotate(180deg); }
+.navLink[aria-current="page"] { color: var(--app-accent); background: var(--app-accent-soft); }
+.navLink[aria-current="page"]::after {
+  content: ""; position: absolute; left: 0.7rem; right: 0.7rem; bottom: -1px;
+  height: 2px; border-radius: 2px; background: var(--app-accent);
+}
 
 .dropdown {
   position: absolute; top: calc(100% + 8px); left: 0; min-width: 300px;
@@ -62,7 +101,7 @@
   transition: opacity .16s ease, transform .16s ease, visibility .16s;
 }
 .navItem:hover .dropdown, .navItem:focus-within .dropdown { opacity: 1; visibility: visible; transform: none; }
-.ddLink { display: block; padding: 0.55rem 0.7rem; border-radius: var(--app-radius); }
+.ddLink { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.55rem 0.7rem; border-radius: var(--app-radius); }
 .ddLink:hover { background: var(--app-accent-soft); }
 .ddTitle { font-weight: 600; font-size: 0.92rem; }
 .ddDesc { font-size: 0.78rem; color: var(--app-text-muted); }
@@ -75,6 +114,8 @@
 }
 .iconBtn:hover { border-color: var(--app-accent); color: var(--app-accent); }
 .menuBtn { display: none; }
+.contactCta { height: 40px; padding-inline: 1rem; white-space: nowrap; }
+.contactCta[aria-current="page"] { --btn-bg: var(--app-accent-strong); }
 
 /* Search overlay */
 .searchWrap { border-top: 1px solid var(--app-border); background: var(--app-surface); }
@@ -92,11 +133,25 @@
   .navRow { display: none; }
   .menuBtn { display: inline-grid; }
   .brandSub { display: none; }
+  /* Still reachable via the drawer below, which keeps Contact Us in primaryNav. */
+  .contactCta { display: none; }
   .drawer {
     display: block; border-top: 1px solid var(--app-border);
-    background: var(--app-surface); padding: 0.5rem 0 1rem;
+    background: var(--app-surface);
+    padding: 0.5rem clamp(16px, 5vw, 40px) 1rem;
   }
-  .drawerLink { display: block; padding: 0.75rem 0.25rem; font-weight: 600; border-bottom: 1px solid var(--app-border); }
+  .drawerLink { display: block; padding: 0.75rem 0; font-weight: 600; border-bottom: 1px solid var(--app-border); }
+  .drawerLink[aria-current="page"] { color: var(--app-accent); }
   .drawerSub { padding: 0.4rem 0 0.4rem 0.9rem; color: var(--app-text-muted); font-size: 0.9rem; }
   .drawerSub a { display: block; padding: 0.35rem 0; }
+
+  /* When the nav has detached into its floating pill, .mainbar's inset margin
+     would otherwise shrink the drawer/search panels too, exposing the page
+     behind them in the gap on both sides. Cancel it so these panels stay
+     full-bleed no matter the header's scroll state. */
+  .mainbar[data-floating="true"] .drawer,
+  .mainbar[data-floating="true"] .searchWrap {
+    margin-inline: calc(-1px - clamp(12px, 3vw, 32px));
+    width: calc(100% + 2px + 2 * clamp(12px, 3vw, 32px));
+  }
 }

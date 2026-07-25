@@ -9,6 +9,7 @@ import s from "./header.module.css";
 export function MainNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [floating, setFloating] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -16,8 +17,20 @@ export function MainNav() {
     setSearchOpen(false);
   }, [pathname]);
 
+  // Full-bleed at rest; detaches into a floating pill once the page scrolls.
+  useEffect(() => {
+    const onScroll = () => setFloating(window.scrollY > 8);
+    onScroll(); // sync on mount (covers restored scroll positions)
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Top-level section match only (not individual dropdown/hash children — too fragile
+  // and would light up several links at once for what's really one page).
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+
   return (
-    <div className={s.mainbar}>
+    <div className={s.mainbar} data-floating={floating}>
       {/* Tier 1 — brand + utility icons */}
       <div className={`container ${s.topRow}`}>
         <Link href="/" className={s.brand} aria-label="EAC-PM home">
@@ -38,6 +51,9 @@ export function MainNav() {
           >
             <Icon name={searchOpen ? "close" : "search"} size={20} />
           </button>
+          <Link href="/contact" className={`btn btn-primary ${s.contactCta}`} aria-current={isActive("/contact") ? "page" : undefined}>
+            Contact Us
+          </Link>
           <button
             className={`${s.iconBtn} ${s.menuBtn}`}
             aria-label="Menu"
@@ -53,9 +69,10 @@ export function MainNav() {
       <div className={s.navRow}>
         <div className="container">
           <nav className={s.nav} aria-label="Primary">
-            {primaryNav.map((item) => (
+            {/* Contact Us is promoted to a CTA button in the actions row instead. */}
+            {primaryNav.filter((item) => item.href !== "/contact").map((item) => (
               <div key={item.label} className={s.navItem}>
-                <Link href={item.href} className={s.navLink}>
+                <Link href={item.href} className={s.navLink} aria-current={isActive(item.href) ? "page" : undefined}>
                   {item.label}
                   {item.children && <Icon name="chevronDown" size={15} />}
                 </Link>
@@ -98,7 +115,7 @@ export function MainNav() {
         <div className={`container ${s.drawer}`}>
           {primaryNav.map((item) => (
             <div key={item.label}>
-              <Link href={item.href} className={s.drawerLink}>
+              <Link href={item.href} className={s.drawerLink} aria-current={isActive(item.href) ? "page" : undefined}>
                 {item.label}
               </Link>
               {item.children && (

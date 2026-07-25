@@ -14,7 +14,7 @@ export const primaryNav: NavItem[] = [
     label: "About EAC-PM",
     href: "/about",
     children: [
-      { label: "About EAC-PM", href: "/about", desc: "Organisational information only" },
+      { label: "Overview", href: "/about", desc: "Organisational information only" },
       { label: "Message from the Chairperson", href: "/about#chairperson", desc: "A signed message" },
       { label: "Team", href: "/about#team", desc: "Categorised, clickable profiles" },
       { label: "Previous Chairpersons", href: "/about#previous", desc: "Chronological legacy" },

@@ -27,13 +27,6 @@ const heroPoints = [6.1, 6.4, 5.2, 7.8, 8.4, 7.4, 6.9, 6.5];
 const upiLabels = ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
 const upiPoints = [0.8, 1.3, 2.3, 4.5, 8.7, 12.5, 15.8, 18.4];
 
-const heroQuick = [
-  { label: "Publications", href: "/publications" },
-  { label: "Data & Dashboards", href: "/data" },
-  { label: "Notices", href: "/notices" },
-  { label: "About", href: "/about" },
-];
-
 const affiliations = [
   { src: "/brand/NITI-Aayog-logo.png", alt: "NITI Aayog", href: "https://www.niti.gov.in/" },
   { src: "/brand/PMINDIA.png", alt: "Prime Minister of India", href: "https://www.pmindia.gov.in/" },
@@ -74,17 +67,6 @@ export default function Home() {
               The data, working papers and analysis behind the world&apos;s most-watched economy.
               Sourced, dated, and open to everyone.
             </p>
-            <form action="/publications" role="search" aria-label="Search the site" className="hero-search3">
-              <Icon name="search" size={19} className="text-muted" />
-              <input type="search" name="q" placeholder="Search papers, data, notices" />
-              <button type="submit" className="btn btn-primary">Search</button>
-            </form>
-            <div className="hero-cine-quick">
-              <span className="lbl">Jump to</span>
-              {heroQuick.map((q) => (
-                <Link key={q.href} href={q.href} className="hero-chip-light">{q.label}</Link>
-              ))}
-            </div>
           </div>
         </div>
       </section>

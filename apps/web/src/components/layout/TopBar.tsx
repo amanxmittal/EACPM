@@ -57,7 +57,7 @@ export function TopBar() {
         </div>
 
         <div className={s.controls}>
-          <div className={s.ctrlGroup} role="group" aria-label="Text size">
+          <div className={`${s.ctrlGroup} ${s.a11yFull}`} role="group" aria-label="Text size">
             <button className={s.ctrl} onClick={() => applyScale(scale - STEP)} disabled={scale <= MIN} aria-label="Decrease text size">
               A<Icon name="minus" size={12} />
             </button>
@@ -68,8 +68,8 @@ export function TopBar() {
               A<Icon name="plus" size={12} />
             </button>
           </div>
-          <span className={s.sep} aria-hidden />
-          <button className={s.ctrl} onClick={toggleContrast} aria-pressed={contrast} aria-label="Toggle high contrast">
+          <span className={`${s.sep} ${s.a11yFull}`} aria-hidden />
+          <button className={`${s.ctrl} ${s.a11yFull}`} onClick={toggleContrast} aria-pressed={contrast} aria-label="Toggle high contrast">
             <Icon name="contrast" size={16} /> <span className={s.hideSm}>Contrast</span>
           </button>
           <button className={s.ctrl} onClick={toggleTheme} aria-pressed={theme === "dark"} aria-label="Toggle dark mode">
@@ -79,8 +79,8 @@ export function TopBar() {
           <button className={s.ctrl} onClick={toggleLang} aria-label="Switch language" title="Hindi content pending (Bhashini)">
             <Icon name="globe" size={16} /> {lang === "en" ? "EN" : "HI"}
           </button>
-          <span className={s.sep} aria-hidden />
-          <Link className={`${s.ctrl} ${s.hideSm}`} href="/policies/screen-reader-access">
+          <span className={`${s.sep} ${s.a11yFull}`} aria-hidden />
+          <Link className={`${s.ctrl} ${s.hideSm} ${s.a11yFull}`} href="/policies/screen-reader-access">
             Screen Reader
           </Link>
         </div>
