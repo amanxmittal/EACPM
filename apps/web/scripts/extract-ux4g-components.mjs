@@ -38,12 +38,15 @@ const FAMILIES = [
   "ux4g-page-nav",
   "ux4g-avatar",
   "ux4g-breadcrumb",
+  "ux4g-list",
   // feedback
   "ux4g-empty-state",
   // primitives
   "ux4g-divider",
   "ux4g-tag",
   "ux4g-search",
+  // layout — every breakpoint's max-width bridged to --app-maxw in globals.css
+  "ux4g-container",
   // buttons — see DESIGN.md §9.2 for the pinned weight
   "ux4g-btn",
   "ux4g-icon-btn",

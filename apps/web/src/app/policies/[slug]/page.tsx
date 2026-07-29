@@ -20,7 +20,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
 
   return (
     <section className="section">
-      <div className="container container-narrow">
+      <div className="ux4g-container container-narrow">
         <nav className="ux4g-breadcrumb ux4g-breadcrumb-divider" aria-label="Breadcrumb">
           <ol className="ux4g-breadcrumb-list">
             <li className="ux4g-breadcrumb-item">

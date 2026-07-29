@@ -74,7 +74,7 @@ export default function Home() {
 
       {/* ============ 3 · FEATURED STORY ============ */}
       <section className="story">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="story-grid">
             <Reveal className="story-cover">
               <span className="story-tag">Featured paper</span>
@@ -112,7 +112,7 @@ export default function Home() {
           <img src="/img/mumbai-marine-drive.jpg" alt="" loading="lazy" />
         </div>
         <div className="scrim" aria-hidden />
-        <div className="container inner">
+        <div className="ux4g-container inner">
           <span className="banner-kicker">The stakes</span>
           <h2>A billion people. One economy the world is watching.</h2>
           <p>
@@ -132,7 +132,7 @@ export default function Home() {
 
       {/* ============ 5 · PUBLICATIONS (magazine) ============ */}
       <section className="pubs">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="pubs-head">
             <h2>Publications</h2>
             <Link href="/publications" className="view-all">All {reports.length} publications <Icon name="arrowRight" size={16} /></Link>
@@ -163,7 +163,7 @@ export default function Home() {
 
       {/* ============ 6 · DASHBOARDS PROMO ============ */}
       <section className="dashp bleed">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="dashp-grid">
             <div>
               <h2>Data & Dashboards</h2>
@@ -199,7 +199,7 @@ export default function Home() {
 
       {/* ============ 7 · INSTITUTION (photograph) ============ */}
       <section className="inst">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="inst-grid">
             <Reveal className="inst-photo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -224,7 +224,7 @@ export default function Home() {
 
       {/* ============ 8 · NEWSROOM ============ */}
       <section className="news">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="news-grid">
             <div>
               <div className="news-h">
@@ -287,7 +287,7 @@ export default function Home() {
           embeds, which CLAUDE.md §8 bars. Handles/URLs are pending confirmation —
           see content/FACTCHECK_QUEUE.md FC-001. */}
       <section className="connect bleed">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="connect-head">
             <div>
               <span className="connect-kicker">Follow the conversation</span>
@@ -341,7 +341,7 @@ export default function Home() {
 
       {/* ============ 10 · AFFILIATION ============ */}
       <section className="affil bleed">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="affil-lead">
             <span className="k">Part of the Government of India</span>
           </div>

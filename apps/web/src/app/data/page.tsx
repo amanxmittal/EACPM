@@ -33,7 +33,7 @@ export default function DataPage() {
   return (
     <>
       <section className="page-hero hero-stage grain">
-        <div className="container hero-content">
+        <div className="ux4g-container hero-content">
           <span className="kicker">Data &amp; Dashboards</span>
           <h1 className="t-h1 balance" style={{ marginTop: "0.6rem", maxWidth: "16ch" }}>
             India at a glance
@@ -52,7 +52,7 @@ export default function DataPage() {
 
       {/* dashboard centerpiece */}
       <section className="section">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="data-panel">
             <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "0.8rem", alignItems: "flex-start" }}>
               <div>
@@ -88,7 +88,7 @@ export default function DataPage() {
 
       {/* small multiples */}
       <section className="section" style={{ paddingTop: 0 }}>
-        <div className="container">
+        <div className="ux4g-container">
           <div className="section-head">
             <div className="sh-copy">
               <span className="kicker">The dashboard</span>
@@ -101,7 +101,7 @@ export default function DataPage() {
 
       {/* dataset explorer teaser */}
       <section className="section tint" id="datasets" style={{ scrollMarginTop: "96px" }}>
-        <div className="container">
+        <div className="ux4g-container">
           <Reveal>
             <span className="kicker">Paper datasets</span>
             <h2 className="t-h2" style={{ marginTop: "0.5rem" }}>
@@ -136,24 +136,30 @@ export default function DataPage() {
 
       {/* download centre */}
       <section className="section" id="downloads" style={{ scrollMarginTop: "96px" }}>
-        <div className="container">
+        <div className="ux4g-container">
           <span className="kicker">Download centre</span>
           <h2 className="t-h2" style={{ marginTop: "0.5rem", marginBottom: "1.2rem" }}>
             Series &amp; data dictionaries
           </h2>
-          <div className="card">
+          <ul className="card ux4g-list ux4g-list-default">
             {downloads.map((d) => (
-              <div key={d.name} className="row-item">
-                <div className="row-main">
-                  <div style={{ fontWeight: 600 }}>{d.name}</div>
-                  <div className="t-micro text-muted">{d.freq}</div>
+              <li key={d.name} className="ux4g-list-item">
+                {/* -fixed: the row itself isn't the click target, only the button
+                    is, so it opts out of the hover/active row affordance. */}
+                <div className="ux4g-list-item-row ux4g-list-item-row-fixed">
+                  <span className="ux4g-list-item-start">
+                    <span>
+                      <div style={{ fontWeight: 600 }}>{d.name}</div>
+                      <div className="t-micro text-muted">{d.freq}</div>
+                    </span>
+                  </span>
+                  <button className="ux4g-btn-outline-primary ux4g-btn-sm">
+                    <Icon name="download" size={15} /> {d.fmt}
+                  </button>
                 </div>
-                <button className="ux4g-btn-outline-primary ux4g-btn-sm">
-                  <Icon name="download" size={15} /> {d.fmt}
-                </button>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <p className="t-micro text-muted" style={{ marginTop: "0.8rem" }}>
             Downloads are illustrative placeholders in the MVP; the live centre serves versioned
             series with a data dictionary and an open licence.

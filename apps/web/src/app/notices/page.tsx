@@ -36,7 +36,7 @@ export default async function NoticesPage({
   return (
     <>
       <section className="page-hero">
-        <div className="container">
+        <div className="ux4g-container">
           <span className="kicker">Notices</span>
           <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
             Tenders, vacancies &amp; circulars
@@ -49,7 +49,7 @@ export default async function NoticesPage({
       </section>
 
       <section className="section">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "1rem" }}>
             <SectionHeader
               eyebrow={isArchiveView ? "Archived notices" : "All notices"}
@@ -81,22 +81,26 @@ export default async function NoticesPage({
           </div>
 
           {filtered.length ? (
-            <div className="card">
+            <ul className="card ux4g-list ux4g-list-default">
               {filtered.map((n) => (
-                <a key={n.title} href={n.href} target={n.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="row-item">
-                  <span className="ux4g-tag-tonal-neutral ux4g-tag-s">{n.kind}</span>
-                  <div className="row-main" style={{ fontWeight: 600 }}>
-                    {n.title}
-                  </div>
-                  <span className="t-micro text-muted">
-                    {isArchiveView && n.published
-                      ? new Date(n.published).toLocaleDateString("en-IN", { year: "numeric", month: "short" })
-                      : n.date}
-                  </span>
-                  <span className={noticeStatusClass[n.status]}>{noticeStatusLabel[n.status]}</span>
-                </a>
+                <li key={n.title} className="ux4g-list-item">
+                  <a href={n.href} target={n.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="ux4g-list-item-row">
+                    <span className="ux4g-list-item-start">
+                      <span className="ux4g-tag-tonal-neutral ux4g-tag-s">{n.kind}</span>
+                      <span style={{ fontWeight: 600 }}>{n.title}</span>
+                    </span>
+                    <span className="ux4g-list-item-end">
+                      <span className="t-micro text-muted">
+                        {isArchiveView && n.published
+                          ? new Date(n.published).toLocaleDateString("en-IN", { year: "numeric", month: "short" })
+                          : n.date}
+                      </span>
+                      <span className={noticeStatusClass[n.status]}>{noticeStatusLabel[n.status]}</span>
+                    </span>
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           ) : (
             <div className="ux4g-empty-state" style={{ padding: "3rem 1rem" }}>
               <span className="ux4g-empty-state-icon">

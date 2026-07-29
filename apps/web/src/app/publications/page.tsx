@@ -24,7 +24,7 @@ export default async function PublicationsPage({
   return (
     <>
       <section className="page-hero hero-stage grain">
-        <div className="container hero-content">
+        <div className="ux4g-container hero-content">
           <span className="kicker">Publications</span>
           <h1 className="t-h1 balance" style={{ marginTop: "0.6rem", maxWidth: "18ch" }}>
             Working papers, reports &amp; occasional papers
@@ -39,7 +39,7 @@ export default async function PublicationsPage({
 
       {/* featured spotlight */}
       <section className="section" style={{ paddingBottom: 0 }}>
-        <div className="container">
+        <div className="ux4g-container">
           <Reveal>
             <span className="kicker">Latest working paper</span>
             <Link
@@ -73,7 +73,7 @@ export default async function PublicationsPage({
       </section>
 
       <section className="section">
-        <div className="container">
+        <div className="ux4g-container">
           <PublicationsExplorer reports={reports} initialType={initialType} initialQuery={initialQuery} />
         </div>
       </section>

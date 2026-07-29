@@ -50,10 +50,23 @@
 /* ---- data panel ---- */
 .data-panel { border: 1px solid var(--app-border); border-radius: var(--app-radius-xl); padding: clamp(1.1rem, 2.5vw, 1.8rem); background: var(--app-surface); }
 
-/* ---- notice / list rows ---- */
-.row-item { display: flex; align-items: center; gap: 1rem; padding-block: 0.9rem; border-bottom: 1px solid var(--app-border); }
-.row-item:last-child { border-bottom: 0; }
-.row-item .row-main { flex: 1; }
+/* ---- notice / list rows ----
+   ux4g-list-item-row supplies the flex/space-between layout and, paired with
+   ux4g-list-default on the container, real hover/active feedback our old
+   .row-item never had. ux4g-list-item-row-fixed opts a row out of that
+   affordance for the one surface (Data downloads) where the row itself
+   isn't the click target, only its child button is.
+   The vendor's own row padding lives behind a `-s/-m/-l/-xl` density
+   selector chain that also expects a two-level .ux4g-list-item >
+   .ux4g-list-item-row nesting just to receive it, and its container
+   padding/shadow would double up with .card's own — so density, padding,
+   the row divider and the shadow-cancel are pinned directly instead of
+   picking a density class. */
+.card.ux4g-list { box-shadow: none; }
+.ux4g-list-item { border-bottom: 1px solid var(--app-border); }
+.ux4g-list-item:last-child { border-bottom: 0; }
+.ux4g-list-item-row { padding-block: 0.9rem; }
+.ux4g-list-item-start { flex: 1; min-width: 0; }
 /* Status badges are UX4G tags now — see noticeStatusClass in content/media.ts.
    The site's badge language is pill-shaped, and the vendor tag is a
    space-between flex row sized to its container; both are corrected here.

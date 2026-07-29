@@ -23,7 +23,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="page-hero hero-stage grain">
-        <div className="container hero-content">
+        <div className="ux4g-container hero-content">
           <span className="kicker">About</span>
           <h1 className="t-h1 balance" style={{ marginTop: "0.6rem", maxWidth: "20ch" }}>
             The Economic Advisory Council to the Prime Minister
@@ -37,7 +37,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="grid grid-2" style={{ alignItems: "center" }}>
             <Reveal>
               <div className="prose">
@@ -70,7 +70,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section tint" id="chairperson" style={{ scrollMarginTop: "96px" }}>
-        <div className="container container-narrow">
+        <div className="ux4g-container container-narrow">
           <Reveal>
             <span className="kicker">Message from the Chairperson</span>
             <blockquote className="t-h3 balance dropcap" style={{ marginTop: "0.8rem", fontWeight: 600 }}>
@@ -87,7 +87,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section" id="team" style={{ scrollMarginTop: "96px" }}>
-        <div className="container">
+        <div className="ux4g-container">
           <SectionHeader eyebrow="Team" title="Members &amp; officials">
             Names are drawn from the current public roster. Designations, areas of focus and bios
             are shown as pending official verification — never invented.
@@ -109,7 +109,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section tint" id="previous" style={{ scrollMarginTop: "96px" }}>
-        <div className="container">
+        <div className="ux4g-container">
           <Reveal>
             <span className="kicker">Previous Chairpersons</span>
             <h2 className="t-h2" style={{ marginTop: "0.5rem" }}>

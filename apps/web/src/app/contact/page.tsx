@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <>
       <section className="page-hero">
-        <div className="container">
+        <div className="ux4g-container">
           <span className="eyebrow">Contact</span>
           <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
             Get in touch
@@ -20,7 +20,7 @@ export default function ContactPage() {
       </section>
 
       <section className="section">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="detail-grid">
             <div className="stack">
               <div className="card">

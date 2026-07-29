@@ -36,7 +36,7 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
   return (
     <section className="section">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="container">
+      <div className="ux4g-container">
         <nav className="ux4g-breadcrumb ux4g-breadcrumb-divider" aria-label="Breadcrumb">
           <ol className="ux4g-breadcrumb-list">
             <li className="ux4g-breadcrumb-item">

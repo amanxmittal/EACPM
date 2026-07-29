@@ -52,7 +52,7 @@ export default async function WhatsNewPage({
   return (
     <>
       <section className="page-hero">
-        <div className="container">
+        <div className="ux4g-container">
           <span className="kicker">What&apos;s New</span>
           <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
             Newly added &amp; recently updated
@@ -68,7 +68,7 @@ export default async function WhatsNewPage({
       </section>
 
       <section className="section">
-        <div className="container">
+        <div className="ux4g-container">
           <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "1rem" }}>
             <div className="filter-chips" role="group" aria-label="Filter by type">
               <Link href="/whats-new" className={`ux4g-choice-chip-md${!activeType ? " active" : ""}`} aria-current={!activeType ? "true" : undefined}>
@@ -86,24 +86,27 @@ export default async function WhatsNewPage({
           </div>
 
           {filtered.length ? (
-            <div className="card">
+            <ul className="card ux4g-list ux4g-list-default">
               {filtered.map((item) => (
-                <a
-                  key={item.type + item.title}
-                  href={item.href}
-                  target={item.external ? "_blank" : undefined}
-                  rel={item.external ? "noopener noreferrer" : undefined}
-                  className="row-item"
-                >
-                  <span className="ux4g-tag-tonal-primary ux4g-tag-s">{item.type}</span>
-                  <div className="row-main">
-                    <div style={{ fontWeight: 600 }}>{item.title}</div>
-                    <div className="t-micro text-muted">{item.meta}</div>
-                  </div>
-                  <Icon name={item.external ? "external" : "arrowRight"} size={16} />
-                </a>
+                <li key={item.type + item.title} className="ux4g-list-item">
+                  <a
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    className="ux4g-list-item-row"
+                  >
+                    <span className="ux4g-list-item-start">
+                      <span className="ux4g-tag-tonal-primary ux4g-tag-s">{item.type}</span>
+                      <span>
+                        <div style={{ fontWeight: 600 }}>{item.title}</div>
+                        <div className="t-micro text-muted">{item.meta}</div>
+                      </span>
+                    </span>
+                    <Icon name={item.external ? "external" : "arrowRight"} size={16} />
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           ) : (
             <div className="ux4g-empty-state" style={{ padding: "3rem 1rem" }}>
               <span className="ux4g-empty-state-icon">

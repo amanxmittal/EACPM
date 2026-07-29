@@ -137,6 +137,22 @@
   --ux4g-border-color-primary-default: var(--app-accent);
 }
 
+/* ux4g-container bridge. The vendor steps max-width at 5 breakpoints
+   (540/720/960/1140/1320px) — all bridged to --app-maxw so the container is
+   one width everywhere, matching the old .container. gutter-x is halved
+   internally (padding-inline: calc(gutter-x * .5)), so it's set to double
+   our clamp to come back out unchanged. Layout, not colour — kept out of
+   the semantic bridge above, and not theme-scoped: the vendor doesn't
+   redefine these per [data-theme="dark"] either. */
+:root {
+  --ux4g-container-sm: var(--app-maxw);
+  --ux4g-container-md: var(--app-maxw);
+  --ux4g-container-lg: var(--app-maxw);
+  --ux4g-container-xl: var(--app-maxw);
+  --ux4g-container-2xl: var(--app-maxw);
+  --ux4g-gutter-x: calc(clamp(16px, 5vw, 40px) * 2);
+}
+
 /* Vendor a11y defect: in dark mode UX4G's warning tag pairs orange-300 text with
    an orange-800 "soft" background — 3.58:1, under the 4.5:1 AA floor and a merge
    gate here (CLAUDE.md §2.3). Its own success tag uses a much darker green-800
@@ -257,7 +273,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .balance { text-wrap: balance; }
 
 /* ---------- layout ---------- */
-.container { width: 100%; max-width: var(--app-maxw); margin-inline: auto; padding-inline: clamp(16px, 5vw, 40px); }
+/* ux4g-container is adopted via a straight token bridge, not an extension:
+   the vendor steps max-width at 5 breakpoints (540/720/960/1140/1320px) and
+   its own gutter is unrelated to ours. Every step is bridged to --app-maxw
+   so the container is the same single width everywhere, and gutter-x (which
+   the component halves internally) is set to double our clamp so it comes
+   back out unchanged — this reproduces the old .container exactly, just
+   sourced from the vendor class instead of a declared one. */
 .container-narrow { max-width: 780px; }
 .section { padding-block: clamp(2.5rem, 6vw, 5.5rem); }
 .stack > * + * { margin-top: var(--stack, 1rem); }

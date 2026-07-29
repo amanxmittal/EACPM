@@ -50,7 +50,7 @@ export function TopBar() {
 
   return (
     <div className={s.topbar}>
-      <div className={`container ${s.topbarInner}`}>
+      <div className={`ux4g-container ${s.topbarInner}`}>
         <div className={s.gov}>
           <FlagIndia width={26} />
           <span>Government of India</span>

@@ -19,7 +19,7 @@ export default function MediaPage() {
   return (
     <>
       <section className="page-hero">
-        <div className="container">
+        <div className="ux4g-container">
           <span className="eyebrow">Media &amp; Events</span>
           <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
             Articles, news &amp; the gallery
@@ -32,7 +32,7 @@ export default function MediaPage() {
       </section>
 
       <section className="section" id="articles" style={{ scrollMarginTop: "84px" }}>
-        <div className="container">
+        <div className="ux4g-container">
           <SectionHeader eyebrow="Articles by members" title="In their own words" />
           <div className="grid grid-2">
             {articles.map((a) => (
@@ -51,23 +51,25 @@ export default function MediaPage() {
       </section>
 
       <section className="section tint" id="news" style={{ scrollMarginTop: "84px" }}>
-        <div className="container">
+        <div className="ux4g-container">
           <SectionHeader eyebrow="EAC-PM in news" title="Press coverage" />
-          <div className="card">
+          <ul className="card ux4g-list ux4g-list-default">
             {news.map((n) => (
-              <a key={n.href} href={n.href} target="_blank" rel="noopener noreferrer" className="row-item">
-                <div className="row-main" style={{ fontWeight: 600 }}>
-                  {n.title}
-                </div>
-                <Icon name="external" size={16} />
-              </a>
+              <li key={n.href} className="ux4g-list-item">
+                <a href={n.href} target="_blank" rel="noopener noreferrer" className="ux4g-list-item-row">
+                  <span className="ux4g-list-item-start">
+                    <span style={{ fontWeight: 600 }}>{n.title}</span>
+                  </span>
+                  <Icon name="external" size={16} />
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       <section className="section" id="gallery" style={{ scrollMarginTop: "84px" }}>
-        <div className="container">
+        <div className="ux4g-container">
           <SectionHeader eyebrow="Gallery" title="Events &amp; photographs">
             Albums migrate with alt text and correct aspect ratios; images shown here are
             placeholders in the MVP.

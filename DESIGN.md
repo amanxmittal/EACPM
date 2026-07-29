@@ -156,6 +156,8 @@ Families lifted by `scripts/extract-ux4g-components.mjs` (add to `FAMILIES` and 
 | Icon button | `ux4g-icon-btn`, `-icon-btn-pill` | Hero carousel arrows |
 | Avatar | `ux4g-avatar` | Team member initials (About) |
 | Breadcrumb | `ux4g-breadcrumb`, `-divider`, `-list`, `-item`, `-link` | Publication detail, Policy pages |
+| List | `ux4g-list`, `-default`, `-item`, `-item-row`, `-item-row-fixed`, `-item-start`, `-item-end` | Notices, What's New, Media (news), Data (downloads) |
+| Container | `ux4g-container` | Every page (was `.container`) |
 
 *Checkbox / radio / switch / table / alert / context-alert / filter-chip were extracted in an earlier pass with no consumer and have been dropped from `FAMILIES` — 55 KB of dead CSS. Re-add (and re-verify against the CSS) if a real surface needs them.*
 
@@ -171,6 +173,10 @@ Families lifted by `scripts/extract-ux4g-components.mjs` (add to `FAMILIES` and 
 
 **The extractor now also matches `[class^=…]` attribute selectors**, not just `.class` tokens. The vendor's type-ramp engine — the rule that turns `--ux4g-fs-current`/`--ux4g-fw-current`/`--ux4g-lh-current` into real `font-size`/`font-weight`/`line-height` — is written as `[class^=ux4g-body-],[class^=ux4g-breadcrumb-],[class^=ux4g-heading-],[class^=ux4g-label-],...`, which a plain `.class` regex never matches. Adopting breadcrumb or label without this fix would extract the per-size rules but silently lose the rule that applies them (text renders at browser defaults, not vendor type).
 
+**List rows are pinned past the vendor's own markup shape.** The vendor's row *padding* only exists behind a `-s`/`-m`/`-l`/`-xl` density class, and even then only via a three-level selector (`.ux4g-list-m .ux4g-list-item .ux4g-list-item-row`) — the vendor expects `ux4g-list-item` (the row slot) to wrap `ux4g-list-item-row` (the actual interactive element), not act as a flat `-item-row` by itself. Any density class's *container* padding/shadow would also double up with `.card`'s own. So no density class is used at all: `.card.ux4g-list` cancels the vendor shadow, `.ux4g-list-item` carries the row divider, and `.ux4g-list-item-row` gets its padding pinned directly. **Choose the row variant by behaviour, same as chips vs. tags:** the row itself is the click target → `ux4g-list-item-row` (Notices, What's New, Media); a *child* control is the click target and the row is inert → add `ux4g-list-item-row-fixed`, a vendor modifier that drops the hover/active background and `cursor: pointer` (Data downloads, where only the download button is interactive).
+
+**`.container` was a token-bridge win, not an extension after all.** The earlier assessment (below, in §9.2) was that UX4G's stepped breakpoints were incompatible with a fluid measure — but the vendor reads its breakpoint widths and gutter from plain custom properties, which bridge cleanly: all 5 size tokens (`sm` through `2xl`) point at `--app-maxw`, so the container is one width at every viewport instead of 5, and `--ux4g-gutter-x` is set to double the old `clamp()` since the component halves it internally (`padding-inline: calc(gutter-x * .5)`). Verified pixel-identical (`max-width`, `padding-inline`) against the old class at 500 / 900 / 1385px. `.container-narrow` is unaffected — it only ever overrides `max-width` on top.
+
 ### 9.2 Sanctioned extensions
 
 Built on `--ux4g-*` tokens; each has a reason it is not the vendor's component.
@@ -178,23 +184,27 @@ Built on `--ux4g-*` tokens; each has a reason it is not the vendor's component.
 | Extension | Why not UX4G |
 |---|---|
 | **Charts** (`LineChart`, `AnimatedAreaChart`, `SmallMultiples`, `Sparkline`) | UX4G ships **no chart component**. Every chart pairs an accessible `<table>`, CSV, and an `aria` summary. |
-| **`.container`** | UX4G's container steps at breakpoints (540/720/960/1140/1320px). Ours is fluid to `--app-maxw` with a `clamp()` gutter — long-form reading needs a stable measure, not jumps. |
 | **Type ramp `.t-*`** | UX4G's roles are fixed px on Noto Sans. Ours are fluid `clamp()` on the display face. Also: the vendor ramp is applied by `[class^=ux4g-body-]`, a prefix match on the whole `class` attribute — it silently fails when composed (`class="text-muted ux4g-body-s-default"`). |
 | **`.grid` / `.grid-2\|3\|4`** | Ours collapse at `max-width: 960px/620px`; UX4G's are `min-width: 768px/992px` and default to `gap: 0`. |
 | **`.btn-light` / `.btn-ondark`** | On-dark button variants for the banner, which sits on a photograph in both themes. UX4G ships no on-dark button, so these compose onto `.ux4g-btn`, which supplies all layout. |
 | **`.hero-arrow`** | Same reasoning as `.btn-ondark`, for `ux4g-icon-btn`: the vendor's four icon-button variants are all accent-tinted at rest; the carousel wants neutral-ghost/accent-hover, composed onto the bare `ux4g-icon-btn ux4g-icon-btn-pill`. |
 | **`.avatar-gradient`** | Composes onto `ux4g-avatar` (box model, radius, centring). The vendor avatar fill is flat single-tone; the gradient identity mark and the 84px size (between its `l`/`2xl` steps) are ours. |
-| **`.card`** | UX4G's `card-solid` adds `shadow-l1` (ours is deliberately flat, border-only) and puts padding on `ux4g-card-body`, which is `display: flex` — it would reflow block content in 17 places. |
+| **`.card`** | Re-examined alongside the `ux4g-list` adoption below. Radius and hover-shadow are baked into one bare `.ux4g-card` selector (`border-radius` + `:hover{box-shadow:l2}`), inseparably — there is no vendor class that gives radius *without* the unconditional hover escalation. `.card`'s own tokens (`--app-radius-lg`, `--app-shadow-2`) already resolve to the *same* `--ux4g-radius-lg` / `--ux4g-shadow-l2` values, so there is no compliance gap left to close on the ~13 non-interactive cards (contact info, `.cite-box`, `.data-panel`, gallery tiles) — adopting the bare class would only add an unwanted "this is clickable" lift to things that aren't. The 3 genuinely interactive cards (`.card-hover`: Publications featured link, `PublicationCard`, Media articles) would be a no-op even if migrated, for the same reason. Not adopted anywhere. |
 | **`.chip-select`** | A `<select>` styled as a chip needs room for the native dropdown arrow, which the vendor's icon-less chip padding doesn't allow for. |
-| **`.row-item`** | The vendor list declares `border: none` (no row separators) and only pads inside a `.ux4g-list-*` container that also brings `shadow-l2` and its own background. |
 | **Layout shell** (`MainNav`, `TopBar`, `SiteFooter`) | Vendor navbar/footer/topbar CSS is 7/4/6 classes with no font-resize or contrast implementation — insufficient for the GIGW toolbar. |
 | **`Icon`** (inline SVG set) | Replaces UX4G's 5 base64 icon fonts (~2.3 MB). |
 | **`FlagIndia`, `--tri-saffron`, `--tri-green`** | Official flag colours; not in any UX4G ramp. Used only where protocol requires. |
-| **`.map-illo-*`, `.cover*`, `.hero-*`, `.detail-grid`** | Editorial and layout primitives with no vendor equivalent. |
+| **`.map-illo-*`, `.cover*`, `.hero-carousel-*`, `.detail-grid`** | Editorial and layout primitives with no vendor equivalent, or (carousel) a materially worse one: `ux4g-carousel` has no peek slides, no Ken Burns, no autoplay-progress dots and no reduced-motion path. Assessed and rejected, not merely unconsidered. |
 
 **On-dark tokens.** `--app-on-dark`, `--app-on-dark-muted`, `--app-on-dark-accent` exist for surfaces that are dark in *both* themes — the hero scrim, the banner and connect bands, the GoI topbar. They deliberately do **not** flip with the theme, unlike `--app-on-accent`.
 
 **Data-viz palette** (`--cat-1…4`) is drawn from UX4G hue tokens and locked in code so categories stay stable across charts. Colour never carries meaning alone (WCAG 1.4.1).
+
+**Considered and deferred** (re-check before re-proposing):
+- **`ux4g-tab` for Media's Articles/News/Gallery anchors** — rejected. All three sections render simultaneously on one page; the nav links are anchor-jumps, not panel switches. `role="tab"` promises exactly the one-visible-panel behaviour it wouldn't have — the same mismatch already documented for the vendor's Accessibility Bar in §12, just self-inflicted this time.
+- **`ux4g-journey-timeline` for About → Previous Chairpersons** — no real content to bind it to yet. The section is a placeholder paragraph; a chairperson's name, tenure or legacy note is exactly the kind of fact Prime Directive 2 forbids inventing. Revisit once EAC-PM supplies the actual roster.
+- **`ux4g-accordion` for Policies** — no FAQ-shaped content on any policy page yet (each is prose migrated verbatim from source). Adding it now would be an unused family, the same mistake already corrected once in §9.1.
+- **`ux4g-tooltip` for chart/figure captions** — rejected, not just deferred. Prime Directive 2 requires source/period/last-updated to be *displayed*, and a tooltip is hidden until hover — a regression on touch devices and for screen-reader users, for a compliance-critical string. The current always-visible `<figcaption>` is the correct pattern; keep it.
 
 ### 9.3 Planned extensions
 

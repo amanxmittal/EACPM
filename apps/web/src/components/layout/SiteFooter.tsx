@@ -18,7 +18,7 @@ const quick = [
 export function SiteFooter() {
   return (
     <footer className={s.footer}>
-      <div className="container">
+      <div className="ux4g-container">
         <div className={s.top}>
           <div>
             <div className={s.brandRow}>

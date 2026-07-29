@@ -53,7 +53,7 @@ export function MainNav() {
   return (
     <div className={s.mainbar} data-floating={floating}>
       {/* Tier 1 — brand + utility icons */}
-      <div className={`container ${s.topRow}`}>
+      <div className={`ux4g-container ${s.topRow}`}>
         <Link href="/" className={s.brand} aria-label="EAC-PM home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/logo.png" alt="" className={`${s.brandMark} emblem-adapt`} width={24} height={40} />
@@ -90,7 +90,7 @@ export function MainNav() {
 
       {/* Tier 2 — primary nav */}
       <div className={s.navRow}>
-        <div className="container">
+        <div className="ux4g-container">
           <nav className={s.nav} aria-label="Primary">
             {/* Contact Us is promoted to a CTA button in the actions row instead. */}
             {primaryNav.filter((item) => item.href !== "/contact").map((item) => (
@@ -123,7 +123,7 @@ export function MainNav() {
 
       {searchOpen && (
         <div className={s.searchWrap}>
-          <form className={`container ${s.searchInner}`} action="/publications">
+          <form className={`ux4g-container ${s.searchInner}`} action="/publications">
             <Icon name="search" size={22} />
             <input
               className={s.searchInput}
@@ -141,7 +141,7 @@ export function MainNav() {
       )}
 
       {menuOpen && (
-        <div className={`container ${s.drawer}`}>
+        <div className={`ux4g-container ${s.drawer}`}>
           {primaryNav.map((item) => (
             <div key={item.label}>
               <Link href={item.href} className={s.drawerLink} aria-current={isActive(item.href) ? "page" : undefined}>
