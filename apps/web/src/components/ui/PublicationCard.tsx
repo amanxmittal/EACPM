@@ -11,7 +11,7 @@ export function PublicationCard({ report }: { report: Report }) {
       </Link>
       <div className="pub-body">
         <div className="cluster" style={{ gap: "0.5rem" }}>
-          <span className="badge badge-neutral">{report.year ?? "—"}</span>
+          <span className="ux4g-tag-tonal-neutral ux4g-tag-s">{report.year ?? "—"}</span>
           <span className="t-micro text-muted">{report.type}</span>
           <span className="t-micro text-muted">· {readMinutes(report)} min read</span>
         </div>

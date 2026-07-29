@@ -84,7 +84,7 @@ export default async function NoticesPage({
             <div className="card">
               {filtered.map((n) => (
                 <a key={n.title} href={n.href} target={n.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="row-item">
-                  <span className="badge badge-neutral">{n.kind}</span>
+                  <span className="ux4g-tag-tonal-neutral ux4g-tag-s">{n.kind}</span>
                   <div className="row-main" style={{ fontWeight: 600 }}>
                     {n.title}
                   </div>

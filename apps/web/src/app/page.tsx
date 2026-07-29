@@ -141,7 +141,7 @@ export default function Home() {
             <Link href={`/publications/${lead.slug}`} className="pub-lead">
               <CoverArt report={lead} />
               <div className="body">
-                <span className="badge">{lead.type}</span>
+                <span className="ux4g-tag-tonal-primary ux4g-tag-s">{lead.type}</span>
                 <h3 style={{ marginTop: "0.6rem" }}>{lead.title}</h3>
                 <p>{lead.abstract}</p>
               </div>

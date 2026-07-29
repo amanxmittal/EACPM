@@ -95,7 +95,7 @@ export default function AboutPage() {
           <RevealStagger className="grid grid-4">
             {members.map((m) => (
               <div key={m.slug} className="card member">
-                <span className="avatar" aria-hidden>
+                <span className="ux4g-avatar avatar-gradient" aria-hidden>
                   {initials(m.name)}
                 </span>
                 <div>

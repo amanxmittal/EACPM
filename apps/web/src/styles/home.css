@@ -102,9 +102,11 @@
 @media (prefers-reduced-motion: reduce) { .hero-cine-entrance > * { opacity: 1; transform: none; animation: none; } }
 
 .hero-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.1rem; }
-.hero-arrow { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px;
-  border: 1px solid var(--app-border-strong); background: var(--app-surface); color: var(--app-text); box-shadow: var(--app-shadow-nav);
-  cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease; }
+/* ux4g-icon-btn supplies the box model, focus ring and transition; ux4g-icon-btn-pill
+   the radius. Its own colour variants are all primary-tinted, so the neutral
+   ghost-at-rest / accent-on-hover look is pinned here (same treatment as
+   .btn-light/.btn-ondark — DESIGN.md §9.2). */
+.hero-arrow { border-color: var(--app-border-strong); background: var(--app-surface); color: var(--app-text); box-shadow: var(--app-shadow-nav); }
 .hero-arrow:hover { background: var(--app-accent-soft); border-color: var(--app-accent); color: var(--app-accent-strong); }
 .hero-arrow:active { transform: scale(0.94); }
 
@@ -157,7 +159,7 @@
 .banner p { color: var(--app-on-dark-muted); font-size: clamp(1rem, 1rem + 0.4vw, 1.2rem); line-height: 1.6; margin-top: 1.2rem; max-width: 50ch; }
 .banner .actions { margin-top: 1.9rem; display: flex; gap: 0.7rem; flex-wrap: wrap; }
 /* .btn-light / .btn-ondark now live in globals.css beside the UX4G button rules. */
-.img-credit { position: absolute; right: 12px; bottom: 10px; z-index: 3; font-size: 0.64rem; color: rgba(255,255,255,0.55); }
+.img-credit { position: absolute; right: var(--ux4g-space-5, 12px); bottom: 10px; z-index: 3; font-size: 0.64rem; color: rgba(255,255,255,0.55); }
 .img-credit a { text-decoration: underline; }
 
 /* ---------------------------------------------------------------------------

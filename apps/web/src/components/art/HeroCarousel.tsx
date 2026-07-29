@@ -117,7 +117,7 @@ export function HeroCarousel({
 
       {hasPeeks && (
         <div className="hero-controls">
-          <button type="button" className="hero-arrow" onClick={goPrev} aria-label="Previous slide">
+          <button type="button" className="ux4g-icon-btn ux4g-icon-btn-pill hero-arrow" onClick={goPrev} aria-label="Previous slide">
             <Icon name="chevronLeft" size={20} />
           </button>
           <div className="hero-dots" role="tablist" aria-label="India in focus">
@@ -136,7 +136,7 @@ export function HeroCarousel({
               </button>
             ))}
           </div>
-          <button type="button" className="hero-arrow" onClick={goNext} aria-label="Next slide">
+          <button type="button" className="ux4g-icon-btn ux4g-icon-btn-pill hero-arrow" onClick={goNext} aria-label="Next slide">
             <Icon name="chevronRight" size={20} />
           </button>
         </div>

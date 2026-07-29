@@ -112,7 +112,7 @@ export default function DataPage() {
               — filter, cross-filter, chart, download the exact slice, and cite a permalink.
             </p>
             <div className="card" style={{ marginTop: "1.5rem" }}>
-              <span className="badge">Reference dataset</span>
+              <span className="ux4g-tag-tonal-primary ux4g-tag-s">Reference dataset</span>
               <h3 className="t-h3" style={{ marginTop: "0.6rem" }}>
                 Economic Census — EC4 · EC5 · EC6
               </h3>

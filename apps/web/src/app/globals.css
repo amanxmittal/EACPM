@@ -305,21 +305,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .card-hover:hover { border-color: var(--app-border-strong); box-shadow: var(--app-shadow-2); transform: translateY(-3px); }
 
-.badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 3px 10px; border-radius: var(--ux4g-radius-full, 999px);
-  font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 600;
-  background: var(--app-accent-soft); color: var(--app-accent-strong);
-  border: 1px solid color-mix(in srgb, var(--app-accent) 18%, transparent);
-}
-.badge-neutral { background: var(--app-bg-subtle); color: var(--app-text-muted); border-color: var(--app-border); }
+/* Badges are UX4G tonal tags (ux4g-tag-tonal-primary/-neutral + ux4g-tag-s); the
+   pill radius and centring already come from the [class*="ux4g-tag-tonal-"] pin
+   in components.css. The tag family's default weight is medium (500); the site's
+   badge/label language is semibold, so it's pinned here — same adopt-and-pin
+   treatment as the .btn family (DESIGN.md §9.2). */
+[class*="ux4g-tag-tonal-"] { font-weight: var(--ux4g-font-weight-semibold, 600); }
 
 /* Filter chips are UX4G choice-chips. The vendor supplies the full state machine
    (default / hover / .active), so only the pill radius is pinned — the site's
    chip and badge language is pill-shaped where the vendor default is radius-sm.
    Selection is keyed off the vendor's bare `.active`, which is safe here: its
    selectors are :is(.ux4g-choice-chip-*).active, so it only binds on a chip. */
-[class*="ux4g-choice-chip"], [class*="ux4g-filter-chip"] {
+[class*="ux4g-choice-chip"] {
   /* The vendor sets min-height but never display/align-items — it assumes a
      <button>, which the UA centres for free. Our category chips are <a> on
      Notices and What's New, where the text would sit at the top of the 32px box

@@ -37,17 +37,21 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
     <section className="section">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="container">
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <Link href="/">Home</Link>
-          <span aria-hidden>/</span>
-          <Link href="/publications">Publications</Link>
-          <span aria-hidden>/</span>
-          <span>{r.type}</span>
+        <nav className="ux4g-breadcrumb ux4g-breadcrumb-divider" aria-label="Breadcrumb">
+          <ol className="ux4g-breadcrumb-list">
+            <li className="ux4g-breadcrumb-item">
+              <Link className="ux4g-breadcrumb-link" href="/">Home</Link>
+            </li>
+            <li className="ux4g-breadcrumb-item">
+              <Link className="ux4g-breadcrumb-link" href="/publications">Publications</Link>
+            </li>
+            <li className="ux4g-breadcrumb-item active">{r.type}</li>
+          </ol>
         </nav>
 
         <div className="detail-grid">
           <article>
-            <span className="badge">{r.type}</span>
+            <span className="ux4g-tag-tonal-primary ux4g-tag-s">{r.type}</span>
             <h1 className="t-h1 balance" style={{ marginTop: "0.8rem" }}>
               {r.title}
             </h1>

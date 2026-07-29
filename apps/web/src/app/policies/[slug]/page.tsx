@@ -21,10 +21,13 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
   return (
     <section className="section">
       <div className="container container-narrow">
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <Link href="/">Home</Link>
-          <span aria-hidden>/</span>
-          <span>Policies</span>
+        <nav className="ux4g-breadcrumb ux4g-breadcrumb-divider" aria-label="Breadcrumb">
+          <ol className="ux4g-breadcrumb-list">
+            <li className="ux4g-breadcrumb-item">
+              <Link className="ux4g-breadcrumb-link" href="/">Home</Link>
+            </li>
+            <li className="ux4g-breadcrumb-item active">Policies</li>
+          </ol>
         </nav>
         <span className="eyebrow">Statutory page · GIGW 3.0</span>
         <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>

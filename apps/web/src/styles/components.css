@@ -115,8 +115,10 @@
 .meta-row dt { color: var(--app-text-muted); }
 .meta-row dd { font-weight: 600; text-align: right; }
 .cite-box { background: var(--app-bg-subtle); border: 1px solid var(--app-border); border-radius: var(--app-radius); padding: 1rem; font-size: 0.85rem; color: var(--app-text-muted); font-family: var(--font-display); }
-.breadcrumb { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; font-size: 0.85rem; color: var(--app-text-muted); margin-bottom: 1.2rem; }
-.breadcrumb a:hover { color: var(--app-accent); }
+/* ux4g-breadcrumb supplies the list layout, the › divider and the link/hover/
+   active colour states. It doesn't set the gap before the page content below
+   it, which is page layout rather than component concern — pinned here. */
+.ux4g-breadcrumb { margin-bottom: 1.2rem; }
 
 /* ---- page hero (inner pages) — soft lavender wash band for a consistent airy header ---- */
 .page-hero {
@@ -129,12 +131,20 @@
 
 /* ---- team ---- */
 .member { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.7rem; }
-.avatar { width: 84px; height: 84px; border-radius: 999px; display: grid; place-items: center; background: linear-gradient(150deg, var(--ux4g-color-primary-500, #6a4eff), var(--ux4g-color-tertiary-600, #8e55b3)); color: var(--app-on-dark); font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; }
+/* ux4g-avatar supplies the circle box model (flex-centred, radius-full, a11y
+   sizing hooks). Its own fill is a flat single-tone brand colour; the gradient
+   identity mark and the 84px size (between the l/2xl steps) are ours —
+   declared extension, DESIGN.md §9.2. */
+.avatar-gradient {
+  width: 84px; height: 84px; font-size: 1.6rem;
+  background: linear-gradient(150deg, var(--ux4g-color-primary-500, #6a4eff), var(--ux4g-color-tertiary-600, #8e55b3));
+  color: var(--app-on-dark); font-family: var(--font-display); font-weight: 700;
+  cursor: default;
+}
 .member h3 { font-size: 1rem; }
 
 /* ---- contact form ---- */
 .field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
-.field label { font-size: 0.85rem; font-weight: 600; }
 /* Direct children only: a control wrapped in a UX4G .ux4g-input / .ux4g-textarea
    box gets its border from that box instead (see below). */
 .field > input, .field > textarea, .field > select { border: 1px solid var(--app-border-strong); border-radius: var(--app-radius); padding: 0.6rem 0.75rem; background: var(--app-surface); color: var(--app-text); font: inherit; }
@@ -167,6 +177,6 @@
 /* Vendor gap + per-item padding pushes 8 controls past a 375px viewport, wrapping
    the next-arrow onto a row of its own. Tighten both so the set stays one row. */
 @media (max-width: 480px) {
-  .ux4g-pagination { gap: 2px; }
-  .ux4g-page-number, .ux4g-page-nav { min-width: 28px; padding-inline: 2px; }
+  .ux4g-pagination { gap: var(--ux4g-space-1, 2px); }
+  .ux4g-page-number, .ux4g-page-nav { min-width: 28px; padding-inline: var(--ux4g-space-1, 2px); }
 }

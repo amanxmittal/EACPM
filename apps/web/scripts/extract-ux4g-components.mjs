@@ -33,17 +33,12 @@ const FAMILIES = [
   "ux4g-input",
   "ux4g-textarea",
   "ux4g-form-group",
-  "ux4g-checkbox",
-  "ux4g-radio",
-  "ux4g-radiomark",
-  "ux4g-switch",
   // data display
-  "ux4g-table",
   "ux4g-pagination",
   "ux4g-page-nav",
+  "ux4g-avatar",
+  "ux4g-breadcrumb",
   // feedback
-  "ux4g-alert",
-  "ux4g-context-alert",
   "ux4g-empty-state",
   // primitives
   "ux4g-divider",
@@ -52,18 +47,36 @@ const FAMILIES = [
   // buttons — see DESIGN.md §9.2 for the pinned weight
   "ux4g-btn",
   "ux4g-icon-btn",
-  // chips — filter/choice; pill radius pinned in globals.css
+  // chips — choice; pill radius pinned in globals.css
   "ux4g-choice-chip",
-  "ux4g-filter-chip",
+  // typography — form labels; breadcrumb text rides the same shared rule (below)
+  "ux4g-label",
 ];
 
 const wanted = (token) =>
   FAMILIES.some((f) => token === f || token.startsWith(`${f}-`));
 
-/** True if a selector references any wanted family. */
+/**
+ * True if a selector references any wanted family — as a `.class` token, or as
+ * an `[class^=prefix-]` attribute selector. The latter matters: the vendor's
+ * type engine (the rule turning `--ux4g-fs-current` etc. into real font-size/
+ * weight/family) is written as
+ *   .ux4g-text,[class^=ux4g-body-],[class^=ux4g-breadcrumb-],... { font-size: var(--ux4g-fs-current); ... }
+ * — a `.class` regex alone never matches that, so any family relying on it
+ * (breadcrumb, label, and heading/body/display/tab/title if adopted later)
+ * would extract its per-size rules but silently lose the rule that actually
+ * applies them.
+ */
 function selectorMatches(selector) {
-  const tokens = selector.match(/\.([A-Za-z0-9_-]+)/g) || [];
-  return tokens.some((t) => wanted(t.slice(1)));
+  const classTokens = selector.match(/\.([A-Za-z0-9_-]+)/g) || [];
+  const attrTokens = selector.match(/\[class\^=["']?([A-Za-z0-9_-]+?)-?\]/g) || [];
+  return (
+    classTokens.some((t) => wanted(t.slice(1))) ||
+    attrTokens.some((t) => {
+      const m = t.match(/\[class\^=["']?([A-Za-z0-9_-]+?)-?\]/);
+      return m && wanted(m[1]);
+    })
+  );
 }
 
 /**

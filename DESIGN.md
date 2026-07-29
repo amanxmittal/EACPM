@@ -145,22 +145,31 @@ Families lifted by `scripts/extract-ux4g-components.mjs` (add to `FAMILIES` and 
 | Family | Classes | Wired into |
 |---|---|---|
 | Input / textarea | `ux4g-input`, `-input-input`, `ux4g-textarea`, `-textarea-input` | Contact form |
-| Checkbox / radio / switch | `ux4g-checkbox`, `ux4g-radio`, `ux4g-switch` (+ states, sizes) | *extracted, no consumer yet* |
-| Table | `ux4g-table` (+ zebra, dividers, responsive) | *extracted, no consumer yet* |
+| Form group / label | `ux4g-form-group`, `ux4g-label-m-strong` | Contact form |
 | Pagination | `ux4g-pagination`, `ux4g-page-number`, `ux4g-page-nav` | Publications (12/page) |
-| Alert | `ux4g-alert`, `ux4g-context-alert` | *extracted, no consumer yet* |
 | Empty state | `ux4g-empty-state` (+ icon, content) | Publications, Notices, What's New |
 | Divider | `ux4g-divider-horizontal` | Contact |
-| Tag | `ux4g-tag-tonal-*`, `ux4g-tag-s` | Notice status badges, illustrative-data flags, static dataset-dimension labels |
+| Tag | `ux4g-tag-tonal-*`, `ux4g-tag-s` | Notice status badges, publication-type badges, illustrative-data flags, static dataset-dimension labels |
 | Chip | `ux4g-choice-chip-md` (+ bare `.active`) | Publications / Notices / What's New filter chips |
 | Search | `ux4g-search`, `-search-input`, `-search-leading-icon` | Publications toolbar |
-| Buttons | `ux4g-btn`, `-btn-primary`, `-btn-outline-primary`, sizes `-sm`/`-md`/`-lg` | All 23 buttons site-wide |
+| Buttons | `ux4g-btn`, `-btn-primary`, `-btn-outline-primary`, sizes `-sm`/`-md`/`-lg` | All buttons site-wide |
+| Icon button | `ux4g-icon-btn`, `-icon-btn-pill` | Hero carousel arrows |
+| Avatar | `ux4g-avatar` | Team member initials (About) |
+| Breadcrumb | `ux4g-breadcrumb`, `-divider`, `-list`, `-item`, `-link` | Publication detail, Policy pages |
+
+*Checkbox / radio / switch / table / alert / context-alert / filter-chip were extracted in an earlier pass with no consumer and have been dropped from `FAMILIES` — 55 KB of dead CSS. Re-add (and re-verify against the CSS) if a real surface needs them.*
 
 **Gap-fills.** The vendor's *reset* layer is not extracted, so adopted controls keep the UA border/outline; `components.css` strips it for `.ux4g-input-input` / `.ux4g-textarea-input`. The vendor also ships **no current-page style** for pagination — `[aria-current="page"]` is ours. Both are documented inline at the rule.
 
 **Chip radius is pinned, and selection uses the vendor's bare `.active`.** `[class*="ux4g-choice-chip"]` gets `radius-full` — the site's chip and badge language is pill-shaped where the vendor default is `radius-sm`. Selection must emit the unprefixed `active` class alongside `aria-pressed` / `aria-current`; that is safe because the vendor's selectors are `:is(.ux4g-choice-chip-*).active`, so `.active` only binds on an element that already carries a chip class. **Choose by behaviour:** interactive filters are chips (`ux4g-choice-chip-md`), static labels are tags (`ux4g-tag-tonal-*`) — the tag family has *no* hover/active/cursor rules at all.
 
 **Button weight is pinned.** `[class*="ux4g-btn"] { --ux4g-fw-current: semibold }` — the vendor default is medium (500); this site settled on semibold. Height (40/48px), radius (8px) and horizontal padding (16/20px) already matched exactly, so weight is the *only* divergence. A `:active` press transform is also added, which the vendor lacks. Use `ux4g-btn-sm` (32px) for compact buttons rather than inline padding.
+
+**Tag weight is pinned** the same way — `[class*="ux4g-tag-tonal-"] { font-weight: semibold }` — vendor default is medium.
+
+**Icon buttons have no neutral-ghost variant.** The vendor only ships `-primary`/`-outline-primary`/`-tonal-primary`/`-text-primary` for `ux4g-icon-btn` — every one is accent-tinted at rest. The hero carousel arrows want neutral-at-rest, accent-on-hover (same ghost language as `.iconBtn` in the nav), so `.hero-arrow` pins border/background/color on top of the bare `ux4g-icon-btn ux4g-icon-btn-pill` base — same treatment as `.btn-light`/`.btn-ondark` below.
+
+**The extractor now also matches `[class^=…]` attribute selectors**, not just `.class` tokens. The vendor's type-ramp engine — the rule that turns `--ux4g-fs-current`/`--ux4g-fw-current`/`--ux4g-lh-current` into real `font-size`/`font-weight`/`line-height` — is written as `[class^=ux4g-body-],[class^=ux4g-breadcrumb-],[class^=ux4g-heading-],[class^=ux4g-label-],...`, which a plain `.class` regex never matches. Adopting breadcrumb or label without this fix would extract the per-size rules but silently lose the rule that applies them (text renders at browser defaults, not vendor type).
 
 ### 9.2 Sanctioned extensions
 
@@ -173,6 +182,8 @@ Built on `--ux4g-*` tokens; each has a reason it is not the vendor's component.
 | **Type ramp `.t-*`** | UX4G's roles are fixed px on Noto Sans. Ours are fluid `clamp()` on the display face. Also: the vendor ramp is applied by `[class^=ux4g-body-]`, a prefix match on the whole `class` attribute — it silently fails when composed (`class="text-muted ux4g-body-s-default"`). |
 | **`.grid` / `.grid-2\|3\|4`** | Ours collapse at `max-width: 960px/620px`; UX4G's are `min-width: 768px/992px` and default to `gap: 0`. |
 | **`.btn-light` / `.btn-ondark`** | On-dark button variants for the banner, which sits on a photograph in both themes. UX4G ships no on-dark button, so these compose onto `.ux4g-btn`, which supplies all layout. |
+| **`.hero-arrow`** | Same reasoning as `.btn-ondark`, for `ux4g-icon-btn`: the vendor's four icon-button variants are all accent-tinted at rest; the carousel wants neutral-ghost/accent-hover, composed onto the bare `ux4g-icon-btn ux4g-icon-btn-pill`. |
+| **`.avatar-gradient`** | Composes onto `ux4g-avatar` (box model, radius, centring). The vendor avatar fill is flat single-tone; the gradient identity mark and the 84px size (between its `l`/`2xl` steps) are ours. |
 | **`.card`** | UX4G's `card-solid` adds `shadow-l1` (ours is deliberately flat, border-only) and puts padding on `ux4g-card-body`, which is `display: flex` — it would reflow block content in 17 places. |
 | **`.chip-select`** | A `<select>` styled as a chip needs room for the native dropdown arrow, which the vendor's icon-less chip padding doesn't allow for. |
 | **`.row-item`** | The vendor list declares `border: none` (no row separators) and only pads inside a `.ux4g-list-*` container that also brings `shadow-l2` and its own background. |
@@ -211,7 +222,7 @@ Any future extension gets a subsection here + a Storybook story + an ADR.
 
 **Why extraction and not PurgeCSS:** the vendor uses `[class*=spinner-]` substring selectors and ~50 bare state classes (`.active`, `.is-open`, `.show`), which naive purging drops. Extraction is deterministic, reviewable in git, and re-runnable — output is byte-identical across vendor patch releases.
 
-Result: **~72 KB** of vendor CSS committed; **~175 KB raw / 28 KB gzipped** across all route chunks.
+Result: **~51 KB** of vendor CSS committed (`src/styles/ux4g-components.css`, regenerated after pruning zero-consumer families — see §9.1); **~153 KB raw / 25 KB gzipped** measured across the production build's CSS chunks (`npm run build`, 2026-07-30).
 
 ---
 

@@ -52,7 +52,7 @@ export default async function PublicationsPage({
               </div>
               <div>
                 <div className="cluster" style={{ gap: "0.5rem" }}>
-                  <span className="badge">{featured.type}</span>
+                  <span className="ux4g-tag-tonal-primary ux4g-tag-s">{featured.type}</span>
                   <span className="t-micro text-muted">
                     {featured.year} · {readMinutes(featured)} min read
                   </span>

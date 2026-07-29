@@ -95,7 +95,7 @@ export default async function WhatsNewPage({
                   rel={item.external ? "noopener noreferrer" : undefined}
                   className="row-item"
                 >
-                  <span className="badge">{item.type}</span>
+                  <span className="ux4g-tag-tonal-primary ux4g-tag-s">{item.type}</span>
                   <div className="row-main">
                     <div style={{ fontWeight: 600 }}>{item.title}</div>
                     <div className="t-micro text-muted">{item.meta}</div>
