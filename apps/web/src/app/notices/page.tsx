@@ -71,7 +71,15 @@ export default async function NoticesPage({
               ))}
             </div>
           ) : (
-            <p className="empty">No notices in this category right now.</p>
+            <div className="ux4g-empty-state" style={{ padding: "3rem 1rem" }}>
+              <span className="ux4g-empty-state-icon">
+                <Icon name="book" size={32} />
+              </span>
+              <div className="ux4g-empty-state-content">
+                <p className="t-h4">No notices in this category right now</p>
+                <p className="text-muted t-small">Tenders and circulars appear here when published.</p>
+              </div>
+            </div>
           )}
         </div>
       </section>

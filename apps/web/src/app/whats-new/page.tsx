@@ -105,7 +105,15 @@ export default async function WhatsNewPage({
               ))}
             </div>
           ) : (
-            <p className="empty">Nothing in this category yet.</p>
+            <div className="ux4g-empty-state" style={{ padding: "3rem 1rem" }}>
+              <span className="ux4g-empty-state-icon">
+                <Icon name="spark" size={32} />
+              </span>
+              <div className="ux4g-empty-state-content">
+                <p className="t-h4">Nothing in this category yet</p>
+                <p className="text-muted t-small">New items appear here as they are published.</p>
+              </div>
+            </div>
           )}
         </div>
       </section>

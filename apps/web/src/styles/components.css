@@ -94,7 +94,6 @@
 .search-box { display: flex; align-items: center; gap: 0.5rem; border: 1px solid var(--app-border-strong); border-radius: var(--app-radius); padding: 0.5rem 0.8rem; background: var(--app-surface); min-width: 240px; color: var(--app-text-muted); }
 .search-box input { border: 0; background: transparent; flex: 1; outline: none; color: var(--app-text); }
 .results-count { color: var(--app-text-muted); font-size: 0.9rem; }
-.empty { text-align: center; padding: 3rem 1rem; color: var(--app-text-muted); }
 
 /* ---- map illustration (contact page, stands in for the click-to-load embed) ---- */
 .map-card { padding: 0; position: relative; overflow: hidden; }

@@ -45,6 +45,8 @@ const FAMILIES = [
   "ux4g-alert",
   "ux4g-context-alert",
   "ux4g-empty-state",
+  // primitives
+  "ux4g-divider",
 ];
 
 const wanted = (token) =>

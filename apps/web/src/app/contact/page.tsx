@@ -92,7 +92,7 @@ export default function ContactPage() {
                   Demo form — validation, confirmation and delivery are wired with the backend.
                 </p>
               </form>
-              <hr className="divider" style={{ margin: "1.2rem 0" }} />
+              <hr className="ux4g-divider-horizontal" style={{ margin: "1.2rem 0" }} />
               <p className="t-small">
                 <strong>RTI &amp; grievances:</strong> the CPIO and grievance officer details are
                 published on the RTI page.
