@@ -72,8 +72,7 @@ export function SiteFooter() {
 
         <div className={s.bottom}>
           <p className={s.credit}>
-            © 2026 EAC-PM. Designed &amp; developed by <strong>Digital India Corporation</strong>.
-            Hosted on the National Government Cloud.
+            © 2026 EAC-PM. Designed &amp; developed by UX4G.
           </p>
           <div className={s.meta}>
             <span className={s.counter} title="Illustrative visitor count (MVP)">

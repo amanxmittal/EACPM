@@ -54,14 +54,14 @@ export default async function WhatsNewPage({
       <section className="page-hero">
         <div className="ux4g-container">
           <span className="kicker">What&apos;s New</span>
-          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
+          <h1 className="t-h1 balance ux4g-mt-xs">
             Newly added &amp; recently updated
           </h1>
-          <p className="t-lead measure" style={{ marginTop: "0.8rem" }}>
+          <p className="t-lead measure ux4g-mt-s">
             Auto-populated from content across Publications, Notices and Media — zero manual
             curation, with an RSS/Atom feed once the backend lands.
           </p>
-          <p style={{ marginTop: "1rem" }}>
+          <p className="ux4g-mt-m">
             <span className="flag ux4g-tag-tonal-warning ux4g-tag-s">Illustrative ordering — real timestamps arrive with the CMS</span>
           </p>
         </div>
@@ -69,7 +69,7 @@ export default async function WhatsNewPage({
 
       <section className="section">
         <div className="ux4g-container">
-          <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "1rem" }}>
+          <div className="cluster ux4g-jc-between ux4g-mb-m">
             <div className="filter-chips" role="group" aria-label="Filter by type">
               <Link href="/whats-new" className={`ux4g-choice-chip-md${!activeType ? " active" : ""}`} aria-current={!activeType ? "true" : undefined}>
                 All
@@ -108,7 +108,7 @@ export default async function WhatsNewPage({
               ))}
             </ul>
           ) : (
-            <div className="ux4g-empty-state" style={{ padding: "3rem 1rem" }}>
+            <div className="ux4g-empty-state ux4g-py-2xl ux4g-px-m">
               <span className="ux4g-empty-state-icon">
                 <Icon name="spark" size={32} />
               </span>

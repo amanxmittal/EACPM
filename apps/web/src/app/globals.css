@@ -284,12 +284,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .section { padding-block: clamp(2.5rem, 6vw, 5.5rem); }
 .stack > * + * { margin-top: var(--stack, 1rem); }
 .cluster { display: flex; flex-wrap: wrap; gap: var(--gap, 0.75rem); align-items: center; }
-.grid { display: grid; gap: clamp(1rem, 2.4vw, 1.75rem); }
-.grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 960px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+/* Column count now comes from per-item ux4g-col-* classes (mobile-first:
+   12 col / sm-6 col / lg-{3,4} col, accepting the vendor's 576/992px steps
+   in place of the old 620/960px ones). .grid only pins the gutter: ux4g-row
+   reads --ux4g-gutter-x/-y globally, which the container bridge above
+   already points at --app-maxw's edge padding — scoped here back to the
+   original grid-gap clamp so row gap doesn't inherit an unrelated value.
+   x and y aren't symmetric in the vendor's own rules: gutter-x is halved by
+   `padding-inline: calc(gutter-x * .5)`, so two neighbours' halves recombine
+   to the full value. gutter-y has no such halving — `padding-block:
+   gutter-y` applies the FULL value to top AND bottom of every item, so two
+   vertically-adjacent items' paddings stack to 2×. Pre-halving gutter-y
+   here is what makes row and column gaps land on the same visible size. */
+.grid { --ux4g-gutter-x: clamp(1rem, 2.4vw, 1.75rem); --ux4g-gutter-y: calc(clamp(1rem, 2.4vw, 1.75rem) / 2); }
 
 /* soft gradient washes — the reference's signature airy backgrounds. Purely
    decorative; sits behind content via a pseudo-element so text contrast is unaffected. */

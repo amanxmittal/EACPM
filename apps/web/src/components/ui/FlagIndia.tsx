@@ -8,7 +8,8 @@ export function FlagIndia({ width = 26 }: { width?: number }) {
       viewBox="0 0 36 24"
       role="img"
       aria-label="Flag of India"
-      style={{ borderRadius: 3, display: "block", boxShadow: "0 0 0 1px rgba(0,0,0,.14)", flex: "none" }}
+      className="ux4g-d-block ux4g-flex-none"
+      style={{ borderRadius: 3, boxShadow: "0 0 0 1px rgba(0,0,0,.14)" }}
     >
       <rect width="36" height="8" fill="#FF9933" />
       <rect y="8" width="36" height="8" fill="#ffffff" />

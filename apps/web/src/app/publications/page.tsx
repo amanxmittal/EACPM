@@ -26,10 +26,10 @@ export default async function PublicationsPage({
       <section className="page-hero hero-stage grain">
         <div className="ux4g-container hero-content">
           <span className="kicker">Publications</span>
-          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem", maxWidth: "18ch" }}>
+          <h1 className="t-h1 balance ux4g-mt-xs" style={{ maxWidth: "18ch" }}>
             Working papers, reports &amp; occasional papers
           </h1>
-          <hr className="gold-rule" style={{ margin: "1.1rem 0" }} />
+          <hr className="gold-rule ux4g-my-m ux4g-mx-none" />
           <p className="t-lead measure">
             {reports.length} publications from the Council and its partners. Fuzzy full-text search
             inside every PDF arrives with the search service — for now, filter and scan.
@@ -38,32 +38,32 @@ export default async function PublicationsPage({
       </section>
 
       {/* featured spotlight */}
-      <section className="section" style={{ paddingBottom: 0 }}>
+      <section className="section ux4g-pb-none">
         <div className="ux4g-container">
           <Reveal>
             <span className="kicker">Latest working paper</span>
             <Link
               href={`/publications/${featured.slug}`}
-              className="card card-hover"
-              style={{ display: "grid", gridTemplateColumns: "minmax(0, 300px) 1fr", gap: "clamp(1.2rem, 3vw, 2.4rem)", alignItems: "center", marginTop: "1rem" }}
+              className="card card-hover ux4g-d-grid ux4g-ai-center ux4g-mt-m"
+              style={{ gridTemplateColumns: "minmax(0, 300px) 1fr", gap: "clamp(1.2rem, 3vw, 2.4rem)" }}
             >
               <div style={{ maxWidth: "300px" }}>
                 <CoverArt report={featured} />
               </div>
               <div>
-                <div className="cluster" style={{ gap: "0.5rem" }}>
+                <div className="cluster ux4g-inline-gap-s">
                   <span className="ux4g-tag-tonal-primary ux4g-tag-s">{featured.type}</span>
                   <span className="t-micro text-muted">
                     {featured.year} · {readMinutes(featured)} min read
                   </span>
                 </div>
-                <h2 className="t-h2 balance" style={{ marginTop: "0.6rem" }}>
+                <h2 className="t-h2 balance ux4g-mt-xs">
                   {featured.title}
                 </h2>
-                <p className="text-muted" style={{ marginTop: "0.7rem" }}>
+                <p className="text-muted ux4g-mt-s">
                   {featured.abstract}
                 </p>
-                <span className="link-arrow" style={{ marginTop: "1rem" }}>
+                <span className="link-arrow ux4g-mt-m">
                   Read the paper <Icon name="arrowRight" size={16} />
                 </span>
               </div>

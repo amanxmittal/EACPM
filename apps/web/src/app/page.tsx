@@ -142,7 +142,7 @@ export default function Home() {
               <CoverArt report={lead} />
               <div className="body">
                 <span className="ux4g-tag-tonal-primary ux4g-tag-s">{lead.type}</span>
-                <h3 style={{ marginTop: "0.6rem" }}>{lead.title}</h3>
+                <h3 className="ux4g-mt-xs">{lead.title}</h3>
                 <p>{lead.abstract}</p>
               </div>
             </Link>
@@ -176,7 +176,7 @@ export default function Home() {
                 <span className="point"><span className="tick"><Icon name="check" size={14} /></span> An accessible data table ships with every chart</span>
                 <span className="point"><span className="tick"><Icon name="check" size={14} /></span> CSV and XLSX downloads, no login</span>
               </div>
-              <div style={{ marginTop: "1.6rem" }}>
+              <div className="ux4g-mt-xl">
                 <Link href="/data" className="ux4g-btn-primary ux4g-btn-lg">Open the dashboards <Icon name="arrowRight" size={18} /></Link>
               </div>
             </div>
@@ -214,7 +214,7 @@ export default function Home() {
                 the Prime Minister on economic and related matters. It analyses the economy, flags the
                 issues that need attention, and offers evidence-based policy counsel.
               </p>
-              <p style={{ marginTop: "1.3rem" }}>
+              <p className="ux4g-mt-l">
                 <Link href="/about" className="view-all">Read about EAC-PM <Icon name="arrowRight" size={16} /></Link>
               </p>
             </div>

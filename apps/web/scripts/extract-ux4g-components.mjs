@@ -47,6 +47,33 @@ const FAMILIES = [
   "ux4g-search",
   // layout — every breakpoint's max-width bridged to --app-maxw in globals.css
   "ux4g-container",
+  // grid — .grid pins --ux4g-gutter-x/-y so row gap doesn't inherit the
+  // container's edge-padding value; see DESIGN.md §9.1
+  "ux4g-row",
+  "ux4g-col",
+  // utilities — spacing/flex, replacing one-off inline style={{}} props.
+  // No font-weight utility exists: ux4g-fw-* only sets --ux4g-fw-current,
+  // which nothing reads without a type-ramp class (ux4g-heading-*/-body-*/
+  // etc.) on the same element — inert on a bare span, so fontWeight stays
+  // inline everywhere. ux4g-d-flex has 4 decoy component-scoped
+  // redeclarations elsewhere in the vendor CSS (e.g. inside
+  // .ux4g-result-list-v2) — the extractor pulls all 5 since it matches by
+  // class token, not usage; the extra 4 are dead selectors here (harmless).
+  "ux4g-mt",
+  "ux4g-mb",
+  "ux4g-my",
+  "ux4g-mx",
+  "ux4g-m",
+  "ux4g-py",
+  "ux4g-px",
+  "ux4g-pt",
+  "ux4g-pb",
+  "ux4g-d",
+  "ux4g-ai",
+  "ux4g-jc",
+  "ux4g-place",
+  "ux4g-flex",
+  "ux4g-inline-gap",
   // buttons — see DESIGN.md §9.2 for the pinned weight
   "ux4g-btn",
   "ux4g-icon-btn",

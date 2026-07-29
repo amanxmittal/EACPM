@@ -38,10 +38,10 @@ export default async function NoticesPage({
       <section className="page-hero">
         <div className="ux4g-container">
           <span className="kicker">Notices</span>
-          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
+          <h1 className="t-h1 balance ux4g-mt-xs">
             Tenders, vacancies &amp; circulars
           </h1>
-          <p className="t-lead measure" style={{ marginTop: "0.8rem" }}>
+          <p className="t-lead measure ux4g-mt-s">
             Open positions, procurement notices and circulars — with publish and close dates,
             status badges, and an e-mail / RSS subscription (wired with the backend).
           </p>
@@ -50,7 +50,7 @@ export default async function NoticesPage({
 
       <section className="section">
         <div className="ux4g-container">
-          <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "1rem" }}>
+          <div className="cluster ux4g-jc-between ux4g-mb-m">
             <SectionHeader
               eyebrow={isArchiveView ? "Archived notices" : "All notices"}
               title={isArchiveView ? "Archive" : "Current notices"}
@@ -60,7 +60,7 @@ export default async function NoticesPage({
             </a>
           </div>
 
-          <div className="filter-chips" role="group" aria-label="Filter by category" style={{ marginBottom: "1.2rem" }}>
+          <div className="filter-chips ux4g-mb-l" role="group" aria-label="Filter by category">
             <Link href="/notices" className={`ux4g-choice-chip-md${!activeType && !isArchiveView ? " active" : ""}`} aria-current={!activeType && !isArchiveView ? "true" : undefined}>
               All
             </Link>

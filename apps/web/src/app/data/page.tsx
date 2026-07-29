@@ -35,16 +35,16 @@ export default function DataPage() {
       <section className="page-hero hero-stage grain">
         <div className="ux4g-container hero-content">
           <span className="kicker">Data &amp; Dashboards</span>
-          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem", maxWidth: "16ch" }}>
+          <h1 className="t-h1 balance ux4g-mt-xs" style={{ maxWidth: "16ch" }}>
             India at a glance
           </h1>
-          <hr className="gold-rule" style={{ margin: "1.1rem 0" }} />
+          <hr className="gold-rule ux4g-my-m ux4g-mx-none" />
           <p className="t-lead measure">
             Curated macro indicators, per-publication dataset explorers, and a download centre.
             Every figure carries source, period and last-updated; every chart ships with a data
             table and a CSV.
           </p>
-          <p style={{ marginTop: "1rem" }}>
+          <p className="ux4g-mt-m">
             <span className="flag ux4g-tag-tonal-warning ux4g-tag-s">Illustrative data — pending verified sources</span>
           </p>
         </div>
@@ -54,10 +54,10 @@ export default function DataPage() {
       <section className="section">
         <div className="ux4g-container">
           <div className="data-panel">
-            <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "0.8rem", alignItems: "flex-start" }}>
+            <div className="cluster ux4g-jc-between ux4g-mb-s" style={{ alignItems: "flex-start" }}>
               <div>
                 <span className="kicker">Featured series</span>
-                <h2 className="t-h3" style={{ marginTop: "0.4rem" }}>
+                <h2 className="t-h3 ux4g-mt-xs">
                   Real GDP growth — the pandemic trough &amp; recovery
                 </h2>
                 <p className="t-micro text-muted">Annual, % · hover for values</p>
@@ -87,7 +87,7 @@ export default function DataPage() {
       </section>
 
       {/* small multiples */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section ux4g-pt-none">
         <div className="ux4g-container">
           <div className="section-head">
             <div className="sh-copy">
@@ -104,25 +104,25 @@ export default function DataPage() {
         <div className="ux4g-container">
           <Reveal>
             <span className="kicker">Paper datasets</span>
-            <h2 className="t-h2" style={{ marginTop: "0.5rem" }}>
+            <h2 className="t-h2 ux4g-mt-xs">
               Explore the data behind the papers
             </h2>
-            <p className="t-lead measure" style={{ marginTop: "0.6rem" }}>
+            <p className="t-lead measure ux4g-mt-xs">
               For every data-heavy publication, the underlying dataset is uploadable and explorable
               — filter, cross-filter, chart, download the exact slice, and cite a permalink.
             </p>
-            <div className="card" style={{ marginTop: "1.5rem" }}>
+            <div className="card ux4g-mt-xl">
               <span className="ux4g-tag-tonal-primary ux4g-tag-s">Reference dataset</span>
-              <h3 className="t-h3" style={{ marginTop: "0.6rem" }}>
+              <h3 className="t-h3 ux4g-mt-xs">
                 Economic Census — EC4 · EC5 · EC6
               </h3>
-              <p className="text-muted t-small" style={{ marginTop: "0.3rem" }}>
+              <p className="text-muted t-small ux4g-mt-2xs">
                 Derived from the shared metadata dictionary. Note: dimension code-lists differ per
                 round (e.g. the State code for Andhra Pradesh is 02 / 28 / 37 across EC4 / EC5 / EC6)
                 — so the explorer versions its code-lists and validates each upload.
               </p>
               {/* Static labels, not filters — tags rather than chips. */}
-              <div className="cluster" style={{ marginTop: "1rem" }}>
+              <div className="cluster ux4g-mt-m">
                 {ecDimensions.map((d) => (
                   <span key={d} className="ux4g-tag-tonal-neutral ux4g-tag-s">
                     {d}
@@ -138,7 +138,7 @@ export default function DataPage() {
       <section className="section" id="downloads" style={{ scrollMarginTop: "96px" }}>
         <div className="ux4g-container">
           <span className="kicker">Download centre</span>
-          <h2 className="t-h2" style={{ marginTop: "0.5rem", marginBottom: "1.2rem" }}>
+          <h2 className="t-h2 ux4g-mt-xs ux4g-mb-l">
             Series &amp; data dictionaries
           </h2>
           <ul className="card ux4g-list ux4g-list-default">
@@ -160,7 +160,7 @@ export default function DataPage() {
               </li>
             ))}
           </ul>
-          <p className="t-micro text-muted" style={{ marginTop: "0.8rem" }}>
+          <p className="t-micro text-muted ux4g-mt-s">
             Downloads are illustrative placeholders in the MVP; the live centre serves versioned
             series with a data dictionary and an open licence.
           </p>

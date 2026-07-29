@@ -25,10 +25,10 @@ export default function AboutPage() {
       <section className="page-hero hero-stage grain">
         <div className="ux4g-container hero-content">
           <span className="kicker">About</span>
-          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem", maxWidth: "20ch" }}>
+          <h1 className="t-h1 balance ux4g-mt-xs" style={{ maxWidth: "20ch" }}>
             The Economic Advisory Council to the Prime Minister
           </h1>
-          <hr className="gold-rule" style={{ margin: "1.1rem 0" }} />
+          <hr className="gold-rule ux4g-my-m ux4g-mx-none" />
           <p className="t-lead measure">
             An independent body constituted to advise the Prime Minister on economic and related
             matters — analysing the economy and offering evidence-based policy counsel.
@@ -38,8 +38,8 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="ux4g-container">
-          <div className="grid grid-2" style={{ alignItems: "center" }}>
-            <Reveal>
+          <div className="grid ux4g-row ux4g-ai-center">
+            <Reveal className="ux4g-col-12 ux4g-col-sm-6">
               <div className="prose">
                 <h2 className="t-h2">Mandate &amp; functions</h2>
                 <p>
@@ -55,7 +55,7 @@ export default function AboutPage() {
                 </p>
               </div>
             </Reveal>
-            <Reveal delay={120}>
+            <Reveal className="ux4g-col-12 ux4g-col-sm-6" delay={120}>
               <div className="stage-frame" style={{ height: "min(46vh, 360px)" }}>
                 <div className="story-art" data-active="true">
                   <ChapterArt id="arthashastra" />
@@ -73,12 +73,12 @@ export default function AboutPage() {
         <div className="ux4g-container container-narrow">
           <Reveal>
             <span className="kicker">Message from the Chairperson</span>
-            <blockquote className="t-h3 balance dropcap" style={{ marginTop: "0.8rem", fontWeight: 600 }}>
+            <blockquote className="t-h3 balance dropcap ux4g-mt-s" style={{ fontWeight: 600 }}>
               The Council&apos;s work is to bring evidence to bear on the questions that matter most
               for India&apos;s growth — and to state plainly what the data does, and does not yet,
               show.
             </blockquote>
-            <p className="text-muted" style={{ marginTop: "1rem" }}>
+            <p className="text-muted ux4g-mt-m">
               Chairperson&apos;s portrait, signed message and an optional captioned video with a
               transcript are placeholders pending official assets.
             </p>
@@ -92,15 +92,17 @@ export default function AboutPage() {
             Names are drawn from the current public roster. Designations, areas of focus and bios
             are shown as pending official verification — never invented.
           </SectionHeader>
-          <RevealStagger className="grid grid-4">
+          <RevealStagger className="grid ux4g-row">
             {members.map((m) => (
-              <div key={m.slug} className="card member">
-                <span className="ux4g-avatar avatar-gradient" aria-hidden>
-                  {initials(m.name)}
-                </span>
-                <div>
-                  <h3>{m.name}</h3>
-                  <p className="text-muted t-small">{m.affiliation} · designation pending</p>
+              <div key={m.slug} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-3">
+                <div className="card member">
+                  <span className="ux4g-avatar avatar-gradient" aria-hidden>
+                    {initials(m.name)}
+                  </span>
+                  <div>
+                    <h3>{m.name}</h3>
+                    <p className="text-muted t-small">{m.affiliation} · designation pending</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -112,10 +114,10 @@ export default function AboutPage() {
         <div className="ux4g-container">
           <Reveal>
             <span className="kicker">Previous Chairpersons</span>
-            <h2 className="t-h2" style={{ marginTop: "0.5rem" }}>
+            <h2 className="t-h2 ux4g-mt-xs">
               A chronological legacy
             </h2>
-            <p className="text-muted measure" style={{ marginTop: "0.6rem" }}>
+            <p className="text-muted measure ux4g-mt-xs">
               A dated list of previous Chairpersons with tenure and a short legacy note is compiled
               from official records during migration.
             </p>

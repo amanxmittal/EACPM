@@ -30,10 +30,10 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
           </ol>
         </nav>
         <span className="eyebrow">Statutory page · GIGW 3.0</span>
-        <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
+        <h1 className="t-h1 balance ux4g-mt-xs">
           {p.title}
         </h1>
-        <div className="prose" style={{ marginTop: "1.5rem" }}>
+        <div className="prose ux4g-mt-xl">
           <p className="text-muted">
             This is a mandatory Government of India (GIGW 3.0) page. Its content is migrated
             verbatim from official sources and reviewed before launch — it is a titled placeholder
@@ -44,7 +44,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
             page/component/test and a pass/fail status.
           </p>
         </div>
-        <Link href="/" className="link-arrow" style={{ marginTop: "1.5rem" }}>
+        <Link href="/" className="link-arrow ux4g-mt-xl">
           ← Back to home
         </Link>
       </div>

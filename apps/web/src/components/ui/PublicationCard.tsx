@@ -10,7 +10,7 @@ export function PublicationCard({ report }: { report: Report }) {
         <CoverArt report={report} />
       </Link>
       <div className="pub-body">
-        <div className="cluster" style={{ gap: "0.5rem" }}>
+        <div className="cluster ux4g-inline-gap-s">
           <span className="ux4g-tag-tonal-neutral ux4g-tag-s">{report.year ?? "—"}</span>
           <span className="t-micro text-muted">{report.type}</span>
           <span className="t-micro text-muted">· {readMinutes(report)} min read</span>
@@ -27,8 +27,8 @@ export function PublicationCard({ report }: { report: Report }) {
             href={report.pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="ux4g-btn-outline-primary ux4g-btn-md"
-            style={{ padding: "0.4rem 0.7rem", fontSize: "0.85rem" }}
+            className="ux4g-btn-outline-primary ux4g-btn-md ux4g-py-xs ux4g-px-s"
+            style={{ fontSize: "0.85rem" }}
             aria-label={`Download PDF: ${report.title}`}
           >
             <Icon name="download" size={15} /> PDF

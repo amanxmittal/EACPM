@@ -112,14 +112,16 @@ export function PublicationsExplorer({
 
       {filtered.length ? (
         <>
-          <div ref={gridRef} className="grid grid-3" style={{ marginTop: "1.2rem", scrollMarginTop: "120px" }}>
+          <div ref={gridRef} className="grid ux4g-row ux4g-mt-l" style={{ scrollMarginTop: "120px" }}>
             {paged.map((r) => (
-              <PublicationCard key={r.slug} report={r} />
+              <div key={r.slug} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-4">
+                <PublicationCard report={r} />
+              </div>
             ))}
           </div>
 
           {totalPages > 1 && (
-            <nav className="ux4g-pagination-wrapper" aria-label="Publications pages" style={{ marginTop: "2rem" }}>
+            <nav className="ux4g-pagination-wrapper ux4g-mt-2xl" aria-label="Publications pages">
               <div className="ux4g-pagination">
                 <button
                   type="button"
@@ -164,7 +166,7 @@ export function PublicationsExplorer({
           )}
         </>
       ) : (
-        <div className="ux4g-empty-state" style={{ marginTop: "2rem" }}>
+        <div className="ux4g-empty-state ux4g-mt-2xl">
           <span className="ux4g-empty-state-icon">
             <Icon name="search" size={32} />
           </span>

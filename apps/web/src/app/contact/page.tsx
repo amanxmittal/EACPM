@@ -13,7 +13,7 @@ export default function ContactPage() {
       <section className="page-hero">
         <div className="ux4g-container">
           <span className="eyebrow">Contact</span>
-          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
+          <h1 className="t-h1 balance ux4g-mt-xs">
             Get in touch
           </h1>
         </div>
@@ -24,36 +24,40 @@ export default function ContactPage() {
           <div className="detail-grid">
             <div className="stack">
               <div className="card">
-                <h2 className="t-h4" style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                <h2 className="t-h4 ux4g-d-flex ux4g-inline-gap-s ux4g-ai-center">
                   <Icon name="mapPin" size={18} /> Postal address
                 </h2>
-                <p className="text-muted" style={{ marginTop: "0.6rem" }}>
+                <p className="text-muted ux4g-mt-xs">
                   Economic Advisory Council to the Prime Minister
                   <br />
                   NITI Aayog, Sansad Marg
                   <br />
                   New Delhi — 110001
                 </p>
-                <p className="t-micro text-muted" style={{ marginTop: "0.5rem" }}>
+                <p className="t-micro text-muted ux4g-mt-xs">
                   Address shown for layout; confirmed from official records during migration.
                 </p>
               </div>
-              <div className="grid grid-2">
-                <div className="card">
-                  <h3 className="t-h4" style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-                    <Icon name="mail" size={16} /> Email
-                  </h3>
-                  <p className="text-muted t-small" style={{ marginTop: "0.4rem" }}>
-                    Provided during migration
-                  </p>
+              <div className="grid ux4g-row">
+                <div className="ux4g-col-12 ux4g-col-sm-6">
+                  <div className="card">
+                    <h3 className="t-h4 ux4g-d-flex ux4g-inline-gap-s ux4g-ai-center">
+                      <Icon name="mail" size={16} /> Email
+                    </h3>
+                    <p className="text-muted t-small ux4g-mt-xs">
+                      Provided during migration
+                    </p>
+                  </div>
                 </div>
-                <div className="card">
-                  <h3 className="t-h4" style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-                    <Icon name="phone" size={16} /> Office hours
-                  </h3>
-                  <p className="text-muted t-small" style={{ marginTop: "0.4rem" }}>
-                    Mon–Fri, 9:30–18:00
-                  </p>
+                <div className="ux4g-col-12 ux4g-col-sm-6">
+                  <div className="card">
+                    <h3 className="t-h4 ux4g-d-flex ux4g-inline-gap-s ux4g-ai-center">
+                      <Icon name="phone" size={16} /> Office hours
+                    </h3>
+                    <p className="text-muted t-small ux4g-mt-xs">
+                      Mon–Fri, 9:30–18:00
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="card map-card" style={{ aspectRatio: "16 / 7" }}>
@@ -66,7 +70,7 @@ export default function ContactPage() {
 
             <div className="card">
               <h2 className="t-h4">Feedback</h2>
-              <form style={{ marginTop: "1rem" }}>
+              <form className="ux4g-mt-m">
                 <div className="field ux4g-form-group">
                   <label className="ux4g-label-m-strong" htmlFor="c-name">Name</label>
                   <div className="ux4g-input ux4g-input-md">
@@ -88,11 +92,11 @@ export default function ContactPage() {
                 <button type="button" className="ux4g-btn-primary ux4g-btn-md" style={{ width: "100%" }}>
                   Send feedback
                 </button>
-                <p className="t-micro text-muted" style={{ marginTop: "0.6rem" }}>
+                <p className="t-micro text-muted ux4g-mt-xs">
                   Demo form — validation, confirmation and delivery are wired with the backend.
                 </p>
               </form>
-              <hr className="ux4g-divider-horizontal" style={{ margin: "1.2rem 0" }} />
+              <hr className="ux4g-divider-horizontal ux4g-my-l ux4g-mx-none" />
               <p className="t-small">
                 <strong>RTI &amp; grievances:</strong> the CPIO and grievance officer details are
                 published on the RTI page.

@@ -52,14 +52,14 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
         <div className="detail-grid">
           <article>
             <span className="ux4g-tag-tonal-primary ux4g-tag-s">{r.type}</span>
-            <h1 className="t-h1 balance" style={{ marginTop: "0.8rem" }}>
+            <h1 className="t-h1 balance ux4g-mt-s">
               {r.title}
             </h1>
-            <p className="text-muted" style={{ marginTop: "0.6rem" }}>
+            <p className="text-muted ux4g-mt-xs">
               Authors: <em>pending verification</em> · {r.year ?? "—"} · {readMinutes(r)} min read
             </p>
 
-            <div className="prose" style={{ marginTop: "1.5rem" }}>
+            <div className="prose ux4g-mt-xl">
               <h2 className="t-h3">Abstract</h2>
               <p>{r.abstract}</p>
               <p className="text-muted t-small">
@@ -68,7 +68,7 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
               </p>
             </div>
 
-            <div className="cluster" style={{ marginTop: "1.5rem" }}>
+            <div className="cluster ux4g-mt-xl">
               <a href={r.pdfUrl} target="_blank" rel="noopener noreferrer" className="ux4g-btn-primary ux4g-btn-lg">
                 <Icon name="download" size={18} /> Download PDF
               </a>
@@ -82,7 +82,7 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
             <div className="side-card stack">
               <CoverArt report={r} />
               <div className="card">
-                <dl style={{ margin: 0 }}>
+                <dl className="ux4g-m-none">
                   <div className="meta-row">
                     <dt>Type</dt>
                     <dd>{r.type}</dd>
@@ -111,7 +111,7 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
               </div>
               <p className="t-micro text-muted">Illustrative — real analytics need server-side, bot-filtered tracking.</p>
               <div>
-                <p className="t-overline" style={{ marginBottom: "0.5rem" }}>
+                <p className="t-overline ux4g-mb-xs">
                   Cite as
                 </p>
                 <div className="cite-box">
@@ -123,13 +123,15 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
         </div>
 
         {related.length > 0 && (
-          <div style={{ marginTop: "3rem" }}>
-            <h2 className="t-h3" style={{ marginBottom: "1.2rem" }}>
+          <div className="ux4g-mt-2xl">
+            <h2 className="t-h3 ux4g-mb-l">
               Related publications
             </h2>
-            <div className="grid grid-3">
+            <div className="grid ux4g-row">
               {related.map((x) => (
-                <PublicationCard key={x.slug} report={x} />
+                <div key={x.slug} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-4">
+                  <PublicationCard report={x} />
+                </div>
               ))}
             </div>
           </div>

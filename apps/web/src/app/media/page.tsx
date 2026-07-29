@@ -21,10 +21,10 @@ export default function MediaPage() {
       <section className="page-hero">
         <div className="ux4g-container">
           <span className="eyebrow">Media &amp; Events</span>
-          <h1 className="t-h1 balance" style={{ marginTop: "0.6rem" }}>
+          <h1 className="t-h1 balance ux4g-mt-xs">
             Articles, news &amp; the gallery
           </h1>
-          <p className="t-lead measure" style={{ marginTop: "0.8rem" }}>
+          <p className="t-lead measure ux4g-mt-s">
             Bylined articles by Council members, press coverage, and photographs from events —
             with source attribution and outbound links.
           </p>
@@ -34,17 +34,19 @@ export default function MediaPage() {
       <section className="section" id="articles" style={{ scrollMarginTop: "84px" }}>
         <div className="ux4g-container">
           <SectionHeader eyebrow="Articles by members" title="In their own words" />
-          <div className="grid grid-2">
+          <div className="grid ux4g-row">
             {articles.map((a) => (
-              <a key={a.href} href={a.href} target="_blank" rel="noopener noreferrer" className="card card-hover" style={{ display: "flex", justifyContent: "space-between", gap: "1rem", alignItems: "center" }}>
-                <div>
-                  <h3 className="t-h4">{a.title}</h3>
-                  <p className="t-micro text-muted" style={{ marginTop: "0.3rem" }}>
-                    {a.author} · {a.outlet}
-                  </p>
-                </div>
-                <Icon name="external" size={18} />
-              </a>
+              <div key={a.href} className="ux4g-col-12 ux4g-col-sm-6">
+                <a href={a.href} target="_blank" rel="noopener noreferrer" className="card card-hover ux4g-d-flex ux4g-jc-between ux4g-ai-center ux4g-inline-gap-l">
+                  <div>
+                    <h3 className="t-h4">{a.title}</h3>
+                    <p className="t-micro text-muted ux4g-mt-2xs">
+                      {a.author} · {a.outlet}
+                    </p>
+                  </div>
+                  <Icon name="external" size={18} />
+                </a>
+              </div>
             ))}
           </div>
         </div>
@@ -74,14 +76,15 @@ export default function MediaPage() {
             Albums migrate with alt text and correct aspect ratios; images shown here are
             placeholders in the MVP.
           </SectionHeader>
-          <div className="grid grid-4">
+          <div className="grid ux4g-row">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-              <div
-                key={i}
-                className="card"
-                style={{ aspectRatio: "4 / 3", background: "linear-gradient(150deg, var(--app-accent-soft), var(--app-bg-subtle))", display: "grid", placeItems: "center" }}
-              >
-                <Icon name="chart" size={22} />
+              <div key={i} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-3">
+                <div
+                  className="card ux4g-d-grid ux4g-place-items-center"
+                  style={{ aspectRatio: "4 / 3", background: "linear-gradient(150deg, var(--app-accent-soft), var(--app-bg-subtle))" }}
+                >
+                  <Icon name="chart" size={22} />
+                </div>
               </div>
             ))}
           </div>
