@@ -28,7 +28,13 @@
   --app-border-strong: color-mix(in srgb, var(--ux4g-color-neutral-300, #d9d9d9) 80%, var(--ux4g-color-primary-500, #6a4eff));
   --app-text: var(--ux4g-color-neutral-900, #171717);
   --app-text-muted: color-mix(in srgb, var(--ux4g-color-neutral-500, #737373) 88%, var(--ux4g-color-primary-800, #301c7d));
-  --app-text-subtle: var(--ux4g-color-neutral-400, #a1a1a1);
+  /* Was neutral-400 (#a1a1a1) = 2.2:1 on --app-bg-subtle, far under the 4.5:1 AA floor.
+     Note this tier can no longer be *lighter* than --app-text-muted: on the tinted
+     --app-bg-subtle, muted itself only clears AA at 4.65:1 and pure neutral-500 fails at
+     4.07:1, so any lighter value fails. Subtle is now a pure neutral (4.7:1) where muted
+     carries a purple tint — they separate by hue, not luminance. If a genuinely quieter
+     tier is needed, it has to come from size/weight, not a lighter colour. */
+  --app-text-subtle: color-mix(in srgb, var(--ux4g-color-neutral-600, #525252) 30%, var(--ux4g-color-neutral-500, #737373));
   --app-gold: var(--ux4g-color-secondary-600, #a46800);
   --app-gold-strong: var(--ux4g-color-secondary-700, #764a00);
   --app-gold-soft: color-mix(in srgb, var(--ux4g-color-secondary-400, #e89c30) 22%, transparent);
@@ -39,6 +45,11 @@
   --app-accent-strong: var(--ux4g-color-primary-700, #3d239f);
   --app-accent-hover: var(--ux4g-color-primary-500, #6a4eff);
   --app-accent-soft: var(--ux4g-color-primary-50, #f2efff);
+  /* Text/icon colour to use ON an --app-accent background. White works in light theme,
+     but the dark theme's accent is a light lilac (primary-400) where white text measures
+     only 3.6:1 — so dark mode flips this to near-black ink (4.9:1). Every accent-filled
+     surface reads from this token rather than hardcoding #fff. */
+  --app-on-accent: #fff;
   --app-accent-softer: color-mix(in srgb, var(--ux4g-color-primary-500, #6a4eff) 7%, var(--ux4g-color-neutral-0, #fff));
   --app-accent-2: var(--ux4g-color-secondary-500, #c47d00);
   --app-ink: var(--ux4g-color-primary-950, #1a0e3d);
@@ -128,10 +139,15 @@
   --app-border-strong: color-mix(in srgb, #3a3a48 84%, var(--ux4g-color-primary-600, #4a2bc2));
   --app-text: var(--ux4g-color-neutral-50, #fafafa);
   --app-text-muted: #a6a6b0;
-  --app-text-subtle: #75757f;
+  /* was #75757f = 3.9:1 on the dark surface, under the 4.5:1 AA floor */
+  --app-text-subtle: #94949f;
   --app-accent: var(--ux4g-color-primary-400, #8670ff);
   --app-accent-strong: var(--ux4g-color-primary-300, #a391ff);
   --app-accent-hover: var(--ux4g-color-primary-300, #a391ff);
+  /* Dark-mode accent is light, so ink — not white — is the legible text on top of it.
+     Deliberately the raw primary-950 scale token, not --app-ink, which inverts to a
+     pale lilac under this theme and would be invisible here. */
+  --app-on-accent: var(--ux4g-color-primary-950, #1a0e3d);
   --app-accent-soft: #1b1630;
   --app-accent-softer: color-mix(in srgb, var(--ux4g-color-primary-500, #6a4eff) 14%, #14141e);
   --app-ink: var(--ux4g-color-primary-100, #dcd4ff);
@@ -192,7 +208,7 @@ img, svg, video { max-width: 100%; height: auto; }
 svg { display: block; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
-::selection { background: var(--app-accent); color: #fff; }
+::selection { background: var(--app-accent); color: var(--app-on-accent); }
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--app-accent);
   outline-offset: 2px;
@@ -271,7 +287,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: var(--btn-bg); transition: background .18s ease, border-color .18s ease, transform .12s ease, color .18s ease;
 }
 .btn:active { transform: translateY(1px); }
-.btn-primary { --btn-bg: var(--app-accent); color: #fff; }
+.btn-primary { --btn-bg: var(--app-accent); color: var(--app-on-accent); }
 .btn-primary:hover { --btn-bg: var(--app-accent-strong); }
 .btn-outline { border-color: var(--app-border-strong); color: var(--app-text); }
 .btn-outline:hover { border-color: var(--app-accent); color: var(--app-accent); }
@@ -303,7 +319,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   transition: all .15s ease; color: var(--app-text-muted);
 }
 .chip:hover { border-color: var(--app-accent); color: var(--app-accent); }
-.chip[aria-pressed="true"], .chip.is-active { background: var(--app-accent); color: #fff; border-color: var(--app-accent); }
+.chip[aria-pressed="true"], .chip.is-active { background: var(--app-accent); color: var(--app-on-accent); border-color: var(--app-accent); }
 
 .link-arrow { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--app-accent); font-weight: 600; }
 .link-arrow svg { transition: transform .18s ease; }
@@ -321,7 +337,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .skip-link {
   position: fixed; top: 0; left: 0; transform: translateY(-120%);
-  background: var(--app-accent); color: #fff; padding: 0.7rem 1.1rem;
+  background: var(--app-accent); color: var(--app-on-accent); padding: 0.7rem 1.1rem;
   border-radius: 0 0 var(--app-radius) 0; z-index: 200; font-weight: 600;
   transition: transform .15s ease;
 }

@@ -69,7 +69,8 @@
 .row-item:last-child { border-bottom: 0; }
 .row-item .row-main { flex: 1; }
 .status { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 600; }
-.status-open { background: #e7f6ec; color: #15803d; }
+/* #15803d measured 4.49:1 on this background — a hair under the 4.5:1 AA floor. */
+.status-open { background: #e7f6ec; color: #15723a; }
 .status-soon { background: #fff4e5; color: #a4560a; }
 .status-closed { background: var(--app-bg-subtle); color: var(--app-text-muted); }
 :root[data-theme="dark"] .status-open { background: #10251a; color: #46d47f; }
@@ -169,11 +170,11 @@
    rather than the [disabled] attribute we set for real keyboard semantics. */
 .ux4g-page-number[aria-current="page"] {
   background: var(--app-accent);
-  color: #fff;
+  color: var(--app-on-accent);
   border-color: var(--app-accent);
   font-weight: 600;
 }
-.ux4g-page-number[aria-current="page"]:hover { color: #fff; }
+.ux4g-page-number[aria-current="page"]:hover { color: var(--app-on-accent); }
 .ux4g-page-nav:disabled { opacity: 0.4; pointer-events: none; }
 .ux4g-page-number, .ux4g-page-nav { min-width: 32px; font: inherit; }
 /* Vendor gap + per-item padding pushes 8 controls past a 375px viewport, wrapping

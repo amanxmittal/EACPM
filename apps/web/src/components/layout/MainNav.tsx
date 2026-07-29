@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@/components/ui/Icon";
@@ -11,6 +11,8 @@ export function MainNav() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [floating, setFloating] = useState(false);
   const pathname = usePathname();
+  const searchBtnRef = useRef<HTMLButtonElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -24,6 +26,25 @@ export function MainNav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Escape closes the search overlay / drawer and returns focus to the control that
+  // opened it — otherwise a keyboard user has to Tab back through the whole panel to
+  // dismiss it. Bound to the document so it works wherever focus currently sits.
+  useEffect(() => {
+    if (!menuOpen && !searchOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (searchOpen) {
+        setSearchOpen(false);
+        searchBtnRef.current?.focus();
+      } else if (menuOpen) {
+        setMenuOpen(false);
+        menuBtnRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen, searchOpen]);
 
   // Top-level section match only (not individual dropdown/hash children — too fragile
   // and would light up several links at once for what's really one page).
@@ -44,6 +65,7 @@ export function MainNav() {
 
         <div className={s.actions}>
           <button
+            ref={searchBtnRef}
             className={s.iconBtn}
             aria-label="Search"
             aria-expanded={searchOpen}
@@ -55,6 +77,7 @@ export function MainNav() {
             Contact Us
           </Link>
           <button
+            ref={menuBtnRef}
             className={`${s.iconBtn} ${s.menuBtn}`}
             aria-label="Menu"
             aria-expanded={menuOpen}
@@ -76,10 +99,16 @@ export function MainNav() {
                   {item.label}
                   {item.children && <Icon name="chevronDown" size={15} />}
                 </Link>
+                {/* Deliberately NOT role="menu"/"menuitem": those roles promise
+                    application-menu keyboard behaviour (arrow keys, Home/End, typeahead,
+                    roving tabindex) that these plain navigation links don't implement, so
+                    a screen reader would announce a contract the UI can't honour. The
+                    enclosing <nav aria-label="Primary"> already carries the right
+                    semantics. See WAI-ARIA Authoring Practices, "Disclosure Navigation". */}
                 {item.children && (
-                  <div className={s.dropdown} role="menu">
+                  <div className={s.dropdown}>
                     {item.children.map((c) => (
-                      <Link key={c.label} href={c.href} className={s.ddLink} role="menuitem">
+                      <Link key={c.label} href={c.href} className={s.ddLink}>
                         <span className={s.ddTitle}>{c.label}</span>
                         {c.desc && <span className={s.ddDesc}>{c.desc}</span>}
                       </Link>

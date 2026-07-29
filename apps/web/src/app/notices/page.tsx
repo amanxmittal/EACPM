@@ -61,11 +61,11 @@ export default async function NoticesPage({
           </div>
 
           <div className="filter-chips" role="group" aria-label="Filter by category" style={{ marginBottom: "1.2rem" }}>
-            <Link href="/notices" className={`chip${!activeType && !isArchiveView ? " is-active" : ""}`}>
+            <Link href="/notices" className={`chip${!activeType && !isArchiveView ? " is-active" : ""}`} aria-current={!activeType && !isArchiveView ? "true" : undefined}>
               All
             </Link>
             {categories.map((c) => (
-              <Link key={c} href={`/notices?type=${encodeURIComponent(c)}`} className={`chip${activeType === c ? " is-active" : ""}`}>
+              <Link key={c} href={`/notices?type=${encodeURIComponent(c)}`} className={`chip${activeType === c ? " is-active" : ""}`} aria-current={activeType === c ? "true" : undefined}>
                 {c}
               </Link>
             ))}
@@ -74,6 +74,7 @@ export default async function NoticesPage({
             <Link
               href="/notices?view=archive"
               className={`chip chip-trailing${isArchiveView ? " is-active" : ""}`}
+              aria-current={isArchiveView ? "true" : undefined}
             >
               Archive
             </Link>

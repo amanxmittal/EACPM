@@ -71,11 +71,11 @@ export default async function WhatsNewPage({
         <div className="container">
           <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "1rem" }}>
             <div className="filter-chips" role="group" aria-label="Filter by type">
-              <Link href="/whats-new" className={`chip${!activeType ? " is-active" : ""}`}>
+              <Link href="/whats-new" className={`chip${!activeType ? " is-active" : ""}`} aria-current={!activeType ? "true" : undefined}>
                 All
               </Link>
               {kinds.map((k) => (
-                <Link key={k} href={`/whats-new?type=${k}`} className={`chip${activeType === k ? " is-active" : ""}`}>
+                <Link key={k} href={`/whats-new?type=${k}`} className={`chip${activeType === k ? " is-active" : ""}`} aria-current={activeType === k ? "true" : undefined}>
                   {k}
                 </Link>
               ))}

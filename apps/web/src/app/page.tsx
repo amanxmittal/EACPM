@@ -228,7 +228,7 @@ export default function Home() {
           <div className="news-grid">
             <div>
               <div className="news-h">
-                <h3>Members in the media</h3>
+                <h2>Members in the media</h2>
                 <Link href="/media" className="view-all">All media <Icon name="arrowRight" size={16} /></Link>
               </div>
               <div className="media-list">
@@ -245,7 +245,7 @@ export default function Home() {
             </div>
             <div>
               <div className="news-h">
-                <h3>Notices</h3>
+                <h2>Notices</h2>
                 <Link href="/notices" className="view-all">All notices <Icon name="arrowRight" size={16} /></Link>
               </div>
               <div className="notices-panel">
@@ -267,7 +267,7 @@ export default function Home() {
           {/* What's New rail */}
           <div style={{ marginTop: "clamp(2.5rem, 5vw, 3.5rem)" }}>
             <div className="rail-head">
-              <h3>What&apos;s new</h3>
+              <h2>What&apos;s new</h2>
               <Link href="/whats-new" className="view-all">Everything recent <Icon name="arrowRight" size={16} /></Link>
             </div>
             <div className="rail">
