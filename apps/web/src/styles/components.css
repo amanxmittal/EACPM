@@ -143,5 +143,38 @@
 /* ---- contact form ---- */
 .field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
 .field label { font-size: 0.85rem; font-weight: 600; }
-.field input, .field textarea, .field select { border: 1px solid var(--app-border-strong); border-radius: var(--app-radius); padding: 0.6rem 0.75rem; background: var(--app-surface); color: var(--app-text); font: inherit; }
-.field input:focus, .field textarea:focus { outline: 2px solid var(--app-accent); outline-offset: 1px; }
+/* Direct children only: a control wrapped in a UX4G .ux4g-input / .ux4g-textarea
+   box gets its border from that box instead (see below). */
+.field > input, .field > textarea, .field > select { border: 1px solid var(--app-border-strong); border-radius: var(--app-radius); padding: 0.6rem 0.75rem; background: var(--app-surface); color: var(--app-text); font: inherit; }
+.field > input:focus, .field > textarea:focus { outline: 2px solid var(--app-accent); outline-offset: 1px; }
+
+/* ---- UX4G form-control gap-fills ----
+   We lift only component families out of the vendor bundle, not its reset
+   layer, so the inner control keeps the UA border/outline. Strip it here and
+   move focus to the wrapping box, matching the .field treatment above. */
+.ux4g-input-input, .ux4g-textarea-input { border: 0; font: inherit; color: var(--app-text); }
+.ux4g-input-input:focus, .ux4g-textarea-input:focus { outline: none; }
+/* The vendor already outlines on focus; we only add the offset so the ring sits
+   clear of the box. (It sets border-color !important, so that stays vendor-side —
+   see the --ux4g-border-color-neutral-elevated bridge in globals.css.) */
+.ux4g-input:focus-within, .ux4g-textarea:focus-within { outline: 2px solid var(--app-accent); outline-offset: 1px; }
+.ux4g-textarea-input { height: auto; resize: vertical; }
+
+/* ---- UX4G pagination gap-fills ----
+   The vendor ships no current-page style, and its disabled state is a class
+   rather than the [disabled] attribute we set for real keyboard semantics. */
+.ux4g-page-number[aria-current="page"] {
+  background: var(--app-accent);
+  color: #fff;
+  border-color: var(--app-accent);
+  font-weight: 600;
+}
+.ux4g-page-number[aria-current="page"]:hover { color: #fff; }
+.ux4g-page-nav:disabled { opacity: 0.4; pointer-events: none; }
+.ux4g-page-number, .ux4g-page-nav { min-width: 32px; font: inherit; }
+/* Vendor gap + per-item padding pushes 8 controls past a 375px viewport, wrapping
+   the next-arrow onto a row of its own. Tighten both so the set stays one row. */
+@media (max-width: 480px) {
+  .ux4g-pagination { gap: 2px; }
+  .ux4g-page-number, .ux4g-page-nav { min-width: 28px; padding-inline: 2px; }
+}

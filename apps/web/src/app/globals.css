@@ -1,4 +1,5 @@
 @import "../styles/ux4g-tokens.css";
+@import "../styles/ux4g-components.css";
 @import "../styles/components.css";
 @import "../styles/art.css";
 @import "../styles/home.css";
@@ -74,6 +75,49 @@
   --app-maxw: 1200px;
   --app-measure: 68ch;
   color-scheme: light;
+}
+
+/* ---------------------------------------------------------------------------
+   UX4G component bridge.
+   Adopted UX4G components (see ux4g-components.css) read the *semantic* UX4G
+   tokens, whose stock values are flat greys. Our design tints every neutral
+   toward primary, so unbridged components would read grey and flat next to the
+   rest of the site. Re-point those semantic tokens at our --app-* values.
+
+   The values resolve lazily, so pointing at --app-* covers both themes. But the
+   selector must ALSO match [data-theme="dark"]: ux4g-tokens.css redefines these
+   same tokens inside :root[data-theme="dark"] (specificity 0,2,0), which would
+   otherwise outrank a plain :root bridge and leave dark mode on stock flat grey.
+   Equal specificity + later source order = ours wins.
+
+   Deliberately NOT bridged: --ux4g-radius-*, --ux4g-shadow-l*, and the font
+   families — our --app-radius/--app-shadow/--font-sans are already defined
+   *from* those tokens, so re-pointing them would create a cycle.
+   --------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  /* surfaces */
+  --ux4g-bg-neutral: var(--app-surface);
+  --ux4g-bg-neutral-elevated: var(--app-surface);
+  --ux4g-bg-neutral-subtle: var(--app-bg-subtle);
+  --ux4g-bg-neutral-emphasis: var(--app-bg-subtle);
+  /* borders. -elevated is what the vendor swaps to on :focus-within (with
+     !important) so the border blends into the surface and the outline alone
+     carries the focus ring — so it must track our surface, not stock near-black. */
+  --ux4g-border-color-neutral-subtle: var(--app-border);
+  --ux4g-border-color-neutral-default: var(--app-border-strong);
+  --ux4g-border-color-neutral-elevated: var(--app-surface);
+  --ux4g-border-color-neutral-hover: var(--app-border-strong);
+  /* ink */
+  --ux4g-text-neutral-primary: var(--app-text);
+  --ux4g-text-neutral-secondary: var(--app-text-muted);
+  --ux4g-text-neutral-tertiary: var(--app-text-subtle);
+  --ux4g-text-neutral-disabled: var(--app-text-subtle);
+  /* brand — also drives the composed --ux4g-shadow-focus-ring */
+  --ux4g-bg-primary-strong: var(--app-accent);
+  --ux4g-bg-primary-soft: var(--app-accent-soft);
+  --ux4g-text-brand-primary-default: var(--app-accent);
+  --ux4g-border-color-primary-default: var(--app-accent);
 }
 
 :root[data-theme="dark"] {

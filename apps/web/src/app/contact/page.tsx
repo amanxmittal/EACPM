@@ -69,15 +69,21 @@ export default function ContactPage() {
               <form style={{ marginTop: "1rem" }}>
                 <div className="field">
                   <label htmlFor="c-name">Name</label>
-                  <input id="c-name" name="name" type="text" autoComplete="name" />
+                  <div className="ux4g-input ux4g-input-md">
+                    <input className="ux4g-input-input" id="c-name" name="name" type="text" autoComplete="name" />
+                  </div>
                 </div>
                 <div className="field">
                   <label htmlFor="c-email">Email</label>
-                  <input id="c-email" name="email" type="email" autoComplete="email" />
+                  <div className="ux4g-input ux4g-input-md">
+                    <input className="ux4g-input-input" id="c-email" name="email" type="email" autoComplete="email" />
+                  </div>
                 </div>
                 <div className="field">
                   <label htmlFor="c-msg">Message</label>
-                  <textarea id="c-msg" name="message" rows={4} />
+                  <div className="ux4g-textarea ux4g-textarea-md">
+                    <textarea className="ux4g-textarea-input" id="c-msg" name="message" rows={4} />
+                  </div>
                 </div>
                 <button type="button" className="btn btn-primary" style={{ width: "100%" }}>
                   Send feedback
