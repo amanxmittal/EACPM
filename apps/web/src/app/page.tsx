@@ -53,22 +53,23 @@ export default function Home() {
     <>
       {/* ============ 1 · HERO (cinematic, rotating) ============ */}
       <section className="hero-cine">
-        <HeroCarousel slides={heroSlides} />
-        <div className="container hero-cine-inner">
-          <div className="hero-cine-copy hero-cine-entrance">
-            <Link href={`/publications/${feature.slug}`} className="hero-badge">
-              <span className="pulse" aria-hidden /> New: latest working paper
-            </Link>
-            <span className="hero-cine-eyebrow">Economic Advisory Council to the Prime Minister</span>
-            <h1 className="hero-cine-title">
-              India&apos;s growth story, read with <span className="u">evidence</span>.
-            </h1>
-            <p className="hero-cine-sub">
-              The data, working papers and analysis behind the world&apos;s most-watched economy.
-              Sourced, dated, and open to everyone.
-            </p>
+        <HeroCarousel slides={heroSlides}>
+          <div className="hero-cine-inner">
+            <div className="hero-cine-copy hero-cine-entrance">
+              <Link href={`/publications/${feature.slug}`} className="hero-badge">
+                <span className="pulse" aria-hidden /> New: latest working paper
+              </Link>
+              <span className="hero-cine-eyebrow">Economic Advisory Council to the Prime Minister</span>
+              <h1 className="hero-cine-title">
+                India&apos;s growth story, read with <span className="u">evidence</span>.
+              </h1>
+              <p className="hero-cine-sub">
+                The data, working papers and analysis behind the world&apos;s most-watched economy.
+                Sourced, dated, and open to everyone.
+              </p>
+            </div>
           </div>
-        </div>
+        </HeroCarousel>
       </section>
 
       {/* ============ 2 · INDICATORS ============ */}

@@ -9,6 +9,8 @@ const paths: Record<string, string> = {
   arrowRight: "M5 12h14 M13 6l6 6-6 6",
   download: "M12 3v12 M7 10l5 5 5-5 M5 21h14",
   chevronDown: "M6 9l6 6 6-6",
+  chevronLeft: "M15 6l-6 6 6 6",
+  chevronRight: "M9 6l6 6-6 6",
   external: "M14 4h6v6 M20 4l-9 9 M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5",
   sun: "M12 7a5 5 0 1 0 0 10a5 5 0 0 0 0-10 M12 1v2 M12 21v2 M4.2 4.2l1.4 1.4 M18.4 18.4l1.4 1.4 M1 12h2 M21 12h2 M4.2 19.8l1.4-1.4 M18.4 5.6l1.4-1.4",
   moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
