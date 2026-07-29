@@ -34,9 +34,36 @@ export type Notice = {
   title: string;
   kind: NoticeKind;
   status: "open" | "soon" | "closed";
-  date: string; // illustrative for MVP
+  /** Display-only deadline text (e.g. "Closes soon"). Illustrative for MVP — NOT parseable. */
+  date: string;
+  /**
+   * Machine-readable publication date, ISO `YYYY-MM-DD`. Drives the Archive tab.
+   * Deliberately absent on the MVP rows below: the live site does not expose a
+   * reliable publication date for them and a guessed date would silently decide
+   * whether a notice is archived. Undated notices stay in Current. Real dates
+   * arrive with the CMS/migration — do not backfill by inference.
+   */
+  published?: string;
   href: string;
 };
+
+/** A notice older than this moves out of Current and into Archive. */
+export const ARCHIVE_AFTER_YEARS = 5;
+
+/**
+ * Note the cutoff is evaluated when this runs — under the static-export-first
+ * build (CLAUDE.md §5) that is build time, so a notice crossing the boundary
+ * moves at the next rebuild rather than the instant it ages out. Acceptable for
+ * a 5-year window; revisit if notices ever need a same-day boundary.
+ */
+export function isArchived(n: Notice, now: Date = new Date()): boolean {
+  if (!n.published) return false;
+  const published = Date.parse(n.published);
+  if (Number.isNaN(published)) return false;
+  const cutoff = new Date(now);
+  cutoff.setFullYear(cutoff.getFullYear() - ARCHIVE_AFTER_YEARS);
+  return published < cutoff.getTime();
+}
 export const notices: Notice[] = [
   {
     title: "Vacancy Circular — Consultants & Young Professionals",

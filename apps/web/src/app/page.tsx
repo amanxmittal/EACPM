@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
-import { CountUp } from "@/components/art/CountUp";
 import { CoverArt } from "@/components/ui/CoverArt";
+import { BrandIcon } from "@/components/ui/BrandIcon";
 import { HeroCarousel, type HeroSlide } from "@/components/art/HeroCarousel";
-import { AnimatedAreaChart } from "@/components/charts/AnimatedAreaChart";
 import { LineChart } from "@/components/charts/LineChart";
-import { Sparkline } from "@/components/charts/Sparkline";
 import { reports, readMinutes } from "@/lib/reports";
-import { indicators } from "@/content/indicators";
 import { articles, notices } from "@/content/media";
+import { channels } from "@/content/channels";
 
 // Rotating hero backdrop: India's economy across sectors. Real, CC BY-SA photographs,
 // self-hosted; credits in content/ATTRIBUTIONS.md and surfaced in the hero.
@@ -19,19 +17,21 @@ const heroSlides: HeroSlide[] = [
   { src: "/img/jnpt-port.jpg", theme: "Trade & exports", place: "Jawaharlal Nehru Port, Navi Mumbai", alt: "Gantry cranes loading containers onto a ship at Jawaharlal Nehru Port", credit: { name: "Ccmarathe", href: "https://commons.wikimedia.org/wiki/File:JNPT_Port_container_handling.jpg" } },
 ];
 
-// Illustrative GDP-growth shape for the indicators band (stylised, not official; flagged).
-const heroLabels = ["FY19", "FY20", "FY21", "FY22", "FY23", "FY24", "FY25", "FY26"];
-const heroPoints = [6.1, 6.4, 5.2, 7.8, 8.4, 7.4, 6.9, 6.5];
-
 // Illustrative UPI volume for the dashboard preview.
 const upiLabels = ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
 const upiPoints = [0.8, 1.3, 2.3, 4.5, 8.7, 12.5, 15.8, 18.4];
 
-const affiliations = [
+type Affiliation = { src: string; alt: string; href: string; wordmark?: { top: string; bottom: string } };
+const affiliations: Affiliation[] = [
   { src: "/brand/NITI-Aayog-logo.png", alt: "NITI Aayog", href: "https://www.niti.gov.in/" },
   { src: "/brand/PMINDIA.png", alt: "Prime Minister of India", href: "https://www.pmindia.gov.in/" },
   { src: "/brand/Cabinet-Secretariat.png", alt: "Cabinet Secretariat", href: "https://cabsec.gov.in/" },
   { src: "/brand/mygov-logo.png", alt: "MyGov", href: "https://www.mygov.in/" },
+  { src: "/brand/india-gov-in.svg", alt: "India.gov.in — National Portal of India", href: "https://www.india.gov.in/" },
+  // apps.gov.in's own header pairs this icon with real "Gov.in / AppStore" text, not a
+  // flattened logo image — matched here rather than baking the wordmark into a raster/
+  // vector export, which would break Hindi parity and screen-reader text.
+  { src: "/brand/apps-gov-in.svg", alt: "Gov.in AppStore", href: "https://apps.gov.in/", wordmark: { top: "Gov.in", bottom: "AppStore" } },
 ];
 
 export default function Home() {
@@ -70,50 +70,6 @@ export default function Home() {
             </div>
           </div>
         </HeroCarousel>
-      </section>
-
-      {/* ============ 2 · INDICATORS ============ */}
-      <section className="measured">
-        <div className="container">
-          <div className="measured-grid">
-            <div>
-              <span className="measured-kicker">Live indicators</span>
-              <h2>India, measured in the open</h2>
-              <p>
-                A standing read on the macro picture. Every figure links to its dataset with source
-                and period attached; contested historical estimates are labelled as estimates.
-              </p>
-              <span className="flag-inline"><span className="d" aria-hidden /> Illustrative, pending verification</span>
-              <Reveal className="measured-chart">
-                <div className="mc-head">
-                  <span className="mc-title">Real GDP growth</span>
-                  <span className="mc-sub">Annual, illustrative shape</span>
-                </div>
-                <AnimatedAreaChart
-                  labels={heroLabels}
-                  points={heroPoints}
-                  color="var(--cat-1)"
-                  height={190}
-                  yUnit="%"
-                  suffix="%"
-                  ariaSummary="Illustrative real GDP growth shape across recent financial years, staying between roughly 5 and 8.5 percent."
-                />
-              </Reveal>
-            </div>
-            <div className="ind-list">
-              {indicators.map((ind) => (
-                <div key={ind.key} className={`ind-row ${ind.direction ?? "flat"}`}>
-                  <div>
-                    <div className="name">{ind.label}</div>
-                    <div className="src">{ind.source} · {ind.period}</div>
-                  </div>
-                  <span className="spark"><Sparkline data={ind.spark} width={88} height={30} /></span>
-                  <div className="fig"><CountUp value={parseFloat(ind.value)} decimals={(ind.value.split(".")[1] || "").length} />{ind.unit && <span className="u">{ind.unit}</span>}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* ============ 3 · FEATURED STORY ============ */}
@@ -178,7 +134,7 @@ export default function Home() {
       <section className="pubs">
         <div className="container">
           <div className="pubs-head">
-            <h2>The latest thinking</h2>
+            <h2>Publications</h2>
             <Link href="/publications" className="view-all">All {reports.length} publications <Icon name="arrowRight" size={16} /></Link>
           </div>
           <div className="pubs-grid">
@@ -210,7 +166,7 @@ export default function Home() {
         <div className="container">
           <div className="dashp-grid">
             <div>
-              <h2>Data you can open, filter and download</h2>
+              <h2>Data & Dashboards</h2>
               <p>
                 For every data-heavy paper, an interactive dashboard. Filter across identifiers, read
                 the chart, then take the dataset with you.
@@ -327,7 +283,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ 9 · AFFILIATION + SOCIAL ============ */}
+      {/* ============ 9 · CONNECT (official channels) ============
+          Channel cards, deliberately not a social feed: we neither mirror posts
+          (nothing to fabricate, nothing to keep in sync) nor auto-load third-party
+          embeds, which CLAUDE.md §8 bars. Handles/URLs are pending confirmation —
+          see content/FACTCHECK_QUEUE.md FC-001. */}
+      <section className="connect bleed">
+        <div className="container">
+          <div className="connect-head">
+            <div>
+              <span className="connect-kicker">Follow the conversation</span>
+              <h2>Connect with EAC-PM</h2>
+              <p>
+                Research releases, policy announcements and data updates — published to the
+                Council&apos;s official channels as they go live.
+              </p>
+            </div>
+            <div className="connect-actions">
+              <Link href="/media" className="btn btn-outline">
+                <Icon name="rss" size={16} /> Newsroom
+              </Link>
+              <Link href="/contact" className="btn btn-primary">
+                <Icon name="mail" size={16} /> Contact the Council
+              </Link>
+            </div>
+          </div>
+
+          <ul className="connect-grid">
+            {channels.map((c) => (
+              <li key={c.key}>
+                <div className="connect-card">
+                  <div className="cc-top">
+                    <span className="cc-badge" aria-hidden>
+                      <BrandIcon name={c.key} size={20} />
+                    </span>
+                    <div className="cc-id">
+                      <span className="cc-name">{c.name}</span>
+                      <span className="cc-platform">{c.handle ?? `on ${c.platform}`}</span>
+                    </div>
+                  </div>
+                  <p className="cc-blurb">{c.blurb}</p>
+                  <div className="cc-foot">
+                    {c.href ? (
+                      <a href={c.href} target="_blank" rel="noopener noreferrer" className="cc-cta">
+                        {c.cta} <Icon name="external" size={14} />
+                      </a>
+                    ) : (
+                      <span className="flag-inline">
+                        <span className="d" aria-hidden /> Official handle pending confirmation
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ============ 10 · AFFILIATION ============ */}
       <section className="affil bleed">
         <div className="container">
           <div className="affil-lead">
@@ -335,16 +349,24 @@ export default function Home() {
           </div>
           <div className="affil-logos">
             {affiliations.map((a) => (
-              <a key={a.alt} href={a.href} target="_blank" rel="noopener noreferrer" aria-label={a.alt}>
+              <a
+                key={a.alt}
+                href={a.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={a.wordmark ? undefined : a.alt}
+                className={a.wordmark ? "affil-lockup" : undefined}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={a.src} alt={a.alt} loading="lazy" />
+                <img src={a.src} alt={a.wordmark ? "" : a.alt} aria-hidden={a.wordmark ? true : undefined} loading="lazy" />
+                {a.wordmark && (
+                  <span className="affil-lockup-text">
+                    <span className="t1">{a.wordmark.top}</span>
+                    <span className="t2">{a.wordmark.bottom}</span>
+                  </span>
+                )}
               </a>
             ))}
-          </div>
-          <div className="affil-social">
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="EAC-PM on X"><Icon name="spark" size={18} /></a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="EAC-PM on LinkedIn"><Icon name="users" size={18} /></a>
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="EAC-PM on Facebook"><Icon name="globe" size={18} /></a>
           </div>
         </div>
       </section>

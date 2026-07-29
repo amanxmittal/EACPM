@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { notices, type NoticeKind } from "@/content/media";
+import { notices, isArchived, ARCHIVE_AFTER_YEARS, type NoticeKind } from "@/content/media";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
@@ -17,8 +17,21 @@ export default async function NoticesPage({
   searchParams: Promise<{ [k: string]: string | string[] | undefined }>;
 }) {
   const sp = await searchParams;
-  const activeType = typeof sp.type === "string" ? sp.type : null;
-  const filtered = activeType ? notices.filter((n) => n.kind === activeType) : notices;
+  const isArchiveView = sp.view === "archive";
+  const activeType = !isArchiveView && typeof sp.type === "string" ? sp.type : null;
+
+  // Current and Archive are separate views, so an aged-out notice leaves the
+  // category tabs entirely rather than showing up under both.
+  const current = notices.filter((n) => !isArchived(n));
+  const archived = notices
+    .filter((n) => isArchived(n))
+    .sort((a, b) => (b.published ?? "").localeCompare(a.published ?? "")); // newest first
+
+  const filtered = isArchiveView
+    ? archived
+    : activeType
+      ? current.filter((n) => n.kind === activeType)
+      : current;
 
   return (
     <>
@@ -38,14 +51,17 @@ export default async function NoticesPage({
       <section className="section">
         <div className="container">
           <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "1rem" }}>
-            <SectionHeader eyebrow="All notices" title="Current notices" />
+            <SectionHeader
+              eyebrow={isArchiveView ? "Archived notices" : "All notices"}
+              title={isArchiveView ? "Archive" : "Current notices"}
+            />
             <a href="#" className="btn btn-outline" style={{ padding: "0.5rem 0.9rem" }}>
               <Icon name="rss" size={16} /> Subscribe
             </a>
           </div>
 
           <div className="filter-chips" role="group" aria-label="Filter by category" style={{ marginBottom: "1.2rem" }}>
-            <Link href="/notices" className={`chip${!activeType ? " is-active" : ""}`}>
+            <Link href="/notices" className={`chip${!activeType && !isArchiveView ? " is-active" : ""}`}>
               All
             </Link>
             {categories.map((c) => (
@@ -53,6 +69,14 @@ export default async function NoticesPage({
                 {c}
               </Link>
             ))}
+            {/* Archive sits last and is separated from the category chips — it
+                switches view rather than narrowing the current list. */}
+            <Link
+              href="/notices?view=archive"
+              className={`chip chip-trailing${isArchiveView ? " is-active" : ""}`}
+            >
+              Archive
+            </Link>
           </div>
 
           {filtered.length ? (
@@ -63,7 +87,11 @@ export default async function NoticesPage({
                   <div className="row-main" style={{ fontWeight: 600 }}>
                     {n.title}
                   </div>
-                  <span className="t-micro text-muted">{n.date}</span>
+                  <span className="t-micro text-muted">
+                    {isArchiveView && n.published
+                      ? new Date(n.published).toLocaleDateString("en-IN", { year: "numeric", month: "short" })
+                      : n.date}
+                  </span>
                   <span className={`status status-${n.status === "open" ? "open" : n.status === "soon" ? "soon" : "closed"}`}>
                     {n.status === "open" ? "Open" : n.status === "soon" ? "Opening soon" : "Closed"}
                   </span>
@@ -76,8 +104,14 @@ export default async function NoticesPage({
                 <Icon name="book" size={32} />
               </span>
               <div className="ux4g-empty-state-content">
-                <p className="t-h4">No notices in this category right now</p>
-                <p className="text-muted t-small">Tenders and circulars appear here when published.</p>
+                <p className="t-h4">
+                  {isArchiveView ? "Nothing archived yet" : "No notices in this category right now"}
+                </p>
+                <p className="text-muted t-small">
+                  {isArchiveView
+                    ? `Notices move here once they are more than ${ARCHIVE_AFTER_YEARS} years old.`
+                    : "Tenders and circulars appear here when published."}
+                </p>
               </div>
             </div>
           )}

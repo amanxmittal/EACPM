@@ -14,5 +14,17 @@ credits.
 | `jnpt-port.jpg` | Jawaharlal Nehru Port, container handling | Ccmarathe | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:JNPT_Port_container_handling.jpg) |
 
 Institutional logos under `apps/web/public/brand/` (NITI Aayog, PMINDIA, MyGov, Cabinet
-Secretariat, national emblem) are official Government of India marks used to indicate
-affiliation; they are not covered by the licenses above.
+Secretariat, India.gov.in, apps.gov.in, national emblem) are official Government of India
+marks used to indicate affiliation; they are not covered by the licenses above.
+
+`india-gov-in.svg` is sourced from the National Portal of India
+(`https://www.india.gov.in/image/static/npi_logo_Beta_Blue.svg`) and optimised with `svgo`
+(precision reduced; no visual change) to cut its footprint from ~225 KB to ~85 KB before
+self-hosting.
+
+`apps-gov-in.svg` is sourced from the Government App Store
+(`https://apps.gov.in/assets/svg/appstore-new.svg` — their own favicon asset; used
+unmodified, no optimisation needed at 3.3 KB). The "Gov.in / AppStore" wordmark shown next
+to it on the homepage is live text (`page.tsx`, `.affil-lockup`), matching how the source
+site itself pairs this icon with real HTML text in its header rather than a flattened logo
+image — kept as text here too, for Hindi parity and screen-reader access.

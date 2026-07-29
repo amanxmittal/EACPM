@@ -91,6 +91,11 @@
 /* ---- publications explorer ---- */
 .toolbar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.6rem; position: sticky; top: 66px; z-index: 20; background: var(--app-bg); padding-block: 0.8rem; }
 .filter-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+/* Pushed to the end of the row: a chip that switches view rather than filtering
+   the current one, so it should not read as another category. Falls back to a
+   plain trailing chip once the row wraps on narrow screens. */
+.chip-trailing { margin-left: auto; }
+@media (max-width: 640px) { .chip-trailing { margin-left: 0; } }
 .search-box { display: flex; align-items: center; gap: 0.5rem; border: 1px solid var(--app-border-strong); border-radius: var(--app-radius); padding: 0.5rem 0.8rem; background: var(--app-surface); min-width: 240px; color: var(--app-text-muted); }
 .search-box input { border: 0; background: transparent; flex: 1; outline: none; color: var(--app-text); }
 .results-count { color: var(--app-text-muted); font-size: 0.9rem; }

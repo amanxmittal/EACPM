@@ -55,7 +55,7 @@ export function HeroCarousel({
   return (
     <>
       <div
-        className="hero-stage"
+        className="hero-carousel-stage"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocusCapture={() => setPaused(true)}

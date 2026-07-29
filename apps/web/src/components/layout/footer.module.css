@@ -1,4 +1,13 @@
 .footer { background: var(--app-bg-subtle); border-top: 1px solid var(--app-border); margin-top: clamp(3rem, 6vw, 5rem); }
+/* .affil and .tint both paint a solid (non-dotted) --app-bg-subtle background —
+   .affil full-bleed on the homepage, .tint as the "previous chairpersons" band
+   on /about. Either sitting last before the footer means margin-top opens a gap
+   that still shows the page's dotted background underneath, reading as a stray
+   dotted stripe between two solid bands. Plain .section (no tint) shares that
+   dotted background itself, so the gap is invisible there and this margin
+   stays in effect for every other page. */
+main:has(> :global(.affil):last-child) + .footer,
+main:has(> :global(.tint):last-child) + .footer { margin-top: 0; }
 .top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr; gap: 2rem; padding-block: clamp(2.5rem, 5vw, 4rem); }
 @media (max-width: 900px) { .top { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .top { grid-template-columns: 1fr; } }
@@ -13,11 +22,6 @@
 .linkList { display: flex; flex-direction: column; gap: 0.55rem; }
 .linkList a { color: var(--app-text-muted); font-size: 0.9rem; }
 .linkList a:hover { color: var(--app-accent); }
-
-.partners { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; padding-block: 1.4rem; border-top: 1px solid var(--app-border); }
-.partnersLabel { font-size: var(--ux4g-fs-12, 0.75rem); color: var(--app-text-subtle); margin-right: 0.4rem; }
-.partnerChip { background: #fff; border: 1px solid var(--app-border); border-radius: var(--app-radius); padding: 0.35rem 0.65rem; display: grid; place-items: center; }
-.partnerChip img { height: 26px; width: auto; }
 
 .bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 1.5rem; padding-block: 1.2rem; border-top: 1px solid var(--app-border); font-size: 0.82rem; color: var(--app-text-muted); }
 .credit strong { color: var(--app-text); font-weight: 600; }

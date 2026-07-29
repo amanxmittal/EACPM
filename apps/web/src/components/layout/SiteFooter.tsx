@@ -14,13 +14,6 @@ const quick = [
   { label: "Notices", href: "/notices" },
   { label: "Contact Us", href: "/contact" },
 ];
-const partners = [
-  { src: "/brand/PMINDIA.png", alt: "PMINDIA" },
-  { src: "/brand/NITI-Aayog-logo.png", alt: "NITI Aayog" },
-  { src: "/brand/mygov-logo.png", alt: "MyGov" },
-  { src: "/brand/Cabinet-Secretariat.png", alt: "Cabinet Secretariat" },
-];
-
 /* eslint-disable @next/next/no-img-element */
 export function SiteFooter() {
   return (
@@ -75,15 +68,6 @@ export function SiteFooter() {
               ))}
             </div>
           </nav>
-        </div>
-
-        <div className={s.partners}>
-          <span className={s.partnersLabel}>In association with</span>
-          {partners.map((p) => (
-            <span className={s.partnerChip} key={p.alt}>
-              <img src={p.src} alt={p.alt} />
-            </span>
-          ))}
         </div>
 
         <div className={s.bottom}>

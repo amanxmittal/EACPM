@@ -15,19 +15,40 @@
    --------------------------------------------------------------------------- */
 .hero-cine { position: relative; padding-block: clamp(1.5rem, 4vw, 3rem); overflow: hidden; }
 
-.hero-stage { position: relative; display: flex; align-items: stretch; justify-content: center;
-  gap: clamp(10px, 1.6vw, 20px); max-width: 1360px; margin-inline: auto; padding-inline: max(1.5rem, 4vw); }
+/* Named .hero-carousel-stage, NOT .hero-stage — art.css already owns a plain
+   .hero-stage (position:relative; overflow:hidden) used as the grain-texture
+   positioning context on About/Publications/Data's page-hero bands. Reusing
+   that name here overrode it site-wide (this file loads after art.css) and
+   turned every inner-page hero into a 3-column grid it never asked for.
 
-.hero-peek { flex: 0 0 clamp(40px, 9vw, 132px); align-self: stretch; margin: 0; padding: 0; border: 0;
-  background: none; cursor: pointer; position: relative; border-radius: var(--app-radius-lg); overflow: hidden; }
-.hero-peek img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5) saturate(0.85); transition: filter 0.2s ease; }
-.hero-peek:hover img, .hero-peek:focus-visible img { filter: brightness(0.72) saturate(1); }
-.hero-peek::after { content: ""; position: absolute; inset: 0; }
-.hero-peek-prev::after { background: linear-gradient(90deg, var(--app-bg-subtle), transparent 65%); }
-.hero-peek-next::after { background: linear-gradient(270deg, var(--app-bg-subtle), transparent 65%); }
+   Centred flex row, NOT a 3-column grid. The grid version floored each side
+   track at the peek's fixed width (`1fr` is `minmax(auto, 1fr)`, and `auto`
+   won't shrink below the item), so between ~900px and ~1500px the tracks
+   refused to shrink, the row overflowed its container, and — because a grid
+   overflows rightward only — the main card was pushed visibly off-centre with
+   the right peek clipped off-screen. Centred flex overflows symmetrically
+   instead, so the main card stays centred at every width and the peeks are
+   trimmed evenly by .hero-cine's overflow:hidden — which is how NeGD's own
+   carousel behaves, its side banners running off both screen edges. */
+.hero-carousel-stage { position: relative; display: flex; justify-content: center;
+  align-items: stretch; width: 100%; gap: clamp(10px, 1.4vw, 22px); }
+
+/* Smaller than the main slide and separated by the row's gap, matching NeGD's
+   side banners — distinct smaller tiles with a visible gutter, not a photo
+   bleeding into the main card. Kept in full colour (no grayscale/brightness
+   mute) for the same reason: NeGD's peeks read as real, undimmed banner crops.
+   flex-shrink:0 keeps them from collapsing as the row overflows. */
+.hero-peek { flex: 0 0 clamp(90px, 11vw, 200px); margin: 0; padding: 0; border: 0;
+  background: none; cursor: pointer; position: relative; overflow: hidden;
+  border-radius: var(--app-radius-xl); box-shadow: var(--app-shadow-2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.hero-peek:hover, .hero-peek:focus-visible { transform: scale(1.03); box-shadow: var(--app-shadow-nav); }
+.hero-peek img { width: 100%; height: 100%; object-fit: cover; display: block; }
 @media (max-width: 900px) { .hero-peek { display: none; } }
 
-.hero-card { position: relative; flex: 1 1 auto; max-width: 1040px; min-height: min(56vh, 520px);
+/* flex-basis pins the main slide to the site's container width so it still
+   "covers the main container"; shrink:0 stops the peeks from squeezing it. */
+.hero-card { flex: 0 0 min(var(--app-maxw, 1200px), 100%); position: relative; min-height: min(56vh, 520px);
   display: flex; align-items: center; overflow: hidden; isolation: isolate;
   border-radius: var(--app-radius-2xl); box-shadow: var(--app-shadow-float); }
 
@@ -54,7 +75,12 @@
 .hero-credit { position: absolute; right: max(1.25rem, 3vw); top: 1rem; z-index: 3; font-size: 0.64rem; color: rgba(255,255,255,0.5); }
 .hero-credit:hover { color: rgba(255,255,255,0.85); text-decoration: underline; }
 
-.hero-cine-inner { position: relative; z-index: 2; width: 100%; padding: clamp(1.75rem, 5vw, 3.25rem); }
+/* The extra bottom padding reserves room for .hero-caption, which is absolutely
+   positioned against the card's bottom edge while this copy sits in normal flow —
+   without it the subtitle's last line collides with the theme/place caption once
+   the copy grows tall relative to the card (reproduced at 1000×800). */
+.hero-cine-inner { position: relative; z-index: 2; width: 100%;
+  padding: clamp(1.75rem, 5vw, 3.25rem); padding-bottom: clamp(4.5rem, 6vw, 5.5rem); }
 .hero-cine-copy { max-width: 41rem; }
 .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(20,16,38,0.5); border: 1px solid rgba(255,255,255,0.26); color: #fff; border-radius: 999px; padding: 0.4rem 0.9rem 0.4rem 0.72rem; font-size: 0.76rem; font-weight: 600; backdrop-filter: blur(5px); }
 .hero-badge .pulse { width: 8px; height: 8px; border-radius: 999px; background: #4ade80; position: relative; flex: none; }
@@ -94,32 +120,6 @@
 
 .flag-inline { display: inline-flex; align-items: center; gap: 5px; font-size: 0.68rem; font-weight: 700; color: var(--app-gold-strong); background: var(--app-gold-soft); border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
 .flag-inline .d { width: 6px; height: 6px; border-radius: 999px; background: var(--app-gold); }
-
-/* ---------------------------------------------------------------------------
-   2 · INDICATORS — a measured band. One large figure, a quiet list beside it.
-   --------------------------------------------------------------------------- */
-.measured { padding-block: clamp(2.5rem, 5vw, 4rem); border-block: 1px solid var(--app-border); }
-.measured-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-@media (max-width: 900px) { .measured-grid { grid-template-columns: 1fr; gap: 2rem; } }
-.measured-kicker { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--app-accent); }
-.measured h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.7rem); letter-spacing: -0.025em; line-height: 1.05; margin-top: 0.7rem; max-width: 16ch; }
-.measured p { color: var(--app-text-muted); margin-top: 0.9rem; max-width: 42ch; }
-.measured .flag-inline { margin-top: 1.1rem; }
-.measured-chart { margin-top: 1.6rem; background: var(--app-surface); border: 1px solid var(--app-border); border-radius: var(--app-radius-xl); padding: 1rem 1.1rem 0.6rem; box-shadow: var(--app-shadow-1); }
-.mc-head { display: flex; align-items: baseline; gap: 0.6rem; }
-.mc-title { font-weight: 600; font-size: 0.92rem; }
-.mc-sub { font-size: 0.74rem; color: var(--app-text-subtle); }
-
-.ind-list { display: flex; flex-direction: column; }
-.ind-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--app-border); }
-.ind-row:first-child { border-top: 0; }
-.ind-row .name { font-weight: 600; }
-.ind-row .src { font-size: 0.74rem; color: var(--app-text-subtle); margin-top: 2px; }
-.ind-row .spark { color: var(--app-accent); }
-.ind-row.up .spark { color: var(--tri-green); }
-.ind-row.down .spark { color: var(--app-accent); }
-.ind-row .fig { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; text-align: right; min-width: 4.5rem; }
-.ind-row .fig .u { font-size: 0.72rem; font-weight: 600; color: var(--app-text-muted); margin-left: 2px; }
 
 /* ---------------------------------------------------------------------------
    3 · FEATURED STORY — a magazine lead. Oversized cover, big headline.
@@ -253,16 +253,80 @@
 /* ---------------------------------------------------------------------------
    10 · INSTITUTIONAL CLOSE — affiliation logos + social.
    --------------------------------------------------------------------------- */
-.affil { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--app-border); background: var(--app-bg-subtle); }
+.affil { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--app-border); background: var(--app-bg-subtle); background-image: none; }
 .affil-lead { text-align: center; margin-bottom: 1.8rem; }
 .affil-lead .k { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--app-text-subtle); }
 .affil-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(1.5rem, 5vw, 3.5rem); }
 .affil-logos img { height: 46px; width: auto; opacity: 0.85; filter: grayscale(0.2); transition: opacity .2s ease; }
 .affil-logos a:hover img { opacity: 1; }
 :root[data-theme="dark"] .affil-logos img { filter: grayscale(0.1) brightness(0) invert(1); opacity: 0.72; }
-.affil-social { display: flex; align-items: center; justify-content: center; gap: 0.7rem; margin-top: 2rem; }
-.affil-social a { width: 42px; height: 42px; border-radius: var(--app-radius); display: grid; place-items: center; border: 1px solid var(--app-border-strong); color: var(--app-text-muted); transition: all .15s ease; }
-.affil-social a:hover { border-color: var(--app-accent); color: var(--app-accent); transform: translateY(-2px); }
+
+/* apps.gov.in's mark is an icon + real wordmark ("Gov.in" / "AppStore"), not a single
+   flattened logo file; the text sits on our own semantic tokens rather than a guessed
+   brand-blue hex, since nothing here specifies apps.gov.in's exact colour and inventing
+   one would violate the no-rogue-hex rule. */
+.affil-lockup { display: inline-flex; align-items: center; gap: 0.55rem; }
+.affil-lockup-text { display: flex; flex-direction: column; line-height: 1.2; text-align: left; }
+/* This icon, unlike every other mark in the row, ships with an opaque white card
+   background baked into the vendor's own asset (it's their favicon). The dark-theme
+   filter above works by inverting a transparent-background mark to a white silhouette —
+   with no transparency to trace a shape through, an opaque icon just turns into a single
+   blank white block. Rather than edit the vendor's asset to strip that backing, this
+   mark is kept in its native colours (its own white card already gives it light-mode
+   contrast) instead of being put through the invert. */
+.affil-lockup img { opacity: 1; }
+:root[data-theme="dark"] .affil-lockup img { filter: none; opacity: 1; }
+.affil-lockup-text .t1 { font-weight: 700; font-size: 1rem; color: var(--app-text); }
+.affil-lockup-text .t2 { font-size: 0.76rem; font-weight: 500; color: var(--app-text-muted); }
+.affil-lockup:hover .affil-lockup-text .t1 { color: var(--app-accent); }
+
+/* ---------------------------------------------------------------------------
+   11 · CONNECT — official channels, as cards. An inked band to close the page
+   before the footer. Brand marks carry recognition; colour stays on our own
+   accent tokens rather than each platform's brand hex.
+   --------------------------------------------------------------------------- */
+/* Deliberately the raw primary-950 scale token, NOT the semantic --app-ink:
+   --app-ink flips to a pale lavender under [data-theme="dark"], which would
+   strand this band's white type on a light background. Same approach as
+   .hero-scrim above — an always-dark surface reads from the scale directly. */
+.connect { padding-block: clamp(3rem, 6vw, 5rem); background: var(--ux4g-color-primary-950, #1a0e3d); color: #fff; }
+.connect-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem 2rem; }
+.connect-kicker { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #cdbcff; }
+.connect h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 1.2rem + 2.2vw, 2.7rem); letter-spacing: -0.028em; line-height: 1.05; margin-top: 0.7rem; color: #fff; }
+.connect-head p { color: rgba(255,255,255,0.76); margin-top: 0.9rem; max-width: 52ch; line-height: 1.6; }
+.connect-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.connect-actions .btn-outline { border-color: rgba(255,255,255,0.34); color: #fff; }
+.connect-actions .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); color: #fff; }
+
+.connect-grid { list-style: none; margin: clamp(2rem, 4vw, 3rem) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
+@media (max-width: 900px) { .connect-grid { grid-template-columns: 1fr; } }
+
+.connect-card { height: 100%; display: flex; flex-direction: column;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--app-radius-xl); padding: clamp(1.2rem, 2.2vw, 1.6rem);
+  transition: border-color .18s ease, background .18s ease, transform .18s ease; }
+.connect-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.28); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .connect-card, .connect-card:hover { transform: none; } }
+
+.cc-top { display: flex; align-items: center; gap: 0.75rem; }
+.cc-badge { width: 40px; height: 40px; flex: none; border-radius: 999px; display: grid; place-items: center;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: #fff; }
+.cc-id { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.cc-name { font-weight: 600; color: #fff; }
+.cc-platform { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+.cc-blurb { margin-top: 1rem; color: rgba(255,255,255,0.78); font-size: 0.92rem; line-height: 1.6; flex: 1 1 auto; }
+.cc-foot { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.12); }
+.cc-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.9rem; color: #cdbcff; }
+.cc-cta:hover { color: #fff; text-decoration: underline; }
+/* The band is inked in both themes, so the status chip needs the on-dark gold
+   pairing the dark theme already defines — the light-theme default (#764a00 on a
+   pale wash) is illegible here. Same tokens, not new values. */
+.connect .flag-inline {
+  --app-gold: var(--ux4g-color-secondary-400, #e89c30);
+  --app-gold-strong: var(--ux4g-color-secondary-300, #ffbe6f);
+  --app-gold-soft: color-mix(in srgb, var(--ux4g-color-secondary-500, #c47d00) 20%, transparent);
+}
 
 /* shared: quiet inline "view all" link used across sections */
 .view-all { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.9rem; color: var(--app-accent); white-space: nowrap; }
