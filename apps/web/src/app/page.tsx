@@ -6,7 +6,7 @@ import { BrandIcon } from "@/components/ui/BrandIcon";
 import { HeroCarousel, type HeroSlide } from "@/components/art/HeroCarousel";
 import { LineChart } from "@/components/charts/LineChart";
 import { reports, readMinutes } from "@/lib/reports";
-import { articles, notices } from "@/content/media";
+import { articles, notices, noticeStatusClass, noticeStatusLabelShort } from "@/content/media";
 import { channels } from "@/content/channels";
 
 // Rotating hero backdrop: India's economy across sectors. Real, CC BY-SA photographs,
@@ -93,10 +93,10 @@ export default function Home() {
                 <div><span className="k">Series</span><span className="v">EAC-PM</span></div>
               </div>
               <div className="story-actions">
-                <Link href={`/publications/${feature.slug}`} className="btn btn-primary btn-lg">
+                <Link href={`/publications/${feature.slug}`} className="ux4g-btn-primary ux4g-btn-lg">
                   Read the paper <Icon name="arrowRight" size={18} />
                 </Link>
-                <a href={feature.pdfUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-lg">
+                <a href={feature.pdfUrl} target="_blank" rel="noopener noreferrer" className="ux4g-btn-outline-primary ux4g-btn-lg">
                   <Icon name="download" size={18} /> PDF
                 </a>
               </div>
@@ -120,8 +120,8 @@ export default function Home() {
             reach a fifth of humanity. The Council&apos;s work is to bring evidence to those choices.
           </p>
           <div className="actions">
-            <Link href="/publications" className="btn btn-light btn-lg">Read the analysis</Link>
-            <Link href="/about" className="btn btn-ondark btn-lg">About the Council</Link>
+            <Link href="/publications" className="ux4g-btn ux4g-btn-lg btn-light">Read the analysis</Link>
+            <Link href="/about" className="ux4g-btn ux4g-btn-lg btn-ondark">About the Council</Link>
           </div>
         </div>
         <span className="img-credit">
@@ -177,7 +177,7 @@ export default function Home() {
                 <span className="point"><span className="tick"><Icon name="check" size={14} /></span> CSV and XLSX downloads, no login</span>
               </div>
               <div style={{ marginTop: "1.6rem" }}>
-                <Link href="/data" className="btn btn-primary btn-lg">Open the dashboards <Icon name="arrowRight" size={18} /></Link>
+                <Link href="/data" className="ux4g-btn-primary ux4g-btn-lg">Open the dashboards <Icon name="arrowRight" size={18} /></Link>
               </div>
             </div>
             <div className="dashp-preview">
@@ -255,9 +255,7 @@ export default function Home() {
                       <div className="nt">{n.title}</div>
                       <div className="nk">{n.kind} · {n.date}</div>
                     </div>
-                    <span className={`status status-${n.status === "open" ? "open" : n.status === "soon" ? "soon" : "closed"}`}>
-                      {n.status === "open" ? "Open" : n.status === "soon" ? "Soon" : "Closed"}
-                    </span>
+                    <span className={noticeStatusClass[n.status]}>{noticeStatusLabelShort[n.status]}</span>
                   </a>
                 ))}
               </div>
@@ -300,10 +298,10 @@ export default function Home() {
               </p>
             </div>
             <div className="connect-actions">
-              <Link href="/media" className="btn btn-outline">
+              <Link href="/media" className="ux4g-btn-outline-primary ux4g-btn-md">
                 <Icon name="rss" size={16} /> Newsroom
               </Link>
-              <Link href="/contact" className="btn btn-primary">
+              <Link href="/contact" className="ux4g-btn-primary ux4g-btn-md">
                 <Icon name="mail" size={16} /> Contact the Council
               </Link>
             </div>

@@ -47,6 +47,14 @@ const FAMILIES = [
   "ux4g-empty-state",
   // primitives
   "ux4g-divider",
+  "ux4g-tag",
+  "ux4g-search",
+  // buttons — see DESIGN.md §9.2 for the pinned weight
+  "ux4g-btn",
+  "ux4g-icon-btn",
+  // chips — filter/choice; pill radius pinned in globals.css
+  "ux4g-choice-chip",
+  "ux4g-filter-chip",
 ];
 
 const wanted = (token) =>

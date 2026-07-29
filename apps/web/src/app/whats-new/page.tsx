@@ -62,7 +62,7 @@ export default async function WhatsNewPage({
             curation, with an RSS/Atom feed once the backend lands.
           </p>
           <p style={{ marginTop: "1rem" }}>
-            <span className="flag">Illustrative ordering — real timestamps arrive with the CMS</span>
+            <span className="flag ux4g-tag-tonal-warning ux4g-tag-s">Illustrative ordering — real timestamps arrive with the CMS</span>
           </p>
         </div>
       </section>
@@ -71,16 +71,16 @@ export default async function WhatsNewPage({
         <div className="container">
           <div className="cluster" style={{ justifyContent: "space-between", marginBottom: "1rem" }}>
             <div className="filter-chips" role="group" aria-label="Filter by type">
-              <Link href="/whats-new" className={`chip${!activeType ? " is-active" : ""}`} aria-current={!activeType ? "true" : undefined}>
+              <Link href="/whats-new" className={`ux4g-choice-chip-md${!activeType ? " active" : ""}`} aria-current={!activeType ? "true" : undefined}>
                 All
               </Link>
               {kinds.map((k) => (
-                <Link key={k} href={`/whats-new?type=${k}`} className={`chip${activeType === k ? " is-active" : ""}`} aria-current={activeType === k ? "true" : undefined}>
+                <Link key={k} href={`/whats-new?type=${k}`} className={`ux4g-choice-chip-md${activeType === k ? " active" : ""}`} aria-current={activeType === k ? "true" : undefined}>
                   {k}
                 </Link>
               ))}
             </div>
-            <a href="#" className="btn btn-outline" style={{ padding: "0.5rem 0.9rem" }}>
+            <a href="#" className="ux4g-btn-outline-primary ux4g-btn-sm">
               <Icon name="rss" size={16} /> RSS
             </a>
           </div>

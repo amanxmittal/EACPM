@@ -85,7 +85,7 @@ export default function ContactPage() {
                     <textarea className="ux4g-textarea-input" id="c-msg" name="message" rows={4} />
                   </div>
                 </div>
-                <button type="button" className="btn btn-primary" style={{ width: "100%" }}>
+                <button type="button" className="ux4g-btn-primary ux4g-btn-md" style={{ width: "100%" }}>
                   Send feedback
                 </button>
                 <p className="t-micro text-muted" style={{ marginTop: "0.6rem" }}>

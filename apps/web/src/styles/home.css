@@ -69,7 +69,7 @@
 @media (max-width: 640px) { .hero-scrim { background: linear-gradient(0deg, rgba(10,8,20,0.92), rgba(10,8,20,0.55)); } }
 
 .hero-caption { position: absolute; left: max(1.25rem, 3vw); bottom: 1.2rem; z-index: 3; display: flex; flex-direction: column; gap: 1px; }
-.hero-caption .hc-theme { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #ffd39a; }
+.hero-caption .hc-theme { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ux4g-color-secondary-200, #ffd9af); }
 .hero-caption .hc-place { font-size: 0.76rem; color: rgba(255,255,255,0.72); }
 
 .hero-credit { position: absolute; right: max(1.25rem, 3vw); top: 1rem; z-index: 3; font-size: 0.64rem; color: rgba(255,255,255,0.5); }
@@ -82,15 +82,15 @@
 .hero-cine-inner { position: relative; z-index: 2; width: 100%;
   padding: clamp(1.75rem, 5vw, 3.25rem); padding-bottom: clamp(4.5rem, 6vw, 5.5rem); }
 .hero-cine-copy { max-width: 41rem; }
-.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(20,16,38,0.5); border: 1px solid rgba(255,255,255,0.26); color: #fff; border-radius: 999px; padding: 0.4rem 0.9rem 0.4rem 0.72rem; font-size: 0.76rem; font-weight: 600; backdrop-filter: blur(5px); }
-.hero-badge .pulse { width: 8px; height: 8px; border-radius: 999px; background: #4ade80; position: relative; flex: none; }
-.hero-badge .pulse::after { content: ""; position: absolute; inset: -4px; border-radius: 999px; border: 1px solid #4ade80; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(20,16,38,0.5); border: 1px solid rgba(255,255,255,0.26); color: var(--app-on-dark); border-radius: 999px; padding: 0.4rem 0.9rem 0.4rem 0.72rem; font-size: 0.76rem; font-weight: 600; backdrop-filter: blur(5px); }
+.hero-badge .pulse { width: 8px; height: 8px; border-radius: 999px; background: var(--ux4g-color-green-400, #44c265); position: relative; flex: none; }
+.hero-badge .pulse::after { content: ""; position: absolute; inset: -4px; border-radius: 999px; border: 1px solid var(--ux4g-color-green-400, #44c265); }
 @media (prefers-reduced-motion: no-preference) { .hero-badge .pulse::after { animation: hero-pulse 1.9s ease-out infinite; } }
 @keyframes hero-pulse { 0% { transform: scale(0.55); opacity: 0.9; } 100% { transform: scale(1.8); opacity: 0; } }
 
 .hero-cine-eyebrow { display: block; margin-top: 1.2rem; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.82); }
-.hero-cine-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.6rem, 1rem + 6.4vw, 5rem); line-height: 0.98; letter-spacing: -0.035em; color: #fff; margin-top: 0.55rem; max-width: 15ch; text-wrap: balance; }
-.hero-cine-title .u { color: #cdbcff; }
+.hero-cine-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.6rem, 1rem + 6.4vw, 5rem); line-height: 0.98; letter-spacing: -0.035em; color: var(--app-on-dark); margin-top: 0.55rem; max-width: 15ch; text-wrap: balance; }
+.hero-cine-title .u { color: var(--app-on-dark-accent); }
 .hero-cine-sub { font-size: clamp(1.02rem, 1rem + 0.4vw, 1.25rem); line-height: 1.55; color: rgba(255,255,255,0.84); max-width: 44ch; margin-top: 1.15rem; }
 
 .hero-cine-entrance > * { opacity: 0; transform: translateY(16px); animation: hero-rise 0.7s cubic-bezier(.2,.7,.2,1) forwards; }
@@ -152,14 +152,11 @@
   linear-gradient(90deg, rgba(11,11,18,0.94) 0%, rgba(11,11,18,0.8) 42%, rgba(11,11,18,0.5) 100%),
   linear-gradient(0deg, color-mix(in srgb, var(--app-accent) 42%, transparent), transparent 55%); }
 .banner .inner { position: relative; z-index: 2; padding-block: clamp(4rem, 12vw, 8.5rem); }
-.banner-kicker { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #d9d2ff; }
-.banner h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 1.1rem + 4.4vw, 4.2rem); line-height: 1; letter-spacing: -0.035em; color: #fff; margin-top: 1rem; max-width: 18ch; text-wrap: balance; }
-.banner p { color: #cfcada; font-size: clamp(1rem, 1rem + 0.4vw, 1.2rem); line-height: 1.6; margin-top: 1.2rem; max-width: 50ch; }
+.banner-kicker { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ux4g-color-primary-100, #dcd4ff); }
+.banner h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 1.1rem + 4.4vw, 4.2rem); line-height: 1; letter-spacing: -0.035em; color: var(--app-on-dark); margin-top: 1rem; max-width: 18ch; text-wrap: balance; }
+.banner p { color: var(--app-on-dark-muted); font-size: clamp(1rem, 1rem + 0.4vw, 1.2rem); line-height: 1.6; margin-top: 1.2rem; max-width: 50ch; }
 .banner .actions { margin-top: 1.9rem; display: flex; gap: 0.7rem; flex-wrap: wrap; }
-.banner .btn-light { background: #fff; color: var(--ux4g-color-primary-800, #301c7d); }
-.banner .btn-light:hover { background: #efeaff; }
-.banner .btn-ondark { border: 1px solid rgba(255,255,255,0.4); color: #fff; }
-.banner .btn-ondark:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+/* .btn-light / .btn-ondark now live in globals.css beside the UX4G button rules. */
 .img-credit { position: absolute; right: 12px; bottom: 10px; z-index: 3; font-size: 0.64rem; color: rgba(255,255,255,0.55); }
 .img-credit a { text-decoration: underline; }
 
@@ -210,7 +207,7 @@
 .inst-photo { position: relative; border-radius: var(--app-radius-2xl); overflow: hidden; border: 1px solid var(--app-border); box-shadow: var(--app-shadow-2); aspect-ratio: 4 / 3; }
 .inst-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .inst-photo:hover img { transform: scale(1.045); }
-.inst-photo .cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 1.4rem 1.2rem 0.9rem; background: linear-gradient(0deg, rgba(11,11,18,0.7), transparent); color: #fff; font-size: 0.8rem; }
+.inst-photo .cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 1.4rem 1.2rem 0.9rem; background: linear-gradient(0deg, rgba(11,11,18,0.7), transparent); color: var(--app-on-dark); font-size: 0.8rem; }
 .inst-kicker { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--app-accent); }
 .inst h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 1.2rem + 2.2vw, 2.8rem); letter-spacing: -0.028em; line-height: 1.05; margin-top: 0.7rem; max-width: 18ch; }
 .inst p { color: var(--app-text-muted); margin-top: 1rem; max-width: 48ch; line-height: 1.65; }
@@ -289,14 +286,16 @@
    --app-ink flips to a pale lavender under [data-theme="dark"], which would
    strand this band's white type on a light background. Same approach as
    .hero-scrim above — an always-dark surface reads from the scale directly. */
-.connect { padding-block: clamp(3rem, 6vw, 5rem); background: var(--ux4g-color-primary-950, #1a0e3d); color: #fff; }
+.connect { padding-block: clamp(3rem, 6vw, 5rem); background: var(--ux4g-color-primary-950, #1a0e3d); color: var(--app-on-dark); }
 .connect-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem 2rem; }
-.connect-kicker { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #cdbcff; }
-.connect h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 1.2rem + 2.2vw, 2.7rem); letter-spacing: -0.028em; line-height: 1.05; margin-top: 0.7rem; color: #fff; }
+.connect-kicker { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--app-on-dark-accent); }
+.connect h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 1.2rem + 2.2vw, 2.7rem); letter-spacing: -0.028em; line-height: 1.05; margin-top: 0.7rem; color: var(--app-on-dark); }
 .connect-head p { color: rgba(255,255,255,0.76); margin-top: 0.9rem; max-width: 52ch; line-height: 1.6; }
 .connect-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-.connect-actions .btn-outline { border-color: rgba(255,255,255,0.34); color: #fff; }
-.connect-actions .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); color: #fff; }
+/* The connect band is dark in both themes, so its outline button needs the
+   on-dark treatment rather than the default border/ink. */
+.connect-actions .ux4g-btn-outline-primary { border-color: color-mix(in srgb, var(--app-on-dark) 34%, transparent); color: var(--app-on-dark); }
+.connect-actions .ux4g-btn-outline-primary:hover { border-color: var(--app-on-dark); background: color-mix(in srgb, var(--app-on-dark) 10%, transparent); color: var(--app-on-dark); }
 
 .connect-grid { list-style: none; margin: clamp(2rem, 4vw, 3rem) 0 0; padding: 0;
   display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
@@ -311,14 +310,14 @@
 
 .cc-top { display: flex; align-items: center; gap: 0.75rem; }
 .cc-badge { width: 40px; height: 40px; flex: none; border-radius: 999px; display: grid; place-items: center;
-  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: #fff; }
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: var(--app-on-dark); }
 .cc-id { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.cc-name { font-weight: 600; color: #fff; }
+.cc-name { font-weight: 600; color: var(--app-on-dark); }
 .cc-platform { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
 .cc-blurb { margin-top: 1rem; color: rgba(255,255,255,0.78); font-size: 0.92rem; line-height: 1.6; flex: 1 1 auto; }
 .cc-foot { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.12); }
-.cc-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.9rem; color: #cdbcff; }
-.cc-cta:hover { color: #fff; text-decoration: underline; }
+.cc-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.9rem; color: var(--app-on-dark-accent); }
+.cc-cta:hover { color: var(--app-on-dark); text-decoration: underline; }
 /* The band is inked in both themes, so the status chip needs the on-dark gold
    pairing the dark theme already defines — the light-theme default (#764a00 on a
    pale wash) is illegible here. Same tokens, not new values. */

@@ -1,18 +1,37 @@
 # DESIGN.md — Design Tokens, Type, Elevation & Motion (resolved from UX4G)
 
-> **Single source of truth for visual decisions.** All values below are **resolved from the real package `ux4g-web-components@1.0.0`** (`styles/ux4g.css`), inspected **2026-07-24**. Nothing here is invented. Values marked `⚠️ verify` were not captured in the first pass and must be confirmed from the installed bundle during M1 (`npm run tokens:extract`).
+> **Single source of truth for visual decisions.** All values below are **resolved from the real package `ux4g-web-components@1.0.2`** (`styles/ux4g.css`), re-verified **2026-07-28**. Nothing here is invented.
 >
-> **Rule:** consume tokens by name. Never write a raw hex or px value that UX4G already exposes. New primitives (charts, timeline) must be built **on these tokens** and documented in §9.
+> **Rule:** consume tokens by name. Never write a raw hex or px value that UX4G already exposes. Anything UX4G does not provide is an **extension** and must be declared in §9 under the policy in §0.1.
 
 ---
 
 ## 0. How the system is consumed
 
-- **Import:** `import "ux4g-web-components/styles.css"` → apply `.ux4g-*` classes to markup.
-- **Token prefix:** `--ux4g-*` CSS custom properties. **Class naming:** `.ux4g-<component>` (e.g. `.ux4g-btn`, `.ux4g-card`, `.ux4g-navbar`, `.ux4g-table`, `.ux4g-breadcrumb`).
-- **Theme switch:** `[data-theme="dark"]` on a root element (see §7).
-- **Interactivity:** optional `ux4g-web-components/runtime/bootstrap` JS for behaviours (dropdown, modal, accordion…). Prefer progressive enhancement.
-- ⚠️ **Do not ship `ux4g.css` raw** — it is **7.6MB** with fonts base64-embedded. See §10.
+- **Tokens:** `src/styles/ux4g-tokens.css` — the `--ux4g-*` layer lifted from the bundle (758 declarations incl. the 212-token dark block). Loaded first.
+- **Components:** `src/styles/ux4g-components.css` — **generated** by `scripts/extract-ux4g-components.mjs`, which lifts only the families we use out of `styles/ux4g.css`. We do **not** `import "ux4g-web-components/styles.css"` (see §10).
+- **Class naming:** `.ux4g-<component>` on markup, exactly as the vendor defines it — **verified against the CSS, never against the README** (see §12).
+- **Theme switch:** `[data-theme="dark"]` on `:root` (see §7).
+- **Interactivity:** the vendor runtime is **not used** — `initRuntime()` injects inline `<script>` tags, which violates the CSP rule in CLAUDE.md §10. Interactive behaviour is ours, written against the vendor's documented class names and ARIA contract.
+
+### 0.1 Governing policy — UX4G first, style guide sanctioned
+
+UX4G Design System 3.0 is the **mandatory** visual vocabulary. Our own style guide exists on top of it and is legitimate — but only under these rules, in this order:
+
+1. **If UX4G provides it, use it.** Adopt the vendor class; do not re-implement.
+2. **If UX4G provides it but it fails a project gate** — accessibility (CLAUDE.md §2.3), performance, or bilingual parity — adopt the class and correct it via the **token bridge** (§0.2), never by forking component CSS. Record the defect in §12.
+3. **If UX4G does not provide it, or its version would break an established product decision**, build it as an **extension**: consume `--ux4g-*` tokens for every value, name it in our own namespace (`--app-*`, unprefixed classes), and declare it in §9 with the reason it isn't the vendor's.
+
+An extension is **not** non-compliance. A raw hex, a magic px, or a silent fork **is**. The audit question is never "is this class `ux4g-`-prefixed?" but "does every value trace to a `--ux4g-*` token, and is the divergence declared?"
+
+### 0.2 The token bridge
+
+Adopted components read UX4G's *semantic* tokens, whose stock values are flat greys. Our design tints neutrals toward primary, so unbridged components read grey next to the rest of the site. `globals.css` re-points those semantic tokens at our `--app-*` layer.
+
+Two rules, both load-bearing:
+
+- The bridge selector is **`:root, :root[data-theme="dark"]`**. `ux4g-tokens.css` redefines the same tokens inside `:root[data-theme="dark"]` (specificity 0,2,0); a plain `:root` bridge is silently outranked and dark mode falls back to stock grey.
+- **Never bridge `--ux4g-radius-*`, `--ux4g-shadow-l*`, or the font families.** `--app-radius`, `--app-shadow-*` and `--font-sans` are already defined *from* those tokens — re-pointing them creates a reference cycle.
 
 ---
 
@@ -117,7 +136,56 @@ UX4G ships **its own icon fonts** in the bundle: `UX4G Material Icons` (+ `Outli
 
 ---
 
-## 9. Extensions (built ON UX4G tokens — documented, not ad-hoc)
+## 9. Adoption ledger & extensions
+
+### 9.1 Adopted from UX4G
+
+Families lifted by `scripts/extract-ux4g-components.mjs` (add to `FAMILIES` and re-run to adopt more):
+
+| Family | Classes | Wired into |
+|---|---|---|
+| Input / textarea | `ux4g-input`, `-input-input`, `ux4g-textarea`, `-textarea-input` | Contact form |
+| Checkbox / radio / switch | `ux4g-checkbox`, `ux4g-radio`, `ux4g-switch` (+ states, sizes) | *extracted, no consumer yet* |
+| Table | `ux4g-table` (+ zebra, dividers, responsive) | *extracted, no consumer yet* |
+| Pagination | `ux4g-pagination`, `ux4g-page-number`, `ux4g-page-nav` | Publications (12/page) |
+| Alert | `ux4g-alert`, `ux4g-context-alert` | *extracted, no consumer yet* |
+| Empty state | `ux4g-empty-state` (+ icon, content) | Publications, Notices, What's New |
+| Divider | `ux4g-divider-horizontal` | Contact |
+| Tag | `ux4g-tag-tonal-*`, `ux4g-tag-s` | Notice status badges, illustrative-data flags, static dataset-dimension labels |
+| Chip | `ux4g-choice-chip-md` (+ bare `.active`) | Publications / Notices / What's New filter chips |
+| Search | `ux4g-search`, `-search-input`, `-search-leading-icon` | Publications toolbar |
+| Buttons | `ux4g-btn`, `-btn-primary`, `-btn-outline-primary`, sizes `-sm`/`-md`/`-lg` | All 23 buttons site-wide |
+
+**Gap-fills.** The vendor's *reset* layer is not extracted, so adopted controls keep the UA border/outline; `components.css` strips it for `.ux4g-input-input` / `.ux4g-textarea-input`. The vendor also ships **no current-page style** for pagination — `[aria-current="page"]` is ours. Both are documented inline at the rule.
+
+**Chip radius is pinned, and selection uses the vendor's bare `.active`.** `[class*="ux4g-choice-chip"]` gets `radius-full` — the site's chip and badge language is pill-shaped where the vendor default is `radius-sm`. Selection must emit the unprefixed `active` class alongside `aria-pressed` / `aria-current`; that is safe because the vendor's selectors are `:is(.ux4g-choice-chip-*).active`, so `.active` only binds on an element that already carries a chip class. **Choose by behaviour:** interactive filters are chips (`ux4g-choice-chip-md`), static labels are tags (`ux4g-tag-tonal-*`) — the tag family has *no* hover/active/cursor rules at all.
+
+**Button weight is pinned.** `[class*="ux4g-btn"] { --ux4g-fw-current: semibold }` — the vendor default is medium (500); this site settled on semibold. Height (40/48px), radius (8px) and horizontal padding (16/20px) already matched exactly, so weight is the *only* divergence. A `:active` press transform is also added, which the vendor lacks. Use `ux4g-btn-sm` (32px) for compact buttons rather than inline padding.
+
+### 9.2 Sanctioned extensions
+
+Built on `--ux4g-*` tokens; each has a reason it is not the vendor's component.
+
+| Extension | Why not UX4G |
+|---|---|
+| **Charts** (`LineChart`, `AnimatedAreaChart`, `SmallMultiples`, `Sparkline`) | UX4G ships **no chart component**. Every chart pairs an accessible `<table>`, CSV, and an `aria` summary. |
+| **`.container`** | UX4G's container steps at breakpoints (540/720/960/1140/1320px). Ours is fluid to `--app-maxw` with a `clamp()` gutter — long-form reading needs a stable measure, not jumps. |
+| **Type ramp `.t-*`** | UX4G's roles are fixed px on Noto Sans. Ours are fluid `clamp()` on the display face. Also: the vendor ramp is applied by `[class^=ux4g-body-]`, a prefix match on the whole `class` attribute — it silently fails when composed (`class="text-muted ux4g-body-s-default"`). |
+| **`.grid` / `.grid-2\|3\|4`** | Ours collapse at `max-width: 960px/620px`; UX4G's are `min-width: 768px/992px` and default to `gap: 0`. |
+| **`.btn-light` / `.btn-ondark`** | On-dark button variants for the banner, which sits on a photograph in both themes. UX4G ships no on-dark button, so these compose onto `.ux4g-btn`, which supplies all layout. |
+| **`.card`** | UX4G's `card-solid` adds `shadow-l1` (ours is deliberately flat, border-only) and puts padding on `ux4g-card-body`, which is `display: flex` — it would reflow block content in 17 places. |
+| **`.chip-select`** | A `<select>` styled as a chip needs room for the native dropdown arrow, which the vendor's icon-less chip padding doesn't allow for. |
+| **`.row-item`** | The vendor list declares `border: none` (no row separators) and only pads inside a `.ux4g-list-*` container that also brings `shadow-l2` and its own background. |
+| **Layout shell** (`MainNav`, `TopBar`, `SiteFooter`) | Vendor navbar/footer/topbar CSS is 7/4/6 classes with no font-resize or contrast implementation — insufficient for the GIGW toolbar. |
+| **`Icon`** (inline SVG set) | Replaces UX4G's 5 base64 icon fonts (~2.3 MB). |
+| **`FlagIndia`, `--tri-saffron`, `--tri-green`** | Official flag colours; not in any UX4G ramp. Used only where protocol requires. |
+| **`.map-illo-*`, `.cover*`, `.hero-*`, `.detail-grid`** | Editorial and layout primitives with no vendor equivalent. |
+
+**On-dark tokens.** `--app-on-dark`, `--app-on-dark-muted`, `--app-on-dark-accent` exist for surfaces that are dark in *both* themes — the hero scrim, the banner and connect bands, the GoI topbar. They deliberately do **not** flip with the theme, unlike `--app-on-accent`.
+
+**Data-viz palette** (`--cat-1…4`) is drawn from UX4G hue tokens and locked in code so categories stay stable across charts. Colour never carries meaning alone (WCAG 1.4.1).
+
+### 9.3 Planned extensions
 
 UX4G has **no chart/data-viz component**, so we build these and bind every value to `--ux4g-*` tokens:
 
@@ -134,18 +202,38 @@ Any future extension gets a subsection here + a Storybook story + an ADR.
 
 `styles/ux4g.css` is **7.6MB** because **7 `@font-face` blocks embed fonts as base64 TTF/OTF data-URIs** (Noto Sans, Noto Sans Display, 5 icon variants). Shipping it raw destroys the performance budget (landing CSS+JS ≤150KB gzip; LCP ≤2.5s on Slow 4G).
 
-**Required pipeline (ADR `docs/adr/0003`):**
-1. **Purge** to only the components/utilities we actually use (safelist dynamic classes).
-2. **Strip** all embedded `@font-face` data-URIs from the shipped CSS.
-3. **Self-host** Noto Sans + Noto Sans Display + **Noto Sans Devanagari** as **subset woff2**, `font-display: swap`, ≤4 weights total.
-4. **Split** icon fonts → subset/SVG sprite, lazy where possible.
-5. Keep the **token layer** (`:root { --ux4g-* }`) intact and first in the cascade.
+**Implemented pipeline — extraction, not purge.**
 
-`npm run tokens:extract` regenerates the token tables in this file from the installed bundle so this doc never drifts from reality.
+1. **Tokens** → `src/styles/ux4g-tokens.css`, loaded first, `@font-face` and base64 excluded.
+2. **Components** → `node scripts/extract-ux4g-components.mjs` lifts the §9.1 families into `src/styles/ux4g-components.css`. It strips `@font-face` and any rule containing `base64`, preserves `@media` wrappers, and keeps a rule only when a class token in its selector belongs to a declared family.
+3. **Fonts** self-hosted via `next/font` (Noto Sans + Schibsted Grotesk). The bundle ships **weight 400 only** and **no Devanagari** — Hindi typography is entirely ours.
+4. **Icons** → inline SVG set (`components/ui/Icon.tsx`), not the vendor icon fonts.
+
+**Why extraction and not PurgeCSS:** the vendor uses `[class*=spinner-]` substring selectors and ~50 bare state classes (`.active`, `.is-open`, `.show`), which naive purging drops. Extraction is deterministic, reviewable in git, and re-runnable — output is byte-identical across vendor patch releases.
+
+Result: **~72 KB** of vendor CSS committed; **~175 KB raw / 28 KB gzipped** across all route chunks.
 
 ---
 
 ## 11. ⏳ Pending (Section 18)
-- **Q1** — confirms `ux4g-web-components@1.0.0` is the approved package/version; if a React/Angular distribution is mandated instead, revisit §0.
+- **Q1** — confirms `ux4g-web-components@1.0.2` is the approved package/version; if a React/Angular distribution is mandated instead, revisit §0. (Note: no React/Angular distribution exists — the README's "React" examples are the HTML examples with `class` renamed to `className`.)
 - **Q6** — brand palette overrides: does EAC-PM require an official Council colour that must map onto/над the UX4G brand tokens? If so, document the mapping here (still as tokens).
 - **⚠️ verify** items above (neutral 600–950, easing/duration tokens, breakpoint values, container widths) — fill during M1 from the installed CSS.
+
+---
+
+## 12. Vendor defect register (`ux4g-web-components@1.0.2`, verified 2026-07-28)
+
+Re-check these on every version bump. `styles/ux4g.css`, the runtime and the types were **byte-identical** across 1.0.0 → 1.0.1 → 1.0.2; only the README and metadata changed.
+
+| # | Defect | Our handling |
+|---|---|---|
+| 1 | **README is unreliable.** 45 class names it documents do not exist in the CSS — incl. `ux4g-badge`, `ux4g-divider`, `ux4g-modal-footer`, `ux4g-carousel-item`, and three typo'd (`ux4g-daft-staus-bar`). Its "For LLMs" quick-reference is the least accurate part: **15 of 25 utility classes** are wrong (`ux4g-align-center` → really `ux4g-ai-center`; `ux4g-shadow-md` → `ux4g-shadow-l1`; `ux4g-w-full` → `ux4g-w-100`). *(1.0.2 did fix the Navbar/Footer/Accessibility-Bar markup.)* | **Verify every class against the CSS before use.** Never copy README markup. |
+| 2 | **Runtime injects inline `<script>`** (`initRuntime()`), breaking the no-`unsafe-inline` CSP. 278 KB, un-tree-shakeable, still handling legacy `data-bs-*`. | Runtime not used; behaviour written in-house. |
+| 3 | **Dark warning tag fails WCAG AA** — orange-300 on orange-800 = **3.58:1**. Its own success tag uses a far darker ground (5.48:1); the warning ramp is inconsistent. | Bridge `--ux4g-bg-warning-soft` → `--ux4g-color-orange-900` in dark → **5.34:1**. |
+| 4 | **Size-vs-variant specificity bugs.** Both are 0,1,0 and variants declare dimensions, so the variant clobbers the size. The vendor's own `cascade-fixes.css` patches this for **buttons only**; `ux4g-input-*`, `ux4g-table-*`, `ux4g-modal-*`, `ux4g-tag-*` remain unfixed. | Audit any newly adopted size/variant pair. |
+| 5 | **No `prefers-color-scheme` support** (0 occurrences); dark mode is `:root[data-theme=dark]` only. The README's claim that `<div data-theme="dark">` scopes dark mode to a section is **false**. | Theme resolution is ours, set before paint. |
+| 6 | **Only 2 `prefers-reduced-motion` blocks** against dozens of transitions. | Global reduced-motion guard is ours (§6). |
+| 7 | **25 hardcoded values** unreachable by token override (mostly OTP/upload, several `!important`). Plus `--Action-*` and `--ux4x-icon-border-desabled` [sic] referenced but never defined. | Avoid those families, or override at equal specificity. |
+
+---

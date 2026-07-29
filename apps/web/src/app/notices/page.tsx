@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { notices, isArchived, ARCHIVE_AFTER_YEARS, type NoticeKind } from "@/content/media";
+import { notices, isArchived, ARCHIVE_AFTER_YEARS, noticeStatusClass, noticeStatusLabel, type NoticeKind } from "@/content/media";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
@@ -55,17 +55,17 @@ export default async function NoticesPage({
               eyebrow={isArchiveView ? "Archived notices" : "All notices"}
               title={isArchiveView ? "Archive" : "Current notices"}
             />
-            <a href="#" className="btn btn-outline" style={{ padding: "0.5rem 0.9rem" }}>
+            <a href="#" className="ux4g-btn-outline-primary ux4g-btn-sm">
               <Icon name="rss" size={16} /> Subscribe
             </a>
           </div>
 
           <div className="filter-chips" role="group" aria-label="Filter by category" style={{ marginBottom: "1.2rem" }}>
-            <Link href="/notices" className={`chip${!activeType && !isArchiveView ? " is-active" : ""}`} aria-current={!activeType && !isArchiveView ? "true" : undefined}>
+            <Link href="/notices" className={`ux4g-choice-chip-md${!activeType && !isArchiveView ? " active" : ""}`} aria-current={!activeType && !isArchiveView ? "true" : undefined}>
               All
             </Link>
             {categories.map((c) => (
-              <Link key={c} href={`/notices?type=${encodeURIComponent(c)}`} className={`chip${activeType === c ? " is-active" : ""}`} aria-current={activeType === c ? "true" : undefined}>
+              <Link key={c} href={`/notices?type=${encodeURIComponent(c)}`} className={`ux4g-choice-chip-md${activeType === c ? " active" : ""}`} aria-current={activeType === c ? "true" : undefined}>
                 {c}
               </Link>
             ))}
@@ -73,7 +73,7 @@ export default async function NoticesPage({
                 switches view rather than narrowing the current list. */}
             <Link
               href="/notices?view=archive"
-              className={`chip chip-trailing${isArchiveView ? " is-active" : ""}`}
+              className={`ux4g-choice-chip-md chip-trailing${isArchiveView ? " active" : ""}`}
               aria-current={isArchiveView ? "true" : undefined}
             >
               Archive
@@ -93,9 +93,7 @@ export default async function NoticesPage({
                       ? new Date(n.published).toLocaleDateString("en-IN", { year: "numeric", month: "short" })
                       : n.date}
                   </span>
-                  <span className={`status status-${n.status === "open" ? "open" : n.status === "soon" ? "soon" : "closed"}`}>
-                    {n.status === "open" ? "Open" : n.status === "soon" ? "Opening soon" : "Closed"}
-                  </span>
+                  <span className={noticeStatusClass[n.status]}>{noticeStatusLabel[n.status]}</span>
                 </a>
               ))}
             </div>

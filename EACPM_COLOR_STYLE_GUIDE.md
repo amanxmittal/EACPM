@@ -1,6 +1,20 @@
 # EAC-PM Colour Style Guide — "Ink, Indigo & Light"
 
-**A theme layer for UX4G Design System 3.0.** This does not replace UX4G. It specifies *which* UX4G semantic slots get which values, and defines the small, documented set of extension tokens UX4G does not cover (chiefly data visualisation). Drop this into `DESIGN.md` in the build repo.
+> ## ⚠️ SUPERSEDED on colour specifics — 2026-07-28
+>
+> This document proposed a **warm** palette (parchment ground, ink black, haldi ochre, terracotta) with `eac.*` extension tokens. **That direction was not built.** The implemented site is a **cool lavender-white** scheme derived directly from UX4G's own primary ramp, with gold reserved for status only. No `eac.*` token exists in the codebase.
+>
+> **Authoritative for colour: [`DESIGN.md`](DESIGN.md)** — §1 (tokens), §0.1 (extension policy), §0.2 (token bridge), §9.2 (sanctioned extensions).
+>
+> **Still binding** — these principles carried into the build and should not be re-litigated:
+> - **§0.1** UX4G owns the structure; components are never restyled by overriding their internals.
+> - **§0.4 / §4** Colour never carries meaning alone (WCAG 1.4.1) — every status, series and category is also labelled or iconed.
+> - **§1** No tricolour-as-theme. The Emblem and flag appear only where protocol requires, at full fidelity.
+> - **§5** Every pairing needs a computed contrast proof, in both modes, before it ships.
+>
+> Retained as the rationale record for *why* the palette is restrained and non-literal. Do not implement its hex values.
+
+**A theme layer for UX4G Design System 3.0.** This does not replace UX4G. It specifies *which* UX4G semantic slots get which values, and defines the small, documented set of extension tokens UX4G does not cover (chiefly data visualisation).
 
 ---
 

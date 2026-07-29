@@ -65,10 +65,10 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
             </div>
 
             <div className="cluster" style={{ marginTop: "1.5rem" }}>
-              <a href={r.pdfUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+              <a href={r.pdfUrl} target="_blank" rel="noopener noreferrer" className="ux4g-btn-primary ux4g-btn-lg">
                 <Icon name="download" size={18} /> Download PDF
               </a>
-              <a href={r.pdfUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-lg">
+              <a href={r.pdfUrl} target="_blank" rel="noopener noreferrer" className="ux4g-btn-outline-primary ux4g-btn-lg">
                 <Icon name="external" size={18} /> View original
               </a>
             </div>

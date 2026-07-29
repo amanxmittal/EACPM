@@ -38,7 +38,7 @@
   --app-gold: var(--ux4g-color-secondary-600, #a46800);
   --app-gold-strong: var(--ux4g-color-secondary-700, #764a00);
   --app-gold-soft: color-mix(in srgb, var(--ux4g-color-secondary-400, #e89c30) 22%, transparent);
-  --app-gold-ink: #fff;
+  --app-gold-ink: var(--ux4g-color-neutral-0, #fff);
 
   /* brand accents — purple is now the lead accent (from UX4G primary) */
   --app-accent: var(--ux4g-color-primary-600, #4a2bc2);
@@ -49,7 +49,13 @@
      but the dark theme's accent is a light lilac (primary-400) where white text measures
      only 3.6:1 — so dark mode flips this to near-black ink (4.9:1). Every accent-filled
      surface reads from this token rather than hardcoding #fff. */
-  --app-on-accent: #fff;
+  --app-on-accent: var(--ux4g-color-neutral-0, #fff);
+  /* Text/icon colour on a surface that is dark in BOTH themes — the hero photo scrim,
+     the banner and connect bands, the GoI topbar. Unlike --app-on-accent this never
+     flips, because the ground it sits on never lightens. */
+  --app-on-dark: var(--ux4g-color-neutral-0, #fff);
+  --app-on-dark-muted: color-mix(in srgb, var(--ux4g-color-neutral-0, #fff) 80%, var(--ux4g-color-primary-900, #24145c));
+  --app-on-dark-accent: var(--ux4g-color-primary-200, #c0b3ff);
   --app-accent-softer: color-mix(in srgb, var(--ux4g-color-primary-500, #6a4eff) 7%, var(--ux4g-color-neutral-0, #fff));
   --app-accent-2: var(--ux4g-color-secondary-500, #c47d00);
   --app-ink: var(--ux4g-color-primary-950, #1a0e3d);
@@ -69,7 +75,7 @@
   --app-radius: var(--ux4g-radius-md, 8px);
   --app-radius-lg: var(--ux4g-radius-lg, 12px);
   --app-radius-xl: var(--ux4g-radius-xl, 16px);
-  --app-radius-2xl: 24px;
+  --app-radius-2xl: var(--ux4g-radius-2xl, 24px);
   --app-shadow-1: var(--ux4g-shadow-l1);
   --app-shadow-2: var(--ux4g-shadow-l2);
   --app-shadow-3: var(--ux4g-shadow-l3);
@@ -131,16 +137,30 @@
   --ux4g-border-color-primary-default: var(--app-accent);
 }
 
+/* Vendor a11y defect: in dark mode UX4G's warning tag pairs orange-300 text with
+   an orange-800 "soft" background — 3.58:1, under the 4.5:1 AA floor and a merge
+   gate here (CLAUDE.md §2.3). Its own success tag uses a much darker green-800
+   ground (5.48:1), so the warning ramp is simply inconsistent. Stepping the
+   background one stop darker, still inside the UX4G palette, gives 5.34:1.
+   Re-measure if the vendor changes its status ramp. */
 :root[data-theme="dark"] {
-  --app-bg: color-mix(in srgb, #0b0b12 86%, var(--ux4g-color-primary-950, #1a0e3d));
-  --app-bg-subtle: color-mix(in srgb, #14141e 84%, var(--ux4g-color-primary-900, #24145c));
-  --app-surface: color-mix(in srgb, #17171f 84%, var(--ux4g-color-primary-900, #24145c));
-  --app-border: color-mix(in srgb, #2b2b38 84%, var(--ux4g-color-primary-700, #3d239f));
-  --app-border-strong: color-mix(in srgb, #3a3a48 84%, var(--ux4g-color-primary-600, #4a2bc2));
+  --ux4g-bg-warning-soft: var(--ux4g-color-orange-900);
+}
+
+:root[data-theme="dark"] {
+  /* Dark ramp = a UX4G neutral deepened with the matching primary step, so every
+     value traces to a token (DESIGN.md §0.1). Built from tokens rather than
+     hand-picked darks; the shift from the previous hand-mixed values is <16/255. */
+  --app-bg: color-mix(in srgb, var(--ux4g-color-neutral-950, #0a0a0a) 86%, var(--ux4g-color-primary-950, #1a0e3d));
+  --app-bg-subtle: color-mix(in srgb, var(--ux4g-color-neutral-900, #171717) 84%, var(--ux4g-color-primary-900, #24145c));
+  --app-surface: color-mix(in srgb, var(--ux4g-color-neutral-900, #171717) 84%, var(--ux4g-color-primary-900, #24145c));
+  --app-border: color-mix(in srgb, var(--ux4g-color-neutral-800, #262626) 84%, var(--ux4g-color-primary-700, #3d239f));
+  --app-border-strong: color-mix(in srgb, var(--ux4g-color-neutral-700, #404040) 84%, var(--ux4g-color-primary-600, #4a2bc2));
   --app-text: var(--ux4g-color-neutral-50, #fafafa);
-  --app-text-muted: #a6a6b0;
-  /* was #75757f = 3.9:1 on the dark surface, under the 4.5:1 AA floor */
-  --app-text-subtle: #94949f;
+  --app-text-muted: color-mix(in srgb, var(--ux4g-color-neutral-400, #a1a1a1) 85%, var(--ux4g-color-primary-200, #c0b3ff));
+  /* Kept deliberately light: the previous #75757f measured 3.9:1 on the dark
+     surface, under the 4.5:1 AA floor. Re-verify if this mix changes. */
+  --app-text-subtle: color-mix(in srgb, var(--ux4g-color-neutral-400, #a1a1a1) 90%, var(--ux4g-color-primary-900, #24145c));
   --app-accent: var(--ux4g-color-primary-400, #8670ff);
   --app-accent-strong: var(--ux4g-color-primary-300, #a391ff);
   --app-accent-hover: var(--ux4g-color-primary-300, #a391ff);
@@ -148,8 +168,8 @@
      Deliberately the raw primary-950 scale token, not --app-ink, which inverts to a
      pale lilac under this theme and would be invisible here. */
   --app-on-accent: var(--ux4g-color-primary-950, #1a0e3d);
-  --app-accent-soft: #1b1630;
-  --app-accent-softer: color-mix(in srgb, var(--ux4g-color-primary-500, #6a4eff) 14%, #14141e);
+  --app-accent-soft: color-mix(in srgb, var(--ux4g-color-primary-900, #24145c) 35%, var(--ux4g-color-neutral-900, #171717));
+  --app-accent-softer: color-mix(in srgb, var(--ux4g-color-primary-500, #6a4eff) 14%, var(--app-bg-subtle));
   --app-ink: var(--ux4g-color-primary-100, #dcd4ff);
   --wash-1: color-mix(in srgb, var(--ux4g-color-primary-500, #6a4eff) 22%, transparent);
   --wash-2: color-mix(in srgb, var(--ux4g-color-tertiary-500, #a66acc) 18%, transparent);
@@ -159,7 +179,7 @@
   --app-gold-strong: var(--ux4g-color-secondary-300, #ffbe6f);
   --app-gold-soft: color-mix(in srgb, var(--ux4g-color-secondary-500, #c47d00) 20%, transparent);
   --app-gold-ink: var(--ux4g-color-secondary-950, #110700);
-  --app-shadow-float: 0 24px 60px -22px rgba(0,0,0,0.6);
+  --app-shadow-float: 0 24px 60px -22px color-mix(in srgb, var(--ux4g-color-neutral-1000, #000) 60%, transparent);
   --app-shadow-nav: 0 10px 28px -16px rgba(0,0,0,0.45), 0 1px 0 var(--app-border);
   color-scheme: dark;
 }
@@ -216,13 +236,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 /* ---------- typography ---------- */
-.t-display {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.6rem, 1.1rem + 5.6vw, 4.9rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-}
 .t-h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.95rem, 1.2rem + 2.8vw, 3.15rem); line-height: 1.06; letter-spacing: -0.025em; }
 .t-h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 1.1rem + 2vw, 2.5rem); line-height: 1.1; letter-spacing: -0.02em; }
 .t-h3 { font-weight: var(--ux4g-font-weight-semibold, 600); font-size: clamp(1.2rem, 1rem + 0.8vw, 1.5rem); line-height: 1.25; }
@@ -230,13 +243,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .t-lead { font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem); line-height: 1.55; color: var(--app-text-muted); }
 .t-small { font-size: var(--ux4g-fs-14, 0.875rem); }
 .t-micro { font-size: var(--ux4g-fs-12, 0.75rem); }
-.t-numeral {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
 .t-overline, .eyebrow {
   font-size: var(--ux4g-fs-12, 0.75rem);
   font-weight: 600;
@@ -247,16 +253,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--app-accent); }
 .eyebrow::before { content: ""; width: 18px; height: 2px; background: var(--app-accent); border-radius: 2px; }
 .text-muted { color: var(--app-text-muted); }
-.text-accent { color: var(--app-accent); }
 .measure { max-width: var(--app-measure); }
 .balance { text-wrap: balance; }
 
 /* ---------- layout ---------- */
 .container { width: 100%; max-width: var(--app-maxw); margin-inline: auto; padding-inline: clamp(16px, 5vw, 40px); }
 .container-narrow { max-width: 780px; }
-.container-wide { max-width: 1320px; }
 .section { padding-block: clamp(2.5rem, 6vw, 5.5rem); }
-.section-tight { padding-block: clamp(2rem, 4vw, 3.5rem); }
 .stack > * + * { margin-top: var(--stack, 1rem); }
 .cluster { display: flex; flex-wrap: wrap; gap: var(--gap, 0.75rem); align-items: center; }
 .grid { display: grid; gap: clamp(1rem, 2.4vw, 1.75rem); }
@@ -278,20 +281,20 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 /* ---------- components ---------- */
-.btn {
-  --btn-bg: transparent;
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  padding: 0.65rem 1.1rem; border-radius: var(--app-radius);
-  font-weight: 600; font-size: 0.95rem; line-height: 1;
-  border: 1px solid transparent; cursor: pointer;
-  background: var(--btn-bg); transition: background .18s ease, border-color .18s ease, transform .12s ease, color .18s ease;
-}
-.btn:active { transform: translateY(1px); }
-.btn-primary { --btn-bg: var(--app-accent); color: var(--app-on-accent); }
-.btn-primary:hover { --btn-bg: var(--app-accent-strong); }
-.btn-outline { border-color: var(--app-border-strong); color: var(--app-text); }
-.btn-outline:hover { border-color: var(--app-accent); color: var(--app-accent); }
-.btn-lg { padding: 0.85rem 1.4rem; font-size: 1rem; }
+/* Buttons are UX4G (.ux4g-btn-*). Two corrections, per DESIGN.md §0.1 step 2:
+   1. Weight. The vendor default is medium (500); this site settled on semibold
+      for a denser, more institutional button. One property, everything else
+      vendor-native — height, radius and padding already matched exactly.
+   2. Press feedback. The vendor has no :active state. */
+[class*="ux4g-btn"] { --ux4g-fw-current: var(--ux4g-font-weight-semibold, 600); }
+[class*="ux4g-btn"]:active { transform: translateY(1px); }
+
+/* On-dark button variants — the banner sits on a photograph in both themes, and
+   UX4G ships no on-dark button. Composed onto .ux4g-btn, which supplies layout. */
+.btn-light { background: var(--app-on-dark); color: var(--ux4g-color-primary-800, #301c7d); }
+.btn-light:hover { background: var(--ux4g-color-primary-50, #f2efff); }
+.btn-ondark { border-color: color-mix(in srgb, var(--app-on-dark) 40%, transparent); color: var(--app-on-dark); }
+.btn-ondark:hover { border-color: var(--app-on-dark); background: color-mix(in srgb, var(--app-on-dark) 10%, transparent); }
 
 .card {
   background: var(--app-surface);
@@ -311,15 +314,30 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .badge-neutral { background: var(--app-bg-subtle); color: var(--app-text-muted); border-color: var(--app-border); }
 
-.chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 0.4rem 0.85rem; border-radius: var(--ux4g-radius-full, 999px);
-  border: 1px solid var(--app-border-strong); background: var(--app-surface);
-  font-size: 0.9rem; font-weight: 500; cursor: pointer;
-  transition: all .15s ease; color: var(--app-text-muted);
+/* Filter chips are UX4G choice-chips. The vendor supplies the full state machine
+   (default / hover / .active), so only the pill radius is pinned — the site's
+   chip and badge language is pill-shaped where the vendor default is radius-sm.
+   Selection is keyed off the vendor's bare `.active`, which is safe here: its
+   selectors are :is(.ux4g-choice-chip-*).active, so it only binds on a chip. */
+[class*="ux4g-choice-chip"], [class*="ux4g-filter-chip"] {
+  /* The vendor sets min-height but never display/align-items — it assumes a
+     <button>, which the UA centres for free. Our category chips are <a> on
+     Notices and What's New, where the text would sit at the top of the 32px box
+     with no vertical padding to balance it. Centre it explicitly. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ux4g-inline-xs, 4px);
+  border-radius: var(--ux4g-radius-full, 999px);
+  /* The vendor's 8px inline padding is tuned for its default radius-sm. At
+     radius-full a short label ("All") ends up barely wider than the 32px height
+     and reads as a circle, so the pill pin needs a matching padding. */
+  padding-inline: var(--ux4g-padding-s, 12px);
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
-.chip:hover { border-color: var(--app-accent); color: var(--app-accent); }
-.chip[aria-pressed="true"], .chip.is-active { background: var(--app-accent); color: var(--app-on-accent); border-color: var(--app-accent); }
+/* A <select> styled as a chip needs room for the native dropdown arrow, which
+   the vendor's icon-less chip padding doesn't allow for. */
+.chip-select { padding-inline: var(--ux4g-padding-s, 12px); cursor: pointer; }
 
 .link-arrow { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--app-accent); font-weight: 600; }
 .link-arrow svg { transition: transform .18s ease; }

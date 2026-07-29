@@ -8,25 +8,15 @@
 .section-head h2 { margin-top: 0.5rem; }
 .section-head p { color: var(--app-text-muted); margin-top: 0.5rem; }
 
-/* ---- illustrative-data flag ---- */
-.flag { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: var(--ux4g-radius-full, 999px); font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 600; background: #fff4e5; color: #7a4b00; border: 1px solid #f2c98a; }
-:root[data-theme="dark"] .flag { background: #2a2010; color: #f0c27a; border-color: #4a3a1a; }
-.flag::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: currentColor; }
+/* ---- illustrative-data flag ----
+   Colour + sizing now come from ux4g-tag-tonal-warning / ux4g-tag-s. This class
+   only adds the leading dot and the pill radius the tag family doesn't carry. */
+.flag { display: inline-flex; border-radius: var(--ux4g-radius-full, 999px); }
+.flag::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: currentColor; flex: none; }
 
 /* ---- stat / indicator ---- */
 .stat { display: flex; flex-direction: column; gap: 0.5rem; }
-.stat-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-.stat-label { font-weight: 600; font-size: 0.92rem; }
-.stat-figure { display: flex; align-items: baseline; gap: 0.35rem; }
-.stat-value { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.stat-unit { font-size: 0.95rem; font-weight: 600; color: var(--app-text-muted); }
-.stat-spark { color: var(--app-accent); }
-.stat-meta { font-size: var(--ux4g-fs-12, 0.75rem); color: var(--app-text-subtle); }
-.trend-up { color: #15803d; }
-.trend-down { color: #b91c1c; }
-.trend-flat { color: var(--app-text-muted); }
-:root[data-theme="dark"] .trend-up { color: #46d47f; }
-:root[data-theme="dark"] .trend-down { color: #f77; }
+/* UX4G's semantic status tokens already flip per theme, so these need no dark override. */
 
 /* ---- publication card & typographic cover ---- */
 .pub-card { display: flex; flex-direction: column; gap: 0.9rem; height: 100%; }
@@ -38,7 +28,7 @@
 .cover {
   aspect-ratio: 5 / 3.4; border-radius: var(--app-radius); overflow: hidden; position: relative;
   display: flex; flex-direction: column; justify-content: space-between; padding: 1rem 1.1rem;
-  color: #fff; background: linear-gradient(150deg, var(--ux4g-color-primary-600, #4a2bc2), var(--ux4g-color-primary-900, #24145c));
+  color: var(--app-on-dark); background: linear-gradient(150deg, var(--ux4g-color-primary-600, #4a2bc2), var(--ux4g-color-primary-900, #24145c));
   isolation: isolate;
 }
 .cover::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0.5;
@@ -56,32 +46,27 @@
 }
 
 /* ---- small icon tile (reused wherever a labelled tile needs a leading glyph) ---- */
-.audience-ico { width: 42px; height: 42px; border-radius: var(--app-radius); background: var(--app-accent-soft); color: var(--app-accent-strong); display: grid; place-items: center; flex: none; }
 
 /* ---- data panel ---- */
 .data-panel { border: 1px solid var(--app-border); border-radius: var(--app-radius-xl); padding: clamp(1.1rem, 2.5vw, 1.8rem); background: var(--app-surface); }
-.data-legend { display: flex; flex-wrap: wrap; gap: 1rem; }
-.legend-item { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--app-text-muted); }
-.legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
 
 /* ---- notice / list rows ---- */
 .row-item { display: flex; align-items: center; gap: 1rem; padding-block: 0.9rem; border-bottom: 1px solid var(--app-border); }
 .row-item:last-child { border-bottom: 0; }
 .row-item .row-main { flex: 1; }
-.status { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: var(--ux4g-fs-12, 0.75rem); font-weight: 600; }
-/* #15803d measured 4.49:1 on this background — a hair under the 4.5:1 AA floor. */
-.status-open { background: #e7f6ec; color: #15723a; }
-.status-soon { background: #fff4e5; color: #a4560a; }
-.status-closed { background: var(--app-bg-subtle); color: var(--app-text-muted); }
-:root[data-theme="dark"] .status-open { background: #10251a; color: #46d47f; }
-:root[data-theme="dark"] .status-soon { background: #2a2010; color: #f0c27a; }
+/* Status badges are UX4G tags now — see noticeStatusClass in content/media.ts.
+   The site's badge language is pill-shaped, and the vendor tag is a
+   space-between flex row sized to its container; both are corrected here.
+   Contrast of the vendor's status pairs is verified in tests/a11y. */
+[class*="ux4g-tag-tonal-"] {
+  border-radius: var(--ux4g-radius-full, 999px);
+  display: inline-flex;
+  justify-content: center;
+  width: fit-content;
+}
 
 /* ---- hero ---- */
 .hero { position: relative; overflow: hidden; }
-.hero-grad { position: absolute; inset: 0; z-index: -1; opacity: 0.5;
-  background: radial-gradient(80% 60% at 85% -10%, var(--app-accent-soft), transparent 60%); }
-.hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.6rem; }
 .indicator-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: clamp(1.6rem, 4vw, 2.6rem); }
 @media (max-width: 900px) { .indicator-row { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .indicator-row { grid-template-columns: 1fr 1fr; } }
@@ -97,8 +82,10 @@
    plain trailing chip once the row wraps on narrow screens. */
 .chip-trailing { margin-left: auto; }
 @media (max-width: 640px) { .chip-trailing { margin-left: 0; } }
-.search-box { display: flex; align-items: center; gap: 0.5rem; border: 1px solid var(--app-border-strong); border-radius: var(--app-radius); padding: 0.5rem 0.8rem; background: var(--app-surface); min-width: 240px; color: var(--app-text-muted); }
-.search-box input { border: 0; background: transparent; flex: 1; outline: none; color: var(--app-text); }
+/* Border, radius, height and the inner input reset now come from .ux4g-search /
+   .ux4g-search-input. This only adds the toolbar width the vendor doesn't set. */
+.search-box { min-width: 240px; padding-inline: 0.8rem; }
+.search-box .ux4g-search-input { color: var(--app-text); }
 .results-count { color: var(--app-text-muted); font-size: 0.9rem; }
 
 /* ---- map illustration (contact page, stands in for the click-to-load embed) ---- */
@@ -142,7 +129,7 @@
 
 /* ---- team ---- */
 .member { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.7rem; }
-.avatar { width: 84px; height: 84px; border-radius: 999px; display: grid; place-items: center; background: linear-gradient(150deg, var(--ux4g-color-primary-500, #6a4eff), var(--ux4g-color-tertiary-600, #8e55b3)); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; }
+.avatar { width: 84px; height: 84px; border-radius: 999px; display: grid; place-items: center; background: linear-gradient(150deg, var(--ux4g-color-primary-500, #6a4eff), var(--ux4g-color-tertiary-600, #8e55b3)); color: var(--app-on-dark); font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; }
 .member h3 { font-size: 1rem; }
 
 /* ---- contact form ---- */

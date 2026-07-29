@@ -73,7 +73,7 @@ export function MainNav() {
           >
             <Icon name={searchOpen ? "close" : "search"} size={20} />
           </button>
-          <Link href="/contact" className={`btn btn-primary ${s.contactCta}`} aria-current={isActive("/contact") ? "page" : undefined}>
+          <Link href="/contact" className={`ux4g-btn-primary ux4g-btn-md ${s.contactCta}`} aria-current={isActive("/contact") ? "page" : undefined}>
             Contact Us
           </Link>
           <button
@@ -133,7 +133,7 @@ export function MainNav() {
               placeholder="Search papers, notices, data…"
               aria-label="Search the site"
             />
-            <button className="btn btn-primary" type="submit">
+            <button className="ux4g-btn-primary ux4g-btn-md" type="submit">
               Search
             </button>
           </form>

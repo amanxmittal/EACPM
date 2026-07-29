@@ -45,7 +45,7 @@ export default function DataPage() {
             table and a CSV.
           </p>
           <p style={{ marginTop: "1rem" }}>
-            <span className="flag">Illustrative data — pending verified sources</span>
+            <span className="flag ux4g-tag-tonal-warning ux4g-tag-s">Illustrative data — pending verified sources</span>
           </p>
         </div>
       </section>
@@ -63,8 +63,8 @@ export default function DataPage() {
                 <p className="t-micro text-muted">Annual, % · hover for values</p>
               </div>
               <div className="cluster">
-                <span className="flag">Illustrative</span>
-                <button className="btn btn-outline" style={{ padding: "0.45rem 0.8rem", fontSize: "0.85rem" }}>
+                <span className="flag ux4g-tag-tonal-warning ux4g-tag-s">Illustrative</span>
+                <button className="ux4g-btn-outline-primary ux4g-btn-sm">
                   <Icon name="download" size={15} /> CSV
                 </button>
               </div>
@@ -121,9 +121,10 @@ export default function DataPage() {
                 round (e.g. the State code for Andhra Pradesh is 02 / 28 / 37 across EC4 / EC5 / EC6)
                 — so the explorer versions its code-lists and validates each upload.
               </p>
+              {/* Static labels, not filters — tags rather than chips. */}
               <div className="cluster" style={{ marginTop: "1rem" }}>
                 {ecDimensions.map((d) => (
-                  <span key={d} className="chip" style={{ cursor: "default" }}>
+                  <span key={d} className="ux4g-tag-tonal-neutral ux4g-tag-s">
                     {d}
                   </span>
                 ))}
@@ -147,7 +148,7 @@ export default function DataPage() {
                   <div style={{ fontWeight: 600 }}>{d.name}</div>
                   <div className="t-micro text-muted">{d.freq}</div>
                 </div>
-                <button className="btn btn-outline" style={{ padding: "0.4rem 0.8rem", fontSize: "0.85rem" }}>
+                <button className="ux4g-btn-outline-primary ux4g-btn-sm">
                   <Icon name="download" size={15} /> {d.fmt}
                 </button>
               </div>

@@ -71,14 +71,14 @@ export function PublicationsExplorer({
       <div className="toolbar">
         <div className="filter-chips" role="group" aria-label="Filter by type">
           {types.map((t) => (
-            <button key={t} className={`chip ${type === t ? "is-active" : ""}`} aria-pressed={type === t} onClick={() => setType(t)}>
+            <button key={t} className={`ux4g-choice-chip-md ${type === t ? "active" : ""}`} aria-pressed={type === t} onClick={() => setType(t)}>
               {t}
             </button>
           ))}
         </div>
         <div className="cluster">
           <select
-            className="chip"
+            className="ux4g-choice-chip-md chip-select"
             aria-label="Filter by year"
             value={String(year)}
             onChange={(e) => setYear(e.target.value === "All" ? "All" : Number(e.target.value))}
@@ -90,9 +90,10 @@ export function PublicationsExplorer({
               </option>
             ))}
           </select>
-          <label className="search-box">
-            <Icon name="search" size={18} />
+          <label className="ux4g-search search-box">
+            <Icon name="search" size={18} className="ux4g-search-leading-icon" />
             <input
+              className="ux4g-search-input"
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
@@ -173,7 +174,7 @@ export function PublicationsExplorer({
           </div>
           <button
             type="button"
-            className="btn btn-outline"
+            className="ux4g-btn-outline-primary ux4g-btn-md"
             onClick={() => {
               setType("All");
               setYear("All");

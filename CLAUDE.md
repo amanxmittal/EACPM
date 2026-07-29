@@ -14,7 +14,9 @@ A bilingual (English + Hindi) government website that does **two jobs at once**:
 
 ## 2. Prime directives (non-negotiable — a merge gate, not aspirations)
 
-1. **UX4G Design System 3.0 is the only visual vocabulary.** All colour, spacing, radius, elevation, type come from UX4G tokens/classes. No hardcoded hex, no arbitrary px, no third-party UI kit (no Bootstrap themes, MUI, shadcn defaults) for anything UX4G provides. Missing pieces (e.g. charts) are built **on UX4G tokens** and documented as extensions in [`DESIGN.md`](DESIGN.md).
+1. **UX4G Design System 3.0 is the only visual vocabulary.** All colour, spacing, radius, elevation, type come from UX4G tokens/classes. No hardcoded hex, no arbitrary px, no third-party UI kit (no Bootstrap themes, MUI, shadcn defaults) for anything UX4G provides.
+   **We may keep our own style guide on top of it**, under the three-step policy in [`DESIGN.md`](DESIGN.md) §0.1: use the vendor component if it exists → adopt-and-bridge if it exists but fails a project gate → build an extension if it doesn't exist or would break a settled product decision. Every extension is declared in `DESIGN.md` §9.2 with its reason and consumes `--ux4g-*` tokens throughout.
+   A declared extension is **not** non-compliance. A raw hex, a magic px, or a silent fork of vendor CSS **is**. The audit question is *"does every value trace to a `--ux4g-*` token, and is the divergence declared?"* — not *"is the class `ux4g-`-prefixed?"*
 2. **Never fabricate.** No invented statistic, quote, date, name, designation, or citation — ever. The correct fallback is always a `{{ FACT-CHECK REQUIRED: … }}` placeholder plus an entry in [`content/FACTCHECK_QUEUE.md`](content/FACTCHECK_QUEUE.md). A wrong number on a GoI economic site is far worse than a blank one. Every displayed figure carries **source + period + last-updated**. Historical GDP-share figures are contested *estimates* and must be labelled as such. (Full rules: [`PRODUCT.md`](PRODUCT.md) §Governance.)
 3. **Accessibility is a gate.** WCAG 2.1 AA minimum, AAA on body text contrast. Keyboard-complete, screen-reader tested (NVDA + VoiceOver), skip links, landmarks, visible focus rings, `prefers-reduced-motion` honoured. axe-core clean **and** a manual audit per page.
 4. **GIGW 3.0 compliance** — every mandatory page + policy, tracked in `docs/GIGW_COMPLIANCE_MATRIX.md`. No page ships that fails its matrix rows.
@@ -29,22 +31,27 @@ A bilingual (English + Hindi) government website that does **two jobs at once**:
 
 ## 3. UX4G integration — how we actually consume it (grounded, verified 2026-07-24)
 
-> ⚠️ **Reality differs from `PROMPT.md` §3's assumption.** The prompt assumed `ux4g-web-components` ships **custom elements** to be wrapped in React with `ClientOnly` boundaries. Inspection of the published package shows it is a **CSS-first utility + token framework** (Bootstrap-style), *not* custom elements. This is better for us (SSR-friendly, cheaper JS). The decision to follow the CSS-first model is [`docs/adr/0002-ux4g-css-first-integration.md`](docs/adr) — **confirm against Section 18 Q1** before locking.
+> ⚠️ **Reality differs from `PROMPT.md` §3's assumption.** The prompt assumed `ux4g-web-components` ships **custom elements** to be wrapped in React with `ClientOnly` boundaries. Inspection of the published package shows it is a **CSS-first utility + token framework** (Bootstrap-style), *not* custom elements. This is better for us (SSR-friendly, cheaper JS). The CSS-first model is now the implemented approach — see [`DESIGN.md`](DESIGN.md) §0. ⏳ ADR `docs/adr/0002-ux4g-css-first-integration.md` still to be written; **confirm against Section 18 Q1** before locking.
 
-Verified facts about `ux4g-web-components@1.0.0` (published by `support.ux4g@digitalindia.gov.in`):
+Verified facts about `ux4g-web-components@1.0.2` (published by `support.ux4g@digitalindia.gov.in`; re-verified 2026-07-28 — CSS, runtime and types are **byte-identical** across 1.0.0 → 1.0.2, only README/metadata changed):
 
 - **Consumption:** `import "ux4g-web-components/styles.css"` (maps to `styles/ux4g.css`) + apply `.ux4g-*` classes. Optional interactive behaviours via `ux4g-web-components/runtime/bootstrap`. TS types under `/types` ("Class_Builder").
 - **Tokens:** CSS custom properties prefixed `--ux4g-*` (colour, `space`, `size`, `radius`, `shadow`/elevation, `fs` type scale, semantic text/link/status). Full inventory + values in [`DESIGN.md`](DESIGN.md).
 - **Theme:** `[data-theme="dark"]` on a root element. Default from `prefers-color-scheme`, manual override persisted.
-- **52 components + 57 service patterns** in the web distribution (list in `docs/UX4G_NOTES.md`, to be written in M0). Includes an **Accessibility Bar** (the GIGW toolbar), Navbar, Mega Menu, Breadcrumb, Footer, Search, Table, Card, Journey Timeline, Stepper, etc. **No chart component** → charts are a token-based extension (ECharts).
+- **53 components** documented, **2,280 distinct `.ux4g-*` classes** in the CSS. Includes Navbar, Mega Menu, Breadcrumb, Footer, Search, Table, Card, Journey Timeline, Stepper, and an Accessibility Bar — though the last is a **CSS shell only** (6 classes, no font-resize or contrast behaviour), so the GIGW toolbar is ours. **No chart component** → charts are a token-based extension (ECharts). Adoption status per family: [`DESIGN.md`](DESIGN.md) §9.1.
 - **The companion `ux4g-skill` package** generates HTML/React/Angular markup using UX4G classes — use it as a reference for correct component markup, not as a runtime dependency. (Authenticity caveat: maintained under a personal Gmail — see Section 18 note.)
 
-**Two hard engineering constraints discovered — must be handled or the perf budget fails:**
+**Hard engineering constraints — handled, do not regress:**
 
-1. `styles/ux4g.css` is **7.6MB** because **7 fonts (Noto Sans, Noto Sans Display, 5 icon variants) are embedded as base64 TTF/OTF data-URIs**. **Do not ship it raw.** Build pipeline must: purge unused rules to the components/utilities we use, **strip embedded fonts**, and self-host **subset woff2** with `font-display: swap`. ADR: [`docs/adr/0003-ux4g-css-diet-and-font-self-hosting.md`](docs/adr).
-2. The bundle has **no Noto Sans Devanagari** — Hindi typography is on us (self-host, subset). See [`DESIGN.md`](DESIGN.md) §Typography.
+1. `styles/ux4g.css` is **7.6MB**, ~94% of it 7 fonts embedded as base64. **Never ship it raw and never `import "ux4g-web-components/styles.css"`.** Tokens live in `src/styles/ux4g-tokens.css`; components are lifted by `node scripts/extract-ux4g-components.mjs` into `src/styles/ux4g-components.css`. Extraction (not PurgeCSS) because the vendor uses `[class*=spinner-]` substring selectors and ~50 bare state classes that purging drops. See [`DESIGN.md`](DESIGN.md) §10.
+2. The bundle has **no Noto Sans Devanagari**, and ships **weight 400 only** for every face — Hindi typography and all non-400 weights are on us. See [`DESIGN.md`](DESIGN.md) §2.
+3. **The vendor runtime is not used.** `initRuntime()` injects inline `<script>` tags, which breaks the CSP rule in §10 below. Interactive behaviour is written in-house against the vendor's class names and ARIA contract.
 
-**Rules:** never fork or copy UX4G component internals; never hardcode a value UX4G exposes as a token; every new primitive must consume `--ux4g-*` tokens and ship a Storybook story + a11y notes.
+**Rules:**
+- Never fork or copy UX4G component internals. To correct vendor behaviour, use the **token bridge** in `globals.css` (`DESIGN.md` §0.2) — and note the bridge selector must be `:root, :root[data-theme="dark"]`, or dark mode is silently outranked.
+- **Verify every class against `styles/ux4g.css`, never against the README** — 45 documented class names don't exist in the CSS, and the "For LLMs" quick-reference has 15 of 25 utilities wrong. Full register: [`DESIGN.md`](DESIGN.md) §12.
+- **Never assume a vendor token pair passes contrast.** Its dark warning tag ships at 3.58:1, under the AA floor. Measure, then bridge if it fails.
+- Every new primitive consumes `--ux4g-*` tokens and ships a Storybook story + a11y notes.
 
 ---
 

@@ -27,7 +27,7 @@ export function PublicationCard({ report }: { report: Report }) {
             href={report.pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-outline"
+            className="ux4g-btn-outline-primary ux4g-btn-md"
             style={{ padding: "0.4rem 0.7rem", fontSize: "0.85rem" }}
             aria-label={`Download PDF: ${report.title}`}
           >

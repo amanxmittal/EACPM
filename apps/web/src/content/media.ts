@@ -30,10 +30,36 @@ export const articles: Article[] = [
 
 // kind is one of the four official Notices categories (Scope of Work §3.6).
 export type NoticeKind = "Tender" | "Vacancy Circular" | "Work at EAC-PM" | "Other";
+export type NoticeStatus = "open" | "soon" | "closed";
+
+/**
+ * Notice status → UX4G tag classes. Single source of truth so the Notices page
+ * and the homepage panel can't drift, and so the status palette comes from
+ * UX4G's semantic status tokens rather than hand-picked hex.
+ */
+export const noticeStatusClass: Record<NoticeStatus, string> = {
+  open: "ux4g-tag-tonal-success ux4g-tag-s",
+  soon: "ux4g-tag-tonal-warning ux4g-tag-s",
+  closed: "ux4g-tag-tonal-neutral ux4g-tag-s",
+};
+
+export const noticeStatusLabel: Record<NoticeStatus, string> = {
+  open: "Open",
+  soon: "Opening soon",
+  closed: "Closed",
+};
+
+/** Condensed variant for the homepage panel, where the row is tighter. */
+export const noticeStatusLabelShort: Record<NoticeStatus, string> = {
+  open: "Open",
+  soon: "Soon",
+  closed: "Closed",
+};
+
 export type Notice = {
   title: string;
   kind: NoticeKind;
-  status: "open" | "soon" | "closed";
+  status: NoticeStatus;
   /** Display-only deadline text (e.g. "Closes soon"). Illustrative for MVP — NOT parseable. */
   date: string;
   /**
