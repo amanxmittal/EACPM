@@ -34,6 +34,9 @@ const paths: Record<string, string> = {
   wallet: "M3 7a2 2 0 0 1 2-2h13v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M6 5V4a1 1 0 0 1 1-1h10 M16 12h3",
   cpu: "M7 7h10v10H7z M9 3v2 M15 3v2 M9 19v2 M15 19v2 M3 9h2 M3 15h2 M19 9h2 M19 15h2",
   play: "M7 4v16l13-8z",
+  eye: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0",
+  grid: "M4 4h7v7H4z M13 4h7v7h-7z M4 13h7v7H4z M13 13h7v7h-7z",
+  list: "M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01",
 };
 
 type IconProps = SVGProps<SVGSVGElement> & { name: keyof typeof paths | string; size?: number; title?: string };

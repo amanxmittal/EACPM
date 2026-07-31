@@ -6,6 +6,11 @@ export type Report = {
   abstract: string;
   pdfUrl: string;
   coverUrl: string;
+  /** Self-hosted cover scan, e.g. "/img/Working-paper-1.png" — distinct from
+   * `coverUrl` (an external eacpm.gov.in link, not rendered anywhere yet, per
+   * CLAUDE.md §7's "no third-party CDN for critical assets"). When present,
+   * CoverArt renders this image instead of the typographic placeholder. */
+  imageUrl?: string;
   year: number | null;
   type: string;
 };
@@ -19,6 +24,15 @@ export const reportYears = Array.from(
 
 export function getReport(slug: string): Report | undefined {
   return reports.find((r) => r.slug === slug);
+}
+
+/** A publication older than this moves out of the default list and into Archives —
+ * same 5-year cutoff and "undated stays current" rule as content/media.ts's Notices. */
+export const ARCHIVE_AFTER_YEARS = 5;
+
+export function isArchived(r: Report, now: Date = new Date()): boolean {
+  if (r.year == null) return false;
+  return r.year < now.getFullYear() - ARCHIVE_AFTER_YEARS;
 }
 
 export function relatedReports(r: Report, n = 3): Report[] {

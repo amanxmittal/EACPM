@@ -107,6 +107,7 @@
 .ddDesc { font-size: 0.78rem; color: var(--app-text-muted); }
 
 .actions { display: flex; align-items: center; gap: 0.4rem; flex: none; }
+
 .iconBtn {
   display: inline-grid; place-items: center; width: 40px; height: 40px;
   border-radius: var(--app-radius); border: 1px solid var(--app-border);

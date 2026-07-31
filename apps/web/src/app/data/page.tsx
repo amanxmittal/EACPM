@@ -12,7 +12,9 @@ export const metadata: Metadata = {
 const gdpLabels = ["FY19", "FY20", "FY21", "FY22", "FY23", "FY24", "FY25", "FY26"];
 const gdpPoints = [6.5, 3.9, -5.8, 9.7, 7.0, 8.2, 7.6, 6.5];
 
-const multiples: SM[] = [
+// Exported so the homepage's Data & Dashboards carousel reads from this same
+// list — this page's "Key indicators" section stays the single source.
+export const multiples: SM[] = [
   { label: "Real GDP growth", value: "6.5", unit: "%", delta: "▲", dir: "up", series: [5.8, 6.1, 7.2, 8.7, 7.6, 6.9, 6.5] },
   { label: "CPI inflation", value: "4.8", unit: "%", delta: "▼", dir: "down", series: [6.8, 6.1, 5.7, 5.5, 5.1, 4.9, 4.8] },
   { label: "UPI volume", value: "18.4", unit: "bn/mo", delta: "▲", dir: "up", series: [8.7, 10.2, 11.4, 13.1, 14.9, 16.6, 18.4] },

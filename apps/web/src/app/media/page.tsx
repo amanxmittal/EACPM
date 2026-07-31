@@ -8,7 +8,10 @@ export const metadata: Metadata = {
   description: "Articles by EAC-PM members, EAC-PM in the news, and the gallery.",
 };
 
-const news = [
+// Exported so the homepage's "EAC-PM in news" card reads from this same list —
+// the press-coverage section here stays the single source of truth.
+export type PressMention = { title: string; href: string };
+export const news: PressMention[] = [
   { title: "GDP may grow 9–11% in FY22, 7% in FY23: Bibek Debroy", href: "https://eacpm.gov.in/news/gdp-may-grow-9-11-in-fy22-7-in-fy23-bibek-debroy/" },
   { title: "EAC-PM calls for a unified labour law", href: "https://eacpm.gov.in/news/economic-advisory-council-to-the-pm-calls-for-unified-labour-law/" },
   { title: "Economy to grow 7–7.5% next fiscal year: EAC-PM", href: "https://eacpm.gov.in/news/economy-to-grow-7-7-5-next-fiscal-year-eac-pm/" },

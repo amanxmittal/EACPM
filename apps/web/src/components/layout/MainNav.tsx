@@ -64,6 +64,9 @@ export function MainNav() {
         </Link>
 
         <div className={s.actions}>
+          <Link href="/contact" className={`ux4g-btn-primary ux4g-btn-md ${s.contactCta}`} aria-current={isActive("/contact") ? "page" : undefined}>
+            Contact Us
+          </Link>
           <button
             ref={searchBtnRef}
             className={s.iconBtn}
@@ -73,9 +76,6 @@ export function MainNav() {
           >
             <Icon name={searchOpen ? "close" : "search"} size={20} />
           </button>
-          <Link href="/contact" className={`ux4g-btn-primary ux4g-btn-md ${s.contactCta}`} aria-current={isActive("/contact") ? "page" : undefined}>
-            Contact Us
-          </Link>
           <button
             ref={menuBtnRef}
             className={`${s.iconBtn} ${s.menuBtn}`}

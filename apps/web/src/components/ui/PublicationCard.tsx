@@ -3,10 +3,10 @@ import { Icon } from "./Icon";
 import { CoverArt } from "./CoverArt";
 import { readMinutes, type Report } from "@/lib/reports";
 
-export function PublicationCard({ report }: { report: Report }) {
+export function PublicationCard({ report, layout = "grid" }: { report: Report; layout?: "grid" | "list" }) {
   return (
-    <article className="card card-hover pub-card">
-      <Link href={`/publications/${report.slug}`} aria-label={report.title}>
+    <article className={`card card-hover pub-card${layout === "list" ? " pub-card-list" : ""}`}>
+      <Link href={`/publications/${report.slug}`} aria-label={report.title} className="pub-cover-link">
         <CoverArt report={report} />
       </Link>
       <div className="pub-body">

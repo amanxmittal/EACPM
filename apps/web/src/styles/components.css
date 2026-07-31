@@ -33,6 +33,10 @@
 }
 .cover::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0.5;
   background: radial-gradient(120% 90% at 100% 0%, rgba(255,255,255,0.18), transparent 60%); }
+/* Real cover scan — object-position top keeps the series number/title (near
+   the top of the source page) in frame rather than the blank lower half. */
+.cover-photo { background: var(--app-bg-subtle); }
+.cover-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .cover[data-variant="Report"] { background: linear-gradient(150deg, var(--ux4g-color-primary-800, #301c7d), var(--ux4g-color-primary-950, #1a0e3d)); }
 .cover[data-variant="Partner Report"] { background: linear-gradient(150deg, var(--ux4g-color-tertiary-600, #8e55b3), var(--ux4g-color-tertiary-900, #462166)); }
 .cover[data-variant="Occasional Paper"] { background: linear-gradient(150deg, var(--ux4g-color-secondary-600, #a46800), var(--ux4g-color-secondary-900, #281600)); }
@@ -98,8 +102,35 @@
 /* Border, radius, height and the inner input reset now come from .ux4g-search /
    .ux4g-search-input. This only adds the toolbar width the vendor doesn't set. */
 .search-box { min-width: 240px; padding-inline: 0.8rem; }
-.search-box .ux4g-search-input { color: var(--app-text); }
+.search-box .ux4g-search-input {
+  color: var(--app-text);
+  /* Belt-and-suspenders: some browsers still paint a native focus ring on
+     <input> even with the vendor's own `outline: none`, which then shows up
+     as a second, narrower box nested inside the pill. */
+  border: 0; outline: none; box-shadow: none;
+}
+/* The vendor draws focus as an `outline` on the pill itself, but .ux4g-search
+   also sets `overflow: hidden` (to clip the search-btn's square corners inside
+   the rounded pill) — outlines get clipped by that in Chromium, so the ring
+   only shows on whichever edge isn't cut off. box-shadow paints as part of the
+   box's own rendering and isn't affected by its own overflow, so it wraps the
+   full pill cleanly instead. */
+.search-box:focus-within { outline: none; box-shadow: 0 0 0 2px var(--app-bg), 0 0 0 4px var(--app-accent); }
+.results-row { display: flex; align-items: center; justify-content: space-between; gap: var(--ux4g-space-4); }
 .results-count { color: var(--app-text-muted); font-size: 0.9rem; }
+/* Active/inactive read entirely off the vendor's own icon-btn variants
+   (primary-filled vs outline) rather than a hand-rolled active style. */
+.view-toggle { display: flex; align-items: center; gap: var(--ux4g-space-2); flex: none; }
+.view-toggle-label { font-size: var(--ux4g-fs-14, 0.85rem); font-weight: 600; color: var(--app-text-muted); margin-right: var(--ux4g-space-2); }
+
+/* ---- publication card, list layout ---- */
+/* Same card, laid out horizontally: fixed-width cover on the left, a full-width
+   row per item instead of a 3-up grid. */
+.pub-card-list { flex-direction: row; align-items: flex-start; gap: var(--ux4g-space-6); }
+.pub-card-list .pub-cover-link { flex: 0 0 clamp(140px, 22vw, 220px); }
+.pub-card-list .pub-body { flex: 1; min-width: 0; }
+.pub-card-list .pub-abstract { -webkit-line-clamp: 2; }
+@media (max-width: 640px) { .pub-card-list { flex-direction: column; } .pub-card-list .pub-cover-link { flex: none; width: 100%; } }
 
 /* ---- map illustration (contact page, stands in for the click-to-load embed) ---- */
 .map-card { padding: 0; position: relative; overflow: hidden; }

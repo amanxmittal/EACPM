@@ -14,8 +14,19 @@ const quick = [
   { label: "Notices", href: "/notices" },
   { label: "Contact Us", href: "/contact" },
 ];
+
+// Pulled out of `policies` into their own "Useful links" column, in this
+// order — the rest stay under "Policies & Compliance".
+const USEFUL_LINK_SLUGS = ["archive-policy", "sitemap", "help", "feedback", "terms-conditions", "rti", "web-information-manager"];
+
+// Illustrative only (MVP), pending live analytics — Indian digit grouping.
+const VISITOR_COUNT = "1,28,45,671";
+
 /* eslint-disable @next/next/no-img-element */
 export function SiteFooter() {
+  const usefulLinks = USEFUL_LINK_SLUGS.map((slug) => policies.find((p) => p.slug === slug)).filter((p) => p != null);
+  const compliancePolicies = policies.filter((p) => !USEFUL_LINK_SLUGS.includes(p.slug));
+
   return (
     <footer className={s.footer}>
       <div className="ux4g-container">
@@ -34,6 +45,20 @@ export function SiteFooter() {
               matters. Evidence, data and analysis, in the public interest.
             </p>
             <p className={s.owned}>Content owned &amp; maintained by EAC-PM.</p>
+            <span className={s.visitorCounter} title="Illustrative visitor count (MVP)">
+              <span className={s.visitorLabel}>
+                <Icon name="eye" size={15} /> Site Visitors
+              </span>
+              <span className={s.visitorDigits} aria-label={`${VISITOR_COUNT} site visitors`}>
+                {VISITOR_COUNT.split("").map((c, i) =>
+                  c === "," ? (
+                    <span key={i} className={s.visitorComma} aria-hidden>,</span>
+                  ) : (
+                    <span key={i} className={s.visitorDigit} aria-hidden>{c}</span>
+                  ),
+                )}
+              </span>
+            </span>
           </div>
 
           <nav aria-label="Explore">
@@ -58,10 +83,21 @@ export function SiteFooter() {
             </div>
           </nav>
 
+          <nav aria-label="Useful links">
+            <p className={s.colTitle}>Useful links</p>
+            <div className={s.linkList}>
+              {usefulLinks.map((p) => (
+                <Link key={p.slug} href={`/policies/${p.slug}`}>
+                  {p.title}
+                </Link>
+              ))}
+            </div>
+          </nav>
+
           <nav aria-label="Policies">
             <p className={s.colTitle}>Policies &amp; Compliance</p>
             <div className={s.linkList}>
-              {policies.map((p) => (
+              {compliancePolicies.map((p) => (
                 <Link key={p.slug} href={`/policies/${p.slug}`}>
                   {p.title}
                 </Link>
@@ -75,14 +111,7 @@ export function SiteFooter() {
             © 2026 EAC-PM. Designed &amp; developed by UX4G.
           </p>
           <div className={s.meta}>
-            <span className={s.counter} title="Illustrative visitor count (MVP)">
-              <Icon name="users" size={15} /> Visitors:{" "}
-              <span className={s.counterNum}>12,48,097</span>
-            </span>
             <span>Last updated: 24 Jul 2026</span>
-            <Link href="/policies/feedback" className="link-arrow">
-              Feedback
-            </Link>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { PublicationCard } from "@/components/ui/PublicationCard";
-import { reportTypes, reportYears, type Report } from "@/lib/reports";
+import { reportTypes, reportYears, isArchived, type Report } from "@/lib/reports";
 
 const PER_PAGE = 12;
 
@@ -23,18 +23,25 @@ export function PublicationsExplorer({
   reports,
   initialType = "All",
   initialQuery = "",
+  initialArchive = false,
 }: {
   reports: Report[];
   initialType?: string;
   initialQuery?: string;
+  initialArchive?: boolean;
 }) {
   const [type, setType] = useState(initialType);
   const [year, setYear] = useState<"All" | number>("All");
   const [q, setQ] = useState(initialQuery);
+  const [isArchiveView, setIsArchiveView] = useState(initialArchive);
 
+  // Archive is its own base pool (current vs archived) — the type/year/search
+  // filters then narrow whichever pool is active, same idea as /notices'
+  // Current/Archive split but with the richer filter set Publications already has.
   const filtered = useMemo(
     () =>
       reports.filter((r) => {
+        if (isArchived(r) !== isArchiveView) return false;
         if (type !== "All" && r.type !== type) return false;
         if (year !== "All" && r.year !== year) return false;
         if (q) {
@@ -43,11 +50,12 @@ export function PublicationsExplorer({
         }
         return true;
       }),
-    [reports, type, year, q],
+    [reports, isArchiveView, type, year, q],
   );
 
   const types = ["All", ...reportTypes];
 
+  const [view, setView] = useState<"grid" | "list">("grid");
   const [page, setPage] = useState(1);
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const gridRef = useRef<HTMLDivElement>(null);
@@ -57,7 +65,7 @@ export function PublicationsExplorer({
   // can strand the reader on a page that no longer exists.
   useEffect(() => {
     setPage(1);
-  }, [type, year, q]);
+  }, [type, year, q, isArchiveView]);
 
   function goTo(next: number) {
     setPage(next);
@@ -75,6 +83,16 @@ export function PublicationsExplorer({
               {t}
             </button>
           ))}
+          {/* Archive is a separate base pool (current vs archived), not another
+              type — trailing and visually distinct, same idea as /notices. */}
+          <button
+            type="button"
+            className={`ux4g-choice-chip-md chip-trailing ${isArchiveView ? "active" : ""}`}
+            aria-pressed={isArchiveView}
+            onClick={() => setIsArchiveView((v) => !v)}
+          >
+            Archives
+          </button>
         </div>
         <div className="cluster">
           <select
@@ -104,18 +122,44 @@ export function PublicationsExplorer({
         </div>
       </div>
 
-      <p className="results-count" aria-live="polite">
-        {filtered.length} publication{filtered.length !== 1 ? "s" : ""}
-        {type !== "All" ? ` · ${type}` : ""}
-        {totalPages > 1 ? ` · page ${page} of ${totalPages}` : ""}
-      </p>
+      <div className="results-row">
+        <p className="results-count" aria-live="polite">
+          {filtered.length} publication{filtered.length !== 1 ? "s" : ""}
+          {isArchiveView ? " · Archives" : ""}
+          {type !== "All" ? ` · ${type}` : ""}
+          {totalPages > 1 ? ` · page ${page} of ${totalPages}` : ""}
+        </p>
+        <div className="view-toggle" role="group" aria-label="View as">
+          <span className="view-toggle-label">View</span>
+          <button
+            type="button"
+            className={`ux4g-icon-btn ux4g-icon-btn-sm ${view === "grid" ? "ux4g-icon-btn-primary" : "ux4g-icon-btn-outline-primary"}`}
+            aria-pressed={view === "grid"}
+            aria-label="Grid view"
+            title="Grid"
+            onClick={() => setView("grid")}
+          >
+            <Icon name="grid" size={16} />
+          </button>
+          <button
+            type="button"
+            className={`ux4g-icon-btn ux4g-icon-btn-sm ${view === "list" ? "ux4g-icon-btn-primary" : "ux4g-icon-btn-outline-primary"}`}
+            aria-pressed={view === "list"}
+            aria-label="List view"
+            title="List"
+            onClick={() => setView("list")}
+          >
+            <Icon name="list" size={16} />
+          </button>
+        </div>
+      </div>
 
       {filtered.length ? (
         <>
           <div ref={gridRef} className="grid ux4g-row ux4g-mt-l" style={{ scrollMarginTop: "120px" }}>
             {paged.map((r) => (
-              <div key={r.slug} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-4">
-                <PublicationCard report={r} />
+              <div key={r.slug} className={view === "list" ? "ux4g-col-12" : "ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-4"}>
+                <PublicationCard report={r} layout={view} />
               </div>
             ))}
           </div>
@@ -181,6 +225,7 @@ export function PublicationsExplorer({
               setType("All");
               setYear("All");
               setQ("");
+              setIsArchiveView(false);
             }}
           >
             Clear filters

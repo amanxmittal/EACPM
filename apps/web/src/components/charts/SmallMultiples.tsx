@@ -12,9 +12,21 @@ export type SM = {
 
 const palette = ["var(--cat-1)", "var(--cat-2)", "var(--cat-3)", "var(--app-gold)", "var(--cat-1)", "var(--cat-2)"];
 
-function MiniArea({ series, color, idx }: { series: number[]; color: string; idx: number }) {
-  const W = 130;
-  const H = 34;
+export function MiniArea({
+  series,
+  color,
+  idx,
+  width = 130,
+  height = 34,
+}: {
+  series: number[];
+  color: string;
+  idx: number;
+  width?: number;
+  height?: number;
+}) {
+  const W = width;
+  const H = height;
   const pad = 2;
   const min = Math.min(...series);
   const max = Math.max(...series);
@@ -23,7 +35,7 @@ function MiniArea({ series, color, idx }: { series: number[]; color: string; idx
   const line = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ");
   const areaD = `${line} L${(W - pad).toFixed(1)} ${H} L${pad} ${H} Z`;
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="34" preserveAspectRatio="none" aria-hidden style={{ display: "block" }}>
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={H} preserveAspectRatio="none" aria-hidden style={{ display: "block" }}>
       <defs>
         <linearGradient id={`sm${idx}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={color} stopOpacity="0.25" />

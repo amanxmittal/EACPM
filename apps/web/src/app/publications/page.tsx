@@ -19,6 +19,7 @@ export default async function PublicationsPage({
   const sp = await searchParams;
   const initialType = typeof sp.type === "string" ? sp.type : "All";
   const initialQuery = typeof sp.q === "string" ? sp.q : "";
+  const initialArchive = sp.archive === "1";
   const featured = reports[0];
 
   return (
@@ -74,7 +75,7 @@ export default async function PublicationsPage({
 
       <section className="section">
         <div className="ux4g-container">
-          <PublicationsExplorer reports={reports} initialType={initialType} initialQuery={initialQuery} />
+          <PublicationsExplorer reports={reports} initialType={initialType} initialQuery={initialQuery} initialArchive={initialArchive} />
         </div>
       </section>
     </>

@@ -8,7 +8,8 @@
    stays in effect for every other page. */
 main:has(> :global(.affil):last-child) + .footer,
 main:has(> :global(.tint):last-child) + .footer { margin-top: 0; }
-.top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr; gap: 2rem; padding-block: clamp(2.5rem, 5vw, 4rem); }
+.top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 2rem; padding-block: clamp(2.5rem, 5vw, 4rem); }
+@media (max-width: 1100px) { .top { grid-template-columns: 1.5fr 1fr 1fr; } }
 @media (max-width: 900px) { .top { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .top { grid-template-columns: 1fr; } }
 
@@ -17,6 +18,7 @@ main:has(> :global(.tint):last-child) + .footer { margin-top: 0; }
 .brandName { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
 .about { color: var(--app-text-muted); font-size: 0.9rem; max-width: 34ch; }
 .owned { margin-top: 1rem; font-size: 0.82rem; color: var(--app-text-subtle); }
+.owned + .visitorCounter { margin-top: 1rem; }
 
 .colTitle { font-size: var(--ux4g-fs-12, 0.75rem); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--app-text-muted); margin-bottom: 0.9rem; }
 .linkList { display: flex; flex-direction: column; gap: 0.55rem; }
@@ -26,5 +28,20 @@ main:has(> :global(.tint):last-child) + .footer { margin-top: 0; }
 .bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 1.5rem; padding-block: 1.2rem; border-top: 1px solid var(--app-border); font-size: 0.82rem; color: var(--app-text-muted); }
 .credit strong { color: var(--app-text); font-weight: 600; }
 .meta { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
-.counter { display: inline-flex; align-items: center; gap: 0.4rem; }
-.counterNum { font-weight: 700; color: var(--app-text); font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }
+
+/* Site-visitors counter — an "LED digit" badge, illustrative (MVP) until live
+   analytics are wired. */
+.visitorCounter {
+  display: inline-flex; align-items: center; gap: 0.5rem; height: 32px;
+  padding-inline: 0.65rem; border-radius: var(--app-radius);
+  border: 1px solid var(--app-border); background: var(--app-surface);
+  color: var(--app-text-muted); font-size: 0.76rem; font-weight: 600; white-space: nowrap;
+}
+.visitorLabel { display: inline-flex; align-items: center; gap: 0.35rem; }
+.visitorDigits { display: inline-flex; align-items: center; gap: 2px; }
+.visitorDigit {
+  display: inline-grid; place-items: center; min-width: 16px; height: 20px; padding-inline: 2px;
+  border-radius: 4px; background: var(--app-accent-strong, var(--app-accent));
+  color: var(--app-on-accent); font-family: var(--font-display); font-weight: 700; font-size: 0.76rem;
+}
+.visitorComma { color: var(--app-text-subtle); font-weight: 700; }

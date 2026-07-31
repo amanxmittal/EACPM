@@ -13,6 +13,7 @@
   "abstract": "The conduct of elections in India demands substantial manpower, particularly polling personnel (PP), to carry out the poll at polling stations (PSs). This paper estimates the potential reduction in PP deployment under a simultaneous election framework. There are other potential benefits of simultaneous elections, but they are outside the scope of this paper. The Election Commission of India (ECI) has benchmarks for the deployment of PP per PS for different kinds of elections. According to these, the composition of a polling party for a PS is a Presiding Officer (PRO) plus 3 Polling Officers (POs) for a State Assembly election, a PRO plus 4 POs for a Lok Sabha election, and a PRO plus 5 POs for a simultaneous election. These benchmarks are tested against actual PP deployment numbers for certain election cycles and found to provide a good fit. Thus, using ECI benchmarks, we get a gross baseline reduction of 33 percent in PP deployment under the simultaneous election framework. This is because while 9 PP are required per PS to conduct a poll separately for State Assembly (PRO plus 3 POs) and Lok Sabha (PRO plus 4 POs), only 6 PP are required per PS to conduct a simultaneous poll (PRO plus 5 POs).",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/ESTIMATING-REDUCTION-IN-POLLING-PERSONNEL-DEPLOYMENT-UNDER-SIMULTANEOUS-ELECTIONS.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/Screenshot-2026-03-18-141251.png",
+  "imageUrl": "/img/Working-paper-1.png",
   "year": 2026,
   "type": "Working Paper",
   "slug": "estimating-reduction-in-polling-personnel-deployment-under-simultaneou"
@@ -22,6 +23,7 @@
   "abstract": "The policy on priority sector lending has been in place in India for almost five decades and banks are required to direct at least 40% of their overall credit towards the priority sector. The priority sector encompasses a broad range of economic activities such as the provision of credit to small and marginal farmers, micro enterprises and weaker sections aiming to address systemic equity gaps. Growth considerations are also addressed through this policy as the priority sector includes activities that serve as economic multipliers like exports, medium enterprises and corporate farmers.",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/05/Priority-Sector-Lending-impact-analysis-final-revised.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/05/economy-impact.png",
+  "imageUrl": "/img/working%20papers/economy-impact.png",
   "year": 2026,
   "type": "Working Paper",
   "slug": "economic-impact-analysis-of-priority-sector-lending"
@@ -31,6 +33,7 @@
   "abstract": "Financial inclusion represents a fundamental human rights imperative, linking economic access to dignity and opportunity. India’s decade-long journey toward universal financial inclusion offers crucial insights into how digital public infrastructure can overcome traditional barriers to financial access. Through the strategic deployment of the India Stack, comprising digital identity (Aadhaar), universal banking (Jan Dhan Yojana), and interoperable payments (UPI), India has demonstrated that financial inclusion at scale is achievable when governments create foundational infrastructure that reduces transaction costs and enables market innovation. This article examines how complementary interventions in savings, insurance, and credit create synergies exceeding their individual impacts, while acknowledging critical concerns about credit quality, sustainability, and the risk of overindebtedness. The evidence suggests that while India has made remarkable progress in expanding financial access, questions remain about whether this credit expansion leads to productive investment or consumption, and whether current lending practices are creating sustainable pathways out of poverty or new forms of debt dependency.",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/Financial-Inclusion-as-a-Path-to-Equality-Lessons-from-India.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/03/Screenshot-2026-03-05-121602.png",
+  "imageUrl": "/img/working%20papers/Finanacial-inclusion.png",
   "year": 2026,
   "type": "Working Paper",
   "slug": "financial-inclusion-as-a-path-to-equality-lessons-from-india"
@@ -40,6 +43,7 @@
   "abstract": "India’s labour market and its large informal enterprise sector present two interlinked development challenges. On the labour side, the persistence of informal employment, low female labour force participation, minimum wage non-compliance, and an expanding youth workforce have been central concerns in India’s employment discourse (World Bank, 2016; La Porta and Shleifer, 2014). On the enterprise side, the unincorporated sector comprising household-owned and individually operated firms outside the Companies Act continues to account for a substantial share of employment and output, yet remains constrained by low productivity, limited access to institutional credit, and weak integration into formal regulatory and financial systems (NCEUS, 2009). Recent policy interest has converged on two levers for addressing these challenges simultaneously: ICT adoption/digitalisation2 and enterprise formalization. ICT adoption has been identified as a potential productivity-enhancing mechanism for micro and small enterprises, while government-sponsored registration programmes such as Udyam and Udyam Assist have been introduced with the explicit aim of extending formal credit access to previously excluded firms. Understanding whether and to what degree these two pathways deliver on their intended objectives requires rigorous empirical analysis using representative data.",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/06/ASUSE-PLFS-Working-Paper-June-2026.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/06/Labour-market.jpg",
+  "imageUrl": "/img/working%20papers/Labour-market.jpg",
   "year": 2026,
   "type": "Working Paper",
   "slug": "formalization-of-labour-market-in-india-evidence-from-plfs-and-asuse-2"
@@ -49,6 +53,7 @@
   "abstract": "India has witnessed unprecedented infrastructure development over the past decade. A cornerstone of this transformation is the PM GatiShakti National Master Plan (PMGS-NMP)1, launched in October 2021, which adopts an integrated, multimodal approach to infrastructure planning aimed at generating strong growth multipliers. Within this framework, high-quality mass transit systems—particularly metro rail corridors—have emerged as a critical pillar. With rapid expansion across cities, India now boasts the world’s third-largest metro network. Moving beyond the conventional focus on output and employment multipliers, this paper is among the first to examine how large-scale urban transport infrastructure affects household financial behaviour in India. Using granular home-loan–level data, we assess the impact of metro connectivity on borrower delinquency and prepayment behaviour across urban neighbourhoods. The underlying mechanism is straightforward: improved access to efficient public transport reduces households’ dependence on private vehicles, thereby lowering recurring transportation expenses. This, in turn, eases the burden of servicing EMIs—among the most significant fixed financial commitments for urban households. Our findings reveal economically meaningful improvements in household financial discipline in metro-served areas. In Hyderabad, households located in metro-connected PIN codes exhibit a 1.7% decline in delinquency incidence and a 1.8% increase in prepayment activity. The effects are even stronger in Bengaluru, where delinquency falls by 2.4% and prepayment rises by 3.5%. Evidence from Delhi points to an even larger 4.42% reduction in mortgage delinquency alongside a 1.38% increase in prepayments. Complementary vehicle registration data indicate that these gains are driven by reduced reliance on private automobiles. Beyond improved repayment behaviour, the results also suggest a broad-based reduction in household indebtedness and a decline in average debt burdens. Overall, investments in urban mobility infrastructure over the last decade —particularly metro rail expansion—have translated into stronger household liquidity management and more disciplined borrowing. These behavioural improvements form a critical foundation for household financial resilience and contribute meaningfully to broader financial stability.",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2026/01/Golden-Decade-of-Infrastructure-Development-in-India-final-rev.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2026/01/Screenshot-2026-01-15-120225.png",
+  "imageUrl": "/img/working%20papers/golden-decade.png",
   "year": 2026,
   "type": "Working Paper",
   "slug": "golden-decade-of-infrastructure-development-in-india-with-special-refe"
@@ -292,6 +297,7 @@
   "abstract": "The global economy is in a phase of churn and being closely watched and analyzed by economists and policymakers everywhere. There are, however, major demographic transitions that are also underway across countries – but mostly going unnoticed by analysts ranging from economy watchers to democracy-watchers. These silent transformations have the power to reshape societies and states. Ironically, of the four megatrends whose cascading effects are bringing about these transformations -demography, technology, economy and climate change3- the forecasts for demography are the most predictable. Shifting demographic trends are aggravating economic disparity within and between countries, straining governance and fuelling friction between states and people.",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Share-of-Religious-Minorities-EAC-PM-Working-Paper-1-1.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2024/05/Share-of-Religious-Minorities-EAC-PM-Working-Paper_page-0001-1.jpg",
+  "imageUrl": "/img/Reports/Share-of-Religious-Minorities-EAC-PM-Working-Paper_page-0001-1.jpg",
   "year": 2024,
   "type": "Report",
   "slug": "share-of-religious-minorities-a-cross-country-analysis"
@@ -436,6 +442,7 @@
   "abstract": "There has been almost no discussion about the existing list of monuments of national importance and how a monument or a site is so declared. Scores of minor and insignificant monuments have been declared as MNI. Therefore, the current list requires immediate attention for drastic rationalisation.",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2023/01/Monuments-of-National-Importance.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2023/01/Monuments-of-National-Importance.jpg",
+  "imageUrl": "/img/Reports/Monuments-of-National-Importance.jpg",
   "year": 2023,
   "type": "Report",
   "slug": "monuments-of-national-lmportance"
@@ -571,6 +578,7 @@
   "abstract": "The report makes an attempt to address various issues associated with India’s diverse and ancient composite heritage.",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/09/Cultural-Heritage-06092022-1.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/09/Cultural-Heritage-Cover-A.jpg",
+  "imageUrl": "/img/Reports/Cultural-Heritage-Cover-A.jpg",
   "year": 2022,
   "type": "Report",
   "slug": "cultural-heritage-an-urgent-need-to-popularize-and-protect"
@@ -580,6 +588,7 @@
   "abstract": "Ideas and inventions have been passed down from generation to generation within many communities since time immemorial. Today’s practice can be defined as a collective understanding of all inventions and developments that occurred over time and were then passed down as Traditional Knowledge (TK).",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/12/Documenting-Traditional-Knowledge-2.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/12/Documenting-Traditional-2.jpg",
+  "imageUrl": "/img/Reports/Documenting-Traditional-2.jpg",
   "year": 2022,
   "type": "Report",
   "slug": "documenting-traditional-knowledge"
@@ -598,6 +607,7 @@
   "abstract": "This report contains all the Annexures for Report of the Beekeeping Development Committee",
   "pdfUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/Report-of-the-Beekeeping-Development-Committee_Inner_Part-II.pdf",
   "coverUrl": "https://eacpm.gov.in/wp-content/uploads/2022/01/Beekeeping-2-A.jpg",
+  "imageUrl": "/img/Reports/Beekeeping-2-A.jpg",
   "year": 2022,
   "type": "Report",
   "slug": "report-of-the-beekeeping-development-committee-part-ii"

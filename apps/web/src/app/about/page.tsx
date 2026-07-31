@@ -3,21 +3,12 @@ import { members } from "@/content/team";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal, RevealStagger } from "@/components/motion/Reveal";
 import { ChapterArt } from "@/components/art/ChapterArt";
+import { MemberAvatar } from "@/components/ui/MemberAvatar";
 
 export const metadata: Metadata = {
   title: "About EAC-PM",
   description: "Mandate, constitution, team and history of the Economic Advisory Council to the Prime Minister.",
 };
-
-function initials(name: string) {
-  return name
-    .replace(/^(Dr|Shri|Prof|Professor|Mr|Ms|Smt)\.?\s+/i, "")
-    .split(/\s+/)
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-}
 
 export default function AboutPage() {
   return (
@@ -33,6 +24,23 @@ export default function AboutPage() {
             An independent body constituted to advise the Prime Minister on economic and related
             matters — analysing the economy and offering evidence-based policy counsel.
           </p>
+        </div>
+      </section>
+
+      <section className="section tint" id="chairperson" style={{ scrollMarginTop: "96px" }}>
+        <div className="ux4g-container container-narrow">
+          <Reveal>
+            <span className="kicker">Message from the Chairperson</span>
+            <blockquote className="t-h3 balance dropcap ux4g-mt-s" style={{ fontWeight: 600 }}>
+              The Council&apos;s work is to bring evidence to bear on the questions that matter most
+              for India&apos;s growth — and to state plainly what the data does, and does not yet,
+              show.
+            </blockquote>
+            <p className="text-muted ux4g-mt-m">
+              Chairperson&apos;s portrait, signed message and an optional captioned video with a
+              transcript are placeholders pending official assets.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -69,23 +77,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section tint" id="chairperson" style={{ scrollMarginTop: "96px" }}>
-        <div className="ux4g-container container-narrow">
-          <Reveal>
-            <span className="kicker">Message from the Chairperson</span>
-            <blockquote className="t-h3 balance dropcap ux4g-mt-s" style={{ fontWeight: 600 }}>
-              The Council&apos;s work is to bring evidence to bear on the questions that matter most
-              for India&apos;s growth — and to state plainly what the data does, and does not yet,
-              show.
-            </blockquote>
-            <p className="text-muted ux4g-mt-m">
-              Chairperson&apos;s portrait, signed message and an optional captioned video with a
-              transcript are placeholders pending official assets.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
       <section className="section" id="team" style={{ scrollMarginTop: "96px" }}>
         <div className="ux4g-container">
           <SectionHeader eyebrow="Team" title="Members &amp; officials">
@@ -96,12 +87,10 @@ export default function AboutPage() {
             {members.map((m) => (
               <div key={m.slug} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-3">
                 <div className="card member">
-                  <span className="ux4g-avatar avatar-gradient" aria-hidden>
-                    {initials(m.name)}
-                  </span>
+                  <MemberAvatar member={m} />
                   <div>
                     <h3>{m.name}</h3>
-                    <p className="text-muted t-small">{m.affiliation} · designation pending</p>
+                    <p className="text-muted t-small">{m.affiliation} · {m.designation ?? "designation pending"}</p>
                   </div>
                 </div>
               </div>

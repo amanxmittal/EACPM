@@ -1,12 +1,18 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
-import { CoverArt } from "@/components/ui/CoverArt";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { HeroCarousel, type HeroSlide } from "@/components/art/HeroCarousel";
-import { LineChart } from "@/components/charts/LineChart";
-import { reports, readMinutes } from "@/lib/reports";
-import { articles, notices, noticeStatusClass, noticeStatusLabelShort } from "@/content/media";
+import { HomePublications } from "@/components/publications/HomePublications";
+import { HomeNewsroom } from "@/components/media/HomeNewsroom";
+import { HomeNotices } from "@/components/notices/HomeNotices";
+import { HomeDashboards } from "@/components/data/HomeDashboards";
+import { news as pressCoverage } from "@/app/media/page";
+import { multiples as indicators } from "@/app/data/page";
+import { reports } from "@/lib/reports";
+import { articles, notices } from "@/content/media";
+import { members } from "@/content/team";
+import { MemberAvatar } from "@/components/ui/MemberAvatar";
 import { channels } from "@/content/channels";
 
 // Rotating hero backdrop: India's economy across sectors. Real, CC BY-SA photographs,
@@ -16,10 +22,6 @@ const heroSlides: HeroSlide[] = [
   { src: "/img/delhi-metro.jpg", theme: "People & mobility", place: "Delhi Metro", alt: "Commuters boarding a Delhi Metro train at a station platform", credit: { name: "Celestinesucess", href: "https://commons.wikimedia.org/wiki/File:Delhi_Metro_Station_(P1140769).jpg" } },
   { src: "/img/jnpt-port.jpg", theme: "Trade & exports", place: "Jawaharlal Nehru Port, Navi Mumbai", alt: "Gantry cranes loading containers onto a ship at Jawaharlal Nehru Port", credit: { name: "Ccmarathe", href: "https://commons.wikimedia.org/wiki/File:JNPT_Port_container_handling.jpg" } },
 ];
-
-// Illustrative UPI volume for the dashboard preview.
-const upiLabels = ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
-const upiPoints = [0.8, 1.3, 2.3, 4.5, 8.7, 12.5, 15.8, 18.4];
 
 type Affiliation = { src: string; alt: string; href: string; wordmark?: { top: string; bottom: string } };
 const affiliations: Affiliation[] = [
@@ -37,9 +39,6 @@ const affiliations: Affiliation[] = [
 export default function Home() {
   const feature = reports[0];
   const lead = reports[1] ?? reports[0];
-  const readingList = reports.slice(2, 7);
-  const featureExcerpt = feature.abstract.split(". ").slice(1, 3).join(". ").slice(0, 240);
-  const featureQuote = feature.abstract.split(". ")[0];
 
   const whatsNew = [
     { when: "This week", title: feature.title, note: `${feature.type} · ${feature.year ?? "recent"}`, href: `/publications/${feature.slug}` },
@@ -72,132 +71,77 @@ export default function Home() {
         </HeroCarousel>
       </section>
 
-      {/* ============ 3 · FEATURED STORY ============ */}
-      <section className="story">
+      {/* ============ 2 · MESSAGE FROM THE CHAIRPERSON ============ */}
+      <section className="section tint">
         <div className="ux4g-container">
-          <div className="story-grid">
-            <Reveal className="story-cover">
-              <span className="story-tag">Featured paper</span>
-              <div className="frame">
-                <CoverArt report={feature} />
-              </div>
+          <div className="chair-grid">
+            <Reveal className="chair-photo">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/img/chairman-NITI.jpeg" alt="Portrait of the Chairperson, EAC-PM" />
             </Reveal>
-            <div>
-              <span className="story-flag">{feature.type}</span>
-              <h2>{feature.title}</h2>
-              <p className="story-quote">{featureQuote}.</p>
-              <p className="story-dek">{featureExcerpt}.</p>
-              <div className="story-meta">
-                <div><span className="k">Published</span><span className="v">{feature.year ?? "Recent"}</span></div>
-                <div><span className="k">Read time</span><span className="v">{readMinutes(feature)} min</span></div>
-                <div><span className="k">Series</span><span className="v">EAC-PM</span></div>
-              </div>
-              <div className="story-actions">
-                <Link href={`/publications/${feature.slug}`} className="ux4g-btn-primary ux4g-btn-lg">
-                  Read the paper <Icon name="arrowRight" size={18} />
-                </Link>
-                <a href={feature.pdfUrl} target="_blank" rel="noopener noreferrer" className="ux4g-btn-outline-primary ux4g-btn-lg">
-                  <Icon name="download" size={18} /> PDF
-                </a>
-              </div>
-            </div>
+            <Reveal delay={120}>
+              <span className="kicker">Message from the Chairperson</span>
+              <blockquote className="t-h3 balance dropcap ux4g-mt-s" style={{ fontWeight: 600 }}>
+                The Council&apos;s work is to bring evidence to bear on the questions that matter most
+                for India&apos;s growth — and to state plainly what the data does, and does not yet,
+                show.
+              </blockquote>
+              <p className="text-muted ux4g-mt-m">
+                A signed message and an optional captioned video with a transcript are placeholders
+                pending official assets.
+              </p>
+              <Link href="/about#chairperson" className="ux4g-btn-outline-primary ux4g-btn-md ux4g-mt-l">
+                Read the full message <Icon name="arrowRight" size={18} />
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ============ 4 · EDITORIAL BANNER (photograph) ============ */}
-      <section className="banner bleed">
-        <div className="bg" aria-hidden>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/mumbai-marine-drive.jpg" alt="" loading="lazy" />
-        </div>
-        <div className="scrim" aria-hidden />
-        <div className="ux4g-container inner">
-          <span className="banner-kicker">The stakes</span>
-          <h2>A billion people. One economy the world is watching.</h2>
-          <p>
-            From digital public infrastructure to the mathematics of growth, the choices made here
-            reach a fifth of humanity. The Council&apos;s work is to bring evidence to those choices.
-          </p>
-          <div className="actions">
-            <Link href="/publications" className="ux4g-btn ux4g-btn-lg btn-light">Read the analysis</Link>
-            <Link href="/about" className="ux4g-btn ux4g-btn-lg btn-ondark">About the Council</Link>
+      {/* ============ 3 · TEAM (horizontal scroll) ============ */}
+      <section className="team-section">
+        <div className="ux4g-container">
+          <div className="pubs-head">
+            <h2>Team</h2>
+            <Link href="/about#team" className="view-all">View team <Icon name="arrowRight" size={16} /></Link>
+          </div>
+          <div className="rail">
+            {members.map((m) => (
+              <div key={m.slug} className="card member team-rail-card">
+                <MemberAvatar member={m} />
+                <div>
+                  <h3>{m.name}</h3>
+                  <p className="text-muted t-small">{m.affiliation} · {m.designation ?? "designation pending"}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-        <span className="img-credit">
-          Marine Drive, Mumbai ·{" "}
-          <a href="https://commons.wikimedia.org/wiki/File:Marine_Drive_of_Mumbai.jpg" target="_blank" rel="noopener noreferrer">BroKholi94 / CC BY-SA 4.0</a>
-        </span>
       </section>
 
-      {/* ============ 5 · PUBLICATIONS (magazine) ============ */}
+      {/* ============ 4 · PUBLICATIONS (paired carousel cards) ============ */}
       <section className="pubs">
         <div className="ux4g-container">
           <div className="pubs-head">
             <h2>Publications</h2>
-            <Link href="/publications" className="view-all">All {reports.length} publications <Icon name="arrowRight" size={16} /></Link>
+            <Link href="/publications" className="view-all">View all publications <Icon name="arrowRight" size={16} /></Link>
           </div>
-          <div className="pubs-grid">
-            <Link href={`/publications/${lead.slug}`} className="pub-lead">
-              <CoverArt report={lead} />
-              <div className="body">
-                <span className="ux4g-tag-tonal-primary ux4g-tag-s">{lead.type}</span>
-                <h3 className="ux4g-mt-xs">{lead.title}</h3>
-                <p>{lead.abstract}</p>
-              </div>
-            </Link>
-            <div className="readlist">
-              {readingList.map((r, i) => (
-                <Link key={r.slug} href={`/publications/${r.slug}`} className="readrow">
-                  <span className="no">{String(i + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h4>{r.title}</h4>
-                    <div className="meta">{r.type} · {r.year ?? "Recent"} · {readMinutes(r)} min read</div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+          <HomePublications reports={reports} excludeSlug={feature.slug} />
         </div>
       </section>
 
-      {/* ============ 6 · DASHBOARDS PROMO ============ */}
+      {/* ============ 5 · DASHBOARDS (paired carousel cards) ============ */}
       <section className="dashp bleed">
         <div className="ux4g-container">
-          <div className="dashp-grid">
-            <div>
-              <h2>Data & Dashboards</h2>
-              <p>
-                For every data-heavy paper, an interactive dashboard. Filter across identifiers, read
-                the chart, then take the dataset with you.
-              </p>
-              <div className="points">
-                <span className="point"><span className="tick"><Icon name="check" size={14} /></span> Source, period and last-updated on every series</span>
-                <span className="point"><span className="tick"><Icon name="check" size={14} /></span> An accessible data table ships with every chart</span>
-                <span className="point"><span className="tick"><Icon name="check" size={14} /></span> CSV and XLSX downloads, no login</span>
-              </div>
-              <div className="ux4g-mt-xl">
-                <Link href="/data" className="ux4g-btn-primary ux4g-btn-lg">Open the dashboards <Icon name="arrowRight" size={18} /></Link>
-              </div>
-            </div>
-            <div className="dashp-preview">
-              <div className="bar">
-                <span className="legend"><span className="sw" /> UPI transaction volume (bn / month)</span>
-                <span className="flag-inline"><span className="d" aria-hidden /> Illustrative</span>
-              </div>
-              <LineChart
-                labels={upiLabels}
-                series={[{ name: "UPI volume (bn/mo)", color: "var(--cat-1)", points: upiPoints }]}
-                height={260}
-                ariaSummary="Illustrative UPI monthly transaction volume rising from about 0.8 billion in 2019 to about 18 billion in 2026."
-                caption="Illustrative shape only. The real series will be sourced from NPCI with period and retrieval date."
-              />
-            </div>
+          <div className="pubs-head">
+            <h2>Data &amp; Dashboards</h2>
+            <Link href="/data" className="view-all">Open the dashboards <Icon name="arrowRight" size={16} /></Link>
           </div>
+          <HomeDashboards indicators={indicators} />
         </div>
       </section>
 
-      {/* ============ 7 · INSTITUTION (photograph) ============ */}
+      {/* ============ 6 · INSTITUTION (photograph) ============ */}
       <section className="inst">
         <div className="ux4g-container">
           <div className="inst-grid">
@@ -222,45 +166,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ 8 · NEWSROOM ============ */}
+      {/* ============ 7 · NOTICES (paired carousel cards) ============ */}
       <section className="news">
         <div className="ux4g-container">
-          <div className="news-grid">
-            <div>
-              <div className="news-h">
-                <h2>Members in the media</h2>
-                <Link href="/media" className="view-all">All media <Icon name="arrowRight" size={16} /></Link>
-              </div>
-              <div className="media-list">
-                {articles.map((a) => (
-                  <a key={a.href} href={a.href} target="_blank" rel="noopener noreferrer" className="media-item">
-                    <div>
-                      <div className="t">{a.title}</div>
-                      <div className="byline">{a.author}</div>
-                    </div>
-                    <span className="outlet">{a.outlet}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="news-h">
-                <h2>Notices</h2>
-                <Link href="/notices" className="view-all">All notices <Icon name="arrowRight" size={16} /></Link>
-              </div>
-              <div className="notices-panel">
-                {notices.map((n) => (
-                  <a key={n.title} href={n.href} target={n.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="notice-line">
-                    <div>
-                      <div className="nt">{n.title}</div>
-                      <div className="nk">{n.kind} · {n.date}</div>
-                    </div>
-                    <span className={noticeStatusClass[n.status]}>{noticeStatusLabelShort[n.status]}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
+          <div className="pubs-head">
+            <h2>Notices</h2>
+            <Link href="/notices" className="view-all">View all notices <Icon name="arrowRight" size={16} /></Link>
           </div>
+          <HomeNotices notices={notices} />
+        </div>
+      </section>
+
+      {/* ============ 8 · MEDIA & EVENTS (paired carousel cards) ============ */}
+      <section className="news">
+        <div className="ux4g-container">
+          <div className="pubs-head">
+            <h2>Media &amp; Events</h2>
+            <Link href="/media" className="view-all">View all media <Icon name="arrowRight" size={16} /></Link>
+          </div>
+          <HomeNewsroom articles={articles} news={pressCoverage} />
 
           {/* What's New rail */}
           <div style={{ marginTop: "clamp(2.5rem, 5vw, 3.5rem)" }}>
