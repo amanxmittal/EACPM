@@ -199,12 +199,22 @@
 /* 510:727 matches the actual cover scan's own aspect ratio (Working-paper-1.png)
    rather than a generic 3:4 — with the box shaped to fit the image exactly,
    `cover` (below) fills it edge-to-edge with no crop and no letterboxing. */
-.pub-item > .cover { flex: 0 0 clamp(84px, 30vw, 150px); aspect-ratio: 510 / 727; border-radius: 0; }
+/* Width (and with it, height) trimmed 25% from the original clamp(84px,
+   30vw, 150px) — aspect-ratio stays 510:727 so the cover still fills edge to
+   edge with no crop, just at a shorter card height. */
+/* overflow: hidden here too (belt-and-suspenders on top of .carousel-item's
+   own clipping) — .cover is `position: relative` with an absolutely-positioned
+   cover-photo <img> inset:0, so it needs its own clip boundary to guarantee
+   the image never paints past this box's rounded corner. */
+.pub-item > .cover { flex: 0 0 clamp(63px, 22.5vw, 113px); aspect-ratio: 510 / 727; border-radius: 0; overflow: hidden; }
 .pub-item .cover-photo img { object-fit: cover; }
 .pub-item .body { flex: 1; min-width: 0; padding: var(--ux4g-padding-s); }
 @media (max-width: 480px) {
   .pub-item { flex-direction: column; }
-  .pub-item > .cover { flex: none; width: 100%; }
+  /* Was `width: 100%`, which — combined with the fixed 510:727 portrait
+     aspect-ratio — blew the cover up to ~1.4x the card's own width in height,
+     dwarfing the text below it. Keep the same small clamp used in row mode. */
+  .pub-item > .cover { flex: none; width: clamp(63px, 40vw, 113px); }
 }
 .pub-item .body h4 {
   font-family: var(--font-display); font-weight: 700; font-size: clamp(1.02rem, 0.95rem + 0.45vw, 1.22rem);
@@ -213,8 +223,11 @@
 }
 .pub-item:hover .body h4 { color: var(--app-accent); }
 .pub-item-meta { font-size: 0.76rem; color: var(--app-text-subtle); margin-top: var(--ux4g-space-2); }
+/* Clamped to 1 line (was 2) so the body's own content height doesn't exceed
+   the cover's — with the cover 25% shorter, a 2-line excerpt would make the
+   text column the taller side and the card wouldn't actually get shorter. */
 .pub-item-excerpt { color: var(--app-text-muted); font-size: 0.9rem; line-height: 1.5;
-  margin-top: var(--ux4g-space-4); display: -webkit-box; -webkit-line-clamp: 2;
+  margin-top: var(--ux4g-space-4); display: -webkit-box; -webkit-line-clamp: 1;
   -webkit-box-orient: vertical; overflow: hidden; }
 
 /* ---------------------------------------------------------------------------
@@ -249,12 +262,16 @@
 /* ---------------------------------------------------------------------------
    7 · NOTICES & 8 · MEDIA & EVENTS — both are the same shared .news section
    spacing (§ shared shell above), each with two peer cards stepping through
-   their own top 5 one at a time. Text-only items — no cover art — so
-   .carousel-item just gets padding instead of a cover slot.
+   their own top 5 one at a time. All three item kinds now share one
+   left-thumbnail, edge-to-edge layout — same width/aspect as .pub-item's
+   cover, so every carousel card in these sections reads as one size family.
    --------------------------------------------------------------------------- */
 .news { padding-block: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid var(--app-border); }
 
-.media-carousel-item, .news-carousel-item, .notice-carousel-item { padding: var(--ux4g-padding-m); display: flex; flex-direction: column; justify-content: center; height: 100%; }
+.media-carousel-item, .news-carousel-item, .notice-carousel-item {
+  display: flex; flex-direction: row; align-items: stretch; gap: 0; padding: 0;
+  min-height: clamp(130px, 20vw, 160px);
+}
 .media-carousel-item h4, .news-carousel-item h4, .notice-carousel-item h4 { font-family: var(--font-display); font-weight: 700;
   font-size: clamp(1.02rem, 0.95rem + 0.45vw, 1.22rem); letter-spacing: -0.015em; line-height: 1.25;
   transition: color .15s ease; }
@@ -264,17 +281,19 @@
 .media-carousel-item .byline { font-size: 0.82rem; color: var(--app-text-subtle); margin-top: var(--ux4g-space-2); }
 .notice-carousel-item .nk { font-size: 0.82rem; color: var(--app-text-subtle); margin-top: var(--ux4g-space-2); }
 
-/* Notices get a left-hand placeholder thumb (no real document scan yet) and a
-   little more height than the plain text-only media/news items. Padding moves
-   off the card and onto .notice-body only, so the thumb bleeds flush to the
-   card's own edges — top, bottom and left — the same way a real cover image
-   would, instead of sitting boxed in by the shared item padding. */
-.notice-carousel-item { flex-direction: row; align-items: stretch; gap: 0; padding: 0; min-height: clamp(130px, 20vw, 160px); }
-.notice-thumb {
-  flex: 0 0 clamp(70px, 22vw, 110px); background: var(--app-accent-soft); color: var(--app-accent);
-  display: grid; place-items: center;
+/* Left-hand placeholder — same width/aspect as .pub-item's cover (which is
+   itself sized to match a real cover scan), so Media & Events cards read as
+   the same size as the Publications cards. Swap in a real <img> here once
+   thumbnails are supplied; the layout won't need to change. */
+.media-thumb, .news-thumb, .notice-thumb {
+  flex: 0 0 clamp(63px, 22.5vw, 113px); aspect-ratio: 510 / 727; background: var(--app-accent-soft); color: var(--app-accent);
+  display: grid; place-items: center; overflow: hidden;
 }
-.notice-body { min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: var(--ux4g-padding-m); }
+.media-thumb img, .news-thumb img, .notice-thumb img { width: 100%; height: 100%; object-fit: cover; }
+/* Notices keep a slightly shorter, wider thumb than the portrait media/news
+   ones — no source image to match yet, so this stays its own proportion. */
+.notice-thumb { aspect-ratio: auto; flex-basis: clamp(70px, 22vw, 110px); }
+.media-body, .news-body, .notice-body { min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: var(--ux4g-padding-m); }
 
 /* ---------------------------------------------------------------------------
    9 · WHAT'S NEW — a horizontal timeline rail, nested inside § 8's section.
@@ -284,11 +303,18 @@
 .rail { display: flex; gap: 1rem; overflow-x: auto; overflow-y: hidden; padding-bottom: 0.75rem; scroll-snap-type: x proximity; }
 .rail::-webkit-scrollbar { height: 8px; }
 .rail::-webkit-scrollbar-thumb { background: var(--app-border-strong); border-radius: 999px; }
-.rail-card { flex: 0 0 min(80%, 258px); scroll-snap-align: start; background: var(--app-surface); border: 1px solid var(--app-border); border-radius: var(--app-radius-lg); padding: 1.1rem; display: flex; flex-direction: column; gap: 0.5rem; min-height: 130px; transition: border-color .15s ease, transform .15s ease; }
+.rail-card { flex: 0 0 min(80%, 258px); scroll-snap-align: start; background: var(--app-surface); border: 1px solid var(--app-border); border-radius: var(--app-radius-lg); overflow: hidden; display: flex; flex-direction: column; height: 300px; transition: border-color .15s ease, transform .15s ease; }
 .rail-card:hover { border-color: var(--app-accent); transform: translateY(-2px); }
+/* Placeholder until real thumbnails are supplied — fixed 60% share of the card's
+   (fixed) height, same edge-to-edge treatment as the pub/media/notice cards. */
+.rail-thumb { flex: 0 0 60%; background: var(--app-accent-soft); color: var(--app-accent); display: grid; place-items: center; overflow: hidden; }
+.rail-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* gap (not rd's old margin-top:auto) spaces tag/headline/hint evenly. */
+.rail-body { flex: 1 1 auto; min-height: 0; padding: 0.9rem 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; }
 .rail-card .when { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--app-accent); }
-.rail-card .rt { font-weight: 600; line-height: 1.3; font-size: 0.95rem; }
-.rail-card .rd { font-size: 0.78rem; color: var(--app-text-subtle); margin-top: auto; }
+.rail-card .rt { font-weight: 600; line-height: 1.3; font-size: 0.95rem;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.rail-card .rd { font-size: 0.78rem; color: var(--app-text-subtle); }
 
 /* ---------------------------------------------------------------------------
    10 · INSTITUTIONAL CLOSE — affiliation logos + social.
@@ -354,10 +380,18 @@
 .cc-top { display: flex; align-items: center; gap: 0.75rem; }
 .cc-badge { width: 40px; height: 40px; flex: none; border-radius: 999px; display: grid; place-items: center;
   background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: var(--app-on-dark); }
+/* logo-icon.png is a solid-white silhouette on transparent (verified by sampling
+   its pixels — opaque areas are pure #fff), so it's invisible on the badge's
+   default translucent-white fill. This variant gives it a light backing circle
+   and darkens the mark itself (same idea as .emblem-adapt, just always-on since
+   the backing here is a fixed white, not theme-dependent). */
+.cc-badge-emblem { background: var(--app-on-dark); }
+.cc-badge-emblem img { width: 62%; height: 62%; object-fit: contain; filter: brightness(0.28) saturate(0); }
 .cc-id { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .cc-name { font-weight: 600; color: var(--app-on-dark); }
 .cc-platform { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
 .cc-blurb { margin-top: 1rem; color: rgba(255,255,255,0.78); font-size: 0.92rem; line-height: 1.6; flex: 1 1 auto; }
+.cc-blurb .mention { color: var(--app-on-dark-accent); font-weight: 600; }
 .cc-foot { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.12); }
 .cc-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.9rem; color: var(--app-on-dark-accent); }
 .cc-cta:hover { color: var(--app-on-dark); text-decoration: underline; }

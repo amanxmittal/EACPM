@@ -25,12 +25,12 @@ export const channels: Channel[] = [
     key: "x",
     platform: "X",
     name: "EAC-PM",
-    handle: null,
+    handle: "@EACtoPM",
     blurb:
       "Working papers and reports as they publish, with a plain-language note on what each one finds.",
     cta: "Follow on X",
-    href: null,
-    verified: false,
+    href: "https://x.com/EACtoPM",
+    verified: true,
   },
   {
     key: "linkedin",

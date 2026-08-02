@@ -1,7 +1,25 @@
 import type { Metadata } from "next";
 import { articles } from "@/content/media";
+import { channels } from "@/content/channels";
+import { posts } from "@/content/posts";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+
+const xChannel = channels.find((c) => c.key === "x")!;
+
+// Highlights literal @mentions in a post's text — visual styling only, not
+// turned into links, since we don't have a verified URL for each mentioned handle.
+function renderPostText(text: string) {
+  return text.split(/(@[A-Za-z0-9_]+)/g).map((part, i) =>
+    part.startsWith("@") ? (
+      <span key={i} className="mention">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+}
 
 export const metadata: Metadata = {
   title: "Media & Events",
@@ -10,12 +28,28 @@ export const metadata: Metadata = {
 
 // Exported so the homepage's "EAC-PM in news" card reads from this same list —
 // the press-coverage section here stays the single source of truth.
-export type PressMention = { title: string; href: string };
+export type PressMention = { title: string; href: string; imageUrl?: string };
 export const news: PressMention[] = [
-  { title: "GDP may grow 9–11% in FY22, 7% in FY23: Bibek Debroy", href: "https://eacpm.gov.in/news/gdp-may-grow-9-11-in-fy22-7-in-fy23-bibek-debroy/" },
-  { title: "EAC-PM calls for a unified labour law", href: "https://eacpm.gov.in/news/economic-advisory-council-to-the-pm-calls-for-unified-labour-law/" },
-  { title: "Economy to grow 7–7.5% next fiscal year: EAC-PM", href: "https://eacpm.gov.in/news/economy-to-grow-7-7-5-next-fiscal-year-eac-pm/" },
-  { title: "Govt reconstitutes seven-member EAC-PM for a two-year period", href: "https://eacpm.gov.in/news/govt-reconstitutes-seven-member-eac-pm-for-two-year-period/" },
+  {
+    title: "GDP may grow 9–11% in FY22, 7% in FY23: Bibek Debroy",
+    href: "https://eacpm.gov.in/news/gdp-may-grow-9-11-in-fy22-7-in-fy23-bibek-debroy/",
+    imageUrl: "/img/News/Indian-Economy-to-grow.jpg",
+  },
+  {
+    title: "EAC-PM calls for a unified labour law",
+    href: "https://eacpm.gov.in/news/economic-advisory-council-to-the-pm-calls-for-unified-labour-law/",
+    imageUrl: "/img/News/Unified-Labour-Laws-EAC-PM.jpg",
+  },
+  {
+    title: "Economy to grow 7–7.5% next fiscal year: EAC-PM",
+    href: "https://eacpm.gov.in/news/economy-to-grow-7-7-5-next-fiscal-year-eac-pm/",
+    imageUrl: "/img/News/Fiscal%20year.jpg",
+  },
+  {
+    title: "Govt reconstitutes seven-member EAC-PM for a two-year period",
+    href: "https://eacpm.gov.in/news/govt-reconstitutes-seven-member-eac-pm-for-two-year-period/",
+    imageUrl: "/img/News/7%20%20member%20EAC.jpg",
+  },
 ];
 
 export default function MediaPage() {
@@ -87,6 +121,60 @@ export default function MediaPage() {
                   style={{ aspectRatio: "4 / 3", background: "linear-gradient(150deg, var(--app-accent-soft), var(--app-bg-subtle))" }}
                 >
                   <Icon name="chart" size={22} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Posts are real, transcribed verbatim from the source — see content/posts.ts.
+          No live feed/embed: CLAUDE.md bars auto-loading third-party scripts. */}
+      <section className="connect bleed" id="x-updates" style={{ scrollMarginTop: "84px" }}>
+        <div className="ux4g-container">
+          <div className="connect-head">
+            <div>
+              <span className="connect-kicker">On X</span>
+              <h2>EAC-PM on X</h2>
+              <p>{xChannel.blurb}</p>
+            </div>
+            <div className="connect-actions">
+              {xChannel.href ? (
+                <a href={xChannel.href} target="_blank" rel="noopener noreferrer" className="ux4g-btn-primary ux4g-btn-md">
+                  <Icon name="external" size={16} /> View the handle
+                </a>
+              ) : (
+                <span className="flag-inline">
+                  <span className="d" aria-hidden /> Official handle pending confirmation
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="connect-grid">
+            {posts.map((p) => (
+              <div key={p.id} className="connect-card">
+                <div className="cc-top">
+                  <span className="cc-badge cc-badge-emblem" aria-hidden>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/brand/logo-icon.png" alt="" />
+                  </span>
+                  <div className="cc-id">
+                    <span className="cc-name">{p.author}</span>
+                    <span className="cc-platform">{p.handle}</span>
+                  </div>
+                </div>
+                <p className="cc-blurb">{renderPostText(p.text)}</p>
+                <div className="cc-foot">
+                  {xChannel.href ? (
+                    <a href={xChannel.href} target="_blank" rel="noopener noreferrer" className="cc-cta">
+                      {xChannel.cta} <Icon name="external" size={14} />
+                    </a>
+                  ) : (
+                    <span className="flag-inline">
+                      <span className="d" aria-hidden /> Official handle pending confirmation
+                    </span>
+                  )}
                 </div>
               </div>
             ))}

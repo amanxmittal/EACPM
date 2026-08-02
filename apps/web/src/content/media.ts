@@ -1,30 +1,34 @@
 // Articles & notices sourced from the live eacpm.gov.in (titles/authors/outlets are real;
 // exact dates come from the CMS/migration — omitted rather than guessed).
-export type Article = { title: string; author: string; outlet: string; href: string };
+export type Article = { title: string; author: string; outlet: string; href: string; imageUrl?: string };
 export const articles: Article[] = [
   {
     title: "The manufacturing opportunity",
     author: "Shri Nilesh Shah",
     outlet: "The Indian Express",
     href: "https://eacpm.gov.in/article/the-manufacturing-opportunity-by-nilesh-shah-indian-express/",
+    imageUrl: "/img/Articles/Manufacturing%20Opportunity.jpg",
   },
   {
     title: "The Seventh Schedule relook",
     author: "Dr. Bibek Debroy",
     outlet: "The Indian Express",
     href: "https://eacpm.gov.in/article/the-seventh-schedule-relook-by-dr-bibek-debroy-published-in-the-indian-express/",
+    imageUrl: "/img/Articles/The%20seventh%20schedule.jpg",
   },
   {
     title: "The difficulty in spending",
     author: "Dr. Neelkanth Mishra",
     outlet: "Business Standard",
     href: "https://eacpm.gov.in/article/the-difficulty-in-spending-by-neelkanth-mishra-published-in-business-standard/",
+    imageUrl: "/img/Articles/Spending.jpg",
   },
   {
     title: "Where will India's economic growth settle in the next 2–3 years?",
     author: "Dr. Poonam Gupta",
     outlet: "The Economic Times",
     href: "https://eacpm.gov.in/article/where-will-indias-economic-growth-settle-in-the-next-2-3-years-by-dr-poonam-gupta-published-in-the-economic-times/",
+    imageUrl: "/img/Articles/economy%20growth.jpg",
   },
 ];
 

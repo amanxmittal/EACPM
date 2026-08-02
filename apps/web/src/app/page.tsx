@@ -41,11 +41,11 @@ export default function Home() {
   const lead = reports[1] ?? reports[0];
 
   const whatsNew = [
-    { when: "This week", title: feature.title, note: `${feature.type} · ${feature.year ?? "recent"}`, href: `/publications/${feature.slug}` },
+    { when: "This week", title: feature.title, note: `${feature.type} · ${feature.year ?? "recent"}`, href: `/publications/${feature.slug}`, img: "/img/What's%20new/constituency%20size.png" },
     { when: "This week", title: notices[0].title, note: `${notices[0].kind} · ${notices[0].date}`, href: notices[0].href },
-    { when: "Recent", title: lead.title, note: `${lead.type} · ${lead.year ?? "recent"}`, href: `/publications/${lead.slug}` },
-    { when: "Recent", title: articles[0].title, note: `${articles[0].author} · ${articles[0].outlet}`, href: articles[0].href },
-    { when: "Recent", title: reports[3].title, note: `${reports[3].type} · ${reports[3].year ?? "recent"}`, href: `/publications/${reports[3].slug}` },
+    { when: "Recent", title: lead.title, note: `${lead.type} · ${lead.year ?? "recent"}`, href: `/publications/${lead.slug}`, img: "/img/What's%20new/estimating%20reduction.png" },
+    { when: "Recent", title: articles[0].title, note: `${articles[0].author} · ${articles[0].outlet}`, href: articles[0].href, img: "/img/What's%20new/manufacturing%20opportunity.jpg" },
+    { when: "Recent", title: reports[3].title, note: `${reports[3].type} · ${reports[3].year ?? "recent"}`, href: `/publications/${reports[3].slug}`, img: "/img/What's%20new/financial%20inclusion.png" },
   ];
 
   return (
@@ -195,9 +195,19 @@ export default function Home() {
             <div className="rail">
               {whatsNew.map((w, i) => (
                 <a key={i} href={w.href} target={w.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="rail-card">
-                  <span className="when">{w.when}</span>
-                  <span className="rt">{w.title.length > 74 ? w.title.slice(0, 72) + "…" : w.title}</span>
-                  <span className="rd">{w.note}</span>
+                  <span className="rail-thumb" aria-hidden>
+                    {w.img ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={w.img} alt="" />
+                    ) : (
+                      <Icon name="book" size={22} />
+                    )}
+                  </span>
+                  <span className="rail-body">
+                    <span className="when">{w.when}</span>
+                    <span className="rt">{w.title.length > 74 ? w.title.slice(0, 72) + "…" : w.title}</span>
+                    <span className="rd">{w.note}</span>
+                  </span>
                 </a>
               ))}
             </div>
@@ -222,7 +232,7 @@ export default function Home() {
               </p>
             </div>
             <div className="connect-actions">
-              <Link href="/media" className="ux4g-btn-outline-primary ux4g-btn-md">
+              <Link href="/media" className="ux4g-btn ux4g-btn-md btn-ondark">
                 <Icon name="rss" size={16} /> Newsroom
               </Link>
               <Link href="/contact" className="ux4g-btn-primary ux4g-btn-md">
