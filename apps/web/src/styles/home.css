@@ -293,6 +293,10 @@
 /* Notices keep a slightly shorter, wider thumb than the portrait media/news
    ones — no source image to match yet, so this stays its own proportion. */
 .notice-thumb { aspect-ratio: auto; flex-basis: clamp(70px, 22vw, 110px); }
+/* Tenders card: +25% row height, +20% placeholder width (both off the shared
+   media/news/notice baseline above). Notice-specific, doesn't touch those. */
+.notice-carousel-item { min-height: clamp(162.5px, 25vw, 200px); }
+.notice-thumb { flex-basis: clamp(84px, 26.4vw, 132px); }
 .media-body, .news-body, .notice-body { min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: var(--ux4g-padding-m); }
 
 /* ---------------------------------------------------------------------------

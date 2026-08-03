@@ -29,10 +29,11 @@ export function HomeNotices({ notices }: { notices: Notice[] }) {
       rel="noopener noreferrer"
       className="carousel-item notice-carousel-item"
     >
-      {/* No real document thumbnail for notices yet — a neutral placeholder,
-          same spirit as CoverArt's typographic cover for publications. */}
+      {/* Real thumbnail where supplied (currently the one Tender entry);
+          other notices fall back to the neutral placeholder, same spirit as
+          CoverArt's typographic cover for publications. */}
       <span className="notice-thumb" aria-hidden>
-        <Icon name="landmark" size={26} />
+        {n.imageUrl ? <img src={n.imageUrl} alt="" /> : <Icon name="landmark" size={26} />}
       </span>
       <div className="notice-body">
         <span className={noticeStatusClass[n.status]}>{noticeStatusLabelShort[n.status]}</span>

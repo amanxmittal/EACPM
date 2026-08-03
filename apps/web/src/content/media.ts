@@ -75,6 +75,7 @@ export type Notice = {
    */
   published?: string;
   href: string;
+  imageUrl?: string;
 };
 
 /** A notice older than this moves out of Current and into Archive. */
@@ -122,5 +123,6 @@ export const notices: Notice[] = [
     status: "soon",
     date: "Opening soon",
     href: "/notices",
+    imageUrl: "/img/Tenders.png",
   },
 ];
