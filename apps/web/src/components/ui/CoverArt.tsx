@@ -1,4 +1,4 @@
-import type { Report } from "@/lib/reports";
+import { thumbnailForType, type Report } from "@/lib/reports";
 import { Icon } from "@/components/ui/Icon";
 
 // A large bleeding glyph per report type, so every cover reads as "about
@@ -17,6 +17,20 @@ const typeGlyph: Record<string, string> = {
 // without the synthetic glyph/label overlay, since the real page already carries
 // its own series number, "Working Paper" label and title.
 export function CoverArt({ report }: { report: Report }) {
+  // Every Working Paper / Report uses its client-supplied thumbnail site-wide,
+  // not its own real scan (see chat history) — .cover-thumbnail's
+  // object-position keeps the left-anchored text/logo visible regardless of
+  // the box's own aspect ratio on whichever page renders it.
+  const thumbnail = thumbnailForType(report.type);
+  if (thumbnail) {
+    return (
+      <div className="cover cover-photo cover-thumbnail" data-variant={report.type}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={thumbnail} alt="" />
+      </div>
+    );
+  }
+
   if (report.imageUrl) {
     return (
       <div className="cover cover-photo" data-variant={report.type}>

@@ -1,87 +1,60 @@
-"use client";
-import { useMemo } from "react";
-import { CarouselCard } from "@/components/ui/CarouselCard";
-import { MiniArea, type SM } from "@/components/charts/SmallMultiples";
+import { GroupedBarChart, type GroupedBarSeries } from "@/components/charts/GroupedBarChart";
 
-const dirTagClass: Record<NonNullable<SM["dir"]>, string> = {
-  up: "ux4g-tag-tonal-success ux4g-tag-s",
-  down: "ux4g-tag-tonal-error ux4g-tag-s",
-  flat: "ux4g-tag-tonal-neutral ux4g-tag-s",
-};
+const CATEGORIES = ["TV", "Mobile", "2/4-Wheeler", "Refrigerator"];
 
-// Thematic group drawn from the same indicator set as /data's "Key
-// indicators" — named explicitly rather than sliced positionally, so the
-// grouping survives the source array being reordered or extended.
-const GROWTH_AND_PRICES = ["Real GDP growth", "CPI inflation", "Fiscal deficit"];
-
-// Placeholder only — no verified Economic Census (EC4/EC5/EC6) time series
-// exists yet; /data's own Economic Census card is deliberately numbers-free
-// for the same reason (CLAUDE.md §2, never fabricate). Kept local here rather
-// than folded into the shared `multiples` export so it can never leak onto
-// /data's Key Indicators grid looking like a sourced macro series.
-const ECONOMY_CENSUS_ILLUSTRATIVE: SM[] = [
-  { label: "Registered enterprises", value: "79.5", unit: "mn", delta: "▲", dir: "up", series: [58.5, 63.1, 66.8, 70.2, 73.4, 76.6, 79.5], color: "var(--cat-2)" },
-  { label: "Persons employed", value: "156", unit: "mn", delta: "▲", dir: "up", series: [110, 118, 126, 134, 142, 149, 156], color: "var(--cat-3)" },
-  { label: "Establishments surveyed", value: "72.7", unit: "mn", delta: "▲", dir: "up", series: [52, 56.8, 60.9, 64.5, 67.8, 70.4, 72.7], color: "var(--app-gold)" },
+// Values as supplied — no citation given for the underlying survey, so this
+// carries the same "pending verification" flag as other unsourced figures
+// (CLAUDE.md §2: never fabricate a source, a blank/flagged number is fine).
+const ADOPTION_GROWTH: GroupedBarSeries[] = [
+  { label: "2011-12", color: "var(--cat-4)", values: [70.3, 86.5, 30.6, 33.8] },
+  { label: "2023-24", color: "var(--cat-1)", values: [73.1, 97.5, 63.0, 58.7] },
 ];
 
-export function HomeDashboards({ indicators }: { indicators: SM[] }) {
-  const growth = useMemo(() => indicators.filter((i) => GROWTH_AND_PRICES.includes(i.label)), [indicators]);
+const OWNERSHIP_GAP: GroupedBarSeries[] = [
+  { label: "Bottom 40%", color: "var(--cat-1)", values: [68.9, 95.6, 53.2, 50.7] },
+  { label: "Top 20%", color: "var(--cat-2)", values: [73.3, 98.4, 69.3, 63.8] },
+];
 
-  const renderIndicator = (it: SM, pool: SM[]) => (
-    <div className="carousel-item dash-carousel-item">
-      <div className="dash-item-head">
-        <span className="dash-label">{it.label}</span>
-        {it.delta && <span className={dirTagClass[it.dir ?? "flat"]}>{it.delta}</span>}
-      </div>
-      <div className="dash-value">
-        {it.value}
-        {it.unit && <span className="u">{it.unit}</span>}
-      </div>
-      <div className="dash-chart">
-        <MiniArea series={it.series} color={it.color ?? "var(--cat-1)"} idx={pool.indexOf(it)} width={640} height={200} />
-      </div>
+function Legend({ series }: { series: GroupedBarSeries[] }) {
+  return (
+    <div className="dash-legend">
+      {series.map((s) => (
+        <span key={s.label} className="dash-legend-item">
+          <span className="dash-legend-swatch" style={{ background: s.color }} aria-hidden />
+          {s.label}
+        </span>
+      ))}
     </div>
   );
+}
 
-  const renderCensusIndicator = (it: SM) => (
-    <div className="carousel-item dash-carousel-item">
-      <div className="dash-item-head">
-        <span className="dash-label">{it.label}</span>
-        <span className="flag-inline"><span className="d" aria-hidden /> Illustrative</span>
-      </div>
-      <div className="dash-value">
-        {it.value}
-        {it.unit && <span className="u">{it.unit}</span>}
-      </div>
-      <div className="dash-chart">
-        <MiniArea
-          series={it.series}
-          color={it.color ?? "var(--cat-1)"}
-          idx={ECONOMY_CENSUS_ILLUSTRATIVE.indexOf(it)}
-          width={640}
-          height={200}
-        />
-      </div>
-    </div>
-  );
-
+export function HomeDashboards() {
   return (
     <div className="carousel-grid">
-      <CarouselCard
-        title="Growth & prices"
-        items={growth}
-        idBase="dashcard-growth"
-        renderItem={(it) => renderIndicator(it, growth)}
-        emptyLabel="No indicators available yet."
-      />
-      <CarouselCard
-        title="Economy census"
-        items={ECONOMY_CENSUS_ILLUSTRATIVE}
-        idBase="dashcard-census"
-        renderItem={renderCensusIndicator}
-        emptyLabel="No indicators available yet."
-      />
+      <div className="carousel-card dash-card-plain">
+        <div className="dash-item-head">
+          <span className="dash-label">National Asset Adoption Growth</span>
+          <span className="flag-inline">
+            <span className="d" aria-hidden /> Source pending verification
+          </span>
+        </div>
+        <Legend series={ADOPTION_GROWTH} />
+        <div className="dash-chart">
+          <GroupedBarChart categories={CATEGORIES} series={ADOPTION_GROWTH} maxValue={110} />
+        </div>
+      </div>
+      <div className="carousel-card dash-card-plain">
+        <div className="dash-item-head">
+          <span className="dash-label">Ownership Gap by Wealth Bracket (2023-24)</span>
+          <span className="flag-inline">
+            <span className="d" aria-hidden /> Source pending verification
+          </span>
+        </div>
+        <Legend series={OWNERSHIP_GAP} />
+        <div className="dash-chart">
+          <GroupedBarChart categories={CATEGORIES} series={OWNERSHIP_GAP} maxValue={110} />
+        </div>
+      </div>
     </div>
   );
 }

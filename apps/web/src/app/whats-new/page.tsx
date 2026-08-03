@@ -46,15 +46,19 @@ export default async function WhatsNewPage({
 }) {
   const sp = await searchParams;
   const initialType = typeof sp.type === "string" ? sp.type : "All";
-  const feed = buildFeed();
+  // "New" tracks position in the built feed, not any stored per-item flag —
+  // whichever 2 items are newest (i.e. first, since new content is added at
+  // the top of its source array — reports[0], notices[0], etc.) always carry
+  // it, with nothing to update by hand when something newer replaces them.
+  const feed = buildFeed().map((item, i) => ({ ...item, isNew: i < 2 }));
 
   return (
     <>
       <section className="page-hero">
         <div className="ux4g-container">
-          <span className="kicker">What&apos;s New</span>
+          <span className="kicker">Newly added &amp; recently updated</span>
           <h1 className="t-h1 balance ux4g-mt-xs">
-            Newly added &amp; recently updated
+            What&apos;s New
           </h1>
           <p className="t-lead measure ux4g-mt-s">
             Auto-populated from content across Publications, Notices and Media — zero manual

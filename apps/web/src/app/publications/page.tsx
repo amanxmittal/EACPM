@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { reports, readMinutes } from "@/lib/reports";
+import { reports } from "@/lib/reports";
 import { PublicationsExplorer } from "@/components/publications/PublicationsExplorer";
-import { CoverArt } from "@/components/ui/CoverArt";
+import { PublicationsSpotlight } from "@/components/publications/PublicationsSpotlight";
 import { Reveal } from "@/components/motion/Reveal";
-import { Icon } from "@/components/ui/Icon";
+
+const SPOTLIGHT_SIZE = 5;
 
 export const metadata: Metadata = {
   title: "Publications",
@@ -20,15 +20,15 @@ export default async function PublicationsPage({
   const initialType = typeof sp.type === "string" ? sp.type : "All";
   const initialQuery = typeof sp.q === "string" ? sp.q : "";
   const initialArchive = sp.archive === "1";
-  const featured = reports[0];
+  const spotlight = reports.slice(0, SPOTLIGHT_SIZE);
 
   return (
     <>
       <section className="page-hero hero-stage grain">
         <div className="ux4g-container hero-content">
-          <span className="kicker">Publications</span>
+          <span className="kicker">Working papers, reports &amp; occasional papers</span>
           <h1 className="t-h1 balance ux4g-mt-xs" style={{ maxWidth: "18ch" }}>
-            Working papers, reports &amp; occasional papers
+            Publications
           </h1>
           <hr className="gold-rule ux4g-my-m ux4g-mx-none" />
           <p className="t-lead measure">
@@ -38,37 +38,11 @@ export default async function PublicationsPage({
         </div>
       </section>
 
-      {/* featured spotlight */}
+      {/* latest publications spotlight — top 5, stepped through one at a time */}
       <section className="section ux4g-pb-none">
         <div className="ux4g-container">
           <Reveal>
-            <span className="kicker">Latest working paper</span>
-            <Link
-              href={`/publications/${featured.slug}`}
-              className="card card-hover ux4g-d-grid ux4g-ai-center ux4g-mt-m"
-              style={{ gridTemplateColumns: "minmax(0, 300px) 1fr", gap: "clamp(1.2rem, 3vw, 2.4rem)" }}
-            >
-              <div style={{ maxWidth: "300px" }}>
-                <CoverArt report={featured} />
-              </div>
-              <div>
-                <div className="cluster ux4g-inline-gap-s">
-                  <span className="ux4g-tag-tonal-primary ux4g-tag-s">{featured.type}</span>
-                  <span className="t-micro text-muted">
-                    {featured.year} · {readMinutes(featured)} min read
-                  </span>
-                </div>
-                <h2 className="t-h2 balance ux4g-mt-xs">
-                  {featured.title}
-                </h2>
-                <p className="text-muted ux4g-mt-s">
-                  {featured.abstract}
-                </p>
-                <span className="link-arrow ux4g-mt-m">
-                  Read the paper <Icon name="arrowRight" size={16} />
-                </span>
-              </div>
-            </Link>
+            <PublicationsSpotlight reports={spotlight} />
           </Reveal>
         </div>
       </section>

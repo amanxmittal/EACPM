@@ -75,8 +75,18 @@ export type Notice = {
    */
   published?: string;
   href: string;
-  imageUrl?: string;
 };
+
+// Client-supplied thumbnails used for every notice of these kinds, site-wide —
+// see HomeNotices.tsx — instead of a per-notice imageUrl. Other kinds (Work at
+// EAC-PM, Other) keep the neutral icon placeholder.
+export const TENDER_THUMBNAIL = "/img/tenders%20thumbnail.png";
+export const VACANCY_THUMBNAIL = "/img/Careers%20thumbnail.jpg";
+export function thumbnailForNoticeKind(kind: NoticeKind): string | undefined {
+  if (kind === "Tender") return TENDER_THUMBNAIL;
+  if (kind === "Vacancy Circular") return VACANCY_THUMBNAIL;
+  return undefined;
+}
 
 /** A notice older than this moves out of Current and into Archive. */
 export const ARCHIVE_AFTER_YEARS = 5;
@@ -123,6 +133,5 @@ export const notices: Notice[] = [
     status: "soon",
     date: "Opening soon",
     href: "/notices",
-    imageUrl: "/img/Tenders.png",
   },
 ];

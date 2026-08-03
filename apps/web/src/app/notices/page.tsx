@@ -19,9 +19,9 @@ export default async function NoticesPage({
     <>
       <section className="page-hero">
         <div className="ux4g-container">
-          <span className="kicker">Notices</span>
+          <span className="kicker">Tenders, vacancies &amp; circulars</span>
           <h1 className="t-h1 balance ux4g-mt-xs">
-            Tenders, vacancies &amp; circulars
+            Notices
           </h1>
           <p className="t-lead measure ux4g-mt-s">
             Open positions, procurement notices and circulars — with publish and close dates,

@@ -4,8 +4,10 @@ import { channels } from "@/content/channels";
 import { posts } from "@/content/posts";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { MediaSpotlight, type SpotlightItem } from "@/components/media/MediaSpotlight";
 
 const xChannel = channels.find((c) => c.key === "x")!;
+const MEDIA_SPOTLIGHT_SIZE = 5;
 
 // Highlights literal @mentions in a post's text — visual styling only, not
 // turned into links, since we don't have a verified URL for each mentioned handle.
@@ -53,18 +55,47 @@ export const news: PressMention[] = [
 ];
 
 export default function MediaPage() {
+  // Combines both real content types this page has — articles by members and
+  // press coverage — into one "recent" list for the spotlight. No dates exist
+  // on either source (CLAUDE.md: don't backfill by inference), so "top 5" is
+  // simply the first 5 in existing file order rather than a sorted feed.
+  const mediaSpotlight: SpotlightItem[] = [
+    ...articles.map((a) => ({
+      key: a.href,
+      kind: "Article" as const,
+      title: a.title,
+      meta: `${a.author} · ${a.outlet}`,
+      href: a.href,
+      imageUrl: a.imageUrl,
+    })),
+    ...news.map((n) => ({
+      key: n.href,
+      kind: "News" as const,
+      title: n.title,
+      meta: "Press coverage",
+      href: n.href,
+      imageUrl: n.imageUrl,
+    })),
+  ].slice(0, MEDIA_SPOTLIGHT_SIZE);
+
   return (
     <>
       <section className="page-hero">
         <div className="ux4g-container">
-          <span className="eyebrow">Media &amp; Events</span>
+          <span className="eyebrow">Articles, news &amp; the gallery</span>
           <h1 className="t-h1 balance ux4g-mt-xs">
-            Articles, news &amp; the gallery
+            Media &amp; Events
           </h1>
           <p className="t-lead measure ux4g-mt-s">
             Bylined articles by Council members, press coverage, and photographs from events —
             with source attribution and outbound links.
           </p>
+        </div>
+      </section>
+
+      <section className="section ux4g-pb-none">
+        <div className="ux4g-container">
+          <MediaSpotlight items={mediaSpotlight} />
         </div>
       </section>
 

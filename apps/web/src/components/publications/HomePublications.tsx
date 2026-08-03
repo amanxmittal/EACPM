@@ -1,9 +1,9 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 import Link from "next/link";
-import { CoverArt } from "@/components/ui/CoverArt";
+import { HomeCoverThumbnail } from "@/components/publications/HomeCoverThumbnail";
 import { CarouselCard } from "@/components/ui/CarouselCard";
-import { readMinutes, type Report } from "@/lib/reports";
+import { readMinutes, REPORTS_THUMBNAIL, WORKING_PAPER_THUMBNAIL, type Report } from "@/lib/reports";
 
 const CARD_SIZE = 5;
 
@@ -18,9 +18,9 @@ export function HomePublications({ reports, excludeSlug }: { reports: Report[]; 
     };
   }, [reports, excludeSlug]);
 
-  const renderReport = (r: Report) => (
+  const renderItem = (cover: (r: Report) => ReactNode) => (r: Report) => (
     <Link href={`/publications/${r.slug}`} className="carousel-item pub-item">
-      <CoverArt report={r} />
+      {cover(r)}
       <div className="body">
         <span className="ux4g-tag-tonal-primary ux4g-tag-s">{r.type}</span>
         <h4 className="ux4g-mt-xs">{r.title}</h4>
@@ -34,18 +34,21 @@ export function HomePublications({ reports, excludeSlug }: { reports: Report[]; 
 
   return (
     <div className="carousel-grid">
+      {/* Both carousels show a fixed client-supplied thumbnail for every card,
+          not each item's own real cover scan (see chat history) — same
+          treatment on both, just a different image per carousel. */}
       <CarouselCard
         title="Working papers"
         items={papers}
         idBase="pubcard-papers"
-        renderItem={renderReport}
+        renderItem={renderItem(() => <HomeCoverThumbnail src={WORKING_PAPER_THUMBNAIL} />)}
         emptyLabel="Nothing published in this category yet."
       />
       <CarouselCard
         title="Reports"
         items={publishedReports}
         idBase="pubcard-reports"
-        renderItem={renderReport}
+        renderItem={renderItem(() => <HomeCoverThumbnail src={REPORTS_THUMBNAIL} />)}
         emptyLabel="Nothing published in this category yet."
       />
     </div>

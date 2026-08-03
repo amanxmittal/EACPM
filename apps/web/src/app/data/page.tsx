@@ -36,9 +36,9 @@ export default function DataPage() {
     <>
       <section className="page-hero hero-stage grain">
         <div className="ux4g-container hero-content">
-          <span className="kicker">Data &amp; Dashboards</span>
+          <span className="kicker">India at a glance</span>
           <h1 className="t-h1 balance ux4g-mt-xs" style={{ maxWidth: "16ch" }}>
-            India at a glance
+            Data &amp; Dashboards
           </h1>
           <hr className="gold-rule ux4g-my-m ux4g-mx-none" />
           <p className="t-lead measure">

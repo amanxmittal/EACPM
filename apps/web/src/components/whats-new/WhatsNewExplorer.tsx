@@ -28,6 +28,12 @@ export type WhatsNewItem = {
   external?: boolean;
   /** From each source's own isArchived() — Media has no reliable date yet, so it's always current. */
   archived: boolean;
+  /**
+   * Set by the page from the item's position in the built feed, not a stored
+   * flag — see whats-new/page.tsx. So it always tracks whatever is newest
+   * without anyone having to remember to unset it on the item that used to be new.
+   */
+  isNew?: boolean;
 };
 
 export function WhatsNewExplorer({
@@ -140,6 +146,7 @@ export function WhatsNewExplorer({
                     <span>
                       <div style={{ fontWeight: 600 }}>{item.title}</div>
                       <div className="t-micro text-muted">{item.meta}</div>
+                      {item.isNew && <span className="new-ribbon">New</span>}
                     </span>
                   </span>
                   <Icon name={item.external ? "external" : "arrowRight"} size={16} />

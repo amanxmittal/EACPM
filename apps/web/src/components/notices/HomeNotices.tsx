@@ -6,6 +6,7 @@ import {
   isArchived,
   noticeStatusClass,
   noticeStatusLabelShort,
+  thumbnailForNoticeKind,
   type Notice,
 } from "@/content/media";
 
@@ -29,11 +30,16 @@ export function HomeNotices({ notices }: { notices: Notice[] }) {
       rel="noopener noreferrer"
       className="carousel-item notice-carousel-item"
     >
-      {/* Real thumbnail where supplied (currently the one Tender entry);
-          other notices fall back to the neutral placeholder, same spirit as
-          CoverArt's typographic cover for publications. */}
+      {/* Every Tender / Vacancy Circular uses its client-supplied thumbnail,
+          not a per-notice image (see chat history) — same pattern as
+          CoverArt's site-wide Working Paper/Report thumbnails. Other kinds
+          keep the neutral icon placeholder. */}
       <span className="notice-thumb" aria-hidden>
-        {n.imageUrl ? <img src={n.imageUrl} alt="" /> : <Icon name="landmark" size={26} />}
+        {thumbnailForNoticeKind(n.kind) ? (
+          <img src={thumbnailForNoticeKind(n.kind)} alt="" />
+        ) : (
+          <Icon name="landmark" size={26} />
+        )}
       </span>
       <div className="notice-body">
         <span className={noticeStatusClass[n.status]}>{noticeStatusLabelShort[n.status]}</span>

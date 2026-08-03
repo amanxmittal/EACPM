@@ -1,5 +1,20 @@
 import data from "@/content/reports.json";
 
+// Client-supplied thumbnails used for every Working Paper's / Report's cover,
+// site-wide — see CoverArt.tsx — instead of each publication's own real scan.
+// Shared constants so the homepage carousel (HomePublications.tsx) and
+// CoverArt reference the same files rather than each hardcoding the path.
+export const WORKING_PAPER_THUMBNAIL = "/img/working-paper-thumbnail-tokenized.png";
+export const REPORTS_THUMBNAIL = "/img/Reports%20-%20Thumbnail.png";
+
+/** The site-wide thumbnail for a report's `type`, or undefined for types that
+ * still use their own real scan / typographic fallback (see CoverArt.tsx). */
+export function thumbnailForType(type: string): string | undefined {
+  if (type === "Working Paper") return WORKING_PAPER_THUMBNAIL;
+  if (type === "Report") return REPORTS_THUMBNAIL;
+  return undefined;
+}
+
 export type Report = {
   slug: string;
   title: string;

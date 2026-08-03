@@ -13,7 +13,7 @@
    control bar of prev/next arrows + dot pagination sits below. All motion is
    reduced-motion safe.
    --------------------------------------------------------------------------- */
-.hero-cine { position: relative; padding-block: clamp(1.3rem, 3.4vw, 2.55rem); overflow: hidden; }
+.hero-cine { position: relative; padding-block: clamp(0.9rem, 2vw, 1.6rem); overflow: hidden; }
 
 /* Named .hero-carousel-stage, NOT .hero-stage — art.css already owns a plain
    .hero-stage (position:relative; overflow:hidden) used as the grain-texture
@@ -38,7 +38,7 @@
    bleeding into the main card. Kept in full colour (no grayscale/brightness
    mute) for the same reason: NeGD's peeks read as real, undimmed banner crops.
    flex-shrink:0 keeps them from collapsing as the row overflows. */
-.hero-peek { flex: 0 0 clamp(90px, 11vw, 200px); margin: 0; padding: 0; border: 0;
+.hero-peek { flex: 0 0 clamp(72px, 8.8vw, 160px); margin: 0; padding: 0; border: 0;
   background: none; cursor: pointer; position: relative; overflow: hidden;
   border-radius: var(--app-radius-xl); box-shadow: var(--app-shadow-2);
   transition: transform 0.2s ease, box-shadow 0.2s ease; }
@@ -48,7 +48,7 @@
 
 /* flex-basis pins the main slide to the site's container width so it still
    "covers the main container"; shrink:0 stops the peeks from squeezing it. */
-.hero-card { flex: 0 0 min(var(--app-maxw, 1200px), 100%); position: relative; min-height: min(48vh, 442px);
+.hero-card { flex: 0 0 min(var(--app-maxw, 1200px), 100%); position: relative; min-height: min(54.6vh, 491px);
   display: flex; align-items: center; overflow: hidden; isolation: isolate;
   border-radius: var(--app-radius-2xl); box-shadow: var(--app-shadow-float); }
 
@@ -80,7 +80,7 @@
    without it the subtitle's last line collides with the theme/place caption once
    the copy grows tall relative to the card (reproduced at 1000×800). */
 .hero-cine-inner { position: relative; z-index: 2; width: 100%;
-  padding: clamp(1.5rem, 4.25vw, 3.4rem); padding-bottom: clamp(4.5rem, 7.5vw, 6.2rem); }
+  padding: clamp(1.2rem, 3vw, 2.4rem); padding-bottom: clamp(2.8rem, 5vw, 4rem); }
 .hero-cine-copy { max-width: 41rem; }
 .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(20,16,38,0.5); border: 1px solid rgba(255,255,255,0.26); color: var(--app-on-dark); border-radius: 999px; padding: 0.34rem 0.77rem 0.34rem 0.61rem; font-size: 0.7rem; font-weight: 600; backdrop-filter: blur(5px); }
 .hero-badge .pulse { width: 8px; height: 8px; border-radius: 999px; background: var(--ux4g-color-green-400, #44c265); position: relative; flex: none; }
@@ -88,10 +88,10 @@
 @media (prefers-reduced-motion: no-preference) { .hero-badge .pulse::after { animation: hero-pulse 1.9s ease-out infinite; } }
 @keyframes hero-pulse { 0% { transform: scale(0.55); opacity: 0.9; } 100% { transform: scale(1.8); opacity: 0; } }
 
-.hero-cine-eyebrow { display: block; margin-top: 1.6rem; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.82); }
+.hero-cine-eyebrow { display: block; margin-top: 1rem; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.82); }
 .hero-cine-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.2rem, 0.85rem + 5.44vw, 4.25rem); line-height: 0.98; letter-spacing: -0.035em; color: var(--app-on-dark); margin-top: 0.9rem; max-width: 15ch; text-wrap: balance; }
 .hero-cine-title .u { color: var(--app-on-dark-accent); }
-.hero-cine-sub { font-size: clamp(0.9rem, 0.85rem + 0.34vw, 1.06rem); line-height: 1.5; color: rgba(255,255,255,0.84); max-width: 44ch; margin-top: 1.6rem; }
+.hero-cine-sub { font-size: clamp(0.9rem, 0.85rem + 0.34vw, 1.06rem); line-height: 1.5; color: rgba(255,255,255,0.84); max-width: 44ch; margin-top: 1rem; }
 
 .hero-cine-entrance > * { opacity: 0; transform: translateY(16px); animation: hero-rise 0.7s cubic-bezier(.2,.7,.2,1) forwards; }
 .hero-cine-entrance > *:nth-child(1) { animation-delay: 0.06s; }
@@ -118,7 +118,7 @@
 @keyframes hero-dot-fill { to { width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .hero-dot[data-active="true"] .hero-dot-fill { width: 100%; } }
 
-@media (max-width: 640px) { .hero-card { min-height: 54vh; } .hero-credit { display: none; } }
+@media (max-width: 640px) { .hero-card { min-height: 51.84vh; } .hero-credit { display: none; } }
 
 .flag-inline { display: inline-flex; align-items: center; gap: 5px; font-size: 0.68rem; font-weight: 700; color: var(--app-gold-strong); background: var(--app-gold-soft); border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
 .flag-inline .d { width: 6px; height: 6px; border-radius: 999px; background: var(--app-gold); }
@@ -126,6 +126,18 @@
 /* ---------------------------------------------------------------------------
    2 · MESSAGE FROM THE CHAIRPERSON — portrait left, quote + copy right.
    --------------------------------------------------------------------------- */
+/* Decorative pattern watermark, scoped to this section only — .tint itself is
+   a plain flat fill shared by other unrelated sections (e.g. Media's press
+   coverage band), so the image lives on a dedicated class + pseudo-element
+   rather than touching .tint. Sits behind .ux4g-container via z-index. */
+.chair-section { position: relative; overflow: hidden; }
+.chair-section::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background: url("/img/Pattern.png") no-repeat left center / cover;
+  opacity: 0.1; pointer-events: none;
+}
+.chair-section > .ux4g-container { position: relative; z-index: 1; }
+
 /* Photo sized to its own auto column (capped, not stretched to fill 0.85fr of
    a wide container) — the source is 1176×1056, so keeping it closer to its
    native size avoids the soft/upscaled look a full-width column produced.
@@ -145,7 +157,11 @@
    .avatar-gradient from components.css (same cards as /about#team).
    --------------------------------------------------------------------------- */
 .team-section { padding-block: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid var(--app-border); }
-.team-rail-card { flex: 0 0 min(70%, 240px); scroll-snap-align: start; }
+/* Exactly 5 cards fit the view at once (4 × .rail's 1rem gap subtracted) —
+   no partial card ever shows at the edge; the rest is reached by scrolling
+   (manual or TeamRail's own auto-page-by-4). */
+.team-rail-card { flex: 0 0 calc((100% - 4 * 1rem) / 5); scroll-snap-align: start; }
+@media (max-width: 640px) { .team-rail-card { flex-basis: calc((100% - 1rem) / 2); } }
 
 /* ---------------------------------------------------------------------------
    SHARED CAROUSEL-CARD SHELL — a titled card that steps through a top-N list
@@ -172,6 +188,23 @@
   border: 1px solid var(--app-border); background: var(--app-bg);
   transition: box-shadow .2s ease, transform .2s ease; height: 100%; }
 .carousel-item:hover { box-shadow: var(--app-shadow-float); transform: translateY(-3px); }
+
+/* Shared "spotlight" carousel item — Publications' "Latest publications" and
+   Media & Events' "Recent media & events" both use this: cover takes a fixed
+   45% of the card, text the rest; description clamped so items don't vary
+   wildly in height as the carousel steps through them. */
+/* Fixed floor, not just content-driven — Media & Events' body has no
+   description paragraph (nothing to clamp to 3 lines) and would otherwise
+   render shorter than the Publications spotlight it shares this class with. */
+.spotlight-item { display: grid; grid-template-columns: 45% 1fr; align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.4rem); padding: var(--ux4g-padding-l); min-height: 380px; }
+/* Same 5:3.4 ratio as .cover (CoverArt) — the wrapper carries it, not the img,
+   so a Media & Events photo (no .cover box of its own) still matches the
+   Publications spotlight's card height exactly. */
+.spotlight-cover { max-width: 100%; aspect-ratio: 5 / 3.4; border-radius: var(--app-radius); overflow: hidden; }
+.spotlight-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.spotlight-desc { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+@media (max-width: 640px) { .spotlight-item { grid-template-columns: 1fr; } }
 
 .carousel-foot { display: flex; align-items: center; justify-content: space-between;
   gap: var(--ux4g-space-6); margin-top: var(--ux4g-margin-s); }
@@ -208,6 +241,17 @@
    the image never paints past this box's rounded corner. */
 .pub-item > .cover { flex: 0 0 clamp(63px, 22.5vw, 113px); aspect-ratio: 510 / 727; border-radius: 0; overflow: hidden; }
 .pub-item .cover-photo img { object-fit: cover; }
+/* Both thumbnails (Working paper, Reports) carry their logo/title/description
+   text in the left half and purely decorative shapes on the right — default
+   center-cropping into this narrow portrait box was cutting into the text
+   (worst on the Working paper one, a square source needing the most crop).
+   Anchoring left keeps the readable side intact and crops the empty side. */
+.pub-item .cover-illustrated img { object-position: left center; }
+
+/* Homepage-only placeholder cover (see ReportPlaceholderCover.tsx) — sized to
+   113×162, matching Working papers' real-scan covers exactly, so both cards'
+   rows come out the same height with no extra height rules needed. */
+.pub-item > .cover.cover-illustrated { flex-basis: 113px; aspect-ratio: 113 / 162; }
 .pub-item .body { flex: 1; min-width: 0; padding: var(--ux4g-padding-s); }
 @media (max-width: 480px) {
   .pub-item { flex-direction: column; }
@@ -215,6 +259,7 @@
      aspect-ratio — blew the cover up to ~1.4x the card's own width in height,
      dwarfing the text below it. Keep the same small clamp used in row mode. */
   .pub-item > .cover { flex: none; width: clamp(63px, 40vw, 113px); }
+  .pub-item > .cover.cover-illustrated { width: 113px; }
 }
 .pub-item .body h4 {
   font-family: var(--font-display); font-weight: 700; font-size: clamp(1.02rem, 0.95rem + 0.45vw, 1.22rem);
@@ -231,9 +276,9 @@
   -webkit-box-orient: vertical; overflow: hidden; }
 
 /* ---------------------------------------------------------------------------
-   5 · DASHBOARDS — a soft accent band; two peer cards (Growth & prices |
-   Trade & reserves), each stepping through its own indicators one at a time
-   with a full-width area chart that swaps per indicator.
+   5 · DASHBOARDS — a soft accent band; two peer cards (National Asset
+   Adoption Growth | Ownership Gap by Wealth Bracket), each a static grouped
+   bar chart with no carousel — one chart per card, nothing to step through.
    --------------------------------------------------------------------------- */
 .dashp { background: var(--app-accent-softer); border-block: 1px solid var(--app-border); padding-block: clamp(3rem, 6vw, 5rem); }
 
@@ -244,6 +289,13 @@
   letter-spacing: -0.02em; margin-top: var(--ux4g-space-2); display: flex; align-items: baseline; gap: var(--ux4g-space-2); }
 .dash-value .u { font-size: 0.85rem; color: var(--app-text-muted); font-weight: 600; }
 .dash-chart { margin-top: var(--ux4g-margin-m); }
+
+/* Back to the standard white .carousel-card surface (same as every other
+   carousel-grid pair on the homepage) — .dash-card-plain is now just a hook
+   for the legend/head spacing below, no background override. */
+.dash-legend { display: flex; gap: var(--ux4g-space-5); margin-top: var(--ux4g-margin-s); }
+.dash-legend-item { display: inline-flex; align-items: center; gap: var(--ux4g-space-2); font-size: 0.82rem; color: var(--app-text-muted); font-weight: 600; }
+.dash-legend-swatch { width: 10px; height: 10px; border-radius: 999px; flex: none; }
 
 /* ---------------------------------------------------------------------------
    6 · ABOUT / INSTITUTION — a real photograph and a quiet statement.
@@ -297,6 +349,19 @@
    media/news/notice baseline above). Notice-specific, doesn't touch those. */
 .notice-carousel-item { min-height: clamp(162.5px, 25vw, 200px); }
 .notice-thumb { flex-basis: clamp(84px, 26.4vw, 132px); }
+/* The Tenders thumbnail is a near-square (375×372) graphic with its "EAC-PM
+   TENDERS" text centred — the fixed narrower width above forced a tall crop
+   that clipped both edges of the centred text. Deriving width from the row's
+   own height via aspect-ratio (instead of a fixed flex-basis) matches the
+   image's real proportions almost exactly, so no cropping is needed at all —
+   card/row height (.notice-carousel-item's min-height) is untouched. Scoped
+   to image-bearing thumbs only, so Vacancy circulars' icon fallback keeps its
+   own width. */
+.notice-thumb:has(img) { flex-basis: 113px; height: 162px; aspect-ratio: auto; }
+/* Row height follows the smaller 113×162 thumb now, not the +25% baseline
+   above — same .carousel-item height:100% override as the Publications
+   cards use, scoped to just this (image-bearing) row via :has(). */
+.carousel-stage:has(> .notice-carousel-item > .notice-thumb > img) > .notice-carousel-item { height: auto; min-height: 0; }
 .media-body, .news-body, .notice-body { min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: var(--ux4g-padding-m); }
 
 /* ---------------------------------------------------------------------------

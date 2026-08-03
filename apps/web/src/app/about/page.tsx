@@ -15,9 +15,9 @@ export default function AboutPage() {
     <>
       <section className="page-hero hero-stage grain">
         <div className="ux4g-container hero-content">
-          <span className="kicker">About</span>
+          <span className="kicker">Explore</span>
           <h1 className="t-h1 balance ux4g-mt-xs" style={{ maxWidth: "20ch" }}>
-            The Economic Advisory Council to the Prime Minister
+            About EAC-PM
           </h1>
           <hr className="gold-rule ux4g-my-m ux4g-mx-none" />
           <p className="t-lead measure">
@@ -27,20 +27,29 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section tint" id="chairperson" style={{ scrollMarginTop: "96px" }}>
-        <div className="ux4g-container container-narrow">
-          <Reveal>
-            <span className="kicker">Message from the Chairperson</span>
-            <blockquote className="t-h3 balance dropcap ux4g-mt-s" style={{ fontWeight: 600 }}>
-              The Council&apos;s work is to bring evidence to bear on the questions that matter most
-              for India&apos;s growth — and to state plainly what the data does, and does not yet,
-              show.
-            </blockquote>
-            <p className="text-muted ux4g-mt-m">
-              Chairperson&apos;s portrait, signed message and an optional captioned video with a
-              transcript are placeholders pending official assets.
-            </p>
-          </Reveal>
+      {/* Same photo + pattern-watermark treatment as the homepage's chairperson
+          teaser (.chair-section) — no "read the full message" link here since
+          this is that full message, not a teaser pointing to it. */}
+      <section className="section tint chair-section" id="chairperson" style={{ scrollMarginTop: "96px" }}>
+        <div className="ux4g-container">
+          <div className="chair-grid">
+            <Reveal className="chair-photo">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/img/chairman-NITI.jpeg" alt="Portrait of the Chairperson, EAC-PM" />
+            </Reveal>
+            <Reveal delay={120}>
+              <span className="kicker">Message from the Chairperson</span>
+              <blockquote className="t-h3 balance dropcap ux4g-mt-s" style={{ fontWeight: 600 }}>
+                The Council&apos;s work is to bring evidence to bear on the questions that matter most
+                for India&apos;s growth — and to state plainly what the data does, and does not yet,
+                show.
+              </blockquote>
+              <p className="text-muted ux4g-mt-m">
+                A signed message and an optional captioned video with a transcript are placeholders
+                pending official assets.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
