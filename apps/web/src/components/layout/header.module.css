@@ -5,14 +5,37 @@
   background: var(--app-topbar-bg);
   font-size: var(--ux4g-fs-12, 0.75rem);
 }
-.topbarInner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 38px; }
-.gov { display: flex; align-items: center; gap: 0.55rem; color: rgba(255,255,255,0.8); font-weight: 500; }
+/* The vendor's .ux4g-topbar family is a declared extension: ux4g.css ships only two
+   `.ux4g-topbar__wrap .ux4g-label-m-default` colour rules — no box model for the bar,
+   the icon buttons, the group, the divider or the select. Those are supplied here on
+   --ux4g-* / --app-* tokens. See DESIGN.md §9.2. */
+.topbarWrap {
+  gap: 1rem; min-height: 38px;
+  padding-inline: clamp(16px, 5vw, 40px);
+}
+.gov { gap: 0.55rem; color: rgba(255,255,255,0.88); font-weight: 500; }
+.gov:hover { color: var(--app-on-dark); }
+/* The vendor paints .ux4g-topbar__wrap .ux4g-label-m-default with
+   --ux4g-text-neutral-inverse — the inverse of the *reading theme*. This bar is a
+   constant dark institutional band that deliberately does not reskin, so in dark mode
+   that token resolves to near-black and the label lands at ~1.3:1. Doubling .topbarWrap
+   outranks the vendor's two-class selector so the label always inherits the light
+   colour the dark band actually needs. */
+.topbarWrap.topbarWrap :global(.ux4g-label-m-default) { color: inherit; }
 .govEmblem {
   width: 22px; height: 22px; border-radius: 999px; flex: none;
   display: grid; place-items: center; background: var(--ux4g-color-primary-400, #8670ff); color: var(--app-on-dark);
   font-weight: 700; font-size: 11px; font-family: var(--font-display);
 }
 .controls { display: flex; align-items: center; gap: 0.35rem; }
+/* Permanently visible skip link (the vendor declares .ux4g-topbar__skip but ships no
+   rule for it). Underlined so it reads as a link without relying on colour alone. */
+.skip {
+  padding: 0.25rem 0.5rem; border-radius: var(--app-radius);
+  color: rgba(255,255,255,0.88); font-weight: 600; font-size: var(--ux4g-fs-12, 0.75rem);
+  text-decoration: underline; text-underline-offset: 2px; white-space: nowrap;
+}
+.skip:hover { color: var(--app-on-dark); }
 .ctrl {
   display: inline-flex; align-items: center; gap: 0.3rem;
   padding: 0.25rem 0.5rem; border-radius: var(--app-radius);
@@ -27,6 +50,8 @@
 .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.24); margin-inline: 0.25rem; }
 @media (max-width: 720px) {
   .hideSm { display: none; }
+  .topbarWrap { padding-inline: 12px; gap: 0.5rem; }
+  .gov { white-space: nowrap; }
   /* Mobile topbar keeps only identity, theme and language — text size and
      contrast move into the full accessibility widget instead of duplicating it here. */
   .a11yFull { display: none; }
@@ -156,3 +181,20 @@
     width: calc(100% + 2px + 2 * clamp(12px, 3vw, 32px));
   }
 }
+
+/* Language selector — a disclosure listbox the vendor markup declares but ships no
+   styles for (.ux4g-topbar__select* is absent from ux4g.css; see below). */
+.langSelect { position: relative; }
+.langList {
+  position: absolute; top: calc(100% + 4px); right: 0; z-index: 200;
+  min-width: 140px; overflow: hidden; list-style: none; margin: 0; padding: 0;
+  background: var(--app-surface); border: 1px solid var(--app-border);
+  border-radius: var(--app-radius); box-shadow: var(--app-shadow-3);
+}
+.langOption {
+  display: block; width: 100%; padding: 0.5rem 0.8rem; text-align: left;
+  border: 0; background: transparent; cursor: pointer;
+  font: inherit; font-size: var(--ux4g-fs-14, 0.875rem); color: var(--app-text);
+}
+.langOption:hover { background: var(--app-accent-soft); color: var(--app-accent); }
+.langList [aria-selected="true"] .langOption { background: var(--app-accent-soft); color: var(--app-accent); font-weight: 600; }

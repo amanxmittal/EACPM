@@ -49,15 +49,20 @@ export function SiteFooter() {
               <span className={s.visitorLabel}>
                 <Icon name="eye" size={15} /> Site Visitors
               </span>
-              <span className={s.visitorDigits} aria-label={`${VISITOR_COUNT} site visitors`}>
+              {/* The per-digit tiles are presentation: a screen reader would spell them out
+                  one character at a time. Hide the whole display and expose the figure once
+                  as plain text. (aria-label can't do that job here — it is prohibited on a
+                  bare span, so it was being dropped and the count announced as nothing.) */}
+              <span className={s.visitorDigits} aria-hidden>
                 {VISITOR_COUNT.split("").map((c, i) =>
                   c === "," ? (
-                    <span key={i} className={s.visitorComma} aria-hidden>,</span>
+                    <span key={i} className={s.visitorComma}>,</span>
                   ) : (
-                    <span key={i} className={s.visitorDigit} aria-hidden>{c}</span>
+                    <span key={i} className={s.visitorDigit}>{c}</span>
                   ),
                 )}
               </span>
+              <span className="sr-only">{VISITOR_COUNT}</span>
             </span>
           </div>
 

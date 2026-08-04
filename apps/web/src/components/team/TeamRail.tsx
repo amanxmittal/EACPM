@@ -41,9 +41,17 @@ export function TeamRail({ members }: { members: Member[] }) {
   }, [reduced, paused, members.length]);
 
   return (
+    // The member cards hold no links or buttons, so nothing inside the rail can take
+    // focus — without tabindex a keyboard user cannot scroll it at all. Making the
+    // container itself focusable restores arrow-key scrolling, and role+label give
+    // screen-reader users something to land on and identify. Focusing it also trips
+    // onFocusCapture below, so tabbing in pauses the auto-advance.
     <div
       ref={railRef}
       className="rail"
+      tabIndex={0}
+      role="region"
+      aria-label="Team members"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}

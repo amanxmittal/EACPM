@@ -380,13 +380,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   position: absolute; width: 1px; height: 1px; max-width: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); white-space: nowrap; border: 0;
 }
-.skip-link {
-  position: fixed; top: 0; left: 0; transform: translateY(-120%);
-  background: var(--app-accent); color: var(--app-on-accent); padding: 0.7rem 1.1rem;
-  border-radius: 0 0 var(--app-radius) 0; z-index: 200; font-weight: 600;
-  transition: transform .15s ease;
-}
-.skip-link:focus { transform: translateY(0); }
+/* The skip link is no longer hidden-until-focus: it lives permanently visible in the
+   topbar utility nav as .ux4g-topbar__skip (see header.module.css). */
 
 /* ---------- motion ---------- */
 @media (prefers-reduced-motion: no-preference) {

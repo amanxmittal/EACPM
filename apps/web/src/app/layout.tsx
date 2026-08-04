@@ -53,9 +53,8 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdn.ux4g.gov.in/accessibility-v3.26/accessibility-widget.css" />
       </head>
       <body>
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
+        {/* The skip link lives in TopBar's utility nav (UX4G .ux4g-topbar__skip), where it
+            is permanently visible rather than hidden until focus. */}
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
