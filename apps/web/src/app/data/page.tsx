@@ -1,35 +1,12 @@
 import type { Metadata } from "next";
-import { Icon } from "@/components/ui/Icon";
-import { AnimatedAreaChart } from "@/components/charts/AnimatedAreaChart";
-import { SmallMultiples, type SM } from "@/components/charts/SmallMultiples";
-import { Reveal } from "@/components/motion/Reveal";
+import { HomeDashboards } from "@/components/data/HomeDashboards";
+import { ReportsCharts } from "@/components/data/ReportsCharts";
+import { PaperDatasetsExplorer } from "@/components/data/PaperDatasetsExplorer";
 
 export const metadata: Metadata = {
   title: "Data & Dashboards",
   description: "India at a glance, per-publication dataset explorers and a download centre — every figure sourced, every chart with a table and CSV.",
 };
-
-const gdpLabels = ["FY19", "FY20", "FY21", "FY22", "FY23", "FY24", "FY25", "FY26"];
-const gdpPoints = [6.5, 3.9, -5.8, 9.7, 7.0, 8.2, 7.6, 6.5];
-
-// Exported so the homepage's Data & Dashboards carousel reads from this same
-// list — this page's "Key indicators" section stays the single source.
-export const multiples: SM[] = [
-  { label: "Real GDP growth", value: "6.5", unit: "%", delta: "▲", dir: "up", series: [5.8, 6.1, 7.2, 8.7, 7.6, 6.9, 6.5] },
-  { label: "CPI inflation", value: "4.8", unit: "%", delta: "▼", dir: "down", series: [6.8, 6.1, 5.7, 5.5, 5.1, 4.9, 4.8] },
-  { label: "UPI volume", value: "18.4", unit: "bn/mo", delta: "▲", dir: "up", series: [8.7, 10.2, 11.4, 13.1, 14.9, 16.6, 18.4] },
-  { label: "Forex reserves", value: "690", unit: "$bn", delta: "▲", dir: "up", series: [575, 598, 616, 642, 655, 678, 690] },
-  { label: "Fiscal deficit", value: "5.1", unit: "% GDP", delta: "▼", dir: "down", series: [9.2, 6.7, 6.4, 5.9, 5.6, 5.3, 5.1] },
-  { label: "Merch. exports", value: "44", unit: "$bn/mo", delta: "▲", dir: "up", series: [30, 28, 34, 38, 40, 42, 44] },
-];
-
-const ecDimensions = ["State / UT", "Activity (NIC)", "Nature of operation", "Source of finance", "Type of ownership"];
-const downloads = [
-  { name: "Real GDP growth (FY19–FY26)", freq: "Annual", fmt: "CSV" },
-  { name: "CPI inflation (monthly)", freq: "Monthly", fmt: "CSV" },
-  { name: "UPI transaction volume (monthly)", freq: "Monthly", fmt: "CSV" },
-  { name: "Forex reserves (weekly)", freq: "Weekly", fmt: "XLSX" },
-];
 
 export default function DataPage() {
   return (
@@ -52,122 +29,40 @@ export default function DataPage() {
         </div>
       </section>
 
-      {/* dashboard centerpiece */}
+      {/* Reports — same dataset as Working Papers, re-plotted as different chart
+          types, stepped through via prev/next arrows at the bottom */}
       <section className="section">
         <div className="ux4g-container">
-          <div className="data-panel">
-            <div className="cluster ux4g-jc-between ux4g-mb-s" style={{ alignItems: "flex-start" }}>
-              <div>
-                <span className="kicker">Featured series</span>
-                <h2 className="t-h3 ux4g-mt-xs">
-                  Real GDP growth — the pandemic trough &amp; recovery
-                </h2>
-                <p className="t-micro text-muted">Annual, % · hover for values</p>
-              </div>
-              <div className="cluster">
-                <span className="flag ux4g-tag-tonal-warning ux4g-tag-s">Illustrative</span>
-                <button className="ux4g-btn-outline-primary ux4g-btn-sm">
-                  <Icon name="download" size={15} /> CSV
-                </button>
-              </div>
+          <div className="cluster ux4g-jc-between ux4g-mb-m" style={{ alignItems: "flex-start" }}>
+            <div>
+              <h2 className="t-h3">Latest data and dashboards</h2>
             </div>
-            <AnimatedAreaChart
-              labels={gdpLabels}
-              points={gdpPoints}
-              yUnit="%"
-              height={360}
-              events={[{ index: 2, label: "COVID" }]}
-              annotations={[
-                { index: 2, label: "−5.8%", kind: "trough" },
-                { index: 3, label: "+9.7%", kind: "peak" },
-              ]}
-              ariaSummary="Illustrative real GDP growth by fiscal year: 6.5% in FY19, a −5.8% pandemic trough in FY21, a 9.7% rebound in FY22, settling near 6.5% by FY26."
-              caption="Illustrative — the live series will be sourced from MoSPI with revision notes and a 'provisional / revised / final' status."
-            />
           </div>
+          <ReportsCharts />
         </div>
       </section>
 
-      {/* small multiples */}
-      <section className="section ux4g-pt-none">
-        <div className="ux4g-container">
-          <div className="section-head">
-            <div className="sh-copy">
-              <span className="kicker">The dashboard</span>
-              <h2 className="t-h2">Key indicators</h2>
-            </div>
-          </div>
-          <SmallMultiples items={multiples} />
-        </div>
-      </section>
-
-      {/* dataset explorer teaser */}
+      {/* dataset explorer — search a report/paper, press Enter to surface the
+          durables dataset card */}
       <section className="section tint" id="datasets" style={{ scrollMarginTop: "96px" }}>
         <div className="ux4g-container">
-          <Reveal>
-            <span className="kicker">Paper datasets</span>
-            <h2 className="t-h2 ux4g-mt-xs">
-              Explore the data behind the papers
-            </h2>
-            <p className="t-lead measure ux4g-mt-xs">
-              For every data-heavy publication, the underlying dataset is uploadable and explorable
-              — filter, cross-filter, chart, download the exact slice, and cite a permalink.
-            </p>
-            <div className="card ux4g-mt-xl">
-              <span className="ux4g-tag-tonal-primary ux4g-tag-s">Reference dataset</span>
-              <h3 className="t-h3 ux4g-mt-xs">
-                Economic Census — EC4 · EC5 · EC6
-              </h3>
-              <p className="text-muted t-small ux4g-mt-2xs">
-                Derived from the shared metadata dictionary. Note: dimension code-lists differ per
-                round (e.g. the State code for Andhra Pradesh is 02 / 28 / 37 across EC4 / EC5 / EC6)
-                — so the explorer versions its code-lists and validates each upload.
-              </p>
-              {/* Static labels, not filters — tags rather than chips. */}
-              <div className="cluster ux4g-mt-m">
-                {ecDimensions.map((d) => (
-                  <span key={d} className="ux4g-tag-tonal-neutral ux4g-tag-s">
-                    {d}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Reveal>
+          <PaperDatasetsExplorer />
         </div>
       </section>
 
-      {/* download centre */}
-      <section className="section" id="downloads" style={{ scrollMarginTop: "96px" }}>
+      {/* Working Papers (was "national dashboards") — same paired cards as the homepage */}
+      <section className="section">
         <div className="ux4g-container">
-          <span className="kicker">Download centre</span>
-          <h2 className="t-h2 ux4g-mt-xs ux4g-mb-l">
-            Series &amp; data dictionaries
-          </h2>
-          <ul className="card ux4g-list ux4g-list-default">
-            {downloads.map((d) => (
-              <li key={d.name} className="ux4g-list-item">
-                {/* -fixed: the row itself isn't the click target, only the button
-                    is, so it opts out of the hover/active row affordance. */}
-                <div className="ux4g-list-item-row ux4g-list-item-row-fixed">
-                  <span className="ux4g-list-item-start">
-                    <span>
-                      <div style={{ fontWeight: 600 }}>{d.name}</div>
-                      <div className="t-micro text-muted">{d.freq}</div>
-                    </span>
-                  </span>
-                  <button className="ux4g-btn-outline-primary ux4g-btn-sm">
-                    <Icon name="download" size={15} /> {d.fmt}
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <p className="t-micro text-muted ux4g-mt-s">
-            Downloads are illustrative placeholders in the MVP; the live centre serves versioned
-            series with a data dictionary and an open licence.
-          </p>
+          <div className="cluster ux4g-jc-between ux4g-mb-m" style={{ alignItems: "flex-start" }}>
+            <div>
+              <span className="kicker">Household &amp; asset trends</span>
+              <h2 className="t-h3 ux4g-mt-xs">Working paper and Reports</h2>
+            </div>
+          </div>
+          <HomeDashboards />
         </div>
       </section>
+
     </>
   );
 }

@@ -13,6 +13,7 @@ export function GroupedBarChart({
   height = 260,
   maxValue,
   valueSuffix = "%",
+  showYAxis = false,
 }: {
   categories: string[];
   series: GroupedBarSeries[];
@@ -20,9 +21,10 @@ export function GroupedBarChart({
   height?: number;
   maxValue?: number;
   valueSuffix?: string;
+  showYAxis?: boolean;
 }) {
   const max = maxValue ?? Math.max(...series.flatMap((s) => s.values)) * 1.18;
-  const pad = { top: 22, right: 8, bottom: 26, left: 8 };
+  const pad = { top: 22, right: 8, bottom: 26, left: showYAxis ? 34 : 8 };
   const chartW = width - pad.left - pad.right;
   const chartH = height - pad.top - pad.bottom;
   const groupW = chartW / categories.length;
@@ -31,11 +33,21 @@ export function GroupedBarChart({
   const gridLines = [0, 0.25, 0.5, 0.75, 1];
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} width="100%" height={height} role="img" aria-label={`Bar chart comparing ${series.map((s) => s.label).join(" vs ")} across ${categories.join(", ")}`}>
+    <svg viewBox={`0 0 ${width} ${height}`} width="100%" height={height} preserveAspectRatio="none" role="img" aria-label={`Bar chart comparing ${series.map((s) => s.label).join(" vs ")} across ${categories.join(", ")}`}>
       {gridLines.map((t) => {
         const y = pad.top + chartH * (1 - t);
         return <line key={t} x1={pad.left} x2={width - pad.right} y1={y} y2={y} stroke="var(--app-border)" strokeWidth="1" />;
       })}
+      {showYAxis &&
+        gridLines.map((t) => {
+          const y = pad.top + chartH * (1 - t);
+          return (
+            <text key={`y-${t}`} x={pad.left - 8} y={y + 3} textAnchor="end" fontSize="10" fontWeight="600" fill="var(--app-text-muted)">
+              {Math.round(max * t)}
+              {valueSuffix}
+            </text>
+          );
+        })}
       {categories.map((cat, ci) => {
         const gx = pad.left + ci * groupW;
         return (

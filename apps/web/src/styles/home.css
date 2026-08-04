@@ -203,6 +203,10 @@
    Publications spotlight's card height exactly. */
 .spotlight-cover { max-width: 100%; aspect-ratio: 5 / 3.4; border-radius: var(--app-radius); overflow: hidden; }
 .spotlight-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Icon fallback for spotlight items with no client-supplied thumbnail (e.g.
+   notice kinds other than Tender/Vacancy Circular) — same soft-accent look as
+   the homepage's media/notice-thumb placeholders. */
+.spotlight-cover-icon { width: 100%; height: 100%; background: var(--app-accent-soft); color: var(--app-accent); display: grid; place-items: center; }
 .spotlight-desc { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 @media (max-width: 640px) { .spotlight-item { grid-template-columns: 1fr; } }
 
@@ -288,7 +292,38 @@
 .dash-value { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 1.4rem + 0.8vw, 2rem);
   letter-spacing: -0.02em; margin-top: var(--ux4g-space-2); display: flex; align-items: baseline; gap: var(--ux4g-space-2); }
 .dash-value .u { font-size: 0.85rem; color: var(--app-text-muted); font-weight: 600; }
-.dash-chart { margin-top: var(--ux4g-margin-m); }
+.dash-chart { margin-top: var(--ux4g-margin-m); flex: 1; min-height: 0; display: flex; align-items: center; }
+.dash-chart > * { width: 100%; height: 100%; }
+/* globals.css sets `svg { height: auto }` site-wide, which lets a chart's
+   viewBox aspect ratio dictate its height — fine everywhere else, but it
+   fights the fixed-height cards below. Scoped back to 100% here, and each
+   chart's own preserveAspectRatio="none" (set at the component level) fills
+   the box edge-to-edge instead of letterboxing within it. */
+.dash-chart svg { height: 100%; }
+
+/* Inner "canvas" panel — a visually distinct surface (tinted, bordered)
+   holding just the plotted chart, separate from the outer white card's
+   head/legend/foot chrome. */
+.dash-chart-panel { border: 1px solid var(--app-border); border-radius: var(--app-radius-xl);
+  background: var(--app-bg); padding: var(--ux4g-padding-m); box-sizing: border-box; }
+.dash-chart-panel > * { width: 100%; height: 100%; }
+
+/* Fixed height so every dashboard/report card lines up regardless of which
+   chart type it holds (line/bar/dumbbell all have different intrinsic
+   heights) — .dash-chart above absorbs the slack and centers its chart. */
+.dash-card-plain { height: 398.8px; overflow: hidden; }
+
+/* Reports card's sliding 2-at-a-time window — two sub-cards side by side,
+   each with its own mini title, sharing the outer card's flag/foot. */
+.reports-subcards { display: flex; gap: var(--ux4g-space-6); flex: 1; min-height: 0; margin-top: var(--ux4g-margin-m); }
+.reports-subcard { flex: 1; min-width: 0; display: flex; flex-direction: column; border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-xl); padding: var(--ux4g-padding-m); background: var(--app-accent-soft); }
+.reports-subcard-title { font-size: 0.82rem; color: var(--app-text-muted); font-weight: 600; }
+.reports-subcard .dash-chart { margin-top: var(--ux4g-margin-s); }
+.reports-subcard .dash-chart-panel { border: none; padding: 0; background: transparent; }
+/* Reports card only — kept at its earlier height while every other
+   .dash-card-plain (Working Papers, homepage) moved to 398.8px. */
+.dash-card-plain.reports-chart-card { height: 497.6px; }
 
 /* Back to the standard white .carousel-card surface (same as every other
    carousel-grid pair on the homepage) — .dash-card-plain is now just a hook
@@ -296,6 +331,46 @@
 .dash-legend { display: flex; gap: var(--ux4g-space-5); margin-top: var(--ux4g-margin-s); }
 .dash-legend-item { display: inline-flex; align-items: center; gap: var(--ux4g-space-2); font-size: 0.82rem; color: var(--app-text-muted); font-weight: 600; }
 .dash-legend-swatch { width: 10px; height: 10px; border-radius: 999px; flex: none; }
+
+/* InteractiveLineChart's hover tooltip — absolutely positioned within the
+   chart's own relative wrapper, following the hovered column via inline
+   left/right percentages set from JS. */
+/* position is set inline (fixed, viewport-relative, via a portal to <body>)
+   so the tooltip floats above the card instead of being clipped by its
+   ancestors' overflow:hidden (needed for the fixed-height cards). */
+.line-chart-tooltip { background: var(--app-surface); border: 1px solid var(--app-border); border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow-2); padding: var(--ux4g-padding-s); pointer-events: none; z-index: 50;
+  min-width: 140px; }
+.line-chart-tooltip-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--app-text-muted); margin-bottom: var(--ux4g-margin-2xs); }
+.line-chart-tooltip-row { display: flex; align-items: center; gap: var(--ux4g-space-2); font-size: 0.82rem; color: var(--app-text); white-space: nowrap; }
+.line-chart-tooltip-swatch { width: 8px; height: 8px; border-radius: 999px; flex: none; }
+
+/* Durables statewise table (dataset explorer) — a durable-good picker (pill
+   tabs, no vendor tab component exists) above a scrollable table. */
+.durables-tabs { display: flex; flex-wrap: wrap; gap: var(--ux4g-space-2); }
+.durables-tab { border: 1px solid var(--app-border); background: var(--app-surface); color: var(--app-text-muted);
+  font-size: 0.82rem; font-weight: 600; padding: var(--ux4g-padding-2xs) var(--ux4g-padding-s); border-radius: 999px;
+  cursor: pointer; transition: background .15s ease, color .15s ease, border-color .15s ease; }
+.durables-tab:hover { border-color: var(--app-accent); color: var(--app-text); }
+.durables-tab[data-active="true"] { background: var(--app-accent); border-color: var(--app-accent); color: var(--app-on-accent); }
+.durables-table-wrap { overflow-x: auto; border: 1px solid var(--app-border); border-radius: var(--app-radius); }
+.durables-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.durables-table caption { text-align: left; padding: var(--ux4g-padding-s); font-size: 0.78rem; color: var(--app-text-muted); }
+.durables-table th, .durables-table td { padding: var(--ux4g-padding-xs) var(--ux4g-padding-s); text-align: right; white-space: nowrap; border-bottom: 1px solid var(--app-border); }
+.durables-table th:first-child, .durables-table td:first-child { text-align: left; }
+.durables-table thead th { color: var(--app-text-muted); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.03em; text-transform: uppercase; background: var(--app-accent-softer); }
+.durables-table tbody tr:last-child td { border-bottom: none; }
+.durables-table tbody tr:hover td { background: var(--app-accent-softer); }
+.durables-table td.state-cell { font-weight: 600; color: var(--app-text); }
+
+.durables-filters { display: flex; flex-wrap: wrap; gap: var(--ux4g-space-6); align-items: flex-end; }
+.durables-filter { display: flex; flex-direction: column; gap: var(--ux4g-space-2); }
+.durables-filter-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--app-text-muted); }
+.durables-select { border: 1px solid var(--app-border); background: var(--app-surface); color: var(--app-text);
+  font-size: 0.85rem; font-weight: 600; padding: var(--ux4g-padding-2xs) var(--ux4g-padding-s); border-radius: var(--app-radius);
+  min-width: 220px; }
+.durables-select:focus-visible { outline: 2px solid var(--app-accent); outline-offset: 1px; }
 
 /* ---------------------------------------------------------------------------
    6 · ABOUT / INSTITUTION — a real photograph and a quiet statement.

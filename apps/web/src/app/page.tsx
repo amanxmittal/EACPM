@@ -9,7 +9,7 @@ import { HomeNotices } from "@/components/notices/HomeNotices";
 import { HomeDashboards } from "@/components/data/HomeDashboards";
 import { news as pressCoverage } from "@/app/media/page";
 import { reports, thumbnailForType } from "@/lib/reports";
-import { articles, notices } from "@/content/media";
+import { articles, notices, thumbnailForNoticeKind } from "@/content/media";
 import { members } from "@/content/team";
 import { TeamRail } from "@/components/team/TeamRail";
 import { channels } from "@/content/channels";
@@ -41,7 +41,7 @@ export default function Home() {
 
   const whatsNew = [
     { when: "This week", title: feature.title, note: `${feature.type} · ${feature.year ?? "recent"}`, href: `/publications/${feature.slug}`, img: thumbnailForType(feature.type) },
-    { when: "This week", title: notices[0].title, note: `${notices[0].kind} · ${notices[0].date}`, href: notices[0].href },
+    { when: "This week", title: notices[0].title, note: `${notices[0].kind} · ${notices[0].date}`, href: notices[0].href, img: thumbnailForNoticeKind(notices[0].kind) },
     { when: "Recent", title: lead.title, note: `${lead.type} · ${lead.year ?? "recent"}`, href: `/publications/${lead.slug}`, img: thumbnailForType(lead.type) },
     { when: "Recent", title: articles[0].title, note: `${articles[0].author} · ${articles[0].outlet}`, href: articles[0].href, img: "/img/What's%20new/manufacturing%20opportunity.jpg" },
     { when: "Recent", title: reports[3].title, note: `${reports[3].type} · ${reports[3].year ?? "recent"}`, href: `/publications/${reports[3].slug}`, img: thumbnailForType(reports[3].type) },

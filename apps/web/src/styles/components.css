@@ -123,6 +123,9 @@
      <input> even with the vendor's own `outline: none`, which then shows up
      as a second, narrower box nested inside the pill. */
   border: 0; outline: none; box-shadow: none;
+  /* Long placeholders (e.g. "Search working papers, reports etc.") truncate
+     with an ellipsis instead of just clipping mid-character at the box edge. */
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 /* The vendor draws focus as an `outline` on the pill itself, but .ux4g-search
    also sets `overflow: hidden` (to clip the search-btn's square corners inside

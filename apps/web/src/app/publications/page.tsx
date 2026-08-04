@@ -17,7 +17,7 @@ export default async function PublicationsPage({
   searchParams: Promise<{ [k: string]: string | string[] | undefined }>;
 }) {
   const sp = await searchParams;
-  const initialType = typeof sp.type === "string" ? sp.type : "All";
+  const initialType = typeof sp.type === "string" ? sp.type : "Report";
   const initialQuery = typeof sp.q === "string" ? sp.q : "";
   const initialArchive = sp.archive === "1";
   const spotlight = reports.slice(0, SPOTLIGHT_SIZE);

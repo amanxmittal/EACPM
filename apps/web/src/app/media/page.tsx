@@ -54,6 +54,20 @@ export const news: PressMention[] = [
   },
 ];
 
+// Alt text is the filename, lightly cleaned up (hyphens/underscores to spaces,
+// trailing index numbers dropped) — nothing invented beyond what the filename
+// itself states.
+const GALLERY_IMAGES = [
+  { src: "/img/Gallery/12th_Yoga_Day_at_NITI_Aayog_2.jpeg", alt: "12th Yoga Day at NITI Aayog" },
+  { src: "/img/Gallery/Chief_Ministers_of_the_North_Eastern_States_11.jpg", alt: "Chief Ministers of the North Eastern States" },
+  { src: "/img/Gallery/Implementation-of-the-SHANTI-1.jpeg", alt: "Implementation of the SHANTI" },
+  { src: "/img/Gallery/Launch-of-DPI@2040-1.jpg", alt: "Launch of DPI@2040" },
+  { src: "/img/Gallery/National-Workshop-on-Grassroots-Innovation-1.jpg", alt: "National Workshop on Grassroots Innovation" },
+  { src: "/img/Gallery/Regional-Workshop-on-Enhancing-District-Level1.jpg", alt: "Regional Workshop on Enhancing District Level" },
+  { src: "/img/Gallery/Review-Meeting-for-Website.jpeg", alt: "Review Meeting for Website" },
+  { src: "/img/Gallery/Strengthening-Tribal1.jpg", alt: "Strengthening Tribal" },
+];
+
 export default function MediaPage() {
   // Combines both real content types this page has — articles by members and
   // press coverage — into one "recent" list for the spotlight. No dates exist
@@ -106,8 +120,8 @@ export default function MediaPage() {
             {articles.map((a) => (
               <div key={a.href} className="ux4g-col-12 ux4g-col-sm-6">
                 <a href={a.href} target="_blank" rel="noopener noreferrer" className="card card-hover ux4g-d-flex ux4g-jc-between ux4g-ai-center ux4g-inline-gap-l">
-                  <div>
-                    <h3 className="t-h4">{a.title}</h3>
+                  <div style={{ minWidth: 0 }}>
+                    <h3 className="t-h4" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{a.title}</h3>
                     <p className="t-micro text-muted ux4g-mt-2xs">
                       {a.author} · {a.outlet}
                     </p>
@@ -141,17 +155,18 @@ export default function MediaPage() {
       <section className="section" id="gallery" style={{ scrollMarginTop: "84px" }}>
         <div className="ux4g-container">
           <SectionHeader eyebrow="Gallery" title="Events &amp; photographs">
-            Albums migrate with alt text and correct aspect ratios; images shown here are
-            placeholders in the MVP.
+            Photographs from Council events and workshops.
           </SectionHeader>
           <div className="grid ux4g-row">
-            {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-              <div key={i} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-3">
-                <div
-                  className="card ux4g-d-grid ux4g-place-items-center"
-                  style={{ aspectRatio: "4 / 3", background: "linear-gradient(150deg, var(--app-accent-soft), var(--app-bg-subtle))" }}
-                >
-                  <Icon name="chart" size={22} />
+            {GALLERY_IMAGES.map((img) => (
+              <div key={img.src} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-3">
+                <div className="card" style={{ aspectRatio: "4 / 3", padding: 0, overflow: "hidden" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
                 </div>
               </div>
             ))}

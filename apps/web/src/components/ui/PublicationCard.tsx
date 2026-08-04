@@ -3,7 +3,7 @@ import { Icon } from "./Icon";
 import { CoverArt } from "./CoverArt";
 import { readMinutes, type Report } from "@/lib/reports";
 
-export function PublicationCard({ report, layout = "grid" }: { report: Report; layout?: "grid" | "list" }) {
+export function PublicationCard({ report, layout = "grid", isNew = false }: { report: Report; layout?: "grid" | "list"; isNew?: boolean }) {
   return (
     <article className={`card card-hover pub-card${layout === "list" ? " pub-card-list" : ""}`}>
       <Link href={`/publications/${report.slug}`} aria-label={report.title} className="pub-cover-link">
@@ -14,6 +14,7 @@ export function PublicationCard({ report, layout = "grid" }: { report: Report; l
           <span className="ux4g-tag-tonal-neutral ux4g-tag-s">{report.year ?? "—"}</span>
           <span className="t-micro text-muted">{report.type}</span>
           <span className="t-micro text-muted">· {readMinutes(report)} min read</span>
+          {isNew && <span className="new-ribbon">New</span>}
         </div>
         <Link href={`/publications/${report.slug}`}>
           <h3 className="pub-title">{report.title}</h3>

@@ -10,8 +10,8 @@ export const REPORTS_THUMBNAIL = "/img/Reports%20-%20Thumbnail.png";
 /** The site-wide thumbnail for a report's `type`, or undefined for types that
  * still use their own real scan / typographic fallback (see CoverArt.tsx). */
 export function thumbnailForType(type: string): string | undefined {
-  if (type === "Working Paper") return WORKING_PAPER_THUMBNAIL;
-  if (type === "Report") return REPORTS_THUMBNAIL;
+  if (type === "Working Paper" || type === "Occasional Paper") return WORKING_PAPER_THUMBNAIL;
+  if (type === "Report" || type === "Partner Report") return REPORTS_THUMBNAIL;
   return undefined;
 }
 

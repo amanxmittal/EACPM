@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { members } from "@/content/team";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal, RevealStagger } from "@/components/motion/Reveal";
 import { ChapterArt } from "@/components/art/ChapterArt";
 import { MemberAvatar } from "@/components/ui/MemberAvatar";
+import { Icon } from "@/components/ui/Icon";
 
 export const metadata: Metadata = {
   title: "About EAC-PM",
@@ -111,15 +113,36 @@ export default function AboutPage() {
       <section className="section tint" id="previous" style={{ scrollMarginTop: "96px" }}>
         <div className="ux4g-container">
           <Reveal>
-            <span className="kicker">Previous Chairpersons</span>
-            <h2 className="t-h2 ux4g-mt-xs">
-              A chronological legacy
-            </h2>
+            <div className="cluster ux4g-jc-between" style={{ alignItems: "flex-start" }}>
+              <div>
+                <span className="kicker">Previous Chairpersons</span>
+                <h2 className="t-h2 ux4g-mt-xs">
+                  A chronological legacy
+                </h2>
+              </div>
+              <Link href="/about/previous-chairpersons" className="view-all">
+                View all <Icon name="arrowRight" size={16} />
+              </Link>
+            </div>
             <p className="text-muted measure ux4g-mt-xs">
-              A dated list of previous Chairpersons with tenure and a short legacy note is compiled
-              from official records during migration.
+              Names and photographs shown here are drawn from the current roster pending the
+              official dated list of former Chairpersons; tenure dates are not yet verified.
             </p>
           </Reveal>
+          <RevealStagger className="grid ux4g-row ux4g-mt-l">
+            {members.slice(0, 4).map((m) => (
+              <div key={m.slug} className="ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-3">
+                <div className="card member">
+                  <MemberAvatar member={m} />
+                  <div>
+                    <h3>{m.name}</h3>
+                    <p className="text-muted t-small">{m.affiliation} · {m.designation ?? "designation pending"}</p>
+                    <p className="text-muted t-small ux4g-mt-2xs">Duration: pending verification</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </RevealStagger>
         </div>
       </section>
     </>

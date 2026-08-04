@@ -82,9 +82,6 @@ export function NoticesExplorer({ notices, initialType = "All" }: { notices: Not
           </button>
         </div>
         <div className="cluster">
-          <a href="#" className="ux4g-btn-outline-primary ux4g-btn-sm">
-            <Icon name="rss" size={16} /> Subscribe
-          </a>
           <label className="ux4g-search search-box">
             <Icon name="search" size={18} className="ux4g-search-leading-icon" />
             <input

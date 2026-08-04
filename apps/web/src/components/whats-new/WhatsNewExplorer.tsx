@@ -1,6 +1,9 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { Icon } from "@/components/ui/Icon";
+import { PublicationCard } from "@/components/ui/PublicationCard";
+import { WhatsNewCard } from "@/components/whats-new/WhatsNewCard";
+import type { Report } from "@/lib/reports";
 
 const PER_PAGE = 12;
 
@@ -20,21 +23,43 @@ function pageItems(current: number, total: number): (number | "gap")[] {
 export type Feed = "Publication" | "Notice" | "Media";
 const kinds: Feed[] = ["Publication", "Notice", "Media"];
 
-export type WhatsNewItem = {
-  type: Feed;
-  title: string;
-  meta: string;
-  href: string;
-  external?: boolean;
-  /** From each source's own isArchived() — Media has no reliable date yet, so it's always current. */
-  archived: boolean;
-  /**
-   * Set by the page from the item's position in the built feed, not a stored
-   * flag — see whats-new/page.tsx. So it always tracks whatever is newest
-   * without anyone having to remember to unset it on the item that used to be new.
-   */
-  isNew?: boolean;
-};
+// Publications carry their full Report (so PublicationCard — with its real
+// abstract, PDF link and cover — can be reused as-is); Notices/Media carry
+// the flatter shape WhatsNewCard expects, since they have no abstract or PDF.
+export type WhatsNewItem =
+  | {
+      type: "Publication";
+      report: Report;
+      archived: boolean;
+      isNew?: boolean;
+    }
+  | {
+      type: "Notice" | "Media";
+      badge: string;
+      tagLabel: string;
+      title: string;
+      href: string;
+      external?: boolean;
+      imageUrl?: string;
+      archived: boolean;
+      isNew?: boolean;
+    };
+
+function itemTitle(i: WhatsNewItem): string {
+  return i.type === "Publication" ? i.report.title : i.title;
+}
+function itemSearchText(i: WhatsNewItem): string {
+  return i.type === "Publication" ? `${i.report.title} ${i.report.type} ${i.report.abstract}` : `${i.title} ${i.badge} ${i.tagLabel}`;
+}
+function itemHref(i: WhatsNewItem): string {
+  return i.type === "Publication" ? `/publications/${i.report.slug}` : i.href;
+}
+function itemExternal(i: WhatsNewItem): boolean {
+  return i.type === "Publication" ? false : Boolean(i.external);
+}
+function itemBadge(i: WhatsNewItem): string {
+  return i.type === "Publication" ? i.report.type : i.badge;
+}
 
 export function WhatsNewExplorer({
   items,
@@ -46,8 +71,9 @@ export function WhatsNewExplorer({
   const [type, setType] = useState(initialType);
   const [q, setQ] = useState("");
   const [isArchiveView, setIsArchiveView] = useState(false);
+  const [view, setView] = useState<"grid" | "list">("list");
   const [page, setPage] = useState(1);
-  const listRef = useRef<HTMLUListElement>(null);
+  const listRef = useRef<HTMLElement>(null);
 
   // Archive is its own base pool (current vs archived), same idea as the
   // Publications and Notices pages — the type/search filters then narrow
@@ -57,10 +83,7 @@ export function WhatsNewExplorer({
       items.filter((i) => {
         if (i.archived !== isArchiveView) return false;
         if (type !== "All" && i.type !== type) return false;
-        if (q) {
-          const hay = `${i.title} ${i.meta}`.toLowerCase();
-          if (!hay.includes(q.toLowerCase())) return false;
-        }
+        if (q && !itemSearchText(i).toLowerCase().includes(q.toLowerCase())) return false;
         return true;
       }),
     [items, isArchiveView, type, q],
@@ -106,9 +129,6 @@ export function WhatsNewExplorer({
           </button>
         </div>
         <div className="cluster">
-          <a href="#" className="ux4g-btn-outline-primary ux4g-btn-sm">
-            <Icon name="rss" size={16} /> RSS
-          </a>
           <label className="ux4g-search search-box">
             <Icon name="search" size={18} className="ux4g-search-leading-icon" />
             <input
@@ -116,44 +136,70 @@ export function WhatsNewExplorer({
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search titles"
+              placeholder="Search working papers, reports etc."
               aria-label="Search what's new"
             />
           </label>
         </div>
       </div>
 
-      <p className="results-count" aria-live="polite">
-        {filtered.length} item{filtered.length !== 1 ? "s" : ""}
-        {isArchiveView ? " · Archives" : ""}
-        {type !== "All" ? ` · ${type}` : ""}
-        {totalPages > 1 ? ` · page ${page} of ${totalPages}` : ""}
-      </p>
+      <div className="results-row">
+        <p className="results-count" aria-live="polite">
+          {filtered.length} item{filtered.length !== 1 ? "s" : ""}
+          {isArchiveView ? " · Archives" : ""}
+          {type !== "All" ? ` · ${type}` : ""}
+          {totalPages > 1 ? ` · page ${page} of ${totalPages}` : ""}
+        </p>
+        <div className="view-toggle" role="group" aria-label="View as">
+          <span className="view-toggle-label">View</span>
+          <button
+            type="button"
+            className={`ux4g-icon-btn ux4g-icon-btn-sm ${view === "grid" ? "ux4g-icon-btn-primary" : "ux4g-icon-btn-outline-primary"}`}
+            aria-pressed={view === "grid"}
+            aria-label="Grid view"
+            title="Grid"
+            onClick={() => setView("grid")}
+          >
+            <Icon name="grid" size={16} />
+          </button>
+          <button
+            type="button"
+            className={`ux4g-icon-btn ux4g-icon-btn-sm ${view === "list" ? "ux4g-icon-btn-primary" : "ux4g-icon-btn-outline-primary"}`}
+            aria-pressed={view === "list"}
+            aria-label="List view"
+            title="List"
+            onClick={() => setView("list")}
+          >
+            <Icon name="list" size={16} />
+          </button>
+        </div>
+      </div>
 
       {filtered.length ? (
         <>
-          <ul ref={listRef} className="card ux4g-list ux4g-list-default ux4g-mt-l" style={{ scrollMarginTop: "120px" }}>
+          <div ref={listRef as RefObject<HTMLDivElement>} className="grid ux4g-row ux4g-mt-l" style={{ scrollMarginTop: "120px" }}>
             {paged.map((item) => (
-              <li key={item.type + item.title} className="ux4g-list-item">
-                <a
-                  href={item.href}
-                  target={item.external ? "_blank" : undefined}
-                  rel={item.external ? "noopener noreferrer" : undefined}
-                  className="ux4g-list-item-row"
-                >
-                  <span className="ux4g-list-item-start">
-                    <span className="ux4g-tag-tonal-primary ux4g-tag-s">{item.type}</span>
-                    <span>
-                      <div style={{ fontWeight: 600 }}>{item.title}</div>
-                      <div className="t-micro text-muted">{item.meta}</div>
-                      {item.isNew && <span className="new-ribbon">New</span>}
-                    </span>
-                  </span>
-                  <Icon name={item.external ? "external" : "arrowRight"} size={16} />
-                </a>
-              </li>
+              <div
+                key={`${item.type}-${itemHref(item)}-${itemTitle(item)}`}
+                className={view === "list" ? "ux4g-col-12" : "ux4g-col-12 ux4g-col-sm-6 ux4g-col-lg-4"}
+              >
+                {item.type === "Publication" ? (
+                  <PublicationCard report={item.report} layout={view} isNew={item.isNew} />
+                ) : (
+                  <WhatsNewCard
+                    imageUrl={item.imageUrl}
+                    tagLabel={item.tagLabel}
+                    badge={itemBadge(item)}
+                    title={itemTitle(item)}
+                    href={itemHref(item)}
+                    external={itemExternal(item)}
+                    isNew={item.isNew}
+                    layout={view}
+                  />
+                )}
+              </div>
             ))}
-          </ul>
+          </div>
 
           {totalPages > 1 && (
             <nav className="ux4g-pagination-wrapper ux4g-mt-2xl" aria-label="What's new pages">

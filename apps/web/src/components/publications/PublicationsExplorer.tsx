@@ -115,7 +115,7 @@ export function PublicationsExplorer({
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search titles & abstracts"
+              placeholder="text search in PDF"
               aria-label="Search publications"
             />
           </label>
