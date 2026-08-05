@@ -150,6 +150,29 @@
 .pub-card-list .pub-abstract { -webkit-line-clamp: 2; }
 @media (max-width: 640px) { .pub-card-list { flex-direction: column; } .pub-card-list .pub-cover-link { flex: none; width: 100%; } }
 
+/* ---- article card (Media & Events "Articles by members") ---- */
+/* Photo bleeds to the card's own edges (padding: 0 on the card, not inset like
+   .pub-card's cover) — text content carries its own padding instead. */
+.card.article-card { display: flex; align-items: stretch; padding: 0; overflow: hidden; }
+.article-card-cover { flex: 0 0 clamp(96px, 20vw, 150px); background: var(--app-accent-soft); }
+.article-card-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.article-card-body { flex: 1; min-width: 0; padding: var(--ux4g-padding-l); display: flex; flex-direction: column; justify-content: center; gap: var(--ux4g-space-2); }
+.article-card-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--app-text-muted); }
+.article-card-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; letter-spacing: -0.01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.article-card-author { font-size: 0.85rem; color: var(--app-text-muted); }
+@media (max-width: 480px) { .article-card { flex-direction: column; } .article-card-cover { flex: none; width: 100%; aspect-ratio: 16 / 9; } }
+
+/* ---- news card (Media & Events "EAC-PM in news") ---- */
+/* Same photo-bleeds-to-edge shell and white surface as .article-card — press
+   mentions carry no outlet/author (PressMention has only a title), so this
+   is just a title, no eyebrow/byline slot to fill. */
+.card.news-card { display: flex; align-items: stretch; padding: 0; overflow: hidden; background: var(--app-surface); }
+.news-card-cover { flex: 0 0 clamp(96px, 20vw, 150px); background: var(--app-accent-soft); }
+.news-card-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.news-card-body { flex: 1; min-width: 0; padding: var(--ux4g-padding-l); display: flex; align-items: center; }
+.news-card-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.35; letter-spacing: -0.01em; color: var(--app-text); }
+@media (max-width: 480px) { .news-card { flex-direction: column; } .news-card-cover { flex: none; width: 100%; aspect-ratio: 16 / 9; } }
+
 /* ---- map illustration (contact page, stands in for the click-to-load embed) ---- */
 .map-card { padding: 0; position: relative; overflow: hidden; }
 .map-illo { width: 100%; height: 100%; display: block; }
@@ -177,9 +200,15 @@
 .meta-row dt { color: var(--app-text-muted); }
 .meta-row dd { font-weight: 600; text-align: right; }
 .cite-box { background: var(--app-bg-subtle); border: 1px solid var(--app-border); border-radius: var(--app-radius); padding: 1rem; font-size: 0.85rem; color: var(--app-text-muted); font-family: var(--font-display); }
-/* ux4g-breadcrumb supplies the list layout, the › divider and the link/hover/
-   active colour states. It doesn't set the gap before the page content below
-   it, which is page layout rather than component concern — pinned here. */
+/* ux4g-breadcrumb supplies the › divider and the link/hover/active colour
+   states, but .ux4g-breadcrumb-list itself never gets `display: flex` from
+   the vendor (only flex-wrap/gap, which are inert without it) — as shipped,
+   the <ol> renders as a plain block list, each crumb on its own line, with
+   the browser's default 40px marker indent. A declared bridge, not page
+   layout: this is the component failing to lay itself out horizontally at
+   all, not a spacing preference. It also doesn't set the gap before the page
+   content below it, which *is* page layout — pinned here too. */
+.ux4g-breadcrumb-list { display: flex; flex-wrap: wrap; align-items: center; list-style: none; padding-inline-start: 0; }
 .ux4g-breadcrumb { margin-bottom: 1.2rem; }
 
 /* ---- page hero (inner pages) — soft lavender wash band for a consistent airy header ---- */

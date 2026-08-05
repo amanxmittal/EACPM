@@ -119,14 +119,22 @@ export default function MediaPage() {
           <div className="grid ux4g-row">
             {articles.map((a) => (
               <div key={a.href} className="ux4g-col-12 ux4g-col-sm-6">
-                <a href={a.href} target="_blank" rel="noopener noreferrer" className="card card-hover ux4g-d-flex ux4g-jc-between ux4g-ai-center ux4g-inline-gap-l">
-                  <div style={{ minWidth: 0 }}>
-                    <h3 className="t-h4" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{a.title}</h3>
-                    <p className="t-micro text-muted ux4g-mt-2xs">
-                      {a.author} · {a.outlet}
-                    </p>
-                  </div>
-                  <Icon name="external" size={18} />
+                <a href={a.href} target="_blank" rel="noopener noreferrer" className="card card-hover article-card">
+                  <span className="article-card-cover" aria-hidden>
+                    {a.imageUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={a.imageUrl} alt="" />
+                    ) : (
+                      <span className="spotlight-cover-icon">
+                        <Icon name="book" size={24} />
+                      </span>
+                    )}
+                  </span>
+                  <span className="article-card-body">
+                    <span className="article-card-eyebrow">{a.outlet}</span>
+                    <h3 className="article-card-title">{a.title}</h3>
+                    <span className="article-card-author">{a.author}</span>
+                  </span>
                 </a>
               </div>
             ))}
@@ -137,18 +145,27 @@ export default function MediaPage() {
       <section className="section tint" id="news" style={{ scrollMarginTop: "84px" }}>
         <div className="ux4g-container">
           <SectionHeader eyebrow="EAC-PM in news" title="Press coverage" />
-          <ul className="card ux4g-list ux4g-list-default">
+          <div className="grid ux4g-row">
             {news.map((n) => (
-              <li key={n.href} className="ux4g-list-item">
-                <a href={n.href} target="_blank" rel="noopener noreferrer" className="ux4g-list-item-row">
-                  <span className="ux4g-list-item-start">
-                    <span style={{ fontWeight: 600 }}>{n.title}</span>
+              <div key={n.href} className="ux4g-col-12 ux4g-col-sm-6">
+                <a href={n.href} target="_blank" rel="noopener noreferrer" className="card card-hover news-card">
+                  <span className="news-card-cover" aria-hidden>
+                    {n.imageUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={n.imageUrl} alt="" />
+                    ) : (
+                      <span className="spotlight-cover-icon">
+                        <Icon name="landmark" size={24} />
+                      </span>
+                    )}
                   </span>
-                  <Icon name="external" size={16} />
+                  <span className="news-card-body">
+                    <span className="news-card-title">{n.title}</span>
+                  </span>
                 </a>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
